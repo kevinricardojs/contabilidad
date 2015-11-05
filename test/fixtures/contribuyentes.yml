@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nit: MyString
+  nombre: MyString
+  calle: MyString
+  no_casa: MyString
+  apto_similar: MyString
+  zona: 1
+  colonia: MyString
+  departamento: MyString
+  municipio: MyString
+  telefono: MyString
+  fax: MyString
+  apto_postal: MyString
+  email: MyString
+
+two:
+  nit: MyString
+  nombre: MyString
+  calle: MyString
+  no_casa: MyString
+  apto_similar: MyString
+  zona: 1
+  colonia: MyString
+  departamento: MyString
+  municipio: MyString
+  telefono: MyString
+  fax: MyString
+  apto_postal: MyString
+  email: MyString

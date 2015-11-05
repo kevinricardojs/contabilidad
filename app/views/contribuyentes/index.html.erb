@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Lista de Contribuyentes</h1>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Nit</th>
+      <th>Nombre</th>
+      <th>Calle</th>
+      <th>No casa</th>
+      <th>Zona</th>
+      <th>Colonia</th>
+      <th>Departamento</th>
+      <th>Municipio</th>
+      <th>Telefono</th>
+      
+      <th colspan="3">Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @contribuyentes.each do |contribuyente| %>
+      <tr>
+        <td><%= contribuyente.nit %></td>
+        <td><%= contribuyente.nombre %></td>
+        <td><%= contribuyente.calle %></td>
+        <td><%= contribuyente.no_casa %></td>
+        <td><%= contribuyente.zona %></td>
+        <td><%= contribuyente.colonia %></td>
+        <td><%= contribuyente.departamento %></td>
+        <td><%= contribuyente.municipio %></td>
+        <td><%= contribuyente.telefono %></td>
+       <td class="td-btn">
+        <%= link_to content_tag(:i ,'',class:"glyphicon glyphicon-folder-open"), contribuyente ,class:"btn btn-default col-md-12 text-center"%>
+      </td>
+      <td class="td-btn">
+        <%= link_to content_tag(:i ,'',class:"glyphicon glyphicon-pencil"), edit_contribuyente_path(contribuyente) ,class:"btn btn-info col-md-12 text-center" %>
+        
+      </td>
+      <td class="td-btn">
+        <%= link_to content_tag(:i ,'',class:"glyphicon glyphicon-trash"), contribuyente, method: :delete, data: { confirm: 'Esta seguro?' },class:"btn btn-danger col-md-12 text-center" %>
+      </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nuevo Contribuyente', new_contribuyente_path , class:"btn btn-primary col-md-offset-5 col-md-2 col-sm-6"%>

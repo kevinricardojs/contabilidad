@@ -1,0 +1,11 @@
+.td-btn{
+	width: 50px;
+}
+@media (max-width: 836px){
+	label{
+		font-size: 12px;
+	}
+	table{
+		font-size: 11px;
+	}
+}

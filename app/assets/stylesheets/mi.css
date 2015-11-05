@@ -9,3 +9,32 @@
 		font-size: 11px;
 	}
 }
+.mininav{
+	font-size: 22px;
+	font-style: italic;
+}
+.nav-pills li{
+	border: solid 1px silver;
+	border-radius: 5px;
+}
+.nav-pills{
+	margin-bottom: 20px !important:;
+}
+#notice, #alert{
+	position: absolute;
+	top:-100%;
+	left: 35%;
+	padding-top: 2.5%;
+	text-align: center;
+	color: white;
+	font-size: 17px;	
+	border-radius: 5px;
+	width:450px;
+	height: 85px;
+}
+#notice{
+	background: rgba(0,100,66,0.5);
+}	
+#alert{
+	background: rgba(201,31,55,0.5);
+}

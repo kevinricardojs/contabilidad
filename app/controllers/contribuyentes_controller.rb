@@ -28,7 +28,7 @@ class ContribuyentesController < ApplicationController
 
     respond_to do |format|
       if @contribuyente.save
-        format.html { redirect_to @contribuyente, notice: 'Contribuyente was successfully created.' }
+        format.html { redirect_to new_contribuyente_path, notice: 'El nuevo Contribuyente fue ingresado.' }
         format.json { render :show, status: :created, location: @contribuyente }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class ContribuyentesController < ApplicationController
   def update
     respond_to do |format|
       if @contribuyente.update(contribuyente_params)
-        format.html { redirect_to @contribuyente, notice: 'Contribuyente was successfully updated.' }
+        format.html { redirect_to new_contribuyente_path, notice: 'El Contribuyente fue actualizado exitosamente' }
         format.json { render :show, status: :ok, location: @contribuyente }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class ContribuyentesController < ApplicationController
   def destroy
     @contribuyente.destroy
     respond_to do |format|
-      format.html { redirect_to contribuyentes_url, notice: 'Contribuyente was successfully destroyed.' }
+      format.html { redirect_to contribuyentes_url, notice: 'El Contribuyente ha sido eliminado' }
       format.json { head :no_content }
     end
   end

@@ -8,9 +8,12 @@
 	<%= csrf_meta_tags %>
 </head>
 <body>
+
 <%= render "partials/nav"%>
 	<div class="container-fluid">
-		
+		<p id="notice"><%= notice %></p>
+		<p id="alert"><%= alert %></p>
+
 
 		<div class="">
 			<%= yield %>

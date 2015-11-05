@@ -1,8 +1,6 @@
 class Contribuyente < ActiveRecord::Base
 
-	validates :nit, presence: {message: " es requerido"},
-									length: {is: 6, message: " consta de 6 Caracteres"}, 
-									numericality:{only_integer: true , message:" solo debe contener numeros"}
+	validates :nit, presence: {message: " es requerido"}, uniqueness: true
 
 	validates :nombre, 	presence:{message: " del Contribuyente es requerido"}
 

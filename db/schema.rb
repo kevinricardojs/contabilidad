@@ -11,16 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151105040818) do
+ActiveRecord::Schema.define(version: 20151105161449) do
 
-  create_table "empresas", force: :cascade do |t|
-    t.string   "nombre",     limit: 255
-    t.string   "direccion",  limit: 255
-    t.integer  "zona",       limit: 4
-    t.string   "nit",        limit: 255
-    t.string   "telefono",   limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+  create_table "contribuyentes", force: :cascade do |t|
+    t.string   "nit",          limit: 255
+    t.string   "nombre",       limit: 255
+    t.string   "calle",        limit: 255
+    t.string   "no_casa",      limit: 255
+    t.string   "apto_similar", limit: 255
+    t.integer  "zona",         limit: 4
+    t.string   "colonia",      limit: 255
+    t.string   "departamento", limit: 255
+    t.string   "municipio",    limit: 255
+    t.string   "telefono",     limit: 255
+    t.string   "fax",          limit: 255
+    t.string   "apto_postal",  limit: 255
+    t.string   "email",        limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
 end

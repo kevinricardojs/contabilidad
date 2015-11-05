@@ -1,40 +1,43 @@
-.td-btn{
-	width: 50px;
-}
-@media (max-width: 836px){
-	label{
-		font-size: 12px;
+	.td-btn{
+		width: 50px;
 	}
-	table{
-		font-size: 11px;
+	@media (max-width: 836px){
+		label{
+			font-size: 12px;
+		}
+		table{
+			font-size: 11px;
+		}
 	}
-}
-.mininav{
-	font-size: 22px;
-	font-style: italic;
-}
-.nav-pills li{
-	border: solid 1px silver;
-	border-radius: 5px;
-}
-.nav-pills{
-	margin-bottom: 20px !important:;
-}
-#notice, #alert{
-	position: absolute;
-	top:-100%;
-	left: 35%;
-	padding-top: 2.5%;
-	text-align: center;
-	color: white;
-	font-size: 17px;	
-	border-radius: 5px;
-	width:450px;
-	height: 85px;
-}
-#notice{
-	background: rgba(0,100,66,0.5);
-}	
-#alert{
-	background: rgba(201,31,55,0.5);
-}
+	.mininav{
+		font-size: 22px;
+		font-style: italic;
+	}
+	.nav-pills li{
+		border: solid 1px silver;
+		border-radius: 5px;
+	}
+	.nav-pills{
+		margin-bottom: 20px !important:;
+	}
+	#notice, #alert{
+		position: absolute;
+		top:-100%;
+		left: 35%;
+		padding-top: 2.5%;
+		text-align: center;
+		color: white;
+		font-size: 17px;	
+		border-radius: 5px;
+		width:450px;
+		height: 85px;
+	}
+	#notice{
+		background: rgba(0,100,66,0.5);
+	}	
+	#alert{
+		background: rgba(201,31,55,0.5);
+	}
+	.fa-grande{
+		font-size: 15em !important;
+	}

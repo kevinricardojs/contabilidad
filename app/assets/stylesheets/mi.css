@@ -23,7 +23,7 @@
 	#notice, #alert{
 		position: absolute;
 		top:-100%;
-		left: 35%;
+		left: 30%;
 		padding-top: 2.5%;
 		text-align: center;
 		color: white;
@@ -31,6 +31,7 @@
 		border-radius: 5px;
 		width:450px;
 		height: 85px;
+		z-index:90;
 	}
 	#notice{
 		background: rgba(0,100,66,0.5);
@@ -39,5 +40,6 @@
 		background: rgba(201,31,55,0.5);
 	}
 	.fa-grande{
-		font-size: 15em !important;
+		font-size: 13em !important;
+		
 	}

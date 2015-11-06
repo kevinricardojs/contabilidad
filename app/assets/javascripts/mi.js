@@ -9,5 +9,6 @@ $(document).ready(function(){
 		$('#notice').delay(4000).fadeOut(2000);
 	};
 	
+	$.get(element index)
 
 })

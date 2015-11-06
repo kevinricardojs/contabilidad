@@ -65,13 +65,13 @@
     <%= f.label :email, "E-mail" %>
     <%= f.text_field :email, class:"form-control" %>
   </div>
-  <%= link_to content_tag(:i ,' Volver' ,class:"glyphicon glyphicon-arrow-left "), contribuyentes_path , class:"btn btn-normal col-md-offset-3 col-md-2 col-sm-offset-3 col-sm-2"%>
+  <%= link_to content_tag(:i ,' Volver' ,class:"fa fa-arrow-circle-left "), contribuyentes_path , class:"btn btn-normal col-md-offset-3 col-md-2 col-sm-offset-3 col-sm-2"%>
   <div class="actions">
   <%= button_tag(type: "submit", class: "btn btn-success col-md-2 col-sm-2") do %>
-    <i class="glyphicon glyphicon-floppy-disk"></i> Guardar 
+    <i class="fa fa-save"></i> Guardar 
     <% end %>
   <%= button_tag(type: "reset", class: "btn btn-danger col-md-2 col-sm-2") do %>
-    <i class="glyphicon glyphicon-floppy-remove"></i> Reiniciar 
+    <i class="fa fa-undo"></i> Reiniciar 
     <% end %>
     
   </div>

@@ -1,4 +1,13 @@
 <ul class="nav nav-pills nav-justified">
-  <li><%= link_to "Nuevo Contribuyente", new_contribuyente_path ,class:"mininav"%></li>
-  <li><%= link_to "Todos los Contribuyentes", contribuyentes_path,class:"mininav" %></li>
+ 
+	<li>
+	<%= link_to  new_contribuyente_path , class:"mininav" do %>
+		Nuevo Contribuyente <i class="fa fa-plus-circle"></i> 
+	<% end %>
+	</li>
+  <li>
+  	<%= link_to  contribuyentes_path,class:"mininav"  do %>
+	<i class="fa fa-list"></i> Todos los Contribuyentes  
+	<% end %>
+  </li>
 </ul>

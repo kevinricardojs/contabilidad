@@ -43,3 +43,38 @@
 		font-size: 13em !important;
 		
 	}
+	.popover{
+		z-index: 90;
+	}
+
+	.list-group-item {
+		width: 49.5%;
+		display: inline-block !important;
+		border-right: 1px solid #E6E9ED !important;
+		border-bottom: 1px solid #E6E9ED !important;
+	}
+	.list-group .primero{
+		width: 100% !important;
+	}
+	.jumbotron .objeto{
+		display: inline-block;
+		position: relative;
+		text-align: center
+	}
+	.fa-mas{
+		font-size: 5em !important;
+		position: absolute;
+		top: 46%;
+		right: 25%;
+		color: #ABB7B7;
+	}
+	.objeto .bottom{
+		width: 300px;
+		top: 100%;
+	}
+	.objeto:hover .fa-grande:hover {
+		color: #264348;
+	}
+	.margin-top{
+		margin-top: 60px;
+	}

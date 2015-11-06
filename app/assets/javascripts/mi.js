@@ -8,7 +8,19 @@ $(document).ready(function(){
 			top: "10%"});
 		$('#notice').delay(4000).fadeOut(2000);
 	};
-	
-	$.get(element index)
+
+	var objeto = $('.jumbotron .objeto');
+
+	$(objeto).mouseenter(function() {
+		var popover = $(this).children("div");
+		$(popover).slideDown(400);
+	});
+
+	$(objeto).mouseleave(function() {
+		var popover = $(this).children("div");
+		$(popover).mouseleave(function() {
+			$(this).slideUp(400);
+		});;
+	});
 
 })

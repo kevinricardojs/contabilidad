@@ -2,58 +2,58 @@
 <br>
 <div class="list-group ">
 
-  <a class="list-group-item active primero" href="#">
+  <a class="list-group-item active col-md-12 col-xs-12 col-lg-12" href="#">
 
     Datos Personales
 
   </a>
-  <a class="list-group-item" href="#">
+  <a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
     <p>
       <strong>Nit:</strong>
       <%= @contribuyente.nit %>
     </p>
   </a>
-  <a class="list-group-item" href="#">
+  <a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
 
     <p>
       <strong>Nombre:</strong>
       <%= @contribuyente.nombre %>
     </p>
   </a>
-  <a class="list-group-item" href="#">
+  <a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
    <p>
     <strong>Calle:</strong>
     <%= @contribuyente.calle %>
   </p>
 
 </a>
-<a class="list-group-item" href="#">
+<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
   <p>
     <strong>No casa:</strong>
     <%= @contribuyente.no_casa %>
   </p>
 </a>
-<a class="list-group-item" href="#">
+<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
 
   <p>
     <strong>Apto similar:</strong>
     <%= @contribuyente.apto_similar %>
   </p>
 </a>
-<a class="list-group-item" href="#">
+<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
   <p>
     <strong>Zona:</strong>
     <%= @contribuyente.zona %>
   </p>
 
 </a>
-<a class="list-group-item" href="#">
+<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
  <p>
   <strong>Colonia:</strong>
   <%= @contribuyente.colonia %>
 </p>
 </a>
-<a class="list-group-item" href="#">
+<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
 
   <p>
     <strong>Departamento:</strong>
@@ -62,31 +62,31 @@
 
 
 </a>
-<a class="list-group-item" href="#">
+<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
   <p>
     <strong>Municipio:</strong>
     <%= @contribuyente.municipio %>
   </p>
 </a>
-<a class="list-group-item" href="#">  
+<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">  
   <p>
     <strong>Telefono:</strong>
     <%= @contribuyente.telefono %>
   </p>
 </a>
-<a class="list-group-item" href="#"> 
+<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#"> 
  <p>
   <strong>Fax:</strong>
   <%= @contribuyente.fax %>
 </p>
 </a>
-<a class="list-group-item" href="#">
+<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
   <p>
     <strong>Apto postal:</strong>
     <%= @contribuyente.apto_postal %>
   </p>
 </a>
-<a class="list-group-item" href="#">
+<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
   <p>
     <strong>Email:</strong>
     <%= @contribuyente.email %>
@@ -94,16 +94,15 @@
 </a>
 
 </div>
-<div class="col-md-12">
 
-
-
-
-
-
-
-
-  <%= link_to 'Edit', edit_contribuyente_path(@contribuyente) %> |
-  <%= link_to 'Back', contribuyentes_path %>
+<div class="col-xs-12 col-md-12 col-lg-12 text-center">   
+<br>
+  <%= link_to  contribuyentes_path, class:"btn btn-normal"  do %>
+    <i class="fa fa-arrow-circle-left"></i> Volver
+  <% end %>
+  |
+  <%= link_to  edit_contribuyente_path(@contribuyente), class:"btn btn-info" do%>
+      Editar <i class="fa fa-pencil"></i>
+    <% end %>
 </div>
 

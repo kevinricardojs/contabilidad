@@ -12,11 +12,11 @@
 
   <tbody>
     <% @contribuyentes.each do |contribuyente| %>
-      <tr>
-        <td><%= contribuyente.nit %></td>
-        <td><%= contribuyente.nombre %></td>
-        <td><%= contribuyente.telefono %></td>
-       <td class="td-btn">
+    <tr>
+      <td><%= contribuyente.nit %></td>
+      <td><%= contribuyente.nombre %></td>
+      <td><%= contribuyente.telefono %></td>
+      <td class="td-btn">
         <%= link_to content_tag(:i ,'',class:"fa fa-eye"), contribuyente ,class:"btn btn-default col-md-12 text-center"%>
       </td>
       <td class="td-btn">
@@ -24,9 +24,9 @@
         
       </td>
       <td class="td-btn">
-        <%= link_to content_tag(:i ,'',class:"fa fa-trash-o"), contribuyente, method: :delete, data: { confirm: 'Esta seguro?' },class:"btn btn-danger col-md-12 text-center" %>
+        <%= link_to content_tag(:i ,'',class:"fa fa-trash-o"), contribuyente, method: :delete, data: { confirm: 'Estas seguro?' },class:"btn btn-danger col-md-12 text-center" %>
       </td>
-      </tr>
+    </tr>
     <% end %>
   </tbody>
 </table>
@@ -34,3 +34,8 @@
 <br>
 
 
+<style>
+  .todos{
+    background: #CCD1D9;
+  }
+</style>

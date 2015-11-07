@@ -11,16 +11,15 @@ $(document).ready(function(){
 
 	var objeto = $('.jumbotron .objeto');
 
-	$(objeto).mouseenter(function() {
+	$(objeto).click(function() {
 		var popover = $(this).children("div");
-		$(popover).slideDown(400);
+		$(popover).slideToggle(400);
 	});
 
-	$(objeto).mouseleave(function() {
-		var popover = $(this).children("div");
+	var popover = $(objeto).children("div");
+	
 		$(popover).mouseleave(function() {
 			$(this).slideUp(400);
-		});;
-	});
+			});
 
 })

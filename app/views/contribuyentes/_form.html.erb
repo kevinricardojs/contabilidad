@@ -1,20 +1,24 @@
 <div class="form">
   <%= form_for(@contribuyente) do |f| %>
   <% if @contribuyente.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@contribuyente.errors.count, "error") %> prohibited this contribuyente from being saved:</h2>
-
-    <ul>
-      <% @contribuyente.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-      <% end %>
-    </ul>
+  <br>  
+  <div id="error_explanation" class="alert alert-danger alert-dismissable col-md-8 col-md-offset-2">
+    <% if @contribuyente.errors.count > 1 %>
+      <strong><%= @contribuyente.errors.count %> errores prohiben que este Contribuyente sea guardado:</strong>    
+    <% else %>
+      <strong><%= @contribuyente.errors.count %> error prohibe que este Contribuyente sea guardado:</strong> 
+    <% end %>
+    
+    <% @contribuyente.errors.full_messages.each do |message| %>
+    <li class="col-md-offset-1"><%= message %></li>
+    <% end %>
+    
   </div>
   <% end %>
 
   <div class="field form-group col-md-3 col-sm-3 col-xs-6">
     <%= f.label :nit, "Nit (*)" %>
-    <%= f.text_field :nit, class:"form-control" %>
+    <%= f.text_field :nit, class:"form-control", autofocus:true %>
   </div>
   <div class="field form-group col-md-9 col-sm-9 col-xs-6">
     <%= f.label :nombre, "Apellidos y Nombres o Razón Social (*)" %>
@@ -67,10 +71,10 @@
   </div>
   <%= link_to content_tag(:i ,' Volver' ,class:"fa fa-arrow-circle-left "), contribuyentes_path , class:"btn btn-normal col-md-offset-3 col-md-2 col-sm-offset-3 col-sm-2"%>
   <div class="actions">
-  <%= button_tag(type: "submit", class: "btn btn-success col-md-2 col-sm-2") do %>
+    <%= button_tag(type: "submit", class: "btn btn-success col-md-2 col-sm-2") do %>
     <i class="fa fa-save"></i> Guardar 
     <% end %>
-  <%= button_tag(type: "reset", class: "btn btn-danger col-md-2 col-sm-2") do %>
+    <%= button_tag(type: "reset", class: "btn btn-danger col-md-2 col-sm-2") do %>
     <i class="fa fa-undo"></i> Reiniciar 
     <% end %>
     

@@ -1,14 +1,9 @@
 <%= form_for(@establecimiento) do |f| %>
 <% if @establecimiento.errors.any? %>
-<div id="error_explanation">
-  <h2><%= pluralize(@establecimiento.errors.count, "error") %> prohibited this establecimiento from being saved:</h2>
+<div class="alert alert-danger alert-dismissable col-md-8 col-md-offset-2">
+    <strong>Error</strong> los campos con asterisco <strong>(*)</strong> son requeridos
 
-  <ul>
-    <% @establecimiento.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-    <% end %>
-  </ul>
-</div>
+  </div>
 <% end %>
   <div class="field col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3 ">
     <%= f.label :contribuyente_id, "Nit (*)" %>

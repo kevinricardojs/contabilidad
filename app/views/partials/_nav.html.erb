@@ -18,24 +18,34 @@
 			<ul class="nav navbar-nav">
 				<li class="dropdown">
 					<li>
-						<%= link_to contribuyentes_path,
+						<%= link_to "#",
 						class:"dropdown-toggle ", 
 							data: {toggle:"dropdown"},
 							role:"button", 
 							aria: {haspopup:"true"}, 
 							aria: {expanded:"false"} do %>
-							Contribuyentes
+							Catalogos
 							<span class="fa fa-caret-down"></span>
 							<% end %>
 							<ul class="dropdown-menu">
 								<li>
 									<%= link_to  contribuyentes_path  do %>
-									<i class="fa fa-list"></i> Todos los contribuyentes 
+									<i class="fa fa-plus-circle"></i> Contribuyentes 
 									<% end %>
 								</li>
 								<li>
-									<%= link_to  new_contribuyente_path  do %>
-									<i class="fa fa-plus-circle"></i> Nuevo Contribuyente 
+									<%= link_to  establecimientos_path  do %>
+									<i class="fa fa-plus-circle"></i> Establecimientos 
+									<% end %>
+								</li>
+								<li>
+									<%= link_to  proveedors_path  do %>
+									<i class="fa fa-plus-circle"></i> Proveedores
+									<% end %>
+								</li>
+								<li>
+									<%= link_to  establecimientos_path  do %>
+									<i class="fa fa-plus-circle"></i> Cuentas 
 									<% end %>
 								</li>
 								<!--<li><a href="#">Something else here</a></li>

@@ -1,18 +1,9 @@
 <div class="form">
   <%= form_for(@contribuyente) do |f| %>
   <% if @contribuyente.errors.any? %>
-  <br>  
-  <div id="error_explanation" class="alert alert-danger alert-dismissable col-md-8 col-md-offset-2">
-    <% if @contribuyente.errors.count > 1 %>
-      <strong><%= @contribuyente.errors.count %> errores prohiben que este Contribuyente sea guardado:</strong>    
-    <% else %>
-      <strong><%= @contribuyente.errors.count %> error prohibe que este Contribuyente sea guardado:</strong> 
-    <% end %>
-    
-    <% @contribuyente.errors.full_messages.each do |message| %>
-    <li class="col-md-offset-1"><%= message %></li>
-    <% end %>
-    
+  <div class="alert alert-danger alert-dismissable col-md-8 col-md-offset-2">
+    <strong>Error</strong> los campos con asterisco <strong>(*)</strong> son requeridos
+
   </div>
   <% end %>
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151110020132) do
+ActiveRecord::Schema.define(version: 20151110221440) do
 
   create_table "contribuyentes", force: :cascade do |t|
     t.string   "nit",          limit: 255
@@ -42,6 +42,13 @@ ActiveRecord::Schema.define(version: 20151110020132) do
   end
 
   add_index "establecimientos", ["contribuyente_id"], name: "index_establecimientos_on_contribuyente_id", using: :btree
+
+  create_table "proveedors", force: :cascade do |t|
+    t.string   "nombre",     limit: 255
+    t.string   "nit",        limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "usuarios", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false

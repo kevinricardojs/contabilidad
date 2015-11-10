@@ -1,49 +1,43 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Establecimientos</h1>
-
-<table>
+<%= render 'mininav' %>
+<table class="table table-bordered">
   <thead>
     <tr>
+      <th>Nit</th>
       <th>Nombre</th>
-      <th>Calle</th>
-      <th>Numero casa</th>
-      <th>Apto similar</th>
-      <th>Zona</th>
-      <th>Colonia</th>
-      <th>Departamento</th>
-      <th>Municipio</th>
       <th>Telefono</th>
-      <th>Fax</th>
-      <th>Apto postal</th>
-      <th>Contribuyente</th>
-      <th colspan="3"></th>
+      
+      <th colspan="3">Acciones</th>
     </tr>
   </thead>
 
   <tbody>
     <% @establecimientos.each do |establecimiento| %>
-      <tr>
-        <td><%= establecimiento.nombre %></td>
-        <td><%= establecimiento.calle %></td>
-        <td><%= establecimiento.numero_casa %></td>
-        <td><%= establecimiento.apto_similar %></td>
-        <td><%= establecimiento.zona %></td>
-        <td><%= establecimiento.colonia %></td>
-        <td><%= establecimiento.departamento %></td>
-        <td><%= establecimiento.municipio %></td>
-        <td><%= establecimiento.telefono %></td>
-        <td><%= establecimiento.fax %></td>
-        <td><%= establecimiento.apto_postal %></td>
-        <td><%= establecimiento.contribuyente %></td>
-        <td><%= link_to 'Show', establecimiento %></td>
-        <td><%= link_to 'Edit', edit_establecimiento_path(establecimiento) %></td>
-        <td><%= link_to 'Destroy', establecimiento, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        <% nit = establecimiento.contribuyente_id %>
+        <% contribuyente = Contribuyente.find_by(id: nit) %>
+    <tr>
+      <td><%= contribuyente.nit %></td>
+      <td><%= establecimiento.nombre %></td>
+      <td><%= establecimiento.telefono %></td>
+      <td class="td-btn">
+        <%= link_to content_tag(:i ,'',class:"fa fa-eye"), establecimiento ,class:"btn btn-default col-md-12 text-center"%>
+      </td>
+      <td class="td-btn">
+        <%= link_to content_tag(:i ,'',class:"fa fa-pencil"), edit_establecimiento_path(establecimiento) ,class:"btn btn-info col-md-12 text-center" %>
+        
+      </td>
+      <td class="td-btn">
+        <%= link_to content_tag(:i ,'',class:"fa fa-trash-o"), establecimiento, method: :delete, data: { confirm: 'Estas seguro?' },class:"btn btn-danger col-md-12 text-center" %>
+      </td>
+    </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Establecimiento', new_establecimiento_path %>
+
+<style>
+  .todos{
+    background: #CCD1D9;
+  }
+</style>

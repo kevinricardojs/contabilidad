@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :establecimientos
+  resources :establecimientos do
+      get :autocomplete_contribuyente_nit, :on => :collection
+  end
   devise_for :usuarios
   get 'inicio/index'
 

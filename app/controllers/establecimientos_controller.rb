@@ -1,6 +1,5 @@
 class EstablecimientosController < ApplicationController
   before_action :set_establecimiento, only: [:show, :edit, :update, :destroy]
-
   # GET /establecimientos
   # GET /establecimientos.json
   def index
@@ -20,6 +19,7 @@ class EstablecimientosController < ApplicationController
 
   # GET /establecimientos/1/edit
   def edit
+        @contribuyentes = Contribuyente.all
   end
 
   # POST /establecimientos

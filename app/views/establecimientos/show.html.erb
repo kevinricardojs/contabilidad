@@ -1,64 +1,101 @@
-<p id="notice"><%= notice %></p>
+<%= render 'mininav' %>
+<br>
+<div class="list-group ">
 
-<p>
-  <strong>Nombre:</strong>
-  <%= @establecimiento.nombre %>
-</p>
+  <a class="list-group-item active col-md-12 col-xs-12 col-lg-12" href="#">
 
-<p>
-  <strong>Calle:</strong>
-  <%= @establecimiento.calle %>
-</p>
+    Datos Personales
 
-<p>
-  <strong>Numero casa:</strong>
-  <%= @establecimiento.numero_casa %>
-</p>
+  </a>
+  <a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
+    <p>
+      <strong>Nit:</strong>
+      <%= @establecimiento.contribuyente_id %>
+    </p>
+  </a>
+  <a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
 
-<p>
-  <strong>Apto similar:</strong>
-  <%= @establecimiento.apto_similar %>
-</p>
+    <p>
+      <strong>Nombre:</strong>
+      <%= @establecimiento.nombre %>
+    </p>
+  </a>
+  <a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
+   <p>
+    <strong>Calle:</strong>
+    <%= @establecimiento.calle %>
+  </p>
 
-<p>
-  <strong>Zona:</strong>
-  <%= @establecimiento.zona %>
-</p>
+</a>
+<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
+  <p>
+    <strong>No casa:</strong>
+    <%= @establecimiento.numero_casa %>
+  </p>
+</a>
+<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
 
-<p>
+  <p>
+    <strong>Apto similar:</strong>
+    <%= @establecimiento.apto_similar %>
+  </p>
+</a>
+<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
+  <p>
+    <strong>Zona:</strong>
+    <%= @establecimiento.zona %>
+  </p>
+
+</a>
+<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
+ <p>
   <strong>Colonia:</strong>
   <%= @establecimiento.colonia %>
 </p>
+</a>
+<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
 
-<p>
-  <strong>Departamento:</strong>
-  <%= @establecimiento.departamento %>
-</p>
+  <p>
+    <strong>Departamento:</strong>
+    <%= @establecimiento.departamento %>
+  </p>
 
-<p>
-  <strong>Municipio:</strong>
-  <%= @establecimiento.municipio %>
-</p>
 
-<p>
-  <strong>Telefono:</strong>
-  <%= @establecimiento.telefono %>
-</p>
-
-<p>
+</a>
+<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
+  <p>
+    <strong>Municipio:</strong>
+    <%= @establecimiento.municipio %>
+  </p>
+</a>
+<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">  
+  <p>
+    <strong>Telefono:</strong>
+    <%= @establecimiento.telefono %>
+  </p>
+</a>
+<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#"> 
+ <p>
   <strong>Fax:</strong>
   <%= @establecimiento.fax %>
 </p>
+</a>
+<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
+  <p>
+    <strong>Apto postal:</strong>
+    <%= @establecimiento.apto_postal %>
+  </p>
+</a>
 
-<p>
-  <strong>Apto postal:</strong>
-  <%= @establecimiento.apto_postal %>
-</p>
+</div>
 
-<p>
-  <strong>Contribuyente:</strong>
-  <%= @establecimiento.contribuyente %>
-</p>
-
-<%= link_to 'Edit', edit_establecimiento_path(@establecimiento) %> |
-<%= link_to 'Back', establecimientos_path %>
+<div class="col-xs-12 col-md-12 col-lg-12 text-center">   
+<br>
+  <%= link_to  establecimientos_path, class:"btn btn-normal"  do %>
+    <i class="fa fa-arrow-circle-left"></i> Volver
+  <% end %>
+  |
+  <%= link_to  edit_establecimiento_path, class:"btn btn-info" do%>
+      Editar <i class="fa fa-pencil"></i>
+    <% end %>
+</div>

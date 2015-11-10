@@ -10,62 +10,77 @@
   </ul>
 </div>
 <% end %>
+  <div class="field col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3 ">
+    <%= f.label :contribuyente_id, "Nit" %>
 
-
-<div class="field">
-  <%= f.label :contribuyente_id %><br>
-  <%=   content_tag(:select ,"establecimiento") do %>
-    <% @contribuyentes.each do |contribuyente| %>
-    <%= content_tag(:option, contribuyente.nit, value:contribuyente.id) %>
+    <%  if @contribuyentes.any? %>
+    <%= content_tag(:select, "Nit",class:"form-control" ,name: "establecimiento[contribuyente_id]") do %>
+      <% @contribuyentes.each do |contribuyente|  %>
+          <% dato = contribuyente.nit + " " + " ---- " + " "  + contribuyente.nombre[0..20] %>
+          <%= content_tag(:option, dato, value:contribuyente.id) %>
+          <% end %>
+          <% end %>
+      <% else %>
+      <%= content_tag(:select, "Nit",class:"form-control ", disabled:true) do %>
+        <%= content_tag(:option, "Registra mas Contribuyentes para crear Establecimientos" ,class:"disabled", name: :contribuyente_id) %>
+    <% end  %>
     <% end %>
-  <% end %>
-</div>
-<div class="field">
-  <%= f.label :nombre %><br>
-  <%= f.text_field :nombre %>
-</div>
-<div class="field">
-  <%= f.label :calle %><br>
-  <%= f.text_field :calle %>
-</div>
-<div class="field">
-  <%= f.label :numero_casa %><br>
-  <%= f.text_field :numero_casa %>
-</div>
-<div class="field">
-  <%= f.label :apto_similar %><br>
-  <%= f.text_field :apto_similar %>
-</div>
-<div class="field">
-  <%= f.label :zona %><br>
-  <%= f.number_field :zona %>
-</div>
-<div class="field">
-  <%= f.label :colonia %><br>
-  <%= f.text_field :colonia %>
-</div>
-<div class="field">
-  <%= f.label :departamento %><br>
-  <%= f.text_field :departamento %>
-</div>
-<div class="field">
-  <%= f.label :municipio %><br>
-  <%= f.text_field :municipio %>
-</div>
-<div class="field">
-  <%= f.label :telefono %><br>
-  <%= f.text_field :telefono %>
-</div>
-<div class="field">
-  <%= f.label :fax %><br>
-  <%= f.text_field :fax %>
-</div>
-<div class="field">
-  <%= f.label :apto_postal %><br>
-  <%= f.text_field :apto_postal %>
-</div>
 
-<div class="actions">
-  <%= f.submit %>
-</div>
-<% end %>
+  </div>
+  <div class="field col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1" >
+    <%= f.label :nombre %><br>
+    <%= f.text_field :nombre, class:"form-control" %>
+  </div>
+  <div class="field col-xs-3 col-sm-3 col-md-3 col-lg-3 ">
+    <%= f.label :calle %><br>
+    <%= f.text_field :calle, class:"form-control" %>
+  </div>
+  <div class="field  col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    <%= f.label :numero_casa %><br>
+    <%= f.text_field :numero_casa, class:"form-control" %>
+  </div>
+  <div class="field col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    <%= f.label :apto_similar %><br>
+    <%= f.text_field :apto_similar, class:"form-control" %>
+  </div>
+  <div class="field col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    <%= f.label :zona %><br>
+    <%= f.number_field :zona, class:"form-control"%>
+  </div>
+  <div class="field col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    <%= f.label :colonia %><br>
+    <%= f.text_field :colonia, class:"form-control"%>
+  </div>
+  <div class="field col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    <%= f.label :departamento %><br>
+    <%= f.text_field :departamento, class:"form-control" %>
+  </div>
+  <div class="field col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    <%= f.label :municipio %><br>
+    <%= f.text_field :municipio, class:"form-control" %>
+  </div>
+  <div class="field col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    <%= f.label :telefono %><br>
+    <%= f.text_field :telefono, class:"form-control" %>
+  </div>
+  <div class="field col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    <%= f.label :fax %><br>
+    <%= f.text_field :fax, class:"form-control" %>
+  </div>
+  <div class="field col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    <%= f.label :apto_postal %><br>
+    <%= f.text_field :apto_postal, class:"form-control" %>
+  </div>
+
+  <div class="actions col-md-12 col-sm-12 col-xs-12">
+  <br>
+    <%= link_to content_tag(:i ,' Volver' ,class:"fa fa-arrow-circle-left "), establecimientos_path , class:"btn btn-normal col-md-offset-3 col-md-2 col-sm-offset-3 col-sm-2"%>
+    <%= button_tag(type: "submit", class: "btn btn-success col-md-2 col-sm-2") do %>
+    <i class="fa fa-save"></i> Guardar 
+    <% end %>
+    <%= button_tag(type: "reset", class: "btn btn-danger col-md-2 col-sm-2") do %>
+    <i class="fa fa-undo"></i> Reiniciar 
+    <% end %>
+    
+  </div>
+  <% end %>

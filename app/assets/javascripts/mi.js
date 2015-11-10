@@ -61,6 +61,7 @@ $('#contribuyente_nit').bind('change paste keyup', function (e) {
     var $this = $(this);
     var $parent = $this.parent();
     var $prev = $this.prev();
+    var $guardar = $('.actions #guardar');
     var nit = $this.val();
 
     if (nit && nitIsValid(nit)) {
@@ -68,16 +69,21 @@ $('#contribuyente_nit').bind('change paste keyup', function (e) {
         $prev.addClass('fa-check');
         $parent.removeClass('has-error');
         $prev.removeClass('fa-exclamation-circle');
+        $guardar.removeClass('disabled');
     } else if (nit) {
         $parent.addClass('has-error');
         $prev.addClass('fa-exclamation-circle');
         $parent.removeClass('has-success');
         $prev.removeClass('fa-check');
+        $guardar.addClass('disabled');
     } else {
         $parent.removeClass('has-error');
         $prev.removeClass('fa-exclamation-circle');
         $parent.removeClass('has-success');
         $prev.removeClass('fa-check');
+        $guardar.addClass('disabled');
+
     }
 });
+
 })

@@ -91,3 +91,13 @@
 		font-size: 9.5em !important;
 	}
 }
+.ui-autocomplete{
+	margin: 0 auto;
+	padding: 0;
+	li{
+		list-style: none;
+		background: #f1f1f1;
+		width: 450px;
+		border-bottom: 1px solid gray;
+	}
+}

@@ -1,5 +1,5 @@
 class Contribuyente < ActiveRecord::Base
-
+	
 	validates :nit, presence: {message: " es requerido"}, uniqueness: { message: " ya esta ingresado"}
 
 	validates :nombre, 	presence:{message: " del Contribuyente es requerido"}

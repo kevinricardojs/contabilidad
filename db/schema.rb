@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151107022724) do
+ActiveRecord::Schema.define(version: 20151110020132) do
 
   create_table "contribuyentes", force: :cascade do |t|
     t.string   "nit",          limit: 255
@@ -30,6 +30,25 @@ ActiveRecord::Schema.define(version: 20151107022724) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
+
+  create_table "establecimientos", force: :cascade do |t|
+    t.string   "nombre",           limit: 255
+    t.string   "calle",            limit: 255
+    t.string   "numero_casa",      limit: 255
+    t.string   "apto_similar",     limit: 255
+    t.integer  "zona",             limit: 4
+    t.string   "colonia",          limit: 255
+    t.string   "departamento",     limit: 255
+    t.string   "municipio",        limit: 255
+    t.string   "telefono",         limit: 255
+    t.string   "fax",              limit: 255
+    t.string   "apto_postal",      limit: 255
+    t.integer  "contribuyente_id", limit: 4
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "establecimientos", ["contribuyente_id"], name: "index_establecimientos_on_contribuyente_id", using: :btree
 
   create_table "usuarios", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -51,4 +70,5 @@ ActiveRecord::Schema.define(version: 20151107022724) do
   add_index "usuarios", ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true, using: :btree
   add_index "usuarios", ["usuario"], name: "index_usuarios_on_usuario", unique: true, using: :btree
 
+  add_foreign_key "establecimientos", "contribuyentes"
 end

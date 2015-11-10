@@ -1,0 +1,1 @@
+json.extract! @establecimiento, :id, :nombre, :calle, :numero_casa, :apto_similar, :zona, :colonia, :departamento, :municipio, :telefono, :fax, :apto_postal, :contribuyente_id, :created_at, :updated_at

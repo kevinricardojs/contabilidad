@@ -1,0 +1,71 @@
+<%= form_for(@establecimiento) do |f| %>
+<% if @establecimiento.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@establecimiento.errors.count, "error") %> prohibited this establecimiento from being saved:</h2>
+
+  <ul>
+    <% @establecimiento.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+
+<div class="field">
+  <%= f.label :contribuyente_id %><br>
+  <%=   content_tag(:select ,"establecimiento") do %>
+    <% @contribuyentes.each do |contribuyente| %>
+    <%= content_tag(:option, contribuyente.nit, value:contribuyente.id) %>
+    <% end %>
+  <% end %>
+</div>
+<div class="field">
+  <%= f.label :nombre %><br>
+  <%= f.text_field :nombre %>
+</div>
+<div class="field">
+  <%= f.label :calle %><br>
+  <%= f.text_field :calle %>
+</div>
+<div class="field">
+  <%= f.label :numero_casa %><br>
+  <%= f.text_field :numero_casa %>
+</div>
+<div class="field">
+  <%= f.label :apto_similar %><br>
+  <%= f.text_field :apto_similar %>
+</div>
+<div class="field">
+  <%= f.label :zona %><br>
+  <%= f.number_field :zona %>
+</div>
+<div class="field">
+  <%= f.label :colonia %><br>
+  <%= f.text_field :colonia %>
+</div>
+<div class="field">
+  <%= f.label :departamento %><br>
+  <%= f.text_field :departamento %>
+</div>
+<div class="field">
+  <%= f.label :municipio %><br>
+  <%= f.text_field :municipio %>
+</div>
+<div class="field">
+  <%= f.label :telefono %><br>
+  <%= f.text_field :telefono %>
+</div>
+<div class="field">
+  <%= f.label :fax %><br>
+  <%= f.text_field :fax %>
+</div>
+<div class="field">
+  <%= f.label :apto_postal %><br>
+  <%= f.text_field :apto_postal %>
+</div>
+
+<div class="actions">
+  <%= f.submit %>
+</div>
+<% end %>

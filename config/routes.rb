@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :establecimientos
   devise_for :usuarios
   get 'inicio/index'
 

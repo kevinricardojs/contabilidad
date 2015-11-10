@@ -18,15 +18,11 @@ ActiveRecord::Schema.define(version: 20151110020132) do
     t.string   "nombre",       limit: 255
     t.string   "calle",        limit: 255
     t.string   "no_casa",      limit: 255
-    t.string   "apto_similar", limit: 255
     t.integer  "zona",         limit: 4
     t.string   "colonia",      limit: 255
     t.string   "departamento", limit: 255
     t.string   "municipio",    limit: 255
     t.string   "telefono",     limit: 255
-    t.string   "fax",          limit: 255
-    t.string   "apto_postal",  limit: 255
-    t.string   "email",        limit: 255
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
@@ -35,14 +31,11 @@ ActiveRecord::Schema.define(version: 20151110020132) do
     t.string   "nombre",           limit: 255
     t.string   "calle",            limit: 255
     t.string   "numero_casa",      limit: 255
-    t.string   "apto_similar",     limit: 255
     t.integer  "zona",             limit: 4
     t.string   "colonia",          limit: 255
     t.string   "departamento",     limit: 255
     t.string   "municipio",        limit: 255
     t.string   "telefono",         limit: 255
-    t.string   "fax",              limit: 255
-    t.string   "apto_postal",      limit: 255
     t.integer  "contribuyente_id", limit: 4
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false

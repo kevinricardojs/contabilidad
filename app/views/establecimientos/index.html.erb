@@ -12,10 +12,17 @@
 
   <tbody>
     <% @establecimientos.each do |establecimiento| %>
-        <% nit = establecimiento.contribuyente_id %>
-        <% contribuyente = Contribuyente.find_by(id: nit) %>
+        <% nit = establecimiento.contribuyente_id %> 
+        <% contribuyente = Contribuyente.find_by(id: nit) || 0 %>
+        
     <tr>
-      <td><%= contribuyente.nit %></td>
+    <% if contribuyente == 0 %>
+          <td class=" danger">Error</td>    
+          <% else %>
+          <td><%= contribuyente.nit %></td>
+        <% end %>
+
+      
       <td><%= establecimiento.nombre %></td>
       <td><%= establecimiento.telefono %></td>
       <td class="td-btn">

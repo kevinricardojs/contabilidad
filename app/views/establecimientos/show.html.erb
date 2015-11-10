@@ -7,24 +7,38 @@
     Datos Personales
 
   </a>
-  <a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
+    <% id = @establecimiento.contribuyente_id %>
+    <% contribuyente = Contribuyente.find_by(id: id) || 0 %>
+    <% if contribuyente == 0 %>
+    <a class="  list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4 btn-danger" href="#">
     <p>
       <strong>Nit:</strong>
-      <%= @establecimiento.contribuyente_id %>
+      Error
     </p>
-  </a>
-  <a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
-
+    </a>  
+    <% else %>
+    <a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
     <p>
-      <strong>Nombre:</strong>
-      <%= @establecimiento.nombre %>
-    </p>
-  </a>
-  <a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
-   <p>
-    <strong>Calle:</strong>
-    <%= @establecimiento.calle %>
+      <strong>Nit:</strong>
+       <%= contribuyente.nit %>
+    </p> 
+   </a>
+    <% end %>
+    
   </p>
+</a>
+<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
+
+  <p>
+    <strong>Nombre:</strong>
+    <%= @establecimiento.nombre %>
+  </p>
+</a>
+<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
+ <p>
+  <strong>Calle:</strong>
+  <%= @establecimiento.calle %>
+</p>
 
 </a>
 <a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
@@ -33,13 +47,7 @@
     <%= @establecimiento.numero_casa %>
   </p>
 </a>
-<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
 
-  <p>
-    <strong>Apto similar:</strong>
-    <%= @establecimiento.apto_similar %>
-  </p>
-</a>
 <a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
   <p>
     <strong>Zona:</strong>
@@ -74,28 +82,18 @@
     <%= @establecimiento.telefono %>
   </p>
 </a>
-<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#"> 
- <p>
-  <strong>Fax:</strong>
-  <%= @establecimiento.fax %>
-</p>
-</a>
-<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
-  <p>
-    <strong>Apto postal:</strong>
-    <%= @establecimiento.apto_postal %>
-  </p>
-</a>
+
+
 
 </div>
 
 <div class="col-xs-12 col-md-12 col-lg-12 text-center">   
-<br>
+  <br>
   <%= link_to  establecimientos_path, class:"btn btn-normal"  do %>
-    <i class="fa fa-arrow-circle-left"></i> Volver
+  <i class="fa fa-arrow-circle-left"></i> Volver
   <% end %>
   |
   <%= link_to  edit_establecimiento_path, class:"btn btn-info" do%>
-      Editar <i class="fa fa-pencil"></i>
-    <% end %>
+  Editar <i class="fa fa-pencil"></i>
+  <% end %>
 </div>

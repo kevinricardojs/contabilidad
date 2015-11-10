@@ -9,6 +9,7 @@ class EstablecimientosController < ApplicationController
   # GET /establecimientos/1
   # GET /establecimientos/1.json
   def show
+    @contribuyentes = Contribuyente.all
   end
 
   # GET /establecimientos/new
@@ -25,11 +26,12 @@ class EstablecimientosController < ApplicationController
   # POST /establecimientos
   # POST /establecimientos.json
   def create
+    @contribuyentes = Contribuyente.all
     @establecimiento = Establecimiento.new(establecimiento_params)
 
     respond_to do |format|
       if @establecimiento.save
-        format.html { redirect_to @establecimiento, notice: 'Establecimiento was successfully created.' }
+        format.html { redirect_to new_establecimiento_path, notice: 'El nuevo Establecimiento fue ingresado.' }
         format.json { render :show, status: :created, location: @establecimiento }
       else
         format.html { render :new }
@@ -43,7 +45,7 @@ class EstablecimientosController < ApplicationController
   def update
     respond_to do |format|
       if @establecimiento.update(establecimiento_params)
-        format.html { redirect_to @establecimiento, notice: 'Establecimiento was successfully updated.' }
+        format.html { redirect_to new_establecimiento_path, notice: 'El Establecimiento fue actualizado exitosamente' }
         format.json { render :show, status: :ok, location: @establecimiento }
       else
         format.html { render :edit }
@@ -57,7 +59,7 @@ class EstablecimientosController < ApplicationController
   def destroy
     @establecimiento.destroy
     respond_to do |format|
-      format.html { redirect_to establecimientos_url, notice: 'Establecimiento was successfully destroyed.' }
+      format.html { redirect_to establecimientos_url, notice: 'El Establecimiento se ha eliminado' }
       format.json { head :no_content }
     end
   end
@@ -70,6 +72,6 @@ class EstablecimientosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def establecimiento_params
-      params.require(:establecimiento).permit(:nombre, :calle, :numero_casa, :apto_similar, :zona, :colonia, :departamento, :municipio, :telefono, :fax, :apto_postal, :contribuyente_id)
+      params.require(:establecimiento).permit(:nombre, :calle, :numero_casa, :zona, :colonia, :departamento, :municipio, :telefono, :contribuyente_id)
     end
 end

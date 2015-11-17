@@ -1,0 +1,38 @@
+<%= render 'mininav' %>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Tipo</th>
+      <th colspan="3">Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cuenta_contables.each do |cuenta_contable| %>
+      <tr>
+        <td><%= cuenta_contable.nombre %></td>
+        <td><%= cuenta_contable.tipo %></td>
+         <td class="td-btn">
+        <%= link_to content_tag(:i ,'',class:"fa fa-eye"), cuenta_contable ,class:"btn btn-default col-md-12 text-center"%>
+      </td>
+      <td class="td-btn">
+        <%= link_to content_tag(:i ,'',class:"fa fa-pencil"), edit_cuenta_contable_path(cuenta_contable) ,class:"btn btn-info col-md-12 text-center" %>
+        
+      </td>
+      <td class="td-btn">
+        <%= link_to content_tag(:i ,'',class:"fa fa-trash-o"), cuenta_contable, method: :delete, data: { confirm: 'Estas seguro?' },class:"btn btn-danger col-md-12 text-center" %>
+      </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+
+<style>
+  .todos{
+    background: #CCD1D9;
+  }
+</style>

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :cuenta_contables
   resources :proveedors
   resources :establecimientos do
       get :autocomplete_contribuyente_nit, :on => :collection

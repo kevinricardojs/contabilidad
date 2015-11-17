@@ -18,21 +18,24 @@ $(document).ready(function(){
 
 	var popover = $(objeto).children("div");
 	
-  $(popover).mouseleave(function() {
-   $(this).slideUp(400);
-});
+	$(popover).mouseleave(function() {
+		$(this).slideUp(400);
+	});
 
-  $('a').click(function  () {
-    if ($(this).attr("href") !== "#") 
-    {
-        if ($(this).attr("href") !== "/") 
-        {
-            window.open(this.href,'ventana','width=800,height=500'); return false;        
-        };
-        
-    }
-    
+	$('a').click(function  () {
+		if ($(this).attr("href") !== "#") 
+		{
+			if ($(this).attr("href") !== "/") 
+			{
+				if ($(this).attr("rel") !== "nofollow") 
+				{
+					window.open(this.href,'ventana','width=800,height=500'); return false;        
+				};
+			};
 
-})
+		}
+
+
+	})
 
 })

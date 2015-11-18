@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'operacion/seleccion'
+
   resources :cuenta_contables
   resources :proveedors
   resources :establecimientos do

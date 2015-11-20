@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
 
+  devise_for :usuarios, path: "cuenta", path_names: { sign_in: 'ingresar', password: 'secreto', confirmation: 'verificacion', unlock: 'desbloqueo', registration: 'register', sign_up: 'registrarme' }
   get 'operacion/seleccion'
+  get 'operacion/establecimiento'
 
   resources :cuenta_contables
   resources :proveedors
-  resources :establecimientos do
-      get :autocomplete_contribuyente_nit, :on => :collection
-  end
-  devise_for :usuarios
+  resources :establecimientos
+  post 'libro_venta/new'
   get 'inicio/index'
 
   resources :contribuyentes

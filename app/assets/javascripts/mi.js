@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+	$("select").addClass('form-control');
 	var noticia = $('#notice');
 	var alerta = $('#alert');
 
@@ -37,5 +37,31 @@ $(document).ready(function(){
 
 
 	})
+
+
+
+var establecimientos = $('#venta_establecimiento_id').html();
+$('#venta_establecimiento_id').parent().hide();
+$('#venta_contribuyente_id').change(function() {
+	var contribuyente = $('#venta_contribuyente_id option:selected').text();
+	var opcion = $(establecimientos).filter("optgroup[label="+ contribuyente +"]").html();
+	console.log(opcion);
+	if (opcion) 
+	{
+		$('#venta_establecimiento_id').html(opcion);
+		$('#venta_establecimiento_id').parent().show();
+	}
+	else
+	{
+		$('#venta_establecimiento_id').empty();
+		$('#venta_establecimiento_id').parent().hide();
+	}
+
+
+
+});
+
+
+
 
 })

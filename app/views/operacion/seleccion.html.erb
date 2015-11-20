@@ -1,23 +1,21 @@
-  <div class="field col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3 ">
-    <%= label :contribuyente_id, "Nit (*)" %>
+  <form action="">
+    <div class="field col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3 ">
+      <%= label :contribuyente_id, "Nit (*)" %>
+      <%= collection_select("usuario","contribuyente_id", @contribuyentes.order(:nit), :id, :nit, class:"form-control", prompt: "Selecciona")%>
+    </div>
 
-    <%  if @contribuyentes.any? %>
-        <%= select("establecimiento", "contribuyente_id", Contribuyente.all.collect {|c| [ c.nit + " – "+c.nombre , c.id ] }, { include_blank: true },class:"form-control")%>  
-      <% else %>
-      <%= content_tag(:select, "Nit",class:"form-control ", disabled:true) do %>
-        <%= content_tag(:option, "Registra mas Contribuyentes para crear Establecimientos" ,class:"disabled", name: :contribuyente_id) %>
-    <% end  %>
-    <% end %>
-  </div>
 
-  
-  <div class="field col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3 ">
-<%= label :contribuyente_id, "Establecimiento (*)" %>    
-    <%  if @establecimientos.any? %>
-        <%= select("establecimiento", "contribuyente_id", Establecimiento.all.collect {|c| [ c.nombre , c.id ] }, { include_blank: true },class:"form-control")%>  
-      <% else %>
-      <%= content_tag(:select, "Nit",class:"form-control ", disabled:true) do %>
-        <%= content_tag(:option, "Registra mas Contribuyentes para crear Establecimientos" ,class:"disabled", name: :contribuyente_id) %>
-    <% end  %>
-    <% end  %>
-  </div>
+    <div class="field col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3 ">
+      <%= label :contribuyente_id, "Establecimiento (*)" %>
+      <%= grouped_collection_select("usuario","establecimiento_id",  @contribuyentes, :establecimientos, :nit, :id, :nombre, prompt: "Selecciona el Establecimiento")%>
+    </div>
+    <div class="field col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3 ">
+      <%= label :mes, "Mes a trabajar" %>
+      <input type="week" name="mes" />
+        
+    </div>
+
+    <div class="action col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3 ">
+      <input type="submit" value="Enviar" id="btn-venta">
+    </div>
+  </form>

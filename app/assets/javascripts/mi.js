@@ -29,37 +29,39 @@ $(document).ready(function(){
 			{
 				if ($(this).attr("rel") !== "nofollow") 
 				{
-					window.open(this.href,'ventana','width=800,height=500'); return false;        
+					if ($(this).attr("href") !== "/cuenta"){
+						window.open(this.href,'usuariona','width=800,height=500'); return false;        
+					};
 				};
 			};
 
+		};
+
+
+	});
+
+
+
+	var establecimientos = $('#usuario_establecimiento_id').html();
+	$('#usuario_establecimiento_id').parent().hide();
+	$('#usuario_contribuyente_id').change(function() {
+		var contribuyente = $('#usuario_contribuyente_id option:selected').text();
+		var opcion = $(establecimientos).filter("optgroup[label="+ contribuyente +"]").html();
+		console.log(opcion);
+		if (opcion) 
+		{
+			$('#usuario_establecimiento_id').html(opcion);
+			$('#usuario_establecimiento_id').parent().show();
+		}
+		else
+		{
+			$('#usuario_establecimiento_id').empty();
+			$('#usuario_establecimiento_id').parent().hide();
 		}
 
 
-	})
 
-
-
-var establecimientos = $('#venta_establecimiento_id').html();
-$('#venta_establecimiento_id').parent().hide();
-$('#venta_contribuyente_id').change(function() {
-	var contribuyente = $('#venta_contribuyente_id option:selected').text();
-	var opcion = $(establecimientos).filter("optgroup[label="+ contribuyente +"]").html();
-	console.log(opcion);
-	if (opcion) 
-	{
-		$('#venta_establecimiento_id').html(opcion);
-		$('#venta_establecimiento_id').parent().show();
-	}
-	else
-	{
-		$('#venta_establecimiento_id').empty();
-		$('#venta_establecimiento_id').parent().hide();
-	}
-
-
-
-});
+	});
 
 
 

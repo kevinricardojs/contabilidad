@@ -22,6 +22,7 @@ $(document).ready(function(){
 		$(this).slideUp(400);
 	});
 
+/*
 	$('a').click(function  () {
 		if ($(this).attr("href") !== "#") 
 		{
@@ -39,7 +40,7 @@ $(document).ready(function(){
 
 
 	});
-
+*/
 
 
 	var establecimientos = $('#usuario_establecimiento_id').html();

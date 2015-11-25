@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  devise_for :usuarios, path: "cuenta", path_names: { sign_in: 'ingresar', password: 'secreto', confirmation: 'verificacion', unlock: 'desbloqueo', registration: 'register', sign_up: 'registrarme' }
   get 'operacion/seleccion'
   get 'operacion/establecimiento'
 

@@ -21,21 +21,21 @@ class ApplicationController < ActionController::Base
 
   def datos_para_operacion
     if usuario_signed_in?
-      es_id = current_usuario.establecimiento_id
-      con_id = current_usuario.contribuyente_id
       @dato = []
-        if es_id == nil
-          es_id = "Selecciona establecimiento "
+      @dato[0] = current_usuario.establecimiento_id
+      @dato[1]= current_usuario.contribuyente_id
+      
+        if @dato[0] == nil
+          @dato[0] = "Selecciona establecimiento "
           else
-            es_id = Establecimiento.find_by(id: es_id).nombre
-        end
-         if con_id == nil
-          con_id = "Selecciona contribuyente "  
-          else
-            con_id = Contribuyente.find_by(id: con_id).nombre
+            @dato[0] = Establecimiento.find_by(id: @dato[0]).nombre
         end
 
-      @dato = [es_id, con_id]
+         if @dato[1] == nil
+          @dato[1] = "Selecciona contribuyente "  
+          else
+            @dato[1] = Contribuyente.find_by(id: @dato[1]).nombre
+        end
       else
     end
   

@@ -54,7 +54,7 @@ $(document).ready(function(){
 		else if( opcion == "" )
 		{
 			$('#usuario_establecimiento_id').empty();
-			$('#usuario_establecimiento_id').html("<option>No hay ningun establecimiento</option>");
+			$('#usuario_establecimiento_id').html("<option value=''>No hay ningun establecimiento</option>");
 
 		}
 		else

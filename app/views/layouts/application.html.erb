@@ -14,7 +14,6 @@
 	<p id="notice"><%= notice %></p>
 	<p id="alert"><%= alert %></p>
 	<%= yield %>
-	
 
 </div>
 <!-- Modal -->
@@ -25,55 +24,8 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title" id="myModalLabel">Selecciona o cambia datos</h4>
 			</div>
-			<div class="modal-body">
-				<form action="/usuarios" method="post">
-					<input type="hidden" value="put" name="_method">
-					<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %> 
-					<div class="field ">
-						<%= label :contribuyente_id, "Nit (*)" %>
-						<%= collection_select("usuario","contribuyente_id", @tcontribuyentes.order(:nit), :id, :nit, class:"form-control", prompt: "Selecciona")%>
-					</div>
-
-
-					<div class="field ">
-						<%= label :contribuyente_id, "Establecimiento (*)" %>
-						<%= grouped_collection_select("usuario","establecimiento_id",  
-						@tcontribuyentes, :establecimientos, :nit, :id, :nombre, prompt: "Selecciona el Establecimiento")%>
-					</div>
-					<div class="field">
-						<%= label :mes, "Mes a trabajar" %>
-						<select name="usuario[mes]">
-							<option value="enero">Enero</option>
-							<option value="febrero">Febrero</option>
-							<option value="marzo">Marzo</option>
-							<option value="abril">Abril</option>
-							<option value="mayo">Mayo</option>
-							<option value="junio">Junio</option>
-							<option value="julio">Julio</option>
-							<option value="Agosto">Agosto</option>
-							<option value="septiembre">Septiembre</option>
-							<option value="octubre">Octubre</option>
-							<option value="noviembre">Noviembre</option>
-							<option value="diciembre">Diciembre</option>
-						</select>
-					</div>
-					<div class="field">
-						<%= label :year,"Año"%>
-						<select name="usuario[year]">
-							<option value="2015">2015</option>
-							<option value="2016">2016</option>
-							<option value="2017">2017</option>
-							<option value="2018">2018</option>
-							<option value="2019">2019</option>
-							<option value="2020">2020</option>
-						</select>
-					</div>
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<input type="submit" value="Cambiar" name="commit" class="btn btn-info">
-				</form>
+			<div class="modal-body" id="receptor-cambiar">
+				
 			</div>
 		</div>
 	</div>

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :establecimientos
   post 'libro_venta/new'
   get 'inicio/index'
+  get 'inicio/operacion'
 
   resources :contribuyentes
   # The priority is based upon order of creation: first created -> highest priority.

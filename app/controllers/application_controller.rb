@@ -2,22 +2,19 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  before_action :authenticate_usuario!
-
+  before_action :operacion_cambio
+  before_action :authenticate_usuario!  
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :datos_para_operacion
-  before_action :operacion
+  
 
 
 
   protected
-  def operacion
+  def operacion_cambio
     if Contribuyente.any?
-      @tcontribuyentes = Contribuyente.all
-      @testablecimientos = Establecimiento.all
-    else
-      @tcontribuyentes = "No hay Contribuyentes"
-      @testablecimientos = "No hay Establecimientos"
+      @contribuyentes = Contribuyente.all
+      @establecimientos = Establecimiento.all
     end
 
   end
@@ -40,7 +37,6 @@ class ApplicationController < ActionController::Base
 
       @dato = [es_id, con_id]
       else
-      @dato = "Inicia Sesión"  
     end
   
     

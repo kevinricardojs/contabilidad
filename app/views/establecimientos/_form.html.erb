@@ -30,7 +30,7 @@
   </div>
   <div class="field form-group col-xs-3 col-sm-3 col-md-3 col-lg-3">
     <%= f.label :zona, "Zona (*)" %>
-    <%= f.number_field :zona, class:"form-control"%>
+    <%= f.number_field :zona, class:"form-control",min:1,max:100%>
   </div>
   <div class="field form-group col-xs-3 col-sm-3 col-md-3 col-lg-3">
     <%= f.label :colonia, "Colonia o Barrio" %>

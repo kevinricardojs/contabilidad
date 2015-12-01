@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$("select").addClass('form-control');
+	
 	var noticia = $('#notice');
 	var alerta = $('#alert');
 
@@ -13,13 +13,13 @@ $(document).ready(function(){
 
 	$(objeto).click(function() {
 		var popover = $(this).children("div");
-		$(popover).slideToggle(400);
+		$(popover).slideDown(400);
 	});
 
 	var popover = $(objeto).children("div");
 	
 	$(popover).mouseleave(function() {
-		$(this).slideUp(400);
+		$(this).delay(500).slideUp(500);
 	});
 
 
@@ -42,23 +42,32 @@ $(document).ready(function(){
 
 
 	var establecimientos = $('#usuario_establecimiento_id').html();
-	$('#usuario_establecimiento_id').parent().hide();
+	
 	$('#usuario_contribuyente_id').change(function() {
 		var contribuyente = $('#usuario_contribuyente_id option:selected').text();
 		var opcion = $(establecimientos).filter("optgroup[label="+ contribuyente +"]").html();
-		console.log(opcion);
 		if (opcion) 
 		{
 			$('#usuario_establecimiento_id').html(opcion);
 			$('#usuario_establecimiento_id').parent().show();
+		}
+		else if( opcion == "" )
+		{
+			$('#usuario_establecimiento_id').empty();
+			$('#usuario_establecimiento_id').html("<option>No hay ningun establecimiento</option>");
+
 		}
 		else
 		{
 			$('#usuario_establecimiento_id').empty();
 			$('#usuario_establecimiento_id').parent().hide();
 		}
+	});
 
-
-
+	/*ajax*/
+	$('#boton-cambiar').click(function() {
+		$.get('/inicio/operacion', function(data) {
+			$('#receptor-cambiar').html(data)
+		});
 	});
 })

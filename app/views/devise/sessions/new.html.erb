@@ -1,0 +1,32 @@
+<div class="well col-xs-12 col-sm-6 col-md-6 col-lg-6 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
+  <h2 class="text-center">Inicia Sesión</h2>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+ <%= render 'partials/messages'%>
+  <div class="field  form-group">
+    <%= f.label "Nombre de Usuario o Email" %>
+    <%= f.text_field :login, autofocus: true,class:"form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :password %>
+    <%= f.password_field :password, autocomplete: "off" ,class:"form-control"%>
+  </div>
+
+  <% if devise_mapping.rememberable? -%>
+    <div class="field form-group  col-sm-offset-8 col-md-offset-8 col-lg-offset-8">
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me , "No cerrar sesión"%>
+    </div>
+  <% end %>
+
+  <div class="actions text-center">
+    <%= f.submit "Iniciar", class:"btn btn-primary col-xs-10 col-sm-8 col-md-8 col-lg-8 col-xs-offset-1 col-sm-offset-2 col-md-offset-2 col-lg-offset-2" %>
+  </div>
+<% end %>
+<div class="col-md-12">
+  <br>
+<%= render "devise/shared/links" %>
+</div>
+
+</div>

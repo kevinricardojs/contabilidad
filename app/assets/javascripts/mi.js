@@ -22,7 +22,7 @@ $(document).ready(function(){
 		$(this).slideUp(400);
 	});
 
-/*
+
 	$('a').click(function  () {
 		if ($(this).attr("href") !== "#") 
 		{
@@ -30,9 +30,7 @@ $(document).ready(function(){
 			{
 				if ($(this).attr("rel") !== "nofollow") 
 				{
-					if ($(this).attr("href") !== "/cuenta"){
-						window.open(this.href,'usuariona','width=800,height=500'); return false;        
-					};
+					window.open(this.href,'usuario','width=800,height=500'); return false;        
 				};
 			};
 
@@ -40,7 +38,7 @@ $(document).ready(function(){
 
 
 	});
-*/
+
 
 
 	var establecimientos = $('#usuario_establecimiento_id').html();
@@ -63,8 +61,4 @@ $(document).ready(function(){
 
 
 	});
-
-
-
-
 })

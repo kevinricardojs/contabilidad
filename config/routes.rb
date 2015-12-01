@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :usuarios
-  get 'operacion/seleccion'
-  get 'operacion/establecimiento'
-
+  devise_for :usuarios, controllers: {registrations: "registrations"}
   resources :cuenta_contables
   resources :proveedors
   resources :establecimientos

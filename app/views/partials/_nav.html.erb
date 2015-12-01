@@ -14,7 +14,7 @@
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<!--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li class="dropdown">
 					<li>
@@ -47,7 +47,7 @@
 									<i class="fa fa-plus-circle"></i> Cuentas 
 									<% end %>
 								</li>
-								<!--<li><a href="#">Something else here</a></li>
+						<li><a href="#">Something else here</a></li>
 								<li role="separator" class="divider"></li>
 								<li><a href="#">Separated link</a></li>
 								<li role="separator" class="divider"></li>
@@ -55,7 +55,7 @@
 							</ul>
 						</li>
 					</ul>
-					<ul class="nav navbar-nav">
+					<!--<ul class="nav navbar-nav">
 						<li class="dropdown">
 							<li>
 								<%= link_to "#",
@@ -77,14 +77,23 @@
 											<i class="fa fa-plus-circle"></i> Nuevo Establecimiento
 											<% end %>
 										</li>
-								<!--<li><a href="#">Something else here</a></li>
+								<li><a href="#">Something else here</a></li>
 								<li role="separator" class="divider"></li>
 								<li><a href="#">Separated link</a></li>
 								<li role="separator" class="divider"></li>
-								<li><a href="#">One more separated link</a></li>-->
-							</ul>
+								<li><a href="#">One more separated link</a></li>
+							</ul>-->
 						</li>
-						<p class="navbar-text">Signed in as Mark Otto</p>
+						<% if usuario_signed_in? %>
+						<p class="navbar-text">Contribuyente: <%= @dato[1]%></p>
+						<p class="navbar-text">Establecimiento: <%= @dato[0]%></p>
+						<p class="navbar-text">Mes: <%= current_usuario.mes.capitalize%></p>
+						<p class="navbar-text">Año: <%= current_usuario.year%></p>
+						<button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#myModal" id="boton-cambiar">
+							Cambiar
+						</button>
+						<% end %>
+
 					</ul>
 					<!-- <form class="navbar-form navbar-left" role="search">
 						<div class="form-group">
@@ -95,15 +104,14 @@
 					<ul class="nav navbar-nav navbar-right">
 						<% if usuario_signed_in? %>
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_usuario.email%><span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_usuario.username%><span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li> <%= link_to "Mi Cuenta", edit_usuario_registration_path %></li>
+								<li> <%= link_to "Mi Cuenta", edit_usuario_registration_path ,rel:"nofollow"%></li>
 								<li role="separator" class="divider"></li>
 								<li><%= link_to "Cerrar Sesión", destroy_usuario_session_path, method: :delete, data: { confirm: 'Se cerrara la sesion' } %></li>
 							</ul>
 						</li>
 						<% else %>
-						<li><%= link_to "Operacion", operacion_seleccion_path %></li>
 						<%= link_to "Iniciar Sesión",new_usuario_session_path, class:"btn btn-default navbar-btn"%>
 						<%= link_to "Registrarme",new_usuario_registration_path, class:"btn btn-default navbar-btn"%>
 

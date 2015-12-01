@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151126200115) do
+ActiveRecord::Schema.define(version: 20151130193833) do
 
   create_table "contribuyentes", force: :cascade do |t|
     t.string   "nit",          limit: 255
@@ -70,10 +70,22 @@ ActiveRecord::Schema.define(version: 20151126200115) do
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
+    t.string   "username",               limit: 255
+    t.string   "nombre",                 limit: 255
+    t.string   "apellido",               limit: 255
+    t.integer  "contribuyente_id",       limit: 4
+    t.integer  "establecimiento_id",     limit: 4
+    t.string   "mes",                    limit: 255
+    t.string   "year",                   limit: 255
   end
 
+  add_index "usuarios", ["contribuyente_id"], name: "index_usuarios_on_contribuyente_id", using: :btree
   add_index "usuarios", ["email"], name: "index_usuarios_on_email", unique: true, using: :btree
+  add_index "usuarios", ["establecimiento_id"], name: "index_usuarios_on_establecimiento_id", using: :btree
   add_index "usuarios", ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true, using: :btree
+  add_index "usuarios", ["username"], name: "index_usuarios_on_username", unique: true, using: :btree
 
   add_foreign_key "establecimientos", "contribuyentes"
+  add_foreign_key "usuarios", "contribuyentes"
+  add_foreign_key "usuarios", "establecimientos"
 end

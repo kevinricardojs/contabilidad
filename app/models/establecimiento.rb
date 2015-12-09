@@ -1,5 +1,6 @@
 class Establecimiento < ActiveRecord::Base
   belongs_to :contribuyente
+  has_many :compra_libros
 	validates :nombre, 	presence:{message: " del Establecimiento es requerido"}
 	validates :calle , presence:{message: " o Avenida es requerido"}
 	validates :numero_casa , presence:{message: " es requerido"}

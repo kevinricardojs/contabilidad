@@ -1,7 +1,7 @@
 <%= render "partials/nav"%>
 <div class="container-fluid">
 		
-<h2 class="text-center">Bienvenido <%= "Usuario"%></h2>
+<h2 class="text-center">Bienvenido <%= current_usuario.username%></h2>
 <div class="jumbotron col-md-12 col-lg-offset-1 col-lg-10">
 	<div class="objeto col-md-4 col-lg-4">
 		<i class="fa fa-newspaper-o fa-grande"></i>
@@ -42,11 +42,11 @@
 				<h4>Opciones</h4>
 			</div>
 			<div class="popover-content">
-				<%= link_to new_contribuyente_path do %>
-				<i class="fa fa-user-plus"></i> Agregar nuevo Contribuyente
+				<%= link_to new_compra_libro_path do %>
+				<i class="fa fa-shopping-cart"></i> Agregar Compra
 				<% end %>
-				
-				<li>Dos</li>
+				<br>
+				<a href="#"><i class="fa fa-money"></i> Agregar Venta</a>
 				<li>Tres</li>
 			</div>
 		</div>

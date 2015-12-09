@@ -3,8 +3,8 @@ class Usuario < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:login]
-  #enum :mes %w[enero febrero marzo abril mayo junio julio  agosto  septiembre octubre noviembre diciembre]
-  #enum :year %w[2015 2016 2017 2018 2019 2020]
+  enum mes: %w[Selecciona\ un\ Mes Enero Febrero Marzo Abril Mayo Junio Julio Agosto Septiembre Octubre Noviembre Diciembre]
+  enum year: %w[Selecciona\ un\ Año 2015 2016 2017 2018 2019 2020]
   
 
   attr_accessor :login

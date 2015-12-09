@@ -1,0 +1,44 @@
+<%= render 'partials/libro' %>
+
+<p>
+  <strong>Documento:</strong>
+  <%= @compra_libro.documento %>
+</p>
+
+<p>
+  <strong>Serie:</strong>
+  <%= @compra_libro.serie %>
+</p>
+
+<p>
+  <strong>Numero:</strong>
+  <%= @compra_libro.numero %>
+</p>
+
+<p>
+  <strong>Proveedor:</strong>
+  <%= @compra_libro.proveedor.nombre %>
+</p>
+
+<p>
+  <strong>Nit:</strong>
+  <%= @compra_libro.proveedor.nit %>
+</p>
+
+<p>
+  <strong>Dia:</strong>
+  <%= @compra_libro.dia %>
+</p>
+
+<p>
+  <strong>Mes:</strong>
+  <%= @compra_libro.mes %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @compra_libro.year %>
+</p>
+
+<%= link_to 'Edit', edit_compra_libro_path(@compra_libro) %> |
+<%= link_to 'Back', compra_libros_path %>

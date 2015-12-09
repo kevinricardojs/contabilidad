@@ -1,12 +1,8 @@
 <%= form_for(@cuenta_contable) do |f| %>
 <% if @cuenta_contable.errors.any? %>
-<div class="alert alert-danger alert-dismissable col-md-8 col-md-offset-2">
-  <strong>Error</strong> los campos con asterisco <strong>(*)</strong> son requeridos
-  <br>
-  <% @cuenta_contable.errors.each do |c|%>
-  <%= c %> <br>
-  <% end %>
-</div>
+<div class="alert alert-danger alert-dismissable col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+    <strong>Error</strong> los campos con asterisco <strong>(*)</strong> son requeridos
+  </div>
 <% end %>
 
 
@@ -18,13 +14,13 @@
   <%= f.label :tipo, "Tipo de Cuenta (*)" %>
   <div class="radio">
   <label >
-    <%= f.radio_button :tipo, "haber"%>
+    <%= f.radio_button :tipo, "Haber"%>
     Haber
   </label>
   </div>
     <div class="radio">
       <label >
-        <%= f.radio_button :tipo, "debe"%>
+        <%= f.radio_button :tipo, "Debe"%>
         Debe
       </label>  
     </div>

@@ -1,25 +1,30 @@
 <%- if controller_name != 'sessions' %>
-  <%= link_to "Ingresa", new_session_path(resource_name) %><br />
+  <%= link_to new_session_path(resource_name), class:"btn btn-primary col-xs-10 col-sm-8 col-md-8 col-lg-8 col-xs-offset-1 col-sm-offset-2 col-md-offset-2 col-lg-offset-2",rel:"nofollow" do %>
+  Iniciar Sesión <i class="fa fa-sign-in"></i>
+  <% end %>
 <% end -%>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "Registrarme", new_registration_path(resource_name),rel:"nofollow" %><br />
+  <%= link_to  new_usuario_registration_path ,class:"btn btn-success col-xs-10 col-sm-8 col-md-8 col-lg-8 col-xs-offset-1 col-sm-offset-2 col-md-offset-2 col-lg-offset-2",rel:"nofollow" do %>
+  	Registrarme <i class="fa fa-user-plus"></i>
+  <% end %>
+  
 <% end -%>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to "Olvide mi contraseña?", new_password_path(resource_name),rel:"nofollow" %><br />
+  <%= link_to "Olvide mi contraseña?", new_password_path(resource_name),rel:"nofollow",class:"col-xs-10 col-sm-8 col-md-8 col-lg-8" %>
 <% end -%>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-  <%= link_to "No recibi las instrucciones de confirmación?", new_confirmation_path(resource_name),rel:"nofollow" %><br />
+  <%= link_to "No recibi las instrucciones de confirmación?", new_confirmation_path(resource_name),rel:"nofollow" %>
 <% end -%>
 
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
-  <%= link_to "No recibi las instrucciones de desbloqueo?", new_unlock_path(resource_name),rel:"nofollow" %><br />
+  <%= link_to "No recibi las instrucciones de desbloqueo?", new_unlock_path(resource_name),rel:"nofollow" %>
 <% end -%>
 
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to "Ingresar con #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider),rel:"nofollow" %><br />
+    <%= link_to "Ingresar con #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider),rel:"nofollow" %>
   <% end -%>
 <% end -%>

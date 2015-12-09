@@ -25,23 +25,21 @@ class ApplicationController < ActionController::Base
       @dato[0] = current_usuario.establecimiento_id
       @dato[1]= current_usuario.contribuyente_id
       
-        if @dato[0] == nil
-          @dato[0] = "Selecciona establecimiento "
-          else
-            @dato[0] = Establecimiento.find_by(id: @dato[0]).nombre
-        end
-
-         if @dato[1] == nil
-          @dato[1] = "Selecciona contribuyente "  
-          else
-            @dato[1] = Contribuyente.find_by(id: @dato[1]).nombre
-        end
+      if @dato[0] == nil
+        @dato[0] = "Selecciona establecimiento"
       else
-    end
-  
-    
-  end
+        @dato[0] = Establecimiento.find_by(id: @dato[0]).nombre
+      end
 
+      if @dato[1] == nil
+        @dato[1] = "Selecciona contribuyente"  
+      else
+        @dato[1] = Contribuyente.find_by(id: @dato[1]).nombre
+      end
+    else
+    end
+  end
+  
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :email, :password, :password_confirmation, :remember_me) }
     devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login, :username, :email, :password, :remember_me) }

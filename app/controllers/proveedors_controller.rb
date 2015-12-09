@@ -28,11 +28,9 @@ class ProveedorsController < ApplicationController
 
     respond_to do |format|
       if @proveedor.save
-        format.html { redirect_to proveedors_path, notice: 'El nuevo Proveedor fue ingresado.' }
-        format.json { render :show, status: :created, location: @proveedor }
+        format.html { redirect_to new_proveedor_path, notice: 'El nuevo Proveedor fue ingresado.' }
       else
         format.html { render :new }
-        format.json { render json: @proveedor.errors, status: :unprocessable_entity }
       end
     end
   end

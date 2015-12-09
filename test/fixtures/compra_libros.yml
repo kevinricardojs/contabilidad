@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  documento: 1
+  serie: MyString
+  numero: 1
+  proveedor_id: 
+  dia: 1
+  mes: MyString
+  year: MyString
+
+two:
+  documento: 1
+  serie: MyString
+  numero: 1
+  proveedor_id: 
+  dia: 1
+  mes: MyString
+  year: MyString

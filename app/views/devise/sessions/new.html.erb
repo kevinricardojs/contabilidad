@@ -1,4 +1,5 @@
-<div class="well col-xs-12 col-sm-6 col-md-6 col-lg-6 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
+
+<div class="sesiones well col-xs-12 col-sm-6 col-md-6 col-lg-6 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
   <h2 class="text-center">Inicia Sesión</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -21,12 +22,15 @@
   <% end %>
 
   <div class="actions text-center">
-    <%= f.submit "Iniciar", class:"btn btn-primary col-xs-10 col-sm-8 col-md-8 col-lg-8 col-xs-offset-1 col-sm-offset-2 col-md-offset-2 col-lg-offset-2" %>
+    <button  class="btn btn-primary col-xs-10 col-sm-8 col-md-8 col-lg-8 col-xs-offset-1 col-sm-offset-2 col-md-offset-2 col-lg-offset-2" name="commit">Iniciar Sesión <i class="fa fa-sign-in"></i></button>
   </div>
 <% end %>
-<div class="col-md-12">
-  <br>
+
 <%= render "devise/shared/links" %>
-</div>
 
 </div>
+<style>
+  body{
+    background:   #757D75;
+  }
+</style>

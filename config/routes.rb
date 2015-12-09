@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
 
+  resources :compra_libros
   devise_for :usuarios, controllers: {registrations: "registrations"}
   resources :cuenta_contables
   resources :proveedors
   resources :establecimientos
-  post 'libro_venta/new'
   get 'inicio/index'
   get 'inicio/operacion'
 

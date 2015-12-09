@@ -30,13 +30,11 @@ $(document).ready(function(){
 			{
 				if ($(this).attr("rel") !== "nofollow") 
 				{
-					window.open(this.href,'usuario','width=800,height=500'); return false;        
+					window.open(this.href,'usuario','width=800,height=650'); return false;        
 				};
 			};
 
 		};
-
-
 	});
 
 
@@ -70,4 +68,48 @@ $(document).ready(function(){
 			$('#receptor-cambiar').html(data)
 		});
 	});
+
+	$('#compra_libro_proveedor_id').change(function() {
+	var proveedorNit = parseInt($('#compra_libro_proveedor_id option:selected').attr('value'));
+	var proveedores = $('.proveedor-nombre').text().split("-");
+	var proveedorNit = proveedorNit - 1;
+	$('#proveedor-nombre').attr('value', proveedores[proveedorNit]);
+	});
+
+
+	$('#compra_libro_documento').change(function() {
+	var inicialesDocumento = $('#compra_libro_documento option:selected').attr('value');
+	var documento = [];
+		documento["DA"] = "DECLARACION ADUANERA";
+		documento["FA"] = "FAUCA";
+		documento["FC"] = "FACTURA"; 
+		documento["FE"] = "FACTURA ESPECIAL";
+		documento["FO"] = "FORMULARIO SAT";
+		documento["NC"] = "NOTA CREDITO";
+		documento["ND"] = "NOTA DEBITO";
+	$('#tipo-documento').attr('value', documento[inicialesDocumento]);
+	});
+
+	if ($('.base-iva').val() == "") {
+		$('.base-iva').val("0.00");
+	};
+	var gravado = $('.gravado');
+	var exento 	= $('.exento');
+		gravado.change(function(){
+			var totalFac 	= $(this).val();
+			var base 		= totalFac / 1.12;
+				iva 		= base * 0.12;
+				iva 		= iva.toFixed(2);
+			 	base 		= base.toFixed(2);
+			var total 		= (parseFloat(iva) + parseFloat(base)).toFixed(2);
+			 	$('#compra_libro_base').val(base);
+			 	$('#compra_libro_iva').val(iva);
+			 	$('#compra_libro_total').val(total);
+		});
+		exento.change(function (){
+			$('#compra_libro_base').val("0.00");
+			 $('#compra_libro_iva').val("0.00");
+		})
+			
+		
 })

@@ -1,0 +1,50 @@
+
+  <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Documento</th>
+      <th>Serie</th>
+      <th>Numero</th>
+      <th>Mes</th>
+      <th>Nit</th>
+      <th>Nombre</th>
+      <th>Base</th>
+      <th>Iva</th>
+      <th>Gravado Bienes</th>
+      <th>Gravado Servicios</th>
+      <th>Exento Bienes</th>
+      <th>Gravado Servicios</th>
+      <th>Total</th>
+      <th colspan="3">Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @compras.each do |compra| %>
+      <tr>
+      <td><%= compra.documento %></td>
+      <td><%= compra.serie %></td>
+      <td><%= compra.numero %></td>
+      <td><%= compra.mes %></td>
+      <td><%= compra.proveedor.nit %></td>
+      <td><%= compra.proveedor.nombre %></td>
+      <td><%= compra.base %></td>
+      <td><%= compra.iva %></td>
+      <td><%= compra.gravado_bienes %></td>
+      <td><%= compra.gravado_servicios %></td>
+      <td><%= compra.exento_bienes %></td>
+      <td><%= compra.exento_servicios %></td>
+      <td><%= compra.total %></td>
+      <td class="td-btn">
+        <%= link_to content_tag(:i ,'',class:"fa fa-eye"), compra ,class:"btn btn-default col-md-12 text-center"%>
+      </td>
+      <td class="td-btn">
+       <%= link_to content_tag(:i ,'',class:"fa fa-pencil"), edit_compra_libro_path(compra) ,class:"btn btn-info col-md-12 text-center" %>
+      </td>
+      <td class="td-btn">
+        <%= link_to content_tag(:i ,'',class:"fa fa-trash-o"), compra, method: :delete, data: { confirm: 'Estas seguro?' },class:"btn btn-danger col-md-12 text-center" %>
+      </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

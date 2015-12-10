@@ -1,6 +1,6 @@
 class CompraLibrosController < ApplicationController
   before_action :set_compra_libro, only: [:show, :edit, :update, :destroy]
-  before_action :set_establecimiento
+  before_action :set_compras
 
   # GET /compra_libros
   # GET /compra_libros.json
@@ -61,7 +61,7 @@ class CompraLibrosController < ApplicationController
     def set_compra_libro
       @compra_libro = CompraLibro.find(params[:id])
     end
-    def set_establecimiento
+    def set_compras
       @compras = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes)      
     end
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,6 +1,9 @@
 .td-btn{
 	width: 50px;
 }
+th{
+	text-align: center;
+}
 
 .mininav{
 	font-size: 22px;
@@ -88,26 +91,7 @@
 		font-size: 9.5em !important;
 	}
 }
-.ui-autocomplete{
-	margin: 0 auto;
-	padding: 0;
-	li{
-		list-style: none;
-		background: #f1f1f1;
-		width: 450px;
-		border-bottom: 1px solid gray;
-	}
-}
 
 .sesiones{
 	margin-top: 1%;
-}
- .ui-autocomplete {
-max-height: 100px;
-overflow-y: auto;
-/* prevent horizontal scrollbar */
-overflow-x: hidden;
-}
-* html .ui-autocomplete {
-			height: 100px;
 }

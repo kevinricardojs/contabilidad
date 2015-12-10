@@ -10,7 +10,7 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and view
 gem 'coffee-rails', '~> 4.1.0'
 gem 'bootflat-rails', '~> 0.1.11'
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

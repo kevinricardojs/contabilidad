@@ -1,30 +1,24 @@
-<div class="col-sm-6 col-md-6 col-lg-6">
+<div class="col-sm-12 col-md-12 col-lg-12">
   <span>Contribuyente: <span class="text-muted"><strong><%= @dato[1] %></strong></span></span>
-  <span>Establecimiento: <span class="text-muted"><strong><%= @dato[0] %></strong></span></span>
+<span>Establecimiento: <span class="text-muted"><strong><%= @dato[0] %></strong></span></span>
 </div>
-
-<%= form_for(@compra_libro) do |f| %>
-<div class="col-sm-6 col-md-6 col-lg-6">
-  <%= f.label :cuenta_contable_id%>
-  <%= select("compra_libro", "cuenta_contable_id", CuentaContable.all.collect {|c| [ c.tipo + "   "+c.nombre , c.id ] }, { include_blank: true },class:"form-control")%>  
-</div>
-<% if @compra_libro.errors.any? %>
+<%= form_for(@venta_libro) do |f| %>
+<% if @venta_libro.errors.any? %>
 <div class="alert alert-danger alert-dismissable col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
   <strong>Error</strong> los campos con asterisco <strong>(*)</strong> son requeridos
-  <% if @compra_libro.errors.messages[:contribuyente_id]%>
+  <% if @venta_libro.errors.messages[:contribuyente_id]%>
   <p><strong>Debes Seleccionar un Contribuyente</strong></p>
   <% end %>
-  <%if  @compra_libro.errors.messages[:establecimiento_id]%>
+  <%if  @venta_libro.errors.messages[:establecimiento_id]%>
   <p><strong>Debes Seleccionar un Establecimiento</strong></p>
   <% end %>
 </div>
 
 <% end %>
-<%= f.hidden_field :establecimiento_id, value: current_usuario.establecimiento_id %>
-<%= f.hidden_field :contribuyente_id, value: current_usuario.contribuyente_id %>
+
 <div class="field form-group col-xs-2 col-sm-2 col-md-2 col-lg-2">
   <%= f.label :documento %>
-  <select name="compra_libro[documento]" class="form-control" id="compra_libro_documento">
+  <select name="venta_libro[documento]" class="form-control" id="compra_libro_documento">
     <option value="" selected="selected"></option>
     <option value="DA">DA</option>
     <option value="FA">FA</option>
@@ -59,16 +53,14 @@
   <%= f.label :year, "Año"%>
   <%= f.text_field :year, class:"form-control", value:current_usuario.year %>
 </div>
+
 <div class="field form-group col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
-  <%= f.label :proveedor_id,"Nit" %>
-  <%= collection_select("compra_libro","proveedor_id", Proveedor.all.order(:nit), :id, :nit, {prompt: "Selecciona"}, {class:"form-control"} )%>
+  <%= f.label :nit %>
+  <%= f.text_field :nit, class:"form-control" %>
 </div>
 <div class="field form-group col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
-  <label> Nombre Proveedor</label>
-  <input type="text" class="form-control" id="proveedor-nombre" disabled>
-  <% Proveedor.all.order(:nit).each do |proveedor|%>
-  <span style="display:none;" class="proveedor-nombre"><%= proveedor.nombre + "-" %></span>
-  <% end %>
+  <%= f.label :nombre %>
+  <%= f.text_field :nombre, class:"form-control" %>
 </div>
 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
   <h5 class="text-center">Valor Gravado</h5>
@@ -95,6 +87,8 @@
 <%=  f.hidden_field :base, class:"base-iva" %>
 <%=  f.hidden_field :iva, class:"base-iva" %>
 <%= f.hidden_field :total %>
+<%= f.hidden_field :establecimiento_id, value: current_usuario.establecimiento_id %>
+<%= f.hidden_field :contribuyente_id, value: current_usuario.contribuyente_id %>
 <div class="actions col-md-12 col-sm-12 col-xs-12">
   <%= link_to content_tag(:i ,' Volver' ,class:"fa fa-arrow-circle-left "), compra_libros_path , class:"btn btn-normal col-md-offset-3 col-md-2 col-sm-offset-3 col-sm-2"%>
   <%= button_tag(type: "submit", class: "btn btn-success col-md-2 col-sm-2") do %>

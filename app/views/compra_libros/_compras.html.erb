@@ -1,8 +1,13 @@
-
-  <table class="table table-bordered">
+<table class="table table-bordered">
   <thead>
     <tr>
-      <th>Documento</th>
+      <th colspan="8"></th>
+      <th colspan="2" class="text-center">Valor Gravado</th>
+      <th colspan="2" class="text-center">Valor Exento</th>
+      <th colspan="4"></th>
+    </tr>
+    <tr>
+      <th>Doc</th>
       <th>Serie</th>
       <th>Numero</th>
       <th>Mes</th>
@@ -10,10 +15,10 @@
       <th>Nombre</th>
       <th>Base</th>
       <th>Iva</th>
-      <th>Gravado Bienes</th>
-      <th>Gravado Servicios</th>
-      <th>Exento Bienes</th>
-      <th>Gravado Servicios</th>
+      <th>Bienes</th>
+      <th>Servicios</th>
+      <th>Bienes</th>
+      <th>Servicios</th>
       <th>Total</th>
       <th colspan="3">Acciones</th>
     </tr>
@@ -21,7 +26,7 @@
 
   <tbody>
     <% @compras.each do |compra| %>
-      <tr>
+    <tr>
       <td><%= compra.documento %></td>
       <td><%= compra.serie %></td>
       <td><%= compra.numero %></td>
@@ -39,12 +44,12 @@
         <%= link_to content_tag(:i ,'',class:"fa fa-eye"), compra ,class:"btn btn-default col-md-12 text-center"%>
       </td>
       <td class="td-btn">
-       <%= link_to content_tag(:i ,'',class:"fa fa-pencil"), edit_compra_libro_path(compra) ,class:"btn btn-info col-md-12 text-center" %>
+        <%= link_to content_tag(:i ,'',class:"fa fa-pencil"), edit_compra_libro_path(compra) ,class:"btn btn-info col-md-12 text-center" %>
       </td>
       <td class="td-btn">
         <%= link_to content_tag(:i ,'',class:"fa fa-trash-o"), compra, method: :delete, data: { confirm: 'Estas seguro?' },class:"btn btn-danger col-md-12 text-center" %>
       </td>
-      </tr>
+    </tr>
     <% end %>
   </tbody>
 </table>

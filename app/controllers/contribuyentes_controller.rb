@@ -71,4 +71,4 @@ class ContribuyentesController < ApplicationController
     def contribuyente_params
       params.require(:contribuyente).permit(:nit, :nombre, :calle, :no_casa, :apto_similar, :zona, :colonia, :departamento, :municipio, :telefono, :fax, :apto_postal, :email)
     end
-end
+  end

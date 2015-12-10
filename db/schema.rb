@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151209164351) do
+ActiveRecord::Schema.define(version: 20151210154124) do
 
   create_table "compra_libros", force: :cascade do |t|
     t.integer  "documento",          limit: 4
@@ -112,6 +112,31 @@ ActiveRecord::Schema.define(version: 20151209164351) do
   add_index "usuarios", ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true, using: :btree
   add_index "usuarios", ["username"], name: "index_usuarios_on_username", unique: true, using: :btree
 
+  create_table "venta_libros", force: :cascade do |t|
+    t.integer  "documento",          limit: 4
+    t.string   "serie",              limit: 255
+    t.string   "numero",             limit: 255
+    t.integer  "dia",                limit: 4
+    t.string   "mes",                limit: 255
+    t.string   "year",               limit: 255
+    t.string   "nit",                limit: 255
+    t.string   "nombre",             limit: 255
+    t.string   "gravado_bienes",     limit: 255
+    t.string   "gravado_servicios",  limit: 255
+    t.string   "exento_bienes",      limit: 255
+    t.string   "exento_servicios",   limit: 255
+    t.string   "base",               limit: 255
+    t.string   "iva",                limit: 255
+    t.string   "total",              limit: 255
+    t.integer  "contribuyente_id",   limit: 4
+    t.integer  "establecimiento_id", limit: 4
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "venta_libros", ["contribuyente_id"], name: "index_venta_libros_on_contribuyente_id", using: :btree
+  add_index "venta_libros", ["establecimiento_id"], name: "index_venta_libros_on_establecimiento_id", using: :btree
+
   add_foreign_key "compra_libros", "contribuyentes"
   add_foreign_key "compra_libros", "cuenta_contables"
   add_foreign_key "compra_libros", "establecimientos"
@@ -119,4 +144,6 @@ ActiveRecord::Schema.define(version: 20151209164351) do
   add_foreign_key "establecimientos", "contribuyentes"
   add_foreign_key "usuarios", "contribuyentes"
   add_foreign_key "usuarios", "establecimientos"
+  add_foreign_key "venta_libros", "contribuyentes"
+  add_foreign_key "venta_libros", "establecimientos"
 end

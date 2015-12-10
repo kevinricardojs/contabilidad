@@ -1,0 +1,39 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  documento: 1
+  serie: MyString
+  numero: MyString
+  dia: 1
+  mes: MyString
+  year: MyString
+  nit: MyString
+  nombre: MyString
+  gravado_bienes: MyString
+  gravado_servicios: MyString
+  exento_bienes: MyString
+  exento_servicios: MyString
+  base: MyString
+  iva: MyString
+  total: MyString
+  contribuyente_id: 
+  establecimiento_id: 
+
+two:
+  documento: 1
+  serie: MyString
+  numero: MyString
+  dia: 1
+  mes: MyString
+  year: MyString
+  nit: MyString
+  nombre: MyString
+  gravado_bienes: MyString
+  gravado_servicios: MyString
+  exento_bienes: MyString
+  exento_servicios: MyString
+  base: MyString
+  iva: MyString
+  total: MyString
+  contribuyente_id: 
+  establecimiento_id: 

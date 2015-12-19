@@ -4,6 +4,9 @@
 th{
 	text-align: center;
 }
+td{
+	text-align: center;
+}	
 
 .mininav{
 	font-size: 22px;
@@ -94,4 +97,46 @@ th{
 
 .sesiones{
 	margin-top: 1%;
+}
+#libro_ventas td , #libro_compras td{
+	border:none;
+	border-right: 1px solid #DDD;
+	border-left: 1px solid #DDD;
+}
+#libro_compras, #libro_ventas{
+	h5{
+		margin-top: 0;
+		margin-bottom: 5px;
+	}
+	table{
+		border: 2px solid #DDD;
+	}
+	.th-sin-bordes th{
+		border:none;
+		border-bottom:  2px solid #DDD;
+		border-right: 2px solid #DDD;
+	}
+	.tr-sin-bordes th{
+		border-bottom: none;
+		border-right: 2px solid #DDD;
+	}
+}
+@media print {
+  body {
+    background-color: #FFF;
+  }
+  #libro_ventas {
+    width: auto;
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+  
+  #line_items {
+    page-break-before: always;
+  }
+  
+  #pdf_link {
+    display: none;
+  }
 }

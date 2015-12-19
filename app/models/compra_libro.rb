@@ -1,6 +1,9 @@
 class CompraLibro < ActiveRecord::Base
   belongs_to :proveedor
+  belongs_to :contribuyente
+  belongs_to :establecimiento
   enum documento: %w{DA FA FC FE FO NC ND}
+  validates :documento , presence: true
   validates :serie, presence: true
   validates :numero, presence: true, numericality:true
   validates :dia, presence: true, numericality:true

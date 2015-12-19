@@ -55,6 +55,8 @@ class CompraLibrosController < ApplicationController
       format.html { redirect_to new_compra_libro_path, notice: 'La compra fue borrada' }
     end
   end
+  def reporte
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -1,1 +1,0 @@
-json.extract! @venta_libro, :id, :documento, :serie, :numero, :dia, :mes, :year, :nit, :nombre, :gravado_bienes, :gravado_servicios, :exento_bienes, :exento_servicios, :base, :iva, :total, :contribuyente_id, :establecimiento_id, :created_at, :updated_at

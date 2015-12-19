@@ -1,6 +1,7 @@
 class Contribuyente < ActiveRecord::Base
 	has_many :establecimientos
 	has_many :compra_libros
+	has_many :venta_libros
 	validates :nit, presence: {message: " es requerido"}, uniqueness: { message: " ya esta ingresado"}
 	validates :nombre, 	presence:{message: " del Contribuyente es requerido"}
 	validates :calle , presence:{message: " o Avenida es requerido"}

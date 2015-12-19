@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_usuario!  
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :datos_para_operacion
+  before_action :fecha_completa
   
 
 
@@ -18,6 +19,11 @@ class ApplicationController < ActionController::Base
     end
 
   end
+  def fecha_completa
+    t = Time.now 
+    @fecha = t.strftime("%d/%m/%Y")
+    @hora  = t.strftime("%I:%M:%S %P")
+  end
 
   def datos_para_operacion
     if usuario_signed_in?
@@ -26,15 +32,19 @@ class ApplicationController < ActionController::Base
       @dato[1]= current_usuario.contribuyente_id
       
       if @dato[0] == nil
-        @dato[0] = "Selecciona establecimiento"
+        @establecimiento_nombre = "Selecciona establecimiento"
       else
-        @dato[0] = Establecimiento.find_by(id: @dato[0]).nombre
+        establecimiento = Establecimiento.find_by(id: @dato[0])
+        @establecimiento_nombre = establecimiento.nombre
       end
 
       if @dato[1] == nil
-        @dato[1] = "Selecciona contribuyente"  
+        @contribuyente_nombre = "Selecciona contribuyente"  
+        @contribuyente_nit = "Selecciona contribuyente"
       else
-        @dato[1] = Contribuyente.find_by(id: @dato[1]).nombre
+        contribuyente = Contribuyente.find_by(id: @dato[1])
+        @contribuyente_nombre = contribuyente.nombre
+        @contribuyente_nit = contribuyente.nit
       end
     else
     end

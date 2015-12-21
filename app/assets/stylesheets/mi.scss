@@ -104,10 +104,6 @@ td{
 	border-left: 1px solid #DDD;
 }
 #libro_compras, #libro_ventas{
-	h5{
-		margin-top: 0;
-		margin-bottom: 5px;
-	}
 	table{
 		border: 2px solid #DDD;
 	}
@@ -131,11 +127,12 @@ td{
     padding: 0;
     border: none;
   }
-  
+  #pdf-render{
+	font-size: 10px !important;  
+}
   #line_items {
     page-break-before: always;
-  }
-  
+  } 
   #pdf_link {
     display: none;
   }

@@ -1,7 +1,7 @@
 <div class="col-sm-12 col-md-12 col-lg-12">
     <span>Contribuyente: <span class="text-muted"><strong><%= @contribuyente_nombre %></strong></span></span>
     <span>Establecimiento: <span class="text-muted"><strong><%= @establecimiento_nombre %></strong></span></span>
-    <%= link_to  operaciones_libro_compra_path + ".pdf", class:"col-md-offset-3" do %>
+    <%= link_to  operaciones_libro_compra_path , class:"col-md-offset-3" do %>
         Ver Resumen del Libro de Compras <i class="fa fa-print"></i>
     <%end%>
 </div>

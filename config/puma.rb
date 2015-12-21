@@ -1,4 +1,4 @@
-threads 4,16
+threads 8,16
 workers 2
 preload_app!
 rackup		DefaultRackup

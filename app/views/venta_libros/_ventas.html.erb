@@ -9,6 +9,7 @@
     </tr>
     <tr>
       <th>Documento</th>
+      <th>Dia</th>
       <th>Serie</th>
       <th>Numero</th>
       <th>Mes</th>
@@ -29,6 +30,7 @@
     <% @ventas.each do |venta| %>
       <tr>
       <td><%= venta.documento %></td>
+      <td><%= venta.dia%></td>
       <td><%= venta.serie %></td>
       <td><%= venta.numero %></td>
       <td><%= venta.mes %></td>

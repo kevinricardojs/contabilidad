@@ -10,10 +10,10 @@ class CreateCompraLibros < ActiveRecord::Migration
       t.references :proveedor, index: true, foreign_key: true
       t.string :base
       t.string :iva
-      t.string :gravado_bienes
-      t.string :gravado_servicios
-      t.string :exento_bienes
-      t.string :exento_servicios
+      t.string :gravado_bienes, default: "0.00"
+      t.string :gravado_servicios, default: "0.00"
+      t.string :exento_bienes, default: "0.00"
+      t.string :exento_servicios, default: "0.00"
 
       t.timestamps null: false
     end

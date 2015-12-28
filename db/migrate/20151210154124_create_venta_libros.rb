@@ -9,10 +9,10 @@ class CreateVentaLibros < ActiveRecord::Migration
       t.string :year
       t.string :nit
       t.string :nombre
-      t.string :gravado_bienes
-      t.string :gravado_servicios
-      t.string :exento_bienes
-      t.string :exento_servicios
+      t.string :gravado_bienes, default: "0.00"
+      t.string :gravado_servicios, default: "0.00"
+      t.string :exento_bienes, default: "0.00"
+      t.string :exento_servicios, default: "0.00"
       t.string :base
       t.string :iva
       t.string :total

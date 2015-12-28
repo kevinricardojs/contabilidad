@@ -12,5 +12,4 @@ class VentaLibro < ActiveRecord::Base
 	validates :establecimiento_id, presence:{message: "Debes Seleccionar un Establecimiento"}
 	validates :base, numericality: true
 	validates :iva, numericality: true 
-
 end

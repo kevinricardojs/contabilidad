@@ -21,18 +21,18 @@ ActiveRecord::Schema.define(version: 20151210154124) do
     t.string   "mes",                limit: 255
     t.string   "year",               limit: 255
     t.integer  "proveedor_id",       limit: 4
-    t.string   "base",               limit: 255
-    t.string   "iva",                limit: 255
-    t.string   "gravado_bienes",     limit: 255
-    t.string   "gravado_servicios",  limit: 255
-    t.string   "exento_bienes",      limit: 255
-    t.string   "exento_servicios",   limit: 255
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.decimal  "base",                           precision: 10, scale: 2
+    t.decimal  "iva",                            precision: 10, scale: 2
+    t.decimal  "gravado_bienes",                 precision: 10, scale: 2
+    t.decimal  "gravado_servicios",              precision: 10, scale: 2
+    t.decimal  "exento_bienes",                  precision: 10, scale: 2
+    t.decimal  "exento_servicios",               precision: 10, scale: 2
+    t.decimal  "total",                          precision: 10, scale: 2
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
     t.integer  "contribuyente_id",   limit: 4
     t.integer  "establecimiento_id", limit: 4
     t.integer  "cuenta_contable_id", limit: 4
-    t.string   "total",              limit: 255
   end
 
   add_index "compra_libros", ["contribuyente_id"], name: "index_compra_libros_on_contribuyente_id", using: :btree
@@ -121,17 +121,17 @@ ActiveRecord::Schema.define(version: 20151210154124) do
     t.string   "year",               limit: 255
     t.string   "nit",                limit: 255
     t.string   "nombre",             limit: 255
-    t.string   "gravado_bienes",     limit: 255, default: "0.00"
-    t.string   "gravado_servicios",  limit: 255, default: "0.00"
-    t.string   "exento_bienes",      limit: 255, default: "0.00"
-    t.string   "exento_servicios",   limit: 255, default: "0.00"
-    t.string   "base",               limit: 255
-    t.string   "iva",                limit: 255
-    t.string   "total",              limit: 255
+    t.decimal  "gravado_bienes",                 precision: 10, scale: 2
+    t.decimal  "gravado_servicios",              precision: 10, scale: 2
+    t.decimal  "exento_bienes",                  precision: 10, scale: 2
+    t.decimal  "exento_servicios",               precision: 10, scale: 2
+    t.decimal  "base",                           precision: 10, scale: 2
+    t.decimal  "iva",                            precision: 10, scale: 2
+    t.decimal  "total",                          precision: 10, scale: 2
     t.integer  "contribuyente_id",   limit: 4
     t.integer  "establecimiento_id", limit: 4
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
   end
 
   add_index "venta_libros", ["contribuyente_id"], name: "index_venta_libros_on_contribuyente_id", using: :btree

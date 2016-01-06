@@ -8,12 +8,13 @@ class CreateCompraLibros < ActiveRecord::Migration
       t.string :mes
       t.string :year
       t.references :proveedor, index: true, foreign_key: true
-      t.string :base
-      t.string :iva
-      t.string :gravado_bienes, default: "0.00"
-      t.string :gravado_servicios, default: "0.00"
-      t.string :exento_bienes, default: "0.00"
-      t.string :exento_servicios, default: "0.00"
+      t.decimal :base, precision: 10, scale: 2
+      t.decimal :iva, precision: 10, scale: 2
+      t.decimal :gravado_bienes, precision: 10, scale: 2
+      t.decimal :gravado_servicios, precision: 10, scale: 2
+      t.decimal :exento_bienes, precision: 10, scale: 2
+      t.decimal :exento_servicios, precision: 10, scale: 2
+      t.decimal :total, precision: 10, scale: 2
 
       t.timestamps null: false
     end

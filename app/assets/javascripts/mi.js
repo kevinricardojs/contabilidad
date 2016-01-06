@@ -22,7 +22,7 @@ $(document).ready(function(){
 		$(this).delay(500).slideUp(500);
 	});
 
-$('a').click(function  () {
+	$('a').click(function  () {
 		if ($(this).attr("href") !== "#") 
 		{
 			if ($(this).attr("href") !== "/") 
@@ -98,8 +98,8 @@ $('a').click(function  () {
 		var totalFac 	= neto.val();
 		var base 		= totalFac / 1.12;
 		var iva 		= base * 0.12;
-			iva 		= iva.toFixed(2);
-			base 		= base.toFixed(2);
+		iva 		= iva.toFixed(2);
+		base 		= base.toFixed(2);
 		var total 		= (parseFloat(iva) + parseFloat(base)).toFixed(2);
 		$('#compra_libro_base').val(base);
 		$('#compra_libro_iva').val(iva);
@@ -111,31 +111,66 @@ $('a').click(function  () {
 	var gravado 		= $('.gravado');
 	var exento 			= $('.exento');
 	gravado.change(function(){
-		exento.val("");
+		exento.val("0.00");
 		if ($(this).hasClass('gravado-bienes')) 
 		{
-			$('.gravado-servicios').val("");
+			$('.gravado-servicios').val("0.00");
 		}
 		else
 		{
-			$('.gravado-bienes').val("");
+			$('.gravado-bienes').val("0.00");
 		}
 		CalculoBaseIva($(this));
 	});
 
 	exento.change(function (){
-		gravado.val("");
+		var precio = $(this).val();
+		gravado.val("0.00");
 		$('.base-iva').val("0.00");
 		if ($(this).hasClass('exento-bienes')) 
 		{
-			$('.exento-servicios').val("");
+			$('.exento-servicios').val("0.00");
 		}
 		else
 		{
-			$('.exento-bienes').val("");
+			$('.exento-bienes').val("0.00");
 		}
+
+		$('#venta_libro_total').val(precio);
+		$('#compra_libro_total').val(precio);
 		
 	});
 
+
+	/*Autocompletado*/
+	$('#compras_proveedor_nit').keyup(function  () {
+		var nit_proveedores = $('#compras_proveedor_nit').data('autocomplete-source');
+		var nombre_proveedores = $('#compras_proveedor_nombre').data('proveedor-nombre');
+		
+		$('#compras_proveedor_nit').autocomplete({
+			source: nit_proveedores
+		});
+
+		var nit_seleccionado = $('#compras_proveedor_nit').val();
+		var index_nit = nit_proveedores.indexOf(nit_seleccionado);
+
+		if ($('.ui-helper-hidden-accessible div:last-child').text() == "No search results.")
+		{
+			$('#compras_proveedor_nombre').removeAttr('readonly');
+			$('#compras_proveedor_nombre').attr('placeholder' ,'Escribe el nombre del nuevo Proveedor');
+		}
+		else if(nit_seleccionado == "")
+		{
+			$('#compras_proveedor_nombre').val("");
+			$('#compras_proveedor_nombre').removeAttr('placeholder');
+			$('#compras_proveedor_nombre').attr('readonly', 'readonly');	
+		}
+		else
+		{
+			$('#compras_proveedor_nombre').val(nombre_proveedores[index_nit]);
+			$('#compras_proveedor_nombre').attr('readonly', 'readonly');
+		}
+
+	})
 
 });

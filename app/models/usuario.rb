@@ -8,8 +8,15 @@ class Usuario < ActiveRecord::Base
   
 
   attr_accessor :login
+  attr_accessor :full_nombre
   validates :username, :presence => true, :uniqueness => {:case_sensitive => false  }
   validate :validate_username
+
+  def full_nombre
+    if self.nombre && self.apellido != ""
+       full_name = self.nombre + " " + self.apellido     
+    end
+  end
 
   def validate_username
   	if Usuario.where(email: username).exists?

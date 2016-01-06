@@ -9,13 +9,13 @@ class CreateVentaLibros < ActiveRecord::Migration
       t.string :year
       t.string :nit
       t.string :nombre
-      t.string :gravado_bienes, default: "0.00"
-      t.string :gravado_servicios, default: "0.00"
-      t.string :exento_bienes, default: "0.00"
-      t.string :exento_servicios, default: "0.00"
-      t.string :base
-      t.string :iva
-      t.string :total
+      t.decimal :gravado_bienes, precision: 10, scale: 2
+      t.decimal :gravado_servicios, precision: 10, scale: 2
+      t.decimal :exento_bienes, precision: 10, scale: 2
+      t.decimal :exento_servicios, precision: 10, scale: 2
+      t.decimal :base, precision: 10, scale: 2
+      t.decimal :iva, precision: 10, scale: 2
+      t.decimal :total, precision: 10, scale: 2
       t.references :contribuyente, index: true, foreign_key: true
       t.references :establecimiento, index: true, foreign_key: true
 

@@ -8,6 +8,7 @@ class CompraLibro < ActiveRecord::Base
   belongs_to :proveedor
   belongs_to :contribuyente
   belongs_to :establecimiento
+  belongs_to :cuenta_contable
 
   #Validaciones
   enum documento: %w{DA FA FC FE FO NC ND}
@@ -24,10 +25,8 @@ class CompraLibro < ActiveRecord::Base
   validates :iva, numericality: true 
   validates :cuenta_contable_id, presence: true
 
-
   def self_proveedor_id   
     self.proveedor_id = Proveedor.find_or_create_by(nit: @proveedor_nit , nombre: @proveedor_nombre).id if @proveedor_nit.present? && @proveedor_nombre.present?  
   end
-  
   
 end

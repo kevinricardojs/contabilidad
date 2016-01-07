@@ -39,11 +39,12 @@
         <th>Servicios</th>
         <th>IVA</th>
         <th>Total</th>
+        <th>Base</th>
       </tr>
     </thead>
 
     <tbody>
-      <% @compras.each do |compra| %>
+      <% @compras_por_dia.each do |compra| %>
       <tr>
         <td><%= compra.dia %></td>
         <td><%= compra.documento %></td>
@@ -55,10 +56,34 @@
         <td>Q<%= compra.gravado_servicios %></td>
         <td>Q<%= compra.exento_bienes %></td>
         <td>Q<%= compra.exento_servicios %></td>
-        <td><%= compra.iva %></td>
-        <td><%= compra.total %></td>
+        <td>Q<%= compra.iva %></td>
+        <td>Q<%= compra.total %></td>
+        <td>Q<%= compra.base %></td>
       </tr>
       <% end %>
     </tbody>
   </table>
+  <div class="col-md-12">
+    <table class="table table-bordered">
+    <thead>
+      <tr class="tr-sin-bordes">
+        <th colspan="2" class="text-center">Resumen por Cuenta Contable</th>
+      </tr>
+      <tr class="th-sin-bordes">
+        <th>Nombre</th>
+        <th>Suma de base</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @compras_por_cuenta.each do |cuenta|  %>
+      <tr>
+        <td><%= cuenta[0]%></td>
+        <td>Q<%= cuenta[1]%></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+  </div>
 </div>

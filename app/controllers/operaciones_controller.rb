@@ -1,10 +1,15 @@
 class OperacionesController < ApplicationController
 	before_action :set_compras
 	before_action :set_ventas
+	before_action :set_por_cuentas
+
 	def libro_venta
+
 	end
 	def libro_compra
+		@compras_por_dia = @compras.order(:dia)
 	end
+
 	private
 	def set_ventas
 		@ventas_por_dia = VentaLibro.order(:dia).where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).group(:dia).sum(:base)
@@ -40,7 +45,19 @@ class OperacionesController < ApplicationController
 			end
 		end
 	end
+
+	
 	def set_compras
-		@compras = CompraLibro.order(:dia).where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes)      
+		@compras = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes)
+	end
+	def set_por_cuentas
+		cuentas = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).group(:cuenta_contable_id).count()
+		@compras_por_cuenta = []
+
+		cuentas.each do |cuenta|
+			nombre_cuenta = CuentaContable.find_by_id(cuenta[0]).nombre
+			suma_base = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes, cuenta_contable_id: cuenta[0]).sum(:base)
+			@compras_por_cuenta.push [nombre_cuenta , suma_base]
+		end
 	end
 end

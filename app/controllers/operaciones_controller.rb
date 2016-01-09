@@ -2,6 +2,7 @@ class OperacionesController < ApplicationController
 	before_action :set_compras
 	before_action :set_ventas
 	before_action :set_por_cuentas
+  
 
 	def libro_venta
 
@@ -11,6 +12,8 @@ class OperacionesController < ApplicationController
 	end
 
 	private
+	
+ 
 	def set_ventas
 		@ventas_por_dia = VentaLibro.order(:dia).where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).group(:dia).sum(:base)
 		dias = VentaLibro.order(:dia).where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).group(:dia).count()

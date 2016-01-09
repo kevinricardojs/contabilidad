@@ -1,89 +1,104 @@
 <div id="libro_compras" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-<%= link_to  operaciones_libro_compra_path + ".pdf" , id:"pdf_link", class:"col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center" do %>
-        Ver Version Imprimible <i class="fa fa-print"></i>
+    <%= link_to  operaciones_libro_compra_path + ".pdf" , id:"pdf_link", class:"col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center" do %>
+    Ver Version Imprimible <i class="fa fa-print"></i>
     <%end%>
-<div id="pdf-render">
-    <div  class="col-xs-9 col-sm-10 col-md-10 col-lg-10"><strong><%= @contribuyente_nombre%></strong></div>
-    <div  class="col-xs-3 col-sm-2 col-md-2 col-lg-2">Fecha: <strong><%= @fecha%></strong></div>
-    <div  class="col-xs-9 col-sm-10 col-md-10 col-lg-10"><strong> <%= @establecimiento_nombre%></strong></div>
-    <div  class="col-xs-3 col-sm-2 col-md-2 col-lg-2">Hora: <strong><%= @hora %></strong></div>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">Nit:  <strong><%= @contribuyente_nit%></strong></div>
-    <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">Periodo:  <strong><%= current_usuario.mes %></strong> - <strong><%= current_usuario.year %></strong></div>
-    <div class="col-xs-6 col-sm-7 col-md-7 col-lg-7 "><strong>Libro de Compras y Servicios Recibidos</strong></div>
-    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Folio: </div>
-  </div>
-   <div class="clearfix visible-xs-block"></div>
-  <table class="table table-bordered">
-    <thead>
-      <tr class="tr-sin-bordes">
-        <th colspan="1"></th>
-        <th colspan="1"></th>
-        <th colspan="1"></th>
-        <th colspan="1"></th>
-        <th colspan="1"></th>
-        <th colspan="1"></th>
-        <th colspan="2">Base Gravada</th>
-        <th colspan="2">Base Exenta</th>
-        <th colspan="2"></th>
-      </tr>
-      <tr class="th-sin-bordes">
-        <th>Dia</th>
-        <th>Tipo</th>
-        <th>Serie</th>
-        <th>Numero</th>
-        <th>Nit</th>
-        <th>Nombre</th>
-        <th>Bienes</th>
-        <th>Servicios</th>
-        <th>Bienes</th>
-        <th>Servicios</th>
-        <th>IVA</th>
-        <th>Total</th>
-        <th>Base</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @compras_por_dia.each do |compra| %>
-      <tr>
-        <td><%= compra.dia %></td>
-        <td><%= compra.documento %></td>
-        <td><%= compra.serie %></td>
-        <td><%= compra.numero %></td>
-        <td><%= compra.proveedor.nit %></td>
-        <td><%= compra.proveedor.nombre %></td>
-        <td>Q<%= compra.gravado_bienes %></td>
-        <td>Q<%= compra.gravado_servicios %></td>
-        <td>Q<%= compra.exento_bienes %></td>
-        <td>Q<%= compra.exento_servicios %></td>
-        <td>Q<%= compra.iva %></td>
-        <td>Q<%= compra.total %></td>
-        <td>Q<%= compra.base %></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <div class="col-md-12">
+    <div id="pdf-render">
+        <div  class="col-xs-9 col-sm-10 col-md-10 col-lg-10">
+            <strong><%= @contribuyente_nombre%></strong>
+        </div>
+        <div  class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
+            Fecha: <strong><%= p_fecha%></strong>
+        </div>
+        <div  class="col-xs-9 col-sm-10 col-md-10 col-lg-10">
+            <strong> <%= @establecimiento_nombre%></strong>
+        </div>
+        <div  class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
+            Hora: <strong><%= p_hora %></strong>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            Nit:  <strong><%= @contribuyente_nit%></strong>
+        </div>
+        <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+            Periodo:  <strong><%= current_usuario.mes %></strong> - <strong><%= current_usuario.year %></strong>
+        </div>
+        <div class="col-xs-6 col-sm-7 col-md-7 col-lg-7 ">
+            <strong>Libro de Compras y Servicios Recibidos</strong>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            Folio: 
+        </div>
+    </div>
+    <div class="clearfix visible-xs-block"></div>
     <table class="table table-bordered">
-    <thead>
-      <tr class="tr-sin-bordes">
-        <th colspan="2" class="text-center">Resumen por Cuenta Contable</th>
-      </tr>
-      <tr class="th-sin-bordes">
-        <th>Nombre</th>
-        <th>Suma de base</th>
-      </tr>
-    </thead>
+        <thead>
+            <tr class="tr-sin-bordes">
+                <th colspan="1"></th>
+                <th colspan="1"></th>
+                <th colspan="1"></th>
+                <th colspan="1"></th>
+                <th colspan="2">Proveedor</th>
+                <th colspan="2">Base Gravada</th>
+                <th colspan="2">Base Exenta</th>
+                <th colspan="2"></th>
+            </tr>
+            <tr class="th-sin-bordes">
+                <th>Dia</th>
+                <th>Tipo</th>
+                <th>Serie</th>
+                <th>Numero</th>
+                <th>Nit</th>
+                <th>Nombre</th>
+                <th>Bienes</th>
+                <th>Servicios</th>
+                <th>Bienes</th>
+                <th>Servicios</th>
+                <th>IVA</th>
+                <th>Total</th>
+                <th>Base</th>
+            </tr>
+        </thead>
 
-    <tbody>
-      <% @compras_por_cuenta.each do |cuenta|  %>
-      <tr>
-        <td><%= cuenta[0]%></td>
-        <td>Q<%= cuenta[1]%></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-  
-  </div>
+        <tbody>
+            <% @compras_por_dia.each do |compra| %>
+            <tr>
+                <td><%= compra.dia %></td>
+                <td><%= compra.documento %></td>
+                <td><%= compra.serie %></td>
+                <td><%= compra.numero %></td>
+                <td><%= compra.proveedor.nit %></td>
+                <td><%= compra.proveedor.nombre %></td>
+                <td>Q<%= compra.gravado_bienes %></td>
+                <td>Q<%= compra.gravado_servicios %></td>
+                <td>Q<%= compra.exento_bienes %></td>
+                <td>Q<%= compra.exento_servicios %></td>
+                <td>Q<%= compra.iva %></td>
+                <td>Q<%= compra.total %></td>
+                <td>Q<%= compra.base %></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <thead>
+                <tr class="tr-sin-bordes">
+                    <th colspan="2" class="text-center">Resumen por Cuenta Contable</th>
+                </tr>
+                <tr class="th-sin-bordes">
+                    <th>Nombre</th>
+                    <th>Suma de base</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% @compras_por_cuenta.each do |cuenta|  %>
+                <tr>
+                    <td><%= cuenta[0]%></td>
+                    <td>Q<%= cuenta[1]%></td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+
+    </div>
 </div>

@@ -6,8 +6,6 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_usuario!  
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :datos_para_operacion
-  before_action :fecha_completa
-  
 
 
 
@@ -18,11 +16,6 @@ class ApplicationController < ActionController::Base
       @establecimientos = Establecimiento.all
     end
 
-  end
-  def fecha_completa
-    t = Time.now 
-    @fecha = t.strftime("%d/%m/%Y")
-    @hora  = t.strftime("%I:%M:%S %P")
   end
 
   def datos_para_operacion

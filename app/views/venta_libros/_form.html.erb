@@ -5,7 +5,7 @@
         Ver Resumen del Libro de Ventas <i class="fa fa-print"></i>
     <%end%>
 </div>
-<%= form_for(@venta_libro) do |f| %>
+<%= form_for(@venta_libro, html: {autocomplete: "off"}) do |f| %>
 <% if @venta_libro.errors.any? %>
 <div class="alert alert-danger alert-dismissable col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
     <strong>Error</strong> los campos con asterisco <strong>(*)</strong> son requeridos
@@ -50,11 +50,11 @@
 </div>
 <div class="field form-group col-xs-6 col-sm-2 col-md-2 col-lg-2 ">
     <%= f.label :mes %>
-    <%= f.text_field :mes, class:"form-control", value:current_usuario.mes %>
+    <%= f.text_field :mes, readonly:"readonly", class:"form-control", value:current_usuario.mes %>
 </div >
 <div class="field form-group col-xs-6 col-sm-1 col-md-1 col-lg-1 ">
     <%= f.label :year, "Año"%>
-    <%= f.text_field :year, class:"form-control", value:current_usuario.year %>
+    <%= f.text_field :year, readonly:"readonly", class:"form-control", value:current_usuario.year %>
 </div>
 
 <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 ">

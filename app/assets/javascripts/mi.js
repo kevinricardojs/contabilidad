@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	
+	//Alertas
 	var noticia = $('#notice');
 	var alerta = $('#alert');
 
@@ -8,12 +8,12 @@ $(document).ready(function(){
 			top: "10%"});
 		$('#notice').delay(4000).fadeOut(2000);
 	};
-
-	var objeto = $('.jumbotron .objeto');
+/* */
+ 	var objeto = $('.jumbotron .objeto');
 
 	$(objeto).click(function() {
 		var popover = $(this).children("div");
-		$(popover).slideDown(400);
+		$(popover).slideToggle(400);
 	});
 
 	var popover = $(objeto).children("div");
@@ -22,6 +22,7 @@ $(document).ready(function(){
 		$(this).delay(500).slideUp(500);
 	});
 
+//Abrir links en Ventanas
 	$('a').click(function  () {
 		if ($(this).attr("href") !== "#") 
 		{
@@ -36,7 +37,7 @@ $(document).ready(function(){
 		};
 	});
 
-
+/**/
 
 	var establecimientos = $('#usuario_establecimiento_id').html();
 	

@@ -1,56 +1,56 @@
 <div class="form">
-  <%= form_for(@contribuyente) do |f| %>
+  <%= form_for(@contribuyente, html: {autocomplete: "off"}) do |f| %>
   <% if @contribuyente.errors.any? %>
   <div class="alert alert-danger alert-dismissable col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
     <strong>Error</strong> los campos con asterisco <strong>(*)</strong> son requeridos
   </div>
   <% end %>
 
-  <div class="field form-group has-feedback col-md-4 col-sm-4 col-xs-6 col-md-offset-4">
+  <div class="field form-group has-feedback col-md-4 col-sm-4 col-xs-12 col-md-offset-4">
     <%= f.label :nit, "Nit (*)" , class:"control-label"%>
     <span class="fa fa-2x form-control-feedback"></span>
     <%= f.text_field :nit, class:"form-control", autofocus:true %>
     
 
   </div>
-  <div class="field form-group col-md-10 col-sm-10 col-xs-8 col-md-offset-1 col-xs-2">
+  <div class="field form-group col-md-10 col-sm-10 col-xs-12 col-md-offset-1 col-xs-12">
     <%= f.label :nombre, "Apellidos y Nombres o Razón Social (*)" %>
     <%= f.text_field :nombre, class:"form-control" %>
   </div>
-  <div class="field form-group col-md-4 col-sm-4 col-xs-6">
+  <div class="field form-group col-md-4 col-sm-4 col-xs-12">
     <%= f.label :calle, "No. ó nombre de calle ó avenida (*)" %>
     <%= f.text_field :calle, class:"form-control" %>
   </div>
-  <div class="field form-group col-md-4 col-sm-4 col-xs-6">
+  <div class="field form-group col-md-4 col-sm-4 col-xs-12">
     <%= f.label :no_casa, "Numero de Casa (*)"  %>
     <%= f.text_field :no_casa, class:"form-control" %>
   </div>
-  <div class="field form-group col-md-3 col-sm-3 col-xs-6">
+  <div class="field form-group col-md-3 col-sm-3 col-xs-12">
     <%= f.label :zona, "Zona (*)"%>
     <%= f.number_field :zona, class:"form-control",min:1,max:100 %>
   </div>
-  <div class="field form-group col-md-3 col-sm-3 col-xs-6">
+  <div class="field form-group col-md-3 col-sm-3 col-xs-12">
     <%= f.label :colonia, "Colonia o Barrio" %>
     <%= f.text_field :colonia, class:"form-control" %>
   </div>
-  <div class="field form-group  col-md-3 col-sm-3 col-xs-6">
+  <div class="field form-group  col-md-3 col-sm-3 col-xs-12">
     <%= f.label :departamento, "Departamento (*)" %>
     <%= f.text_field :departamento, class:"form-control" %>
   </div>
-  <div class="field form-group col-md-3 col-sm-3 col-xs-6">
+  <div class="field form-group col-md-3 col-sm-3 col-xs-12">
     <%= f.label :municipio, "Municipio (*)" %>
     <%= f.text_field :municipio, class:"form-control" %>
   </div>
-  <div class="field form-group col-md-3 col-sm-3 col-xs-6">
+  <div class="field form-group col-md-3 col-sm-3 col-xs-12">
     <%= f.label :telefono, "Telefono (*)" %>
     <%= f.text_field :telefono, class:"form-control" %>
   </div>
-  <div class="actions col-md-12 col-sm-12 col-xs-12">
-  <%= link_to content_tag(:i ,' Volver' ,class:"fa fa-arrow-circle-left "), contribuyentes_path , class:"btn btn-normal col-md-offset-3 col-md-2 col-sm-offset-3 col-sm-2"%>
-    <%= button_tag(type: "submit", class: "btn btn-success col-md-2 col-sm-2", id:"guardar") do %>
+  <div class="actions col-xs-12 col-sm-12 col-md-12  ">
+  <%= link_to content_tag(:i ,' Volver' ,class:"fa fa-arrow-circle-left "), contribuyentes_path , class:"btn btn-normal col-xs-12 col-sm-offset-3 col-sm-2 col-md-offset-3 col-md-2 "%>
+    <%= button_tag(type: "submit", class: "btn btn-success col-xs-12 col-md-2 col-sm-2", id:"guardar") do %>
     <i class="fa fa-save"></i> Guardar 
     <% end %>
-    <%= button_tag(type: "reset", class: "btn btn-danger col-md-2 col-sm-2") do %>
+    <%= button_tag(type: "reset", class: "btn btn-danger col-xs-12 col-md-2 col-sm-2") do %>
     <i class="fa fa-undo"></i> Reiniciar 
     <% end %>
     

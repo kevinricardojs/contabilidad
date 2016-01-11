@@ -41,10 +41,8 @@ class ProveedorsController < ApplicationController
     respond_to do |format|
       if @proveedor.update(proveedor_params)
         format.html { redirect_to proveedors_path, notice: 'El Proveedor fue actualizado exitosamente' }
-        format.json { render :show, status: :ok, location: @proveedor }
       else
         format.html { render :edit }
-        format.json { render json: @proveedor.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -55,7 +53,6 @@ class ProveedorsController < ApplicationController
     @proveedor.destroy
     respond_to do |format|
       format.html { redirect_to proveedors_url, notice: 'El Proveedor se ha eliminado' }
-      format.json { head :no_content }
     end
   end
 

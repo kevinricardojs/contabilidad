@@ -32,10 +32,8 @@ class EstablecimientosController < ApplicationController
     respond_to do |format|
       if @establecimiento.save
         format.html { redirect_to new_establecimiento_path, notice: 'El nuevo Establecimiento fue ingresado.' }
-        format.json { render :show, status: :created, location: @establecimiento }
       else
         format.html { render :new }
-        format.json { render json: @establecimiento.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -46,10 +44,8 @@ class EstablecimientosController < ApplicationController
     respond_to do |format|
       if @establecimiento.update(establecimiento_params)
         format.html { redirect_to new_establecimiento_path, notice: 'El Establecimiento fue actualizado exitosamente' }
-        format.json { render :show, status: :ok, location: @establecimiento }
       else
         format.html { render :edit }
-        format.json { render json: @establecimiento.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -60,7 +56,6 @@ class EstablecimientosController < ApplicationController
     @establecimiento.destroy
     respond_to do |format|
       format.html { redirect_to establecimientos_url, notice: 'El Establecimiento se ha eliminado' }
-      format.json { head :no_content }
     end
   end
 

@@ -29,10 +29,8 @@ class CuentaContablesController < ApplicationController
     respond_to do |format|
       if @cuenta_contable.save
         format.html { redirect_to new_cuenta_contable_path , notice: 'Fue añadida una nueva Cuenta contable' }
-        format.json { render :show, status: :created, location: @cuenta_contable }
       else
         format.html { render :new }
-        format.json { render json: @cuenta_contable.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -43,10 +41,8 @@ class CuentaContablesController < ApplicationController
     respond_to do |format|
       if @cuenta_contable.update(cuenta_contable_params)
         format.html { redirect_to new_cuenta_contable_path , notice: 'Fue actualizada la Cuenta contable' }
-        format.json { render :show, status: :ok, location: @cuenta_contable }
       else
         format.html { render :edit }
-        format.json { render json: @cuenta_contable.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -57,7 +53,6 @@ class CuentaContablesController < ApplicationController
     @cuenta_contable.destroy
     respond_to do |format|
       format.html { redirect_to cuenta_contables_url, notice: 'La Cuenta contable fue borrada' }
-      format.json { head :no_content }
     end
   end
 

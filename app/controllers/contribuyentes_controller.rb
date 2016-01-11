@@ -29,10 +29,8 @@ class ContribuyentesController < ApplicationController
     respond_to do |format|
       if @contribuyente.save
         format.html { redirect_to new_contribuyente_path, notice: 'El nuevo Contribuyente fue ingresado.' }
-        format.json { render :show, status: :created, location: @contribuyente }
       else
         format.html { render :new }
-        format.json { render json: @contribuyente.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -43,10 +41,8 @@ class ContribuyentesController < ApplicationController
     respond_to do |format|
       if @contribuyente.update(contribuyente_params)
         format.html { redirect_to new_contribuyente_path, notice: 'El Contribuyente fue actualizado exitosamente' }
-        format.json { render :show, status: :ok, location: @contribuyente }
       else
         format.html { render :edit }
-        format.json { render json: @contribuyente.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -57,7 +53,6 @@ class ContribuyentesController < ApplicationController
     @contribuyente.destroy
     respond_to do |format|
       format.html { redirect_to contribuyentes_url, notice: 'El Contribuyente ha sido eliminado' }
-      format.json { head :no_content }
     end
   end
 

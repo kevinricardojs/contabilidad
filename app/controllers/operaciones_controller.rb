@@ -5,7 +5,6 @@ class OperacionesController < ApplicationController
   
 
 	def libro_venta
-
 	end
 	def libro_compra
 		@compras_por_dia = @compras.order(:dia)
@@ -64,3 +63,4 @@ class OperacionesController < ApplicationController
 		end
 	end
 end
+

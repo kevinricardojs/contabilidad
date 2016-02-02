@@ -6,6 +6,65 @@
 				<h4 class="modal-title" id="myModalLabel">Selecciona o cambia datos</h4>
 			</div>
 			<div class="modal-body" id="receptor-cambiar">
+				<form action="/usuarios" method="post">
+					<input type="hidden" value="put" name="_method">
+					<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %> 
+
+
+					<div class="field form-group">
+						<%= label :contribuyente_id, "Nit (*)" %>
+						<select name="usuario[contribuyente_id]" id="select_contribuyentes" class="form-control borrar-option" >
+							<option disabled selected> Selecciona una opción</option>
+						</select>
+					</div>
+
+					<div class="field form-group" id="establecimientos">
+						<%= label :contribuyente_id, "Establecimiento (*)" %>
+						<select name="usuario[establecimiento_id]" id="select_establecimientos" class="form-control borrar-option" >
+							<option disabled selected> Selecciona una opción</option>
+						</select>
+					</div>
+
+					<div class="field form-group">
+						<%= label :mes, "Mes a trabajar" %>
+						<select name="usuario[mes]" class="form-control">
+							<option value="Selecciona un Mes">Selecciona un mes</option>
+							<option value="Enero">Enero</option>
+							<option value="Febrero">Febrero</option>
+							<option value="Marzo">Marzo</option>
+							<option value="Abril">Abril</option>
+							<option value="Mayo">Mayo</option>
+							<option value="Junio">Junio</option>
+							<option value="Julio">Julio</option>
+							<option value="Agosto">Agosto</option>
+							<option value="Septiembre">Septiembre</option>
+							<option value="Octubre">Octubre</option>
+							<option value="Noviembre">Noviembre</option>
+							<option value="Diciembre">Diciembre</option>
+						</select>
+					</div>
+					<div class="field form-group">
+						<%= label :year,"Año"%>
+						<select name="usuario[year]" class="form-control">
+							<option value="Selecciona un Año">Selecciona un año</option>
+							<option value="2015">2015</option>
+							<option value="2016">2016</option>
+							<option value="2017">2017</option>
+							<option value="2018">2018</option>
+							<option value="2019">2019</option>
+							<option value="2020">2020</option>
+						</select>
+					</div>
+
+
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+						<input type="submit" value="Cambiar" name="commit" class="btn btn-info">
+					</div>
+
+				</form>
+
 
 			</div>
 		</div>

@@ -1,0 +1,1 @@
+json.array! @establecimientos, :id, :nombre

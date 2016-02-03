@@ -1,39 +1,310 @@
-<%= form_for(@cuenta_contable, html: {autocomplete: "off"}) do |f| %>
-<% if @cuenta_contable.errors.any? %>
-<div class="alert alert-danger alert-dismissable col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-    <strong>Error</strong> los campos con asterisco <strong>(*)</strong> son requeridos
+<%= form_for(@cuenta_contable) do |f| %>
+  <% if @cuenta_contable.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cuenta_contable.errors.count, "error") %> prohibited this cuenta_contable from being saved:</h2>
+
+      <ul>
+      <% @cuenta_contable.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field col-md-4">
+    <%= f.label :establecimiento_id %>
+    <%= f.text_field :establecimiento_id, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :caja %>
+    <%= f.text_field :caja, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :banco %>
+    <%= f.text_field :banco, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :clientes %>
+    <%= f.text_field :clientes, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :deudores %>
+    <%= f.text_field :deudores, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :acciones_suscritas %>
+    <%= f.text_field :acciones_suscritas, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :suscriptores_de_acciones %>
+    <%= f.text_field :suscriptores_de_acciones, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :hipoteca %>
+    <%= f.text_field :hipoteca, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :prestamos_fiduciarios %>
+    <%= f.text_field :prestamos_fiduciarios, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :documentos_por_cobrar %>
+    <%= f.text_field :documentos_por_cobrar, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :documentos_por_pagar %>
+    <%= f.text_field :documentos_por_pagar, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :cuentas_por_cobrar %>
+    <%= f.text_field :cuentas_por_cobrar, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :cuentas_por_pagar %>
+    <%= f.text_field :cuentas_por_pagar, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :proveedores %>
+    <%= f.text_field :proveedores, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :acreedores %>
+    <%= f.text_field :acreedores, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :inmuebles %>
+    <%= f.text_field :inmuebles, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :mobiliario_y_equipo %>
+    <%= f.text_field :mobiliario_y_equipo, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :equipo_de_computacion %>
+    <%= f.text_field :equipo_de_computacion, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :maquinaria %>
+    <%= f.text_field :maquinaria, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :herramientas %>
+    <%= f.text_field :herramientas, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :vehiculos %>
+    <%= f.text_field :vehiculos, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :cristaleria %>
+    <%= f.text_field :cristaleria, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :depreciacion_acumulada_mobiliario_y_equipo %>
+    <%= f.text_field :depreciacion_acumulada_mobiliario_y_equipo, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :depreciacion_acumulada_equipo_de_computacion %>
+    <%= f.text_field :depreciacion_acumulada_equipo_de_computacion, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :depreciacion_acumulada_maquinaria %>
+    <%= f.text_field :depreciacion_acumulada_maquinaria, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :depreciacion_acumulada_herramienta %>
+    <%= f.text_field :depreciacion_acumulada_herramienta, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :depreciacion_acumulada_vehiculos %>
+    <%= f.text_field :depreciacion_acumulada_vehiculos, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :depreciacion_acumulada_cristaleria %>
+    <%= f.text_field :depreciacion_acumulada_cristaleria, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :capital %>
+    <%= f.text_field :capital, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :capital_autorizado %>
+    <%= f.text_field :capital_autorizado, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :reserva_legal %>
+    <%= f.text_field :reserva_legal, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :ventas %>
+    <%= f.text_field :ventas, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :servicios_prestados %>
+    <%= f.text_field :servicios_prestados, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :comisiones_devengadas %>
+    <%= f.text_field :comisiones_devengadas, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :alquileres_devengados %>
+    <%= f.text_field :alquileres_devengados, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :arrendamiento_de_maquinaria %>
+    <%= f.text_field :arrendamiento_de_maquinaria, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :alquileres_pagados %>
+    <%= f.text_field :alquileres_pagados, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :gastos_generales %>
+    <%= f.text_field :gastos_generales, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :viaticos %>
+    <%= f.text_field :viaticos, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :seguros_pagados %>
+    <%= f.text_field :seguros_pagados, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :servicios_pagados %>
+    <%= f.text_field :servicios_pagados, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :reparacion_y_mantenimiento_gastos %>
+    <%= f.text_field :reparacion_y_mantenimiento_gastos, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :repuestos_y_accesorios_gastos %>
+    <%= f.text_field :repuestos_y_accesorios_gastos, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :combustibles_y_lubricantes %>
+    <%= f.text_field :combustibles_y_lubricantes, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :costo_por_servicio %>
+    <%= f.text_field :costo_por_servicio, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :telefono %>
+    <%= f.text_field :telefono, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :energia_electrica %>
+    <%= f.text_field :energia_electrica, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :medicina_y_medicamentos %>
+    <%= f.text_field :medicina_y_medicamentos, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :depreciacion_mobiliario_y_equipo %>
+    <%= f.text_field :depreciacion_mobiliario_y_equipo, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :depreciacion_equipo_de_computacion %>
+    <%= f.text_field :depreciacion_equipo_de_computacion, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :depreciacion_maquinaria %>
+    <%= f.text_field :depreciacion_maquinaria, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :depreciacion_herramienta %>
+    <%= f.text_field :depreciacion_herramienta, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :depreciacion_vehiculos %>
+    <%= f.text_field :depreciacion_vehiculos, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :depreciacion_cristaleria %>
+    <%= f.text_field :depreciacion_cristaleria, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :compras %>
+    <%= f.text_field :compras, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :intereses_devengados %>
+    <%= f.text_field :intereses_devengados, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :intereses_pagados %>
+    <%= f.text_field :intereses_pagados, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :terrenos %>
+    <%= f.text_field :terrenos, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :edificios %>
+    <%= f.text_field :edificios, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :gastos_constitucion %>
+    <%= f.text_field :gastos_constitucion, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :sueldos_y_salarios %>
+    <%= f.text_field :sueldos_y_salarios, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :retenci¾n_igss_laboral %>
+    <%= f.text_field :retenci¾n_igss_laboral, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :cuota_patronal %>
+    <%= f.text_field :cuota_patronal, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :bonificacion_e_incentivo_laboral %>
+    <%= f.text_field :bonificacion_e_incentivo_laboral, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :bono_14 %>
+    <%= f.text_field :bono_14, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :aguinaldo %>
+    <%= f.text_field :aguinaldo, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :fletes_sobre_compras %>
+    <%= f.text_field :fletes_sobre_compras, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :indemnizaciones %>
+    <%= f.text_field :indemnizaciones, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :perdidas_y_ganancias %>
+    <%= f.text_field :perdidas_y_ganancias, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :publicidad_y_propaganda %>
+    <%= f.text_field :publicidad_y_propaganda, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :vacaciones %>
+    <%= f.text_field :vacaciones, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :descuentos_sobre_compras %>
+    <%= f.text_field :descuentos_sobre_compras, class:"form-control" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :devoluciones_y_rebajas_sobre_ventas %>
+    <%= f.text_field :devoluciones_y_rebajas_sobre_ventas, class:"form-control" %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
   </div>
 <% end %>
-
-
-<div class="field form-group col-xs-12 col-sm-4 col-md-4 col-lg-4  col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
-  <%= f.label :nombre, "Nombre (*)" %>
-  <%= f.text_field :nombre, class:"form-control" %>
-</div>
-<div class="field form-group col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
-  <%= f.label :tipo, "Tipo de Cuenta (*)" %>
-  <div class="radio">
-  <label >
-    <%= f.radio_button :tipo, "Haber"%>
-    Haber
-  </label>
-  </div>
-    <div class="radio">
-      <label >
-        <%= f.radio_button :tipo, "Debe"%>
-        Debe
-      </label>  
-    </div>
-  </div>
-  <div class="actions col-md-12 col-sm-12 col-xs-12">
-
-    <%= link_to content_tag(:i ,' Volver' ,class:"fa fa-arrow-circle-left "), cuenta_contables_path , class:"btn btn-normal col-xs-12 col-md-offset-3 col-md-2 col-sm-offset-3 col-sm-2"%>
-    <%= button_tag(type: "submit", class: "btn btn-success col-xs-12 col-md-2 col-sm-2") do %>
-    <i class="fa fa-save"></i> Guardar 
-    <% end %>
-    <%= button_tag(type: "reset", class: "btn btn-danger col-xs-12 col-md-2 col-sm-2") do %>
-    <i class="fa fa-undo"></i> Reiniciar 
-    <% end %>
-    
-  </div>
-  <% end %>

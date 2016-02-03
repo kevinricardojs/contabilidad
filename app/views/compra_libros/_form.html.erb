@@ -67,11 +67,6 @@
     <%= f.label :proveedor_nombre, "Nombre Proveedor(*)" %>
     <%= f.text_field :proveedor_nombre, id:"compras_proveedor_nombre" , class:"form-control", data: { proveedor_nombre: Proveedor.order(:nit).map(&:nombre)}, readonly:"readonly", autocomplete:"off" %>
 </div>
-<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-    <%= f.label :cuenta_contable_id, "Cuenta Contable(*)" %>
-    <%= select("compra_libro", "cuenta_contable_id", CuentaContable.all.collect {|c| [ c.nombre , c.id ] }, { include_blank: true },class:"form-control")%>  
-</div>
-
 <div class="col-xs-12 col-sm-offset-2 col-md-offset-2 col-sm-4 col-md-4 col-lg-4">
     <h5 class="text-center">Valor Gravado</h5>
     <div class="field form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">

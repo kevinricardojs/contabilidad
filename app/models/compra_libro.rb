@@ -23,7 +23,7 @@ class CompraLibro < ActiveRecord::Base
   validates :establecimiento_id, presence:{message: "Debes Seleccionar un Establecimiento"}
   validates :base, numericality: true
   validates :iva, numericality: true 
-  validates :cuenta_contable_id, presence: true
+  
 
   def self_proveedor_id   
     self.proveedor_id = Proveedor.find_or_create_by(nit: @proveedor_nit , nombre: @proveedor_nombre).id if @proveedor_nit.present? && @proveedor_nombre.present?  

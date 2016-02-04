@@ -10,13 +10,9 @@
 <%= form_for(@compra_libro, html: {autocomplete: "off"}) do |f| %>
 <% if @compra_libro.errors.any? %>
 <div class="alert alert-danger alert-dismissable col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-    <strong>Error</strong> los campos con asterisco <strong>(*)</strong> son requeridos
-    <% if @compra_libro.errors.messages[:contribuyente_id]%>
-    <p><strong>Debes Seleccionar un Contribuyente</strong></p>
-    <% end %>
-    <%if  @compra_libro.errors.messages[:establecimiento_id]%>
-    <p><strong>Debes Seleccionar un Establecimiento</strong></p>
-    <% end %>
+  <% @compra_libro.errors.full_messages.each do |mensaje|%>
+  <%= mensaje%>
+  <%end%>
 </div>
 
 <% end %>
@@ -35,7 +31,7 @@
         <option value="ND">ND</option>
     </select>
 </div>
-<div class="field form-group col-xs-6 col-sm-3 col-md-3 col-lg-3 ">
+<div class="field form-group col-xs-6 col-sm-3 col-md-3 col-lg-3">
     <label >Tipo de Documento(*)</label>
     <input type="text" id="tipo-documento" class="form-control" disabled>
 </div>
@@ -61,11 +57,15 @@
 </div>
 <div class="field form-group col-xs-6 col-sm-4 col-md-4 col-lg-4">
     <%= f.label :proveedor_nit,"Nit(*)" %>
-    <%= f.text_field :proveedor_nit, id:"compras_proveedor_nit", class:"form-control", data: { autocomplete_source: Proveedor.order(:nit).map(&:nit)}, autocomplete:"off"  %>
+    <%= f.text_field :proveedor_nit, id:"compras_proveedor_nit", class:"form-control", autocomplete:"off"  %>
 </div>
 <div class="field form-group col-xs-6 col-sm-4 col-md-4 col-lg-4 ">
     <%= f.label :proveedor_nombre, "Nombre Proveedor(*)" %>
-    <%= f.text_field :proveedor_nombre, id:"compras_proveedor_nombre" , class:"form-control", data: { proveedor_nombre: Proveedor.order(:nit).map(&:nombre)}, readonly:"readonly", autocomplete:"off" %>
+    <%= f.text_field :proveedor_nombre, id:"compras_proveedor_nombre" , class:"form-control"%>
+</div>
+<div class="field form-group col-xs-6 col-sm-4 col-md-4 col-lg-4 ">
+    <%= f.label :tipo_de_gasto, "Tipo de Gasto"%>
+    <%= f.text_field :tipo_de_gasto, class:"form-control", id:"compra_libro_tipo_de_gasto" %>
 </div>
 <div class="col-xs-12 col-sm-offset-2 col-md-offset-2 col-sm-4 col-md-4 col-lg-4">
     <h5 class="text-center">Valor Gravado</h5>
@@ -92,7 +92,6 @@
 
 <%=  f.hidden_field :base, class:"base-iva" %>
 <%=  f.hidden_field :iva, class:"base-iva" %>
-<%= f.hidden_field :total %>
 <div class="actions col-md-12 col-sm-12 col-xs-12">
     <%= link_to content_tag(:i ,' Volver' ,class:"fa fa-arrow-circle-left "), compra_libros_path , class:"btn btn-normal col-xs-12 col-md-offset-3 col-md-2 col-sm-offset-3 col-sm-2"%>
     <%= button_tag(type: "submit", class: "btn btn-success col-xs-12 col-md-2 col-sm-2") do %>

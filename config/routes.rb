@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tipo_de_gastos
   resources :cuenta_contables
   resources :venta_libros
   resources :compra_libros
@@ -6,8 +7,10 @@ Rails.application.routes.draw do
   resources :proveedors
   resources :establecimientos
   get 'inicio/index'
-  get 'inicio/contribuyentes'
-  post 'inicio/establecimientos'
+  post 'peticion_json/contribuyentes'
+  post 'peticion_json/establecimientos'
+  post 'peticion_json/proveedores'
+  post 'peticion_json/tipos_de_gastos'
   get 'operaciones/libro_venta'
   get 'operaciones/libro_compra'
   resources :contribuyentes

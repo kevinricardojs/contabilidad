@@ -48,7 +48,7 @@ $('#boton-cambiar').click(function() {
 	var borrar = $('.borrar-option')
 	$(borrar).children('option').remove();
 	$(borrar).html("<option disabled selected> Selecciona una opción</option>");
-	$.get('/inicio/contribuyentes.json', function(data) {
+	$.post('/peticion_json/contribuyentes.json', function(data) {
 		if (data.length !== 0) 
 		{ 
 			for (var i = data.length - 1; i >= 0; i--) {
@@ -66,7 +66,7 @@ $('#boton-cambiar').click(function() {
 	});
 	select_contribuyentes.change(function() {
 		var contribuyente_id = $('#select_contribuyentes option:selected').val();
-		$.post( "/inicio/establecimientos.json", { id: contribuyente_id}, function(data) {
+		$.post( "/peticion_json/establecimientos.json", { id: contribuyente_id}, function(data) {
 			if (data.length !== 0) 
 			{ 
 				$(select_establecimientos).children('option').remove();
@@ -86,15 +86,7 @@ $('#boton-cambiar').click(function() {
 		});
 	});
 });
-
-$('#compra_libro_proveedor_id').change(function() {
-	var proveedorNit = parseInt($('#compra_libro_proveedor_id option:selected').attr('value'));
-	var proveedores = $('.proveedor-nombre').text().split("-");
-	var proveedorNit = proveedorNit - 1;
-	$('#proveedor-nombre').attr('value', proveedores[proveedorNit]);
-});
-
-
+/**/
 $('#compra_libro_documento').change(function() {
 	var inicialesDocumento = $('#compra_libro_documento option:selected').attr('value');
 	var documento = [];
@@ -107,7 +99,6 @@ $('#compra_libro_documento').change(function() {
 	documento["ND"] = "NOTA DEBITO";
 	$('#tipo-documento').attr('value', documento[inicialesDocumento]);
 });
-
 
 if ($('.base-iva').val() == "") {
 	$('.base-iva').val("0.00");
@@ -122,10 +113,8 @@ function CalculoBaseIva(neto){
 	var total 		= (parseFloat(iva) + parseFloat(base)).toFixed(2);
 	$('#compra_libro_base').val(base);
 	$('#compra_libro_iva').val(iva);
-	$('#compra_libro_total').val(total);
 	$('#venta_libro_base').val(base);
 	$('#venta_libro_iva').val(iva);
-	$('#venta_libro_total').val(total);
 }
 var gravado 		= $('.gravado');
 var exento 			= $('.exento');
@@ -154,42 +143,56 @@ exento.change(function (){
 	{
 		$('.exento-bienes').val("0.00");
 	}
-
-	$('#venta_libro_total').val(precio);
-	$('#compra_libro_total').val(precio);
-
 });
 
 
-/*Autocompletado*/
-$('#compras_proveedor_nit').keyup(function  () {
-	var nit_proveedores = $('#compras_proveedor_nit').data('autocomplete-source');
-	var nombre_proveedores = $('#compras_proveedor_nombre').data('proveedor-nombre');
+/*Autocompletado Proveedor CompraLibros#new*/
+$('#compras_proveedor_nit').keyup(function () {
+	var nit_escrito = $(this).val();
+	$.post( "/peticion_json/proveedores.json", { nit: nit_escrito }, function(data) {
+		var nit_proveedores = [];
+		var nombre_proveedores = [];
+		data.map(function(elem) {
+			nit_proveedores.push(elem.nit);
+			nombre_proveedores.push(elem.nombre);
+		});
+		$('#compras_proveedor_nit').autocomplete({
+			source: nit_proveedores
+		});
 
-	$('#compras_proveedor_nit').autocomplete({
-		source: nit_proveedores
+		var nit_seleccionado = $('#compras_proveedor_nit').val();
+		var index_nit = nit_proveedores.indexOf(nit_seleccionado);
+
+		if ($('.ui-helper-hidden-accessible div:last-child').text() == "No search results.")
+		{
+			$('#compras_proveedor_nombre').removeAttr('readonly');
+			$('#compras_proveedor_nombre').attr('placeholder' ,'Escribe el nombre del nuevo Proveedor');
+		}
+		else if(nit_seleccionado == "")
+		{
+			$('#compras_proveedor_nombre').val("");
+			$('#compras_proveedor_nombre').removeAttr('placeholder');
+			$('#compras_proveedor_nombre').attr('readonly', 'readonly');	
+		}
+		else
+		{
+			$('#compras_proveedor_nombre').val(nombre_proveedores[index_nit]);
+			$('#compras_proveedor_nombre').attr('readonly', 'readonly');
+		}
 	});
-
-	var nit_seleccionado = $('#compras_proveedor_nit').val();
-	var index_nit = nit_proveedores.indexOf(nit_seleccionado);
-
-	if ($('.ui-helper-hidden-accessible div:last-child').text() == "No search results.")
-	{
-		$('#compras_proveedor_nombre').removeAttr('readonly');
-		$('#compras_proveedor_nombre').attr('placeholder' ,'Escribe el nombre del nuevo Proveedor');
-	}
-	else if(nit_seleccionado == "")
-	{
-		$('#compras_proveedor_nombre').val("");
-		$('#compras_proveedor_nombre').removeAttr('placeholder');
-		$('#compras_proveedor_nombre').attr('readonly', 'readonly');	
-	}
-	else
-	{
-		$('#compras_proveedor_nombre').val(nombre_proveedores[index_nit]);
-		$('#compras_proveedor_nombre').attr('readonly', 'readonly');
-	}
-
+});
+/*Autocompletado Tipo de Gastos CompraLibros#new*/
+$('#compra_libro_tipo_de_gasto').keyup(function (){
+	var busqueda = $(this).val();
+	var datos = [];
+	$.post( "/peticion_json/tipos_de_gastos.json", { nombre: busqueda }, function(data) {
+		data.map(function(elem) {
+			datos.push(elem.nombre);
+		})
+	});
+	$('#compra_libro_tipo_de_gasto').autocomplete({
+		source: datos
+	});
 })
 
 });

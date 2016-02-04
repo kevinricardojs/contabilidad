@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160203213553) do
+ActiveRecord::Schema.define(version: 20160204052112) do
 
   create_table "compra_libros", force: :cascade do |t|
     t.integer  "documento",          limit: 4
@@ -32,11 +32,13 @@ ActiveRecord::Schema.define(version: 20160203213553) do
     t.datetime "updated_at",                                              null: false
     t.integer  "contribuyente_id",   limit: 4
     t.integer  "establecimiento_id", limit: 4
+    t.integer  "tipo_de_gasto_id",   limit: 4
   end
 
   add_index "compra_libros", ["contribuyente_id"], name: "index_compra_libros_on_contribuyente_id", using: :btree
   add_index "compra_libros", ["establecimiento_id"], name: "index_compra_libros_on_establecimiento_id", using: :btree
   add_index "compra_libros", ["proveedor_id"], name: "index_compra_libros_on_proveedor_id", using: :btree
+  add_index "compra_libros", ["tipo_de_gasto_id"], name: "index_compra_libros_on_tipo_de_gasto_id", using: :btree
 
   create_table "contribuyentes", force: :cascade do |t|
     t.string   "nit",          limit: 255
@@ -155,6 +157,12 @@ ActiveRecord::Schema.define(version: 20160203213553) do
     t.datetime "updated_at",             null: false
   end
 
+  create_table "tipo_de_gastos", force: :cascade do |t|
+    t.string   "nombre",     limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "usuarios", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false
@@ -211,6 +219,7 @@ ActiveRecord::Schema.define(version: 20160203213553) do
   add_foreign_key "compra_libros", "contribuyentes"
   add_foreign_key "compra_libros", "establecimientos"
   add_foreign_key "compra_libros", "proveedors"
+  add_foreign_key "compra_libros", "tipo_de_gastos"
   add_foreign_key "cuenta_contables", "establecimientos"
   add_foreign_key "establecimientos", "contribuyentes"
   add_foreign_key "usuarios", "contribuyentes"

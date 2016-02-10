@@ -1,0 +1,67 @@
+<div id="partidas">
+	
+	<table class="table table-bordered table-responsive">
+		<thead>
+    <!-- <tr>
+      <th colspan="7"></th>
+      <th colspan="2">Valor Gravado</th>
+      <th colspan="2">Valor Exento</th>
+      <th colspan="4"></th>
+  </tr> -->
+  <tr>
+  	<th>Nombre de Cuentas</th>
+  	<th>Debe</th>
+  	<th>Haber</th>
+  </tr>
+</thead>
+<tbody>
+	<tr>
+		<td>Partida #1</td>
+	</tr>
+	<tr>
+		<td class="left border-grueso-right">Ventas</td>
+		<td></td>
+		<td>Q<%= @ventas_base %></td>
+	</tr>
+	<tr>
+		<td class="left border-grueso-right">IVA Credito Fiscal</td>
+		<td></td>
+		<td>Q<%= @ventas_iva %></td>
+	</tr>
+	<tr>
+		<td class="left border-grueso-right">Caja</td>
+		<td>Q<%= @ventas_caja %></td>
+		<td></td>
+	</tr>
+	<tr >
+		<td class="left border-grueso-right">Total</td>
+		<td class="termina-partida">Q<%= @ventas_caja %></td>
+		<td class="termina-partida">Q<%= @ventas_caja %></td>
+	</tr>
+	<tr>
+		<td>Partida #2</td>
+	</tr>
+	<tr>
+		<td class="left border-grueso-right">Caja</td>
+		<td></td>
+		<td>Q<%= @compras_caja %></td>
+	</tr>
+
+	<tr>
+		<td class="left border-grueso-right">Compras</td>
+		<td>Q<%= @compras_base %></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td class="left border-grueso-right">IVA Credito Fiscal</td>
+		<td>Q<%= @compras_iva %></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td class="left border-grueso-right">Total</td>
+		<td class="termina-partida">Q<%= @compras_caja %></td>
+		<td class="termina-partida">Q<%= @compras_caja %></td>
+	</tr>
+</tbody>
+</table>
+</div>

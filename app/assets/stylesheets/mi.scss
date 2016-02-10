@@ -162,3 +162,23 @@ td{
 .ui-helper-hidden-accessible {
   display: none;
 }
+
+#partidas{
+	border: 1px solid black;
+	width: 1024px;
+	height:720px;
+	overflow: scroll;
+}
+.termina-partida{
+	border-top: 2px solid black !important;
+	border-bottom: 4px double black !important;
+}
+.border-grueso-right{
+	border-right: 2px solid black !important;
+}
+.left{
+	text-align: left;
+}
+.right{
+	text-align: right;
+}

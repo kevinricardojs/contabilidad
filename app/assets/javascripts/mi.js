@@ -30,7 +30,7 @@ $('a').click(function  () {
 		{
 			if ($(this).attr("rel") !== "nofollow") 
 			{
-				window.open(this.href,'usuario','width=auto'); return false;        
+				window.open(this.href,'usuario','width=1024'); return false;        
 			};
 		};
 

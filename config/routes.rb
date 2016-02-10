@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'libro_diario/partidas'
+  get 'libro_diario/resumen'
+
   resources :tipo_de_gastos
   resources :cuenta_contables
   resources :venta_libros

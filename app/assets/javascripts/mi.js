@@ -1,4 +1,6 @@
 $(document).ready(function(){
+
+	
 	//Alertas
 	var noticia = $('#notice');
 	var alerta = $('#alert');

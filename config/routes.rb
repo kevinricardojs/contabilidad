@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  get 'libro_diario/partidas'
+  resources :libro_diarios, except: :index do
+    resources :partidas  
+  end
   get 'libro_diario/resumen'
 
   resources :tipo_de_gastos
-  resources :cuenta_contables
+  
   resources :venta_libros
   resources :compra_libros
   devise_for :usuarios, controllers: {registrations: "registrations"}

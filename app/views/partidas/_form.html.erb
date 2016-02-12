@@ -1,10 +1,10 @@
-<%= form_for(@cuenta_contable) do |f| %>
-  <% if @cuenta_contable.errors.any? %>
+<%= form_for(@partida) do |f| %>
+  <% if @partida.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@cuenta_contable.errors.count, "error") %> prohibited this cuenta_contable from being saved:</h2>
+      <h2><%= pluralize(@oartida.errors.count, "error") %> prohibited this oartida from being saved:</h2>
 
       <ul>
-      <% @cuenta_contable.errors.full_messages.each do |message| %>
+      <% @oartida.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>

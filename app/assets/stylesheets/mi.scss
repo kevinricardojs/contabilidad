@@ -1,3 +1,4 @@
+@import "bootflat";
 .td-btn{
 	width: 50px;
 }
@@ -163,7 +164,7 @@ td{
   display: none;
 }
 
-#partidas{
+#resumen{
 	border: 1px solid black;
 	width: 1024px;
 	height:720px;
@@ -181,4 +182,7 @@ td{
 }
 .right{
 	text-align: right;
+}
+table{
+  border-collapse: separate; 
 }

@@ -1,6 +1,6 @@
-class CreateCuentaContables < ActiveRecord::Migration
+class CreatePartidas < ActiveRecord::Migration
   def change
-    create_table :cuenta_contables do |t|
+    create_table :partidas do |t|
       t.decimal :caja, precision: 10, scale: 2
       t.decimal :banco, precision: 10, scale: 2
       t.decimal :clientes, precision: 10, scale: 2

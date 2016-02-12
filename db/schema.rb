@@ -54,7 +54,23 @@ ActiveRecord::Schema.define(version: 20160204052112) do
     t.datetime "updated_at",               null: false
   end
 
-  create_table "cuenta_contables", force: :cascade do |t|
+  create_table "establecimientos", force: :cascade do |t|
+    t.string   "nombre",           limit: 255
+    t.string   "calle",            limit: 255
+    t.string   "numero_casa",      limit: 255
+    t.integer  "zona",             limit: 4
+    t.string   "colonia",          limit: 255
+    t.string   "departamento",     limit: 255
+    t.string   "municipio",        limit: 255
+    t.string   "telefono",         limit: 255
+    t.integer  "contribuyente_id", limit: 4
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "establecimientos", ["contribuyente_id"], name: "index_establecimientos_on_contribuyente_id", using: :btree
+
+  create_table "partidas", force: :cascade do |t|
     t.decimal  "caja",                                                   precision: 10, scale: 2
     t.decimal  "banco",                                                  precision: 10, scale: 2
     t.decimal  "clientes",                                               precision: 10, scale: 2
@@ -132,23 +148,7 @@ ActiveRecord::Schema.define(version: 20160204052112) do
     t.integer  "establecimiento_id",                           limit: 4
   end
 
-  add_index "cuenta_contables", ["establecimiento_id"], name: "index_cuenta_contables_on_establecimiento_id", using: :btree
-
-  create_table "establecimientos", force: :cascade do |t|
-    t.string   "nombre",           limit: 255
-    t.string   "calle",            limit: 255
-    t.string   "numero_casa",      limit: 255
-    t.integer  "zona",             limit: 4
-    t.string   "colonia",          limit: 255
-    t.string   "departamento",     limit: 255
-    t.string   "municipio",        limit: 255
-    t.string   "telefono",         limit: 255
-    t.integer  "contribuyente_id", limit: 4
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-  end
-
-  add_index "establecimientos", ["contribuyente_id"], name: "index_establecimientos_on_contribuyente_id", using: :btree
+  add_index "partidas", ["establecimiento_id"], name: "index_partidas_on_establecimiento_id", using: :btree
 
   create_table "proveedors", force: :cascade do |t|
     t.string   "nombre",     limit: 255
@@ -220,8 +220,8 @@ ActiveRecord::Schema.define(version: 20160204052112) do
   add_foreign_key "compra_libros", "establecimientos"
   add_foreign_key "compra_libros", "proveedors"
   add_foreign_key "compra_libros", "tipo_de_gastos"
-  add_foreign_key "cuenta_contables", "establecimientos"
   add_foreign_key "establecimientos", "contribuyentes"
+  add_foreign_key "partidas", "establecimientos"
   add_foreign_key "usuarios", "contribuyentes"
   add_foreign_key "usuarios", "establecimientos"
   add_foreign_key "venta_libros", "contribuyentes"

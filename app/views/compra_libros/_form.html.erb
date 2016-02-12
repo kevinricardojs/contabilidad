@@ -19,8 +19,8 @@
 <%= f.hidden_field :establecimiento_id, value: current_usuario.establecimiento_id %>
 <%= f.hidden_field :contribuyente_id, value: current_usuario.contribuyente_id %>
 <div class="field form-group col-xs-6 col-sm-2 col-md-2 col-lg-2">
-    <%= f.label :documento, "Documento(*)" %>
-    <select name="compra_libro[documento]" class="form-control" id="compra_libro_documento">
+    <%= f.label :documento, "Documento(*)",class:"control-label" %>
+    <select name="compra_libro[documento]" class="form-control" id="compra_libro_documento" required>
         <option value="" selected="selected"></option>
         <option value="DA">DA</option>
         <option value="FA">FA</option>
@@ -32,61 +32,61 @@
     </select>
 </div>
 <div class="field form-group col-xs-6 col-sm-3 col-md-3 col-lg-3">
-    <label >Tipo de Documento(*)</label>
+    <label class:"control-label" >Tipo de Documento(*)</label>
     <input type="text" id="tipo-documento" class="form-control" disabled>
 </div>
 <div class="field form-group col-xs-6 col-sm-1 col-md-1 col-lg-1">
-    <%= f.label :serie, "Serie(*)" %>
-    <%= f.text_field :serie, class:"form-control" %>
+    <%= f.label :serie, "Serie(*)",class:"control-label" %>
+    <%= f.text_field :serie, class:"form-control", required:true %>
 </div>
 <div class="field form-group col-xs-6 col-sm-2 col-md-2 col-lg-2 ">
-    <%= f.label :numero, "Numero(*)" %>
-    <%= f.text_field :numero, class:"form-control" %>
+    <%= f.label :numero, "Numero(*)",class:"control-label" %>
+    <%= f.text_field :numero, class:"form-control", required:true %>
 </div>
 <div class="field form-group col-xs-6 col-sm-1 col-md-1 col-lg-1 ">
-    <%= f.label :dia, "Dia(*)" %>
-    <%= f.text_field :dia, class:"form-control" %>
+    <%= f.label :dia, "Dia(*)",class:"control-label" %>
+    <%= f.text_field :dia, class:"form-control", required:true %>
 </div>
 <div class="field form-group col-xs-6 col-sm-2 col-md-2 col-lg-2 ">
-    <%= f.label :mes, "Mes(*)" %>
-    <%= f.text_field :mes, readonly:"readonly", class:"form-control", value:current_usuario.mes %>
+    <%= f.label :mes, "Mes(*)", class:"control-label" %>
+    <%= f.text_field :mes, readonly:"readonly", class:"form-control", value:current_usuario.mes, required:true %>
 </div >
 <div class="field form-group col-xs-6 col-sm-1 col-md-1 col-lg-1 ">
-    <%= f.label :year, "Año(*)"%>
-    <%= f.text_field :year, readonly:"readonly", class:"form-control", value:current_usuario.year %>
+    <%= f.label :year, "Año(*)", class:"control-label"%>
+    <%= f.text_field :year, readonly:"readonly", class:"form-control", value:current_usuario.year, required:true %>
 </div>
 <div class="field form-group col-xs-6 col-sm-4 col-md-4 col-lg-4">
-    <%= f.label :proveedor_nit,"Nit(*)" %>
-    <%= f.text_field :proveedor_nit, id:"compras_proveedor_nit", class:"form-control", autocomplete:"off"  %>
+    <%= f.label :proveedor_nit,"Nit(*)", class:"control-label" %>
+    <%= f.text_field :proveedor_nit, id:"compras_proveedor_nit", class:"form-control", autocomplete:"off", required:true  %>
 </div>
 <div class="field form-group col-xs-6 col-sm-4 col-md-4 col-lg-4 ">
-    <%= f.label :proveedor_nombre, "Nombre Proveedor(*)" %>
-    <%= f.text_field :proveedor_nombre, id:"compras_proveedor_nombre" , class:"form-control"%>
+    <%= f.label :proveedor_nombre, "Nombre Proveedor(*)", class:"control-label" %>
+    <%= f.text_field :proveedor_nombre, id:"compras_proveedor_nombre" , class:"form-control", required:true%>
 </div>
 <div class="field form-group col-xs-6 col-sm-4 col-md-4 col-lg-4 ">
-    <%= f.label :tipo_de_gasto, "Tipo de Gasto"%>
-    <%= f.text_field :tipo_de_gasto, class:"form-control", id:"compra_libro_tipo_de_gasto" %>
+    <%= f.label :tipo_de_gasto, "Tipo de Gasto", class:"control-label"%>
+    <%= f.text_field :tipo_de_gasto, class:"form-control", id:"compra_libro_tipo_de_gasto", required:true %>
 </div>
 <div class="col-xs-12 col-sm-offset-2 col-md-offset-2 col-sm-4 col-md-4 col-lg-4">
     <h5 class="text-center">Valor Gravado</h5>
     <div class="field form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <%= f.label :gravado_bienes, "Bienes" %>
-        <%= f.text_field :gravado_bienes, class:"form-control gravado gravado-bienes"%>
+        <%= f.label :gravado_bienes, "Bienes", class:"control-label" %>
+        <%= f.text_field :gravado_bienes, class:"form-control gravado gravado-bienes",required:true %>
     </div>
     <div class="field form-group col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
-        <%= f.label :gravado_servicios, "Servicios" %>
-        <%= f.text_field :gravado_servicios, class:"form-control gravado gravado-servicios" %>
+        <%= f.label :gravado_servicios, "Servicios", class:"control-label" %>
+        <%= f.text_field :gravado_servicios, class:"form-control gravado gravado-servicios" ,required:true %>
     </div>
 </div>
 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
     <h5 class="text-center">Valor Exento</h5>
-    <div class="field form-group col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
-        <%= f.label :exento_bienes, "Bienes" %>
-        <%= f.text_field :exento_bienes, class:"form-control exento exento-bienes" %>
+    <div class="field form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <%= f.label :exento_bienes, "Bienes",class:"control-label" %>
+        <%= f.text_field :exento_bienes, class:"form-control exento exento-bienes" ,required:true %>
     </div>
     <div class="field form-group col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
-        <%= f.label :exento_servicios, "Servicios" %>
-        <%= f.text_field :exento_servicios, class:"form-control exento exento-servicios" %>
+        <%= f.label :exento_servicios, "Servicios",class:"control-label" %>
+        <%= f.text_field :exento_servicios, class:"form-control exento exento-servicios" ,required:true %>
     </div>
 </div>
 

@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  resources :libro_diarios, except: :index do
+  resources :libro_diarios, except: :show do
     resources :partidas  
   end
-  get 'libro_diario/resumen'
+  get 'libro_diarios/mostrar'
+  get 'libro_diarios/resumen'
 
   resources :tipo_de_gastos
   

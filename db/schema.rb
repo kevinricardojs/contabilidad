@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160204052112) do
+ActiveRecord::Schema.define(version: 20160212180056) do
 
   create_table "compra_libros", force: :cascade do |t|
     t.integer  "documento",          limit: 4
@@ -69,6 +69,16 @@ ActiveRecord::Schema.define(version: 20160204052112) do
   end
 
   add_index "establecimientos", ["contribuyente_id"], name: "index_establecimientos_on_contribuyente_id", using: :btree
+
+  create_table "libro_diarios", force: :cascade do |t|
+    t.integer  "establecimiento_id", limit: 4
+    t.string   "mes",                limit: 255
+    t.string   "year",               limit: 255
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "libro_diarios", ["establecimiento_id"], name: "index_libro_diarios_on_establecimiento_id", using: :btree
 
   create_table "partidas", force: :cascade do |t|
     t.decimal  "caja",                                                   precision: 10, scale: 2
@@ -146,9 +156,11 @@ ActiveRecord::Schema.define(version: 20160204052112) do
     t.datetime "created_at",                                                                      null: false
     t.datetime "updated_at",                                                                      null: false
     t.integer  "establecimiento_id",                           limit: 4
+    t.integer  "libro_diario_id",                              limit: 4
   end
 
   add_index "partidas", ["establecimiento_id"], name: "index_partidas_on_establecimiento_id", using: :btree
+  add_index "partidas", ["libro_diario_id"], name: "index_partidas_on_libro_diario_id", using: :btree
 
   create_table "proveedors", force: :cascade do |t|
     t.string   "nombre",     limit: 255
@@ -221,7 +233,9 @@ ActiveRecord::Schema.define(version: 20160204052112) do
   add_foreign_key "compra_libros", "proveedors"
   add_foreign_key "compra_libros", "tipo_de_gastos"
   add_foreign_key "establecimientos", "contribuyentes"
+  add_foreign_key "libro_diarios", "establecimientos"
   add_foreign_key "partidas", "establecimientos"
+  add_foreign_key "partidas", "libro_diarios"
   add_foreign_key "usuarios", "contribuyentes"
   add_foreign_key "usuarios", "establecimientos"
   add_foreign_key "venta_libros", "contribuyentes"

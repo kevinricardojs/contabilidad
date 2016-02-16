@@ -2,7 +2,7 @@ class CompraLibro < ActiveRecord::Base
   #Callback
   before_validation :self_proveedor_id
   before_validation :self_tipo_de_gasto
-  before_save :suma_total
+  before_save :suma_total 
 
   attr_accessor :proveedor_nit
   attr_accessor :proveedor_nombre
@@ -29,6 +29,22 @@ class CompraLibro < ActiveRecord::Base
   validates :iva, numericality: true 
   validates :tipo_de_gasto_id, presence: true
   
+  def proveedor_nit
+    if self.proveedor_id
+      Proveedor.find_by(id: self.proveedor_id).nit
+    end
+  end
+  def proveedor_nombre
+    if self.proveedor_id
+      Proveedor.find_by(id: self.proveedor_id).nombre
+    end
+  end
+
+  def tipo_de_gasto
+    if self.tipo_de_gasto_id
+      TipoDeGasto.find_by(id: self.tipo_de_gasto_id).nombre
+    end
+  end
 
   def self_proveedor_id   
     self.proveedor_id = Proveedor.find_or_create_by(nit: @proveedor_nit , nombre: @proveedor_nombre).id if @proveedor_nit.present? && @proveedor_nombre.present?  

@@ -1,15 +1,14 @@
 class VentaLibrosController < ApplicationController
   before_action :set_venta_libro, only: [:show, :edit, :update, :destroy]
   before_action :set_ventas
+  before_action :validar_datos_para_trabajar
 
   # GET /venta_libros
-  # GET /venta_libros.json
   def index
     @venta_libros = VentaLibro.all
   end
 
   # GET /venta_libros/1
-  # GET /venta_libros/1.json
   def show
   end
 
@@ -23,14 +22,14 @@ class VentaLibrosController < ApplicationController
   end
 
   # POST /venta_libros
-  # POST /venta_libros.json
   def create
     @venta_libro = VentaLibro.new(venta_libro_params)
+    @venta_libro.contribuyente_id = @u.contribuyente_id
+    @venta_libro.establecimiento_id  = @u.establecimiento_id 
 
     respond_to do |format|
       if @venta_libro.save
-        format.html { redirect_to new_venta_libro_path, notice: 'Venta libro was successfully created.' }
-        format.json { render :show, status: :created, location: @venta_libro }
+        format.html { redirect_to new_venta_libro_path, notice: 'La Venta fue añadida exitosamente' }
       else
         format.html { render :new }
       end
@@ -38,11 +37,10 @@ class VentaLibrosController < ApplicationController
   end
 
   # PATCH/PUT /venta_libros/1
-  # PATCH/PUT /venta_libros/1.json
   def update
     respond_to do |format|
       if @venta_libro.update(venta_libro_params)
-        format.html { redirect_to new_venta_libro_path, notice: 'Venta libro was successfully updated.' }
+        format.html { redirect_to new_venta_libro_path, notice: 'La Venta fue actualizada exitosamente' }
       else
         format.html { render :edit }
       end
@@ -50,11 +48,10 @@ class VentaLibrosController < ApplicationController
   end
 
   # DELETE /venta_libros/1
-  # DELETE /venta_libros/1.json
   def destroy
     @venta_libro.destroy
     respond_to do |format|
-      format.html { redirect_to new_venta_libro_path, notice: 'Venta libro was successfully destroyed.' }
+      format.html { redirect_to new_venta_libro_path, notice: 'La Venta fue borrada' }
     end
   end
 

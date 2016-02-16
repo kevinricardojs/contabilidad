@@ -61,7 +61,7 @@ class CreatePartidas < ActiveRecord::Migration
       t.decimal :edificios, precision: 10, scale: 2
       t.decimal :gastos_constitucion, precision: 10, scale: 2
       t.decimal :sueldos_y_salarios, precision: 10, scale: 2
-      t.decimal :retenci¾n_igss_laboral, precision: 10, scale: 2
+      t.decimal :retencion_igss_laboral, precision: 10, scale: 2
       t.decimal :cuota_patronal, precision: 10, scale: 2
       t.decimal :bonificacion_e_incentivo_laboral, precision: 10, scale: 2
       t.decimal :bono_14, precision: 10, scale: 2

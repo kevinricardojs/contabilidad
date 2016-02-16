@@ -1,14 +1,11 @@
 class LibroDiariosController < ApplicationController
-  before_action :set_libro_diario, only: [:mostrar, :resumen]
-  def mostrar
-    @partidas = @libro_diario.partidas
+  before_action :set_libro_diario
+
+  def partidas
+    @partida = @libro_diario.partidas.new
+
   end
 
-  def update
-  end
-
-  def destroy
-  end
   def resumen
     @ventas_base = VentaLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:base)
     @ventas_iva = VentaLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:iva)
@@ -20,18 +17,5 @@ class LibroDiariosController < ApplicationController
 
   private
 
-  def set_libro_diario
-    establecimiento = current_usuario.establecimiento_id
-    mes = current_usuario.mes
-    year = current_usuario.year
-    buscar_libro = LibroDiario.find_by(establecimiento_id: establecimiento, mes: mes, year: year)
-    if buscar_libro == nil
-      nuevo_diario = LibroDiario.new(establecimiento_id: establecimiento, mes: mes, year: year)  
-      nuevo_diario.save
-      @libro_diario = nuevo_diario
-    else
-      @libro_diario = buscar_libro
-    end
 
-  end
 end

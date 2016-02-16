@@ -1,14 +1,13 @@
 class CompraLibrosController < ApplicationController
   before_action :set_compra_libro, only: [:show, :edit, :update, :destroy]
   before_action :set_compras
+  before_action :validar_datos_para_trabajar
 
   # GET /compra_libros
-  # GET /compra_libros.json
   def index
   end
 
   # GET /compra_libros/1
-  # GET /compra_libros/1.json
   def show
   end
 
@@ -22,13 +21,14 @@ class CompraLibrosController < ApplicationController
   end
 
   # POST /compra_libros
-  # POST /compra_libros.json
   def create
     @compra_libro = CompraLibro.new(compra_libro_params)
+    @compra_libro.contribuyente_id = @u.contribuyente_id
+    @compra_libro.establecimiento_id  = @u.establecimiento_id 
 
     respond_to do |format|
       if @compra_libro.save
-        format.html { redirect_to new_compra_libro_path, notice: 'La compra fua añadida exitosamente' }
+        format.html { redirect_to new_compra_libro_path, notice: 'La Compra fue añadida exitosamente' }
       else
         format.html { render :new }
       end
@@ -36,11 +36,10 @@ class CompraLibrosController < ApplicationController
   end
 
   # PATCH/PUT /compra_libros/1
-  # PATCH/PUT /compra_libros/1.json
   def update
     respond_to do |format|
       if @compra_libro.update(compra_libro_params)
-        format.html { redirect_to new_compra_libro_path, notice: 'La compra fue actualizada exitosamente' }
+        format.html { redirect_to new_compra_libro_path, notice: 'La Compra fue actualizada exitosamente' }
       else
         format.html { render :edit }
       end
@@ -48,11 +47,10 @@ class CompraLibrosController < ApplicationController
   end
 
   # DELETE /compra_libros/1
-  # DELETE /compra_libros/1.json
   def destroy
     @compra_libro.destroy
     respond_to do |format|
-      format.html { redirect_to new_compra_libro_path, notice: 'La compra fue borrada' }
+      format.html { redirect_to new_compra_libro_path, notice: 'La Compra fue borrada' }
     end
   end
   def reporte
@@ -70,4 +68,4 @@ class CompraLibrosController < ApplicationController
     def compra_libro_params
       params.require(:compra_libro).permit(:documento, :serie, :numero, :proveedor_nit, :proveedor_nombre , :dia, :mes, :year, :gravado_bienes, :gravado_servicios, :exento_bienes, :exento_servicios, :contribuyente_id, :establecimiento_id, :base, :iva, :tipo_de_gasto)
     end
-end
+  end

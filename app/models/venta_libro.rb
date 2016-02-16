@@ -15,6 +15,7 @@ class VentaLibro < ActiveRecord::Base
 	validates :base, numericality: true
 	validates :iva, numericality: true 
 
+	
 	def suma_total
 		self.total = self.base + self.iva
 	end

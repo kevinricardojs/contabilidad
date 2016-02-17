@@ -1,36 +1,6 @@
-<form action="#">
-    <div class="col-md-6">
-        <label class="control-label">Buscar campo</label>
-        <input type="text" class="form-control" name="nombre-campo" id="nombre-de-campo" autocomplete="off" placeholder="Ingresa el nombre de la Cuenta" autofocus required>
-    </div>
-    <div class="col-md-2">
-        <label class="control-label">Valor</label>
-        <input type="text" id="valor-de-campo" placeholder="Ingresa la Cantidad" class="form-control" autocomplete="off" required>
-    </div>
-    <div class="col-md-2">
-        <label>Agregar a Partida</label>
-        <input type="submit" id="agregar" value="Agregar" class="btn btn-success">
-    </div>
-</form>
-
-<div class="col-md-12" style="margin-top:20px;">
-   <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Nombre De Cuentas</th>
-          <th>Debe</th>
-          <th>Haber</th>
-      </tr>
-  </thead>
-
-  <tbody id="tbody-partida">
-  </tbody>
-</table>
-
-</div>
-
 <div id="formulario-partida" class="actions col-md-12">
-<%= form_for(@partida) do |f| %>
-    <%= f.submit %>
+  <%= form_for(@partida) do |f| %>
+  <%= f.submit %>
+  <% end %>
 </div>
-<% end %>
+

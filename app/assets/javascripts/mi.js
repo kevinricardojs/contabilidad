@@ -234,24 +234,28 @@ function add_tr(nombre, valor){
 			position =  elem[1];
 		}
 	});
-	var debe, haber;
+	var debe, haber, caja_haber, caja_debe;
+	caja_haber = "<tr><td>Caja</td><td></td><td>" + valor + "</td></tr>";
+	caja_debe = "<tr><td>Caja</td><td>" + valor + "</td><td></td></tr>";
 	debe = "<tr><td>" + nombre + "</td> <td>" + valor + "</td> <td></td></tr>";
 	haber = "<tr><td>" + nombre + "</td> <td></td> <td>" + valor + "</td></tr>";
 	if( position == "D")
 	{
 		limpiar();
+		$('#tbody-partida').append(caja_haber);
 		return debe;	
 	}
 	else if(position == undefined)
 	{
 		$('#nombre-de-campo').parent("div").addClass('has-error');
-	}
-	else{
+	}	
+	else
+	{
 		limpiar();
+		$('#tbody-partida').prepend(caja_debe);
 		return haber;		
 	}
 };
-
 $('#agregar').click(function(e) {
 	e.preventDefault();
 	var nombre_de_cuenta = $('#nombre-de-campo').val();

@@ -210,72 +210,62 @@ $('#nombre-de-campo').keyup(function() {
 		source: tipos
 	});
 });
-/*Para Crear un nuevo tr en una nueva partida y un input escondido*/
-function hidden_campo(nombre_de_cuenta, nombre_, valor){
-	if (tipos.indexOf(nombre_de_cuenta) != -1 ) {
-		var campo = "<input type='text' class='suma' name=partida[" + nombre_ + "] value=" + valor + ">";
-		return campo;	
-	};
-};
+var tipos_con_tipo = [ "Caja,H", "Caja,D", "Banco,D", "Clientes,D", "Deudores,D", "Acciones Suscritas,D", "Suscriptores De Acciones,Pendiente", "Hipoteca,H", "Prestamos Fiduciarios,H", "Documentos Por Cobrar,D", "Documentos Por Pagar,H", "Cuentas Por Cobrar,D", "Cuentas Por Pagar,H", "Proveedores,H", "Acreedores,H", "Inmuebles,D", "Mobiliario y Equipo,D", "Equipo De Computacion,D", "Maquinaria,D", "Herramientas,D", "Vehiculos,D", "Cristaleria,D", "Depreciacion Acumulada Mobiliario y Equipo,H", "Depreciacion Acumulada Equipo De Computacion,H", "Depreciacion Acumulada Maquinaria,H", "Depreciacion Acumulada Herramienta,H", "Depreciacion Acumulada Vehiculos,H", "Depreciacion Acumulada Cristaleria,H", "Capital,PENDIENTE", "Capital Autorizado,PENDIENTE", "Reserva Legal,PENDIENTE", "Ventas,H", "Servicios Prestados,H", "Comisiones Devengadas,H", "Alquileres Devengados,H", "Arrendamiento De Maquinaria,D", "Alquileres Pagados,D", "Gastos Generales,D", "Viaticos,D", "Seguros Pagados,D", "Servicios Pagados,D", "Reparacion y Mantenimiento Gastos,D", "Repuestos y Accesorios Gastos,D", "Combustibles y Lubricantes,D", "Costo Por Servicio,D", "Telefono,D", "Energia Electrica,D", "Medicina y Medicamentos,D", "Depreciacion Mobiliario y Equipo,D", "Depreciacion Equipo De Computacion,D", "Depreciacion Maquinaria,D", "Depreciacion Herramienta,D", "Depreciacion Vehiculos,D", "Depreciacion Cristaleria,D", "Compras,D", "Intereses Devengados,H", "Intereses Pagados,D", "Terrenos,D", "Edificios,D", "Gastos Constitucion,D", "Sueldos y Salarios,D", "Retencion Igss Laboral,H", "Cuota Patronal,D", "Bonificacion E Incentivo Laboral,D", "Bono 14,D", "Aguinaldo,D", "Fletes Sobre Compras,D", "Indemnizaciones,D", "Perdidas y Ganancias,H", "Publicidad y Propaganda,D", "Vacaciones,D", "Descuentos Sobre Compras,H", "Devoluciones y Rebajas Sobre Ventas,D"];
+var tabla = $('#tbody-partida'); //Seleccion del formulario para la partida!
+var formulario = $('#new_partida');
 
-function add_tr(nombre, valor){
-	var tipos_con_tipo = [ "Caja,H", "Caja,D", "Banco,D", "Clientes,D", "Deudores,D", "Acciones Suscritas,D", "Suscriptores De Acciones,Pendiente", "Hipoteca,H", "Prestamos Fiduciarios,H", "Documentos Por Cobrar,D", "Documentos Por Pagar,H", "Cuentas Por Cobrar,D", "Cuentas Por Pagar,H", "Proveedores,H", "Acreedores,H", "Inmuebles,D", "Mobiliario y Equipo,D", "Equipo De Computacion,D", "Maquinaria,D", "Herramientas,D", "Vehiculos,D", "Cristaleria,D", "Depreciacion Acumulada Mobiliario y Equipo,H", "Depreciacion Acumulada Equipo De Computacion,H", "Depreciacion Acumulada Maquinaria,H", "Depreciacion Acumulada Herramienta,H", "Depreciacion Acumulada Vehiculos,H", "Depreciacion Acumulada Cristaleria,H", "Capital,PENDIENTE", "Capital Autorizado,PENDIENTE", "Reserva Legal,PENDIENTE", "Ventas,H", "Servicios Prestados,H", "Comisiones Devengadas,H", "Alquileres Devengados,H", "Arrendamiento De Maquinaria,D", "Alquileres Pagados,D", "Gastos Generales,D", "Viaticos,D", "Seguros Pagados,D", "Servicios Pagados,D", "Reparacion y Mantenimiento Gastos,D", "Repuestos y Accesorios Gastos,D", "Combustibles y Lubricantes,D", "Costo Por Servicio,D", "Telefono,D", "Energia Electrica,D", "Medicina y Medicamentos,D", "Depreciacion Mobiliario y Equipo,D", "Depreciacion Equipo De Computacion,D", "Depreciacion Maquinaria,D", "Depreciacion Herramienta,D", "Depreciacion Vehiculos,D", "Depreciacion Cristaleria,D", "Compras,D", "Intereses Devengados,H", "Intereses Pagados,D", "Terrenos,D", "Edificios,D", "Gastos Constitucion,D", "Sueldos y Salarios,D", "Retencion Igss Laboral,H", "Cuota Patronal,D", "Bonificacion E Incentivo Laboral,D", "Bono 14,D", "Aguinaldo,D", "Fletes Sobre Compras,D", "Indemnizaciones,D", "Perdidas y Ganancias,H", "Publicidad y Propaganda,D", "Vacaciones,D", "Descuentos Sobre Compras,H", "Devoluciones y Rebajas Sobre Ventas,D"];
-	var position = undefined;
+function crear_partida(nombre_de_cuenta, nombre_,valor, position){
+
 	function limpiar(){
 		$('#nombre-de-campo').parent("div").removeClass('has-error');
 		$('#nombre-de-campo').val("").focus() ;
 		$('#valor-de-campo').val("");
 	};
-	tipos_con_tipo.forEach(function(elem) 
-	{
-		elem = elem.split(",");
-		if (elem[0].includes(nombre))
-		{
-			position =  elem[1];
+	if (tipos.indexOf(nombre_de_cuenta) != -1 ) {
+		if (position == "H") {
+			$(tabla).append("<tr><td class='left'>" + nombre_de_cuenta + "</td> <td></td> <td>" + valor + "</td></tr>");
+			$(tabla).append( "<tr><td class='left'>Caja</td><td>" + valor + "</td><td></td></tr>");
+			$(formulario).prepend("<input type='hidden' name=partida[" + nombre_ + "] value=" + valor + ">");
+			$(formulario).prepend("<input type='hidden' name=partida[caja_debe] value=" + valor + ">");
+			limpiar();
 		}
-	});
-	var debe, haber, caja_haber, caja_debe;
-	caja_haber = "<tr><td>Caja</td><td></td><td>" + valor + "</td></tr>";
-	caja_debe = "<tr><td>Caja</td><td>" + valor + "</td><td></td></tr>";
-	debe = "<tr><td>" + nombre + "</td> <td>" + valor + "</td> <td></td></tr>";
-	haber = "<tr><td>" + nombre + "</td> <td></td> <td>" + valor + "</td></tr>";
-	if( position == "D")
-	{
-		limpiar();
-		$('#tbody-partida').append(caja_haber);
-		return debe;	
+		else if (position == "D") 
+		{
+			$(tabla).append( "<tr><td class='left'>Caja</td><td></td><td>" + valor + "</td></tr>");
+			$(tabla).append("<tr><td class='left'>" + nombre_de_cuenta + "</td><td>" + valor + "</td><td></td></tr>");
+			$(formulario).prepend("<input type='hidden' name=partida[" + nombre_ + "] value=" + valor + ">");
+			$(formulario).prepend("<input type='hidden' name=partida[caja_haber] value=" + valor + ">");
+			limpiar();
+		}
 	}
 	else if(position == undefined)
 	{
 		$('#nombre-de-campo').parent("div").addClass('has-error');
-	}	
-	else
-	{
-		limpiar();
-		$('#tbody-partida').prepend(caja_debe);
-		return haber;		
 	}
 };
 $('#agregar').click(function(e) {
 	e.preventDefault();
-	var nombre_de_cuenta = $('#nombre-de-campo').val();
-	var valor_de_cuenta = $('#valor-de-campo').val();
-	var nombre_ = nombre_de_cuenta.split(" ").join("_").toLowerCase();
-	var tbody = $('#tbody-partida');
-	var hidden = $('#new_partida');
-	var campo = hidden_campo(nombre_de_cuenta, nombre_, valor_de_cuenta);
-	var tr = add_tr(nombre_de_cuenta, valor_de_cuenta);
-
-
-
+	var nombre_de_cuenta, valor_de_cuenta, nombre_,
+	nombre_de_cuenta = $('#nombre-de-campo').val();
+	valor_de_cuenta = $('#valor-de-campo').val();
+	nombre_ = nombre_de_cuenta.split(" ").join("_").toLowerCase();
+	var position = undefined;
+	tipos_con_tipo.forEach(function(elem) 
+	{
+		elem = elem.split(",");
+		if (elem[0].includes(nombre_de_cuenta))
+		{
+			position =  elem[1];
+		}
+	});
+	console.log(position);
 	if (nombre_de_cuenta != "" && valor_de_cuenta != "") 
 	{
-		$(hidden).prepend(campo);
-		$(tbody).append(tr);
-
+		crear_partida( nombre_de_cuenta, nombre_,valor_de_cuenta, position);
 	}
-	else {
+	else 
+	{
 		alert("Debes Rellenar los dos Campos Necesarios");
-	}
+	};
 });
 });

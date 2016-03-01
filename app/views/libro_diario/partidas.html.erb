@@ -1,0 +1,55 @@
+<%= link_to "Ver Resumen", libro_diario_resumen_path %>
+<form action="#">
+  <div class="col-md-6">
+    <label class="control-label">Buscar campo</label>
+    <input type="text" class="form-control" name="nombre-campo" id="nombre-de-campo" autocomplete="off" placeholder="Ingresa el nombre de la Cuenta" autofocus required>
+  </div>
+  <div class="col-md-2">
+    <label class="control-label">Valor</label>
+    <input type="text" id="valor-de-campo" placeholder="Ingresa la Cantidad" class="form-control" autocomplete="off" required>
+  </div>
+  <div class="col-md-2">
+    <label>Agregar a Partida</label>
+    <input type="submit" id="agregar" value="Agregar" class="btn btn-success">
+  </div>
+  <div class="col-md-2">
+    <label>Reiniciar</label>
+    <input type="reset" id="reboot" value="Reiniciar" class="btn btn-default">
+  </div>
+</form>
+
+<div class="col-md-12" style="margin-top:20px;">
+ <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Nombre De Cuentas</th>
+      <th>Debe</th>
+      <th>Haber</th>
+    </tr>
+
+  </thead>
+
+  <tbody id="tbody-partida">
+    <tr id="total">
+      <td class="left border-grueso-right">Total</td>
+      <td id="total-debe" class="termina-partida"></td>
+      <td id="total-haber" class="termina-partida"></td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+<div class="col-md-12">
+	<%= form_for @partida do |f| %>
+ <div class="field col-md-8">
+    <%= f.label :descripcion, class:"label-control" %>
+  <%= f.text_field :descripcion, class:"form-control" %>
+  <br> 
+ </div>
+<div class="clearfix"></div>
+  <div class="col-md-2">
+    <%= f.submit "Añadir Partida", class:"form-control btn btn-primary" %>
+  </div>
+  <%end%>
+</div>

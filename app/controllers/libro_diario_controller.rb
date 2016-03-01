@@ -1,4 +1,4 @@
-class LibroDiariosController < ApplicationController
+class LibroDiarioController < ApplicationController
   before_action :set_libro_diario
 
   def partidas

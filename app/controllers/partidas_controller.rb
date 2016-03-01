@@ -30,9 +30,9 @@ class PartidasController < ApplicationController
     @partida.libro_diario_id = @libro_diario
     respond_to do |format|
       if @partida.save
-        format.html { redirect_to libro_diarios_partidas_path, notice: 'Cuenta contable was successfully created.' }
+        format.html { redirect_to libro_diario_partidas_path, notice: 'Cuenta contable was successfully created.' }
       else
-        format.html { redirect_to libro_diarios_partidas_path }
+        format.html { redirect_to libro_diario_partidas_path }
       end
     end
   end
@@ -42,7 +42,7 @@ class PartidasController < ApplicationController
   def update
     respond_to do |format|
       if @partida.update(partida_params)
-        format.html { redirect_to libro_diarios_partidas_path, notice: 'Cuenta contable was successfully updated.' }
+        format.html { redirect_to libro_diario_partidas_path, notice: 'Cuenta contable was successfully updated.' }
       else
         format.html { render :edit }
       end
@@ -54,7 +54,7 @@ class PartidasController < ApplicationController
   def destroy
     @partida.destroy
     respond_to do |format|
-      format.html { redirect_to libro_diarios_partidas_path, notice: 'Cuenta contable was successfully destroyed.' }
+      format.html { redirect_to libro_diario_partidas_path, notice: 'Cuenta contable was successfully destroyed.' }
     end
   end
 

@@ -78,5 +78,31 @@
             <% end %>
         </tbody>
     </table>
-    
+<div class="col-md-12">
+    <table class="table table-bordered">
+    <thead>
+      <tr class="tr-sin-bordes">
+        <th colspan="2" class="text-center">Resumen por Cuenta Contable</th>
+      </tr>
+      <tr class="th-sin-bordes">
+        <th>Nombre</th>
+        <th>Suma de base</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @compras_por_cuenta.each do |cuenta|  %>
+      <tr>
+        <td><%= cuenta[0]%></td>
+        <td>Q<%= cuenta[1]%></td>
+      </tr>
+      <% end %>
+      <tr>
+          <td>IVA</td>
+          <td>Q<%= @iva %></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  </div>
 </div>

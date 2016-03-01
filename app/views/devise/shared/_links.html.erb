@@ -1,18 +1,18 @@
 <%- if controller_name != 'sessions' %>
-  <%= link_to new_session_path(resource_name), class:"btn btn-primary col-xs-10 col-sm-8 col-md-8 col-lg-8 col-xs-offset-1 col-sm-offset-2 col-md-offset-2 col-lg-offset-2",rel:"nofollow" do %>
+  <%= link_to new_session_path(resource_name), class:"btn btn-primary col-xs-10 col-sm-8 col-md-8 col-lg-8 col-xs-offset-1 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 no-window",rel:"nofollow" do %>
   Iniciar Sesión <i class="fa fa-sign-in"></i>
   <% end %>
 <% end -%>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to  new_usuario_registration_path ,class:"btn btn-success col-xs-10 col-sm-8 col-md-8 col-lg-8 col-xs-offset-1 col-sm-offset-2 col-md-offset-2 col-lg-offset-2",rel:"nofollow" do %>
+  <%= link_to  new_usuario_registration_path ,class:"btn btn-success col-xs-10 col-sm-8 col-md-8 col-lg-8 col-xs-offset-1 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 no-window",rel:"nofollow" do %>
   	Registrarme <i class="fa fa-user-plus"></i>
   <% end %>
   
 <% end -%>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to "Olvide mi contraseña?", new_password_path(resource_name),rel:"nofollow",class:"col-xs-10 col-sm-8 col-md-8 col-lg-8" %>
+  <%= link_to "Olvide mi contraseña?", new_password_path(resource_name),rel:"nofollow",class:"col-xs-10 col-sm-8 col-md-8 col-lg-8 no-window" %>
 <% end -%>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>

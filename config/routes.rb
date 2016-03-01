@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   
   resources :partidas  
   
-  get 'libro_diarios/partidas'
-  get 'libro_diarios/resumen'
+  get 'libro_diario/partidas'
+  get 'libro_diario/resumen'
 
   resources :tipo_de_gastos
   

@@ -1,6 +1,8 @@
 class OperacionesController < ApplicationController
 	before_action :set_compras
 	before_action :set_ventas
+	before_action :set_por_cuentas
+	before_action :resumen_compras_iva
   
 
 	def libro_venta
@@ -47,7 +49,21 @@ class OperacionesController < ApplicationController
 		end
 	end
 
-	
+	def set_por_cuentas
+		cuentas = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).group(:tipo_de_gasto_id).count()
+		@compras_por_cuenta = []
+
+		cuentas.each do |cuenta|
+			nombre_cuenta = TipoDeGasto.find_by_id(cuenta[0]).nombre
+			suma_base = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes, tipo_de_gasto_id: cuenta[0]).sum(:base)
+			@compras_por_cuenta.push [nombre_cuenta , suma_base]
+		end
+ 	end
+
+ 	def resumen_compras_iva
+ 		@iva = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:iva)
+ 	end
+
 	def set_compras
 		@compras = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes)
 	end

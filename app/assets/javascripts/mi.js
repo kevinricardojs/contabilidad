@@ -250,7 +250,7 @@ function crear_partida(nombre_de_cuenta, nombre_,valor, position){
 				crear_caja(position, valor);
 				if ($("input[name='partida[" + nombre_ + "]']").length == 0)
 				{
-					$("#caja").before("<tr class='cuenta' ><td class='left'>" + nombre_de_cuenta + "</td><td></td> <td id='cuenta_" + nombre_ + "'>" + valor + "</td></tr>");
+					$("#caja").before("<tr class='cuenta' ><td class='left'>" + nombre_de_cuenta + "</td><td></td> <td></td><td>Q</td><td id='cuenta_" + nombre_ + "'>" + valor + "</td></tr>");
 					$(formulario).prepend("<input type='hidden' name=partida[" + nombre_ + "] value=" + valor + ">");
 				}
 				else
@@ -275,8 +275,8 @@ function crear_partida(nombre_de_cuenta, nombre_,valor, position){
 
 				if ($("input[name='partida[" + nombre_ + "]']").length == 0)
 				{
-					$('#total').before("<tr class='cuenta' ><td class='left'>" + nombre_de_cuenta + "</td><td id='cuenta_" + nombre_ + "'>" + valor + "</td><td></td></tr>");
-				$(formulario).prepend("<input type='hidden' name=partida[" + nombre_ + "] value=" + valor + ">");
+					$('#total').before("<tr class='cuenta' ><td class='left'>" + nombre_de_cuenta + "</td><td>Q</td><td id='cuenta_" + nombre_ + "'>" + valor + "</td><td></td><td></td></tr>");
+					$(formulario).prepend("<input type='hidden' name=partida[" + nombre_ + "] value=" + valor + ">");
 				}
 				else
 				{
@@ -309,11 +309,11 @@ function crear_partida(nombre_de_cuenta, nombre_,valor, position){
 		if (position == "H") {
 			if ($('#current_input_caja').val() == undefined) {
 				$(formulario).prepend("<input type='hidden' name=partida[caja_d] id='current_input_caja' value=" + valor + ">");	
-				$('#total').before( "<tr id='caja' ><td class='left'>Caja</td><td class='reset' id='current_caja'>" + valor + "</td><td></td></tr>");
+				$('#total').before( "<tr id='caja' ><td class='left'>Caja</td><td>Q</td><td class='reset' id='current_caja'>" + valor + "</td><td></td><td></td></tr>");
 			}
 			else
 			{
-				$('#current_input_caja').val( to_dinero($('#current_input_caja').val()) + to_dinero(valor));
+				$('#current_input_caja').val((to_dinero($('#current_input_caja').val()) + to_dinero(valor)).toFixed(2) );
 				$('#current_caja').text($('#current_input_caja').val());
 			}
 
@@ -321,11 +321,11 @@ function crear_partida(nombre_de_cuenta, nombre_,valor, position){
 		else if (position == "D") {
 			if ($('#current_input_caja').val() == undefined) {
 				$(formulario).prepend("<input type='hidden' name=partida[caja_h] id='current_input_caja' class='reset' value=" + valor + ">");
-				$(tabla).prepend( "<tr><td class='left'>Caja</td><td></td><td id='current_caja'>" + valor + "</td></tr>");
+				$(tabla).prepend( "<tr><td class='left'>Caja</td><td></td><td></td><td>Q</td><td id='current_caja'>" + valor + "</td></tr>");
 			}
 			else
 			{
-				$('#current_input_caja').val(to_dinero($('#current_input_caja').val()) + to_dinero(valor));
+				$('#current_input_caja').val((to_dinero($('#current_input_caja').val()) + to_dinero(valor)).toFixed(2));
 				$('#current_caja').text($('#current_input_caja').val());
 			}
 

@@ -10,7 +10,7 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td colspan="3">Partida #1</td>
+				<td colspan="3">Partida #<%= @partida_1.numero_partida %></td>
 			</tr>
 			<tr>
 				<td class="left border-grueso-right">Ventas</td>
@@ -35,20 +35,20 @@
 
 			<% if @partida_1.descripcion == "" %>
 			<tr>
-				<td>Descripcion</td>
+				<td>Descripción</td>
 				<td colspan="2">
 					
 				</td>
 			</tr>
 			<% else %>
 			<tr>
-				<td>Descripcion</td>
+				<td>Descripción</td>
 				<td colspan="2"><%= @partida_1.descripcion %></td>
 			</tr>
 
 			<% end %>
 			<tr class="separar">
-				<td colspan="3">Partida #2</td>
+				<td colspan="3">Partida #<%= @partida_2.numero_partida %></td>
 			</tr>
 			<tr>
 				<td class="left border-grueso-right">Caja</td>
@@ -72,7 +72,7 @@
 				<td class="termina-partida">Q<%= @partida_2.caja_h %></td>
 			</tr>
 			<tr>
-				<td>Descripcion</td>
+				<td>Descripción</td>
 				<td colspan="2"><input type="text" placeholder="Ingresa una descripción...." class="form-control" id="descripcion_partida_2"></td>
 			</tr>
 		</tbody>

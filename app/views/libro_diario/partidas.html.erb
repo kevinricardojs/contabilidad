@@ -6,17 +6,18 @@
   </div>
   <div class="col-md-2">
     <label class="control-label">Valor</label>
-    <input type="text" id="valor-de-campo" placeholder="Ingresa la Cantidad" class="form-control" autocomplete="off" required>
+    <input type="text" id="valor-de-campo" placeholder="Ingresa la Cantidad" class="form-control" autocomplete="off" pattern="^\d+$" title="Solo se aceptan numeros">
   </div>
   <div class="col-md-2">
     <label>Agregar a Partida</label>
     <input type="submit" id="agregar" value="Agregar" class="btn btn-success">
   </div>
+  </form>
   <div class="col-md-2">
     <label>Reiniciar</label>
     <input type="reset" id="reboot" value="Reiniciar" class="btn btn-default">
   </div>
-</form>
+
 
 <div class="col-md-12" style="margin-top:20px;">
  <table class="table table-bordered">
@@ -44,7 +45,7 @@
 	<%= form_for @partida do |f| %>
  <div class="field col-md-8">
     <%= f.label :descripcion, class:"label-control" %>
-  <%= f.text_field :descripcion, class:"form-control" %>
+  <%= f.text_field :descripcion, class:"form-control", required:true, placeholder:"Agrega una descripción" %>
   <br> 
  </div>
 <div class="clearfix"></div>

@@ -248,8 +248,18 @@ function crear_partida(nombre_de_cuenta, nombre_,valor, position){
 		if (position == "H") {
 			if (lista_haber.indexOf(nombre_de_cuenta) != -1) {
 				crear_caja(position, valor);
-				$("#caja").before("<tr class='cuenta' ><td class='left'>" + nombre_de_cuenta + "</td><td></td> <td>" + valor + "</td></tr>");
-				$(formulario).prepend("<input type='hidden' name=partida[" + nombre_ + "] value=" + valor + ">");
+				if ($("input[name='partida[" + nombre_ + "]']").length == 0)
+				{
+					$("#caja").before("<tr class='cuenta' ><td class='left'>" + nombre_de_cuenta + "</td><td></td> <td id='cuenta_" + nombre_ + "'>" + valor + "</td></tr>");
+					$(formulario).prepend("<input type='hidden' name=partida[" + nombre_ + "] value=" + valor + ">");
+				}
+				else
+				{
+					var suma = to_dinero($("input[name='partida[" + nombre_ + "]']").val()) + to_dinero(valor);
+					$("input[name='partida[" + nombre_ + "]']").val(suma);
+					$("#cuenta_" + nombre_).text($("input[name='partida[" + nombre_ + "]']").val());
+				}
+				
 				limpiar();	
 			}
 			else
@@ -262,8 +272,19 @@ function crear_partida(nombre_de_cuenta, nombre_,valor, position){
 		{
 			if (lista_debe.indexOf(nombre_de_cuenta) != -1) {
 				crear_caja(position, valor);
-				$(tabla).append("<tr class='cuenta' ><td class='left'>" + nombre_de_cuenta + "</td><td>" + valor + "</td><td></td></tr>");
+
+				if ($("input[name='partida[" + nombre_ + "]']").length == 0)
+				{
+					$('#total').before("<tr class='cuenta' ><td class='left'>" + nombre_de_cuenta + "</td><td id='cuenta_" + nombre_ + "'>" + valor + "</td><td></td></tr>");
 				$(formulario).prepend("<input type='hidden' name=partida[" + nombre_ + "] value=" + valor + ">");
+				}
+				else
+				{
+					var suma = to_dinero($("input[name='partida[" + nombre_ + "]']").val()) + to_dinero(valor);
+					$("input[name='partida[" + nombre_ + "]']").val(suma);
+					$("#cuenta_" + nombre_).text($("input[name='partida[" + nombre_ + "]']").val());
+				}
+				
 				limpiar();	
 			}
 			else
@@ -287,7 +308,7 @@ function crear_partida(nombre_de_cuenta, nombre_,valor, position){
 	function crear_caja(position, valor) {
 		if (position == "H") {
 			if ($('#current_input_caja').val() == undefined) {
-				$(formulario).prepend("<input type='hidden' name=partida[caja_debe] id='current_input_caja' value=" + valor + ">");	
+				$(formulario).prepend("<input type='hidden' name=partida[caja_d] id='current_input_caja' value=" + valor + ">");	
 				$('#total').before( "<tr id='caja' ><td class='left'>Caja</td><td class='reset' id='current_caja'>" + valor + "</td><td></td></tr>");
 			}
 			else
@@ -299,8 +320,8 @@ function crear_partida(nombre_de_cuenta, nombre_,valor, position){
 		}
 		else if (position == "D") {
 			if ($('#current_input_caja').val() == undefined) {
-				$(formulario).prepend("<input type='hidden' name=partida[caja_haber] id='current_input_caja' class='reset' value=" + valor + ">");
-				$(tabla).append( "<tr><td class='left'>Caja</td><td></td><td id='current_caja'>" + valor + "</td></tr>");
+				$(formulario).prepend("<input type='hidden' name=partida[caja_h] id='current_input_caja' class='reset' value=" + valor + ">");
+				$(tabla).prepend( "<tr><td class='left'>Caja</td><td></td><td id='current_caja'>" + valor + "</td></tr>");
 			}
 			else
 			{
@@ -330,10 +351,17 @@ $('#agregar').click(function(e) {
 			position =  elem[1];
 		}
 	});
-
+	
 	if (nombre_de_cuenta != "" && valor_de_cuenta != "") 
 	{
-		crear_partida( nombre_de_cuenta, nombre_,valor_de_cuenta, position);
+		if (!isNaN(valor_de_cuenta)) {
+			crear_partida( nombre_de_cuenta, nombre_,valor_de_cuenta, position);
+			$('#valor-de-campo').parent().removeClass('has-error');				
+		}
+		else
+		{
+			$('#valor-de-campo').parent().addClass('has-error');
+		}
 	}
 	else 
 	{
@@ -346,4 +374,8 @@ $('#reboot').click(function(e) {
 	window.location.reload();
 });
 
+$('#new_partida').on('ajax:success', function(event) {
+	event.preventDefault();
+	alert("pollo");
+});
 });

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160218153732) do
+ActiveRecord::Schema.define(version: 20160302160809) do
 
   create_table "compra_libros", force: :cascade do |t|
     t.integer  "documento",          limit: 4
@@ -160,6 +160,7 @@ ActiveRecord::Schema.define(version: 20160218153732) do
     t.decimal  "caja_h",                                                   precision: 10, scale: 2
     t.decimal  "caja_d",                                                   precision: 10, scale: 2
     t.integer  "numero_partida",                               limit: 4
+    t.decimal  "iva_credito_fiscal",                                       precision: 10, scale: 2
   end
 
   add_index "partidas", ["establecimiento_id"], name: "index_partidas_on_establecimiento_id", using: :btree

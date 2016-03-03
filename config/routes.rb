@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  resources :partidas  
+  resources :partidas, except:[:index, :show, :new]
   
   get 'libro_diario/partidas'
   get 'libro_diario/resumen'
@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   devise_for :usuarios, controllers: {registrations: "registrations"}
   resources :proveedors
   resources :establecimientos
+  resources :contribuyentes
   get 'inicio/index'
   post 'peticion_json/contribuyentes'
   post 'peticion_json/establecimientos'
@@ -19,7 +20,6 @@ Rails.application.routes.draw do
   post 'peticion_json/tipos_de_gastos'
   get 'operaciones/libro_venta'
   get 'operaciones/libro_compra'
-  resources :contribuyentes
 
   root 'inicio#index'
 

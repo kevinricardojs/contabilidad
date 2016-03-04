@@ -1,5 +1,6 @@
 class LibroDiarioController < ApplicationController
   before_action :set_libro_diario
+  before_action :partidas_libro, only: :resumen
 
   def partidas
     @partida = @libro_diario.partidas.new
@@ -48,6 +49,17 @@ class LibroDiarioController < ApplicationController
   end
 
   private
+  def partidas_libro
+    partidas  = @libro_diario.partidas
+    @partidas_libro_diario = []
+    partidas.each do |p|
+      array = p.attributes.to_a
+      array.delete_if do |a|
+        a[1].nil?
+      end
+      @partidas_libro_diario.push array
+    end
 
+  end
 
 end

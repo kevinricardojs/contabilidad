@@ -78,3 +78,33 @@
 		</tbody>
 	</table>
 </div>
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>Nombre de Cuentas</th>
+			<th>Debe</th>
+			<th>Haber</th>
+		</tr>
+	</thead>
+	<tbody>
+
+
+		<% @partidas_libro_diario.each do |partida| %>
+
+		<tr>
+			<td colspan="3">Partida # <%= partida[partida.index { |c| c.include?("numero_partida")}][1] %></td>
+		</tr>
+		<% partida.each do |campo|%>
+
+		<% if campo[0] != "id" && campo[0] != "created_at" && campo[0] != "updated_at" && campo[0] != "establecimiento_id" &&  campo[0] !="libro_diario_id" %>
+
+		<tr>
+			<td><%= campo[0] %></td>
+			<td colspan="2"> <%= campo[1] %></td>
+		</tr>
+		<% end %>
+		<% end %>
+		<% end %>
+	</tbody>
+</table>

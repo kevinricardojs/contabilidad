@@ -50,16 +50,7 @@ class LibroDiarioController < ApplicationController
 
   private
   def partidas_libro
-    partidas  = @libro_diario.partidas
-    @partidas_libro_diario = []
-    partidas.each do |p|
-      array = p.attributes.to_a
-      array.delete_if do |a|
-        a[1].nil?
-      end
-      @partidas_libro_diario.push array
-    end
-
+    @partidas_libro_diario  = @libro_diario.partidas
   end
 
 end

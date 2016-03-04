@@ -1,5 +1,4 @@
 <div id="resumen">
-	
 	<table class="table table-striped table-responsive">
 		<thead>
 			<tr>
@@ -9,102 +8,66 @@
 			</tr>
 		</thead>
 		<tbody>
+
+
+			<% @partidas_libro_diario.each do |p| %>
+			<% partida = p.solo_campos_valids %>
 			<tr>
-				<td colspan="3">Partida #<%= @partida_1.numero_partida %></td>
-			</tr>
-			<tr>
-				<td class="left border-grueso-right">Ventas</td>
-				<td></td>
-				<td>Q<%= @partida_1.ventas %></td>
-			</tr>
-			<tr>
-				<td class="left border-grueso-right">IVA Credito Fiscal</td>
-				<td></td>
-				<td>Q<%= @partida_1.iva_credito_fiscal %></td>
-			</tr>
-			<tr>
-				<td class="left border-grueso-right">Caja</td>
-				<td>Q<%= @partida_1.caja_d %></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td class="left border-grueso-right">Total</td>
-				<td class="termina-partida">Q<%= @partida_1.caja_d %></td>
-				<td class="termina-partida">Q<%= @partida_1.caja_d %></td>
+				<td colspan="3">Partida # <%= partida["numero_partida"] %></td>
 			</tr>
 
-			<% if @partida_1.descripcion == "" %>
-			<tr>
-				<td>Descripción</td>
-				<td colspan="2">
-					
-				</td>
-			</tr>
-			<% else %>
-			<tr>
-				<td>Descripción</td>
-				<td colspan="2"><%= @partida_1.descripcion %></td>
-			</tr>
-
-			<% end %>
-			<tr class="separar">
-				<td colspan="3">Partida #<%= @partida_2.numero_partida %></td>
-			</tr>
+			<% if partida["caja_h"] %>
 			<tr>
 				<td class="left border-grueso-right">Caja</td>
 				<td></td>
-				<td>Q<%= @partida_2.caja_h %></td>
-			</tr>
+				<td>Q<%= partida["caja_h"] %></td>
+			</tr>	
+			<% partida.each do |nombre, valor|
+				if nombre != "descripcion" && nombre != "caja_h" && nombre != "caja_d" && nombre != "numero_partida" %>
+				<tr>
+					<td class="left border-grueso-right"><%= nombre.split("_").map(&:capitalize).join(' ') %></td>
+					<td>Q<%= valor %></td>
+					<td></td>
+				</tr>
+				<% end %>
+				<% end %>		
+				<tr>
+					<td class="left border-grueso-right">Total</td>
+					<td class="termina-partida">Q<%= partida["caja_h"] %></td>
+					<td class="termina-partida">Q<%= partida["caja_h"] %></td>
+				</tr>
+				<tr>
+					<td>Descripción</td>
+					<td colspan="2"><%= partida["descripcion"] %></td>
+				</tr>
+				<% end %>
+				<% if partida["caja_d"]
+					partida.each do |nombre, valor|
+						if nombre != "descripcion" && nombre != "caja_h" && nombre != "caja_d" && nombre != "numero_partida" %>
+						<tr>
+							<td class="left border-grueso-right"><%= nombre.split("_").map(&:capitalize).join(' ') %></td>
+							<td></td>
+							<td>Q<%= valor %></td>
+						</tr>
+						<% end %>
+						<% end %>
+						<tr>
+							<td class="left border-grueso-right">Caja</td>
+							<td>Q<%= partida["caja_d"] %></td>
+							<td></td>
+						</tr>			
 
-			<tr>
-				<td class="left border-grueso-right">Compras</td>
-				<td>Q<%= @partida_2.compras %></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td class="left border-grueso-right">IVA Credito Fiscal</td>
-				<td>Q<%= @partida_2.iva_credito_fiscal %></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td class="left border-grueso-right">Total</td>
-				<td class="termina-partida">Q<%= @partida_2.caja_h %></td>
-				<td class="termina-partida">Q<%= @partida_2.caja_h %></td>
-			</tr>
-			<tr>
-				<td>Descripción</td>
-				<td colspan="2"><input type="text" placeholder="Ingresa una descripción...." class="form-control" id="descripcion_partida_2"></td>
-			</tr>
-		</tbody>
-	</table>
-</div>
-
-<table class="table table-bordered">
-	<thead>
-		<tr>
-			<th>Nombre de Cuentas</th>
-			<th>Debe</th>
-			<th>Haber</th>
-		</tr>
-	</thead>
-	<tbody>
-
-
-		<% @partidas_libro_diario.each do |partida| %>
-
-		<tr>
-			<td colspan="3">Partida # <%= partida[partida.index { |c| c.include?("numero_partida")}][1] %></td>
-		</tr>
-		<% partida.each do |campo|%>
-
-		<% if campo[0] != "id" && campo[0] != "created_at" && campo[0] != "updated_at" && campo[0] != "establecimiento_id" &&  campo[0] !="libro_diario_id" %>
-
-		<tr>
-			<td><%= campo[0] %></td>
-			<td colspan="2"> <%= campo[1] %></td>
-		</tr>
-		<% end %>
-		<% end %>
-		<% end %>
-	</tbody>
-</table>
+						<tr>
+							<td class="left border-grueso-right">Total</td>
+							<td class="termina-partida">Q<%= partida["caja_d"] %></td>
+							<td class="termina-partida">Q<%= partida["caja_d"] %></td>
+						</tr>
+						<tr>
+							<td>Descripción</td>
+							<td colspan="2"><%= partida["descripcion"] %></td>
+						</tr>
+						<% end %>
+						<% end %>
+					</tbody>
+				</table>
+			</div>

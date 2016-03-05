@@ -1,3 +1,6 @@
+<%= link_to libro_diario_partidas_path, class:"col-md-12 text-center btn btn-info"  do %>
+<i class="fa fa-plus"></i> Agregar mas partidas
+<% end %>
 <div id="resumen">
 	<table class="table table-striped table-responsive">
 		<thead>
@@ -13,7 +16,7 @@
 			<% @partidas_libro_diario.each do |p| %>
 			<% partida = p.solo_campos_valids %>
 			<tr>
-				<td colspan="3">Partida # <%= partida["numero_partida"] %></td>
+				<td colspan="3"><strong>Partida # <%= partida["numero_partida"] %></strong></td>
 			</tr>
 
 			<% if partida["caja_h"] %>
@@ -23,7 +26,7 @@
 				<td>Q<%= partida["caja_h"] %></td>
 			</tr>	
 			<% partida.each do |nombre, valor|
-				if nombre != "descripcion" && nombre != "caja_h" && nombre != "caja_d" && nombre != "numero_partida" %>
+				if nombre != "descripcion" && nombre != "caja_h" && nombre != "caja_d" && nombre != "numero_partida" && nombre != "id" %>
 				<tr>
 					<td class="left border-grueso-right"><%= nombre.split("_").map(&:capitalize).join(' ') %></td>
 					<td>Q<%= valor %></td>
@@ -37,13 +40,13 @@
 					<td class="termina-partida">Q<%= partida["caja_h"] %></td>
 				</tr>
 				<tr>
-					<td>Descripción</td>
+					<td class="left">Descripción</td>
 					<td colspan="2"><%= partida["descripcion"] %></td>
 				</tr>
 				<% end %>
 				<% if partida["caja_d"]
 					partida.each do |nombre, valor|
-						if nombre != "descripcion" && nombre != "caja_h" && nombre != "caja_d" && nombre != "numero_partida" %>
+						if nombre != "descripcion" && nombre != "caja_h" && nombre != "caja_d" && nombre != "numero_partida" && nombre != "id" %>
 						<tr>
 							<td class="left border-grueso-right"><%= nombre.split("_").map(&:capitalize).join(' ') %></td>
 							<td></td>
@@ -63,10 +66,24 @@
 							<td class="termina-partida">Q<%= partida["caja_d"] %></td>
 						</tr>
 						<tr>
-							<td>Descripción</td>
+							<td class="left">Descripción</td>
 							<td colspan="2"><%= partida["descripcion"] %></td>
 						</tr>
 						<% end %>
+						<tr>
+							
+							<td colspan="2">
+							<%= link_to edit_partida_path(partida["id"]), class:"btn btn-primary" do %>
+								<%= "Editar partida # " + "#{partida["numero_partida"]}" %>
+								<i class="fa fa-edit"></i>
+							<% end %>
+							</td>
+							<td colspan="1">
+								<%= link_to Partida.find(partida["id"]), class:"btn btn-danger no-window", data: { confirm: "Estas seguro(a)?" }, method: :delete do %>
+								<i class="fa fa-trash-o"></i>
+							<% end %>
+							</td>
+						</tr>
 						<% end %>
 					</tbody>
 				</table>

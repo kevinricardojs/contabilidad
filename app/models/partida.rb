@@ -6,7 +6,7 @@ class Partida < ActiveRecord::Base
 	def solo_campos_valids
 		array = self.attributes.to_a
 		array.delete_if do |a|
-			 a[1].nil? || a.include?("id") || a.include?("establecimiento_id") || a.include?("created_at") || a.include?("updated_at") || a.include?("libro_diario_id")
+			 a[1].nil? || a.include?("establecimiento_id") || a.include?("created_at") || a.include?("updated_at") || a.include?("libro_diario_id")
 		end
 		return array.to_h
 	end

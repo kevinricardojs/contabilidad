@@ -28,7 +28,12 @@ class LibroDiarioController < ApplicationController
       partida1.save 
       @partida_1 = partida1
     else
+      partida1.ventas = ventas_base
+      partida1.iva_credito_fiscal = ventas_iva
+      partida1.caja_d = ventas_caja
+      partida1.save 
       @partida_1 = partida1
+      
     end
     
     partida2 = @libro_diario.partidas.find_by(numero_partida: 2)
@@ -43,6 +48,10 @@ class LibroDiarioController < ApplicationController
       partida2.save 
       @partida_2 = partida2
     else
+      partida2.compras = compras_base
+      partida2.iva_credito_fiscal = compras_iva
+      partida2.caja_h = compras_caja
+      partida2.save 
       @partida_2 = partida2
     end
 
@@ -50,7 +59,7 @@ class LibroDiarioController < ApplicationController
 
   private
   def partidas_libro
-    @partidas_libro_diario  = @libro_diario.partidas
+    @partidas_libro_diario  = @libro_diario.partidas.order(:numero_partida)
   end
 
 end

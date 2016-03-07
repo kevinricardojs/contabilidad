@@ -28,11 +28,9 @@ class TipoDeGastosController < ApplicationController
 
     respond_to do |format|
       if @tipo_de_gasto.save
-        format.html { redirect_to @tipo_de_gasto, notice: 'Tipo de gasto was successfully created.' }
-        format.json { render :show, status: :created, location: @tipo_de_gasto }
+        format.html { redirect_to new_tipo_de_gasto_path, notice: 'El Tipo de gasto fue creado' }
       else
         format.html { render :new }
-        format.json { render json: @tipo_de_gasto.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -42,11 +40,9 @@ class TipoDeGastosController < ApplicationController
   def update
     respond_to do |format|
       if @tipo_de_gasto.update(tipo_de_gasto_params)
-        format.html { redirect_to @tipo_de_gasto, notice: 'Tipo de gasto was successfully updated.' }
-        format.json { render :show, status: :ok, location: @tipo_de_gasto }
+        format.html { redirect_to tipo_de_gastos_path, notice: 'El Tipo de gasto fue actualizado' }
       else
         format.html { render :edit }
-        format.json { render json: @tipo_de_gasto.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -56,8 +52,7 @@ class TipoDeGastosController < ApplicationController
   def destroy
     @tipo_de_gasto.destroy
     respond_to do |format|
-      format.html { redirect_to tipo_de_gastos_url, notice: 'Tipo de gasto was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to tipo_de_gastos_url, notice: 'EL Tipo de gasto fue borrado' }
     end
   end
 

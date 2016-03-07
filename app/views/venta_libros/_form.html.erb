@@ -1,10 +1,20 @@
 <div class="col-sm-12 col-md-12 col-lg-12">
-    <span>Contribuyente: <span class="text-muted"><strong><%= @contribuyente_nombre %></strong></span></span>
-    <span>Establecimiento: <span class="text-muted"><strong><%= @establecimiento_nombre %></strong></span></span>
-     <%= link_to  operaciones_libro_venta_path , class:"col-md-offset-3" do %>
-        Ver Resumen del Libro de Ventas <i class="fa fa-print"></i>
-    <%end%>
+    <div class="col-md-8">
+        <span>Contribuyente: <span class="text-muted">
+            <strong><%= @contribuyente_nombre %></strong>
+        </span>
+    </span>
+    <span>Establecimiento: <span class="text-muted">
+        <strong><%= @establecimiento_nombre %></strong>
+    </span>
+</span>
 </div>
+<%= link_to  operaciones_libro_venta_path , class:"col-md-4 btn btn-info" do %>
+Ver Resumen Libro de Ventas <i class="fa fa-print"></i>
+<%end%>
+</div>
+
+
 <%= form_for(@venta_libro, html: {autocomplete: "off"}) do |f| %>
 <% if @venta_libro.errors.any? %>
 <div class="alert alert-danger alert-dismissable col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
@@ -20,7 +30,7 @@
 <% end %>
 
 <div class="field form-group col-xs-2 col-sm-2 col-md-2 col-lg-2">
-    <%= f.label :documento %>
+    <%= f.label :documento, "Documento(*)" %>
     <select name="venta_libro[documento]" class="form-control" id="compra_libro_documento" required>
         <option value="" selected="selected"></option>
         <option value="DA">DA</option>
@@ -33,39 +43,39 @@
     </select>
 </div>
 <div class="field form-group col-xs-6 col-sm-3 col-md-3 col-lg-3 ">
-    <label >Tipo de Documento</label>
+    <label >Tipo de Documento(*)</label>
     <input type="text" id="tipo-documento" class="form-control" disabled>
 </div>
 <div class="field form-group col-xs-6 col-sm-1 col-md-1 col-lg-1">
-    <%= f.label :serie %>
+    <%= f.label :serie, "Serie(*)" %>
     <%= f.text_field :serie, class:"form-control" , required:true%>
 </div>
 <div class="field form-group col-xs-6 col-sm-2 col-md-2 col-lg-2 ">
-    <%= f.label :numero %>
-    <%= f.text_field :numero, class:"form-control" , required:true%>
+    <%= f.label :numero, "Numero(*)" %>
+    <%= f.number_field :numero, class:"form-control" , required:true, min:1 %>
 </div>
 <div class="field form-group col-xs-6 col-sm-1 col-md-1 col-lg-1 ">
-    <%= f.label :dia %>
-    <%= f.text_field :dia, class:"form-control", required:true %>
+    <%= f.label :dia, "Día(*)" %>
+    <%= f.number_field :dia, class:"form-control", required:true, min:1, max:31  %>
 </div>
 <div class="field form-group col-xs-6 col-sm-2 col-md-2 col-lg-2 ">
-    <%= f.label :mes %>
+    <%= f.label :mes, "Mes(*)" %>
     <%= f.text_field :mes, readonly:"readonly", class:"form-control", value:current_usuario.mes , required:true%>
 </div >
 <div class="field form-group col-xs-6 col-sm-1 col-md-1 col-lg-1 ">
-    <%= f.label :year, "Año"%>
+    <%= f.label :year, "Año(*)"%>
     <%= f.text_field :year, readonly:"readonly", class:"form-control", value:current_usuario.year , required:true%>
 </div>
 
 <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 ">
     <div class="field form-group col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
-    <%= f.label :nit %>
-    <%= f.text_field :nit, class:"form-control" , required:true%>
-</div>
-<div class="field form-group col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
-    <%= f.label :nombre %>
-    <%= f.text_field :nombre, class:"form-control" , required:true%>
-</div>
+        <%= f.label :nit, "Nit(*)" %>
+        <%= f.text_field :nit, class:"form-control" , required:true%>
+    </div>
+    <div class="field form-group col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
+        <%= f.label :nombre, "Nombre(*)" %>
+        <%= f.text_field :nombre, class:"form-control" , required:true%>
+    </div>
 </div>
 
 <div class="col-xs-12 col-md-offset-2 col-sm-4 col-md-4 col-lg-4">
@@ -94,18 +104,18 @@
 <%=  f.hidden_field :base, class:"base-iva" %>
 <%=  f.hidden_field :iva, class:"base-iva" %>
 <div class="actions col-md-12 col-sm-12 col-xs-12">
-   <% if @u.contribuyente_id.nil? %>
-    <%= button_tag(type: "submit", class: "btn btn-success col-sm-offset-3 col-xs-12 col-md-3 col-sm-3", disabled: true) do %>
-    <i class="fa fa-save"></i> Guardar 
-    <% end %>
-    <% else %>
-    <%= button_tag(type: "submit", class: "btn btn-success col-xs-12 col-md-3 col-sm-3", disabled: true) do %>
-    <i class="fa fa-save"></i> Guardar 
-    <% end %>
-    <% end %>
-    <%= button_tag(type: "reset", class: "btn btn-danger col-md-3 col-sm-3") do %>
-    <i class="fa fa-undo"></i> Reiniciar 
-    <% end %>
+ <% if @u.contribuyente_id.nil? %>
+ <%= button_tag(type: "submit", class: "btn btn-success col-sm-offset-3 col-xs-12 col-md-3 col-sm-3", disabled: true) do %>
+ <i class="fa fa-save"></i> Guardar 
+ <% end %>
+ <% else %>
+ <%= button_tag(type: "submit", class: "btn btn-success col-xs-12 col-sm-offset-3 col-md-3 col-sm-3") do %>
+ <i class="fa fa-save"></i> Guardar 
+ <% end %>
+ <% end %>
+ <%= button_tag(type: "reset", class: "btn btn-danger col-md-3 col-sm-3") do %>
+ <i class="fa fa-undo"></i> Reiniciar 
+ <% end %>
 
 </div>
 <% end %>

@@ -1,21 +1,30 @@
-<%= form_for(@tipo_de_gasto) do |f| %>
-  <% if @tipo_de_gasto.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@tipo_de_gasto.errors.count, "error") %> prohibited this tipo_de_gasto from being saved:</h2>
-
-      <ul>
-      <% @tipo_de_gasto.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+<div class="form">
+  <%= form_for(@tipo_de_gasto) do |f| %>
+<% if @tipo_de_gasto.errors.any? %>
+  <div class="alert alert-danger alert-dismissable col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+    <strong>Error</strong> los campos con asterisco <strong>(*)</strong> son requeridos
+    <br>
+    <strong>El tipo de gasto</strong> puede que ya haya sido creado
+  </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :nombre %><br>
-    <%= f.text_field :nombre %>
+  <div class="col-md-12">
+    <div class="field form-group col-md-offset-4 col-md-4">
+      <%= f.label :nombre, "Nombre(*)" %><br>
+      <%= f.text_field :nombre, class:"form-control", required:true, autocomplete:"off", autofocus:true %>
+    </div>
   </div>
   <div class="actions">
-    <%= f.submit %>
+  <%= link_to tipo_de_gastos_path, class:"col-md-offset-3 btn btn-normal col-xs-12  col-md-2 col-sm-2 " do %>
+  <i class="fa fa fa-arrow-circle-left"></i> Volver
+  <% end %>
+  <%= button_tag(type: "submit", class: "btn btn-success col-xs-12  col-md-2 col-sm-2") do %>
+    <i class="fa fa-save"></i> Guardar 
+    <% end %>
+    <%= button_tag(type: "reset", class: "btn btn-danger col-xs-12 col-md-2 col-sm-2") do %>
+    <i class="fa fa-undo"></i> Reiniciar 
+    <% end %>
   </div>
-<% end %>
+  <% end %>
+
+</div>

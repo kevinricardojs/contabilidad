@@ -37,7 +37,7 @@ $(popover).mouseleave(function() {
 $('a').click(function  () {
 	if ($(this).hasClass('no-window') != true)
 	{
-		window.open(this.href,'usuario','width=1024'); return false;        
+		window.open(this.href,'Accion',"scrollbars=yes, resizable=yes, fullscreen=yes, height=660"); return false;        
 	};
 });
 
@@ -374,8 +374,4 @@ $('#reboot').click(function(e) {
 	window.location.reload();
 });
 
-$('#new_partida').on('ajax:success', function(event) {
-	event.preventDefault();
-	alert("pollo");
-});
 });

@@ -4,7 +4,7 @@
     <tr>
       <th>Nombre</th>
       <th>Nit</th>
-      <th colspan="3">Acciones</th>
+      <th colspan="2">Acciones</th>
     </tr>
   </thead>
 
@@ -20,10 +20,10 @@
         <%= link_to content_tag(:i ,'',class:"fa fa-pencil"),
            edit_proveedor_path(proveedor) ,class:"btn btn-info col-md-12 text-center" %>
       </td>
-      <td class="td-btn">
+     <!--  <td class="td-btn">
         <%= link_to content_tag(:i ,'',class:"fa fa-trash-o"),
          proveedor, method: :delete, data: { confirm: 'Estas seguro?' },class:"btn btn-danger col-md-12 text-center" %>
-      </td>
+      </td> -->
 
     </tr>
     <% end %>

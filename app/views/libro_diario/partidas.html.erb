@@ -19,7 +19,11 @@
   <label>Reiniciar</label>
   <input type="reset" id="reboot" value="Reiniciar" class="btn btn-default">
 </div>
-
+<% if @u.establecimiento_id == nil %>
+<div class="col-md-8 col-md-offset-2">
+  <p class="bg-warning text-center text-muted" style="padding: 20px;">No puedes <strong>Añadir Partidas</strong> porque no has seleccionado el <strong>Establecimiento</strong> con el que deseas trabajar</p>
+</div>
+<% end %>  
 
 <div class="col-md-12" style="margin-top:20px;">
    <table class="table table-bordered">
@@ -56,7 +60,11 @@
   </div>
   <div class="clearfix"></div>
   <div class="col-md-2">
+      <% if @u.establecimiento_id == nil %>
+      <%= f.submit "Añadir Partida", class:"form-control btn btn-primary" , disabled:true%>
+      <% else %>
       <%= f.submit "Añadir Partida", class:"form-control btn btn-primary" %>
+      <% end %>
   </div>
   <%end%>
 </div>

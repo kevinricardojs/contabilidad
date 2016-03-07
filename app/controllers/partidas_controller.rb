@@ -12,7 +12,7 @@ class PartidasController < ApplicationController
   def create
     @partida = @libro_diario.partidas.new(partida_params)
     @partida.establecimiento_id = current_usuario.establecimiento_id
-    @partida.numero_partida = LibroDiario.find(@libro_diario).partidas.last.numero_partida + 1
+    @partida.numero_partida = LibroDiario.find(@libro_diario).partidas.last.numero_partida + 1 || 3
     if @partida.caja_h  != nil || @partida.caja_d != nil
       respond_to do |format|
         if @partida.save

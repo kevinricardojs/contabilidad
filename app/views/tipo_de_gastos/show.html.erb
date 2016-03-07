@@ -1,9 +1,24 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Nombre:</strong>
-  <%= @tipo_de_gasto.nombre %>
-</p>
+<div class="list-group">
 
-<%= link_to 'Edit', edit_tipo_de_gasto_path(@tipo_de_gasto) %> |
-<%= link_to 'Back', tipo_de_gastos_path %>
+	<a class="list-group-item active col-md-8 col-xs-8 col-lg-8 col-md-offset-2 col-xs-offset-2 col-lg-offset-2" href="#">
+
+	Tipo de Gasto
+
+	</a>
+	<a class="  list-group-item col-xs-8 col-sm-8 col-md-8 col-lg-8 col-md-offset-2 col-xs-offset-2 col-lg-offset-2" href="#">
+		<p>
+			<strong>Nombre:</strong>
+			<%= @tipo_de_gasto.nombre %>
+		</p>
+	</a>
+</div><div class="col-xs-12 col-md-12 col-lg-12 text-center">   
+<br>
+<%= link_to  tipo_de_gastos_path, class:"btn btn-normal"  do %>
+<i class="fa fa-arrow-circle-left"></i> Volver
+<% end %>
+|
+<%= link_to  edit_tipo_de_gasto_path(@tipo_de_gasto), class:"btn btn-info" do%>
+Editar <i class="fa fa-pencil"></i>
+<% end %>
+</div>

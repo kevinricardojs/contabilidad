@@ -1,9 +1,17 @@
 <div class="col-sm-12 col-md-12 col-lg-12">
-    <span>Contribuyente: <span class="text-muted"><strong><%= @contribuyente_nombre %></strong></span></span>
-    <span>Establecimiento: <span class="text-muted"><strong><%= @establecimiento_nombre %></strong></span></span>
-    <%= link_to  operaciones_libro_compra_path , class:"col-md-offset-3" do %>
-    Ver Resumen del Libro de Compras <i class="fa fa-print"></i>
-    <%end%>
+<div class="col-md-8">
+        <span>Contribuyente: <span class="text-muted">
+            <strong><%= @contribuyente_nombre %></strong>
+        </span>
+    </span>
+    <span>Establecimiento: <span class="text-muted">
+        <strong><%= @establecimiento_nombre %></strong>
+    </span>
+</span>
+</div>
+<%= link_to  operaciones_libro_compra_path , class:"col-md-4 btn btn-info" do %>
+Ver Resumen Libro de Compras <i class="fa fa-print"></i>
+<%end%>
 </div>
 
 
@@ -41,11 +49,11 @@
 </div>
 <div class="field form-group col-xs-6 col-sm-2 col-md-2 col-lg-2 ">
     <%= f.label :numero, "Numero(*)",class:"control-label" %>
-    <%= f.text_field :numero, class:"form-control", required:true %>
+    <%= f.number_field :numero, class:"form-control", required:true, min:1 %>
 </div>
 <div class="field form-group col-xs-6 col-sm-1 col-md-1 col-lg-1 ">
-    <%= f.label :dia, "Dia(*)",class:"control-label" %>
-    <%= f.text_field :dia, class:"form-control", required:true %>
+    <%= f.label :dia, "Día(*)",class:"control-label" %>
+    <%= f.number_field :dia, class:"form-control", required:true, min:1, max:31 %>
 </div>
 <div class="field form-group col-xs-6 col-sm-2 col-md-2 col-lg-2 ">
     <%= f.label :mes, "Mes(*)", class:"control-label" %>
@@ -64,7 +72,7 @@
     <%= f.text_field :proveedor_nombre, id:"compras_proveedor_nombre" , class:"form-control", required:true%>
 </div>
 <div class="field form-group col-xs-6 col-sm-4 col-md-4 col-lg-4 ">
-    <%= f.label :tipo_de_gasto, "Tipo de Gasto", class:"control-label"%>
+    <%= f.label :tipo_de_gasto, "Tipo de Gasto(*)", class:"control-label"%>
     <%= f.text_field :tipo_de_gasto, class:"form-control", id:"compra_libro_tipo_de_gasto", required:true %>
 </div>
 <div class="col-xs-12 col-sm-offset-2 col-md-offset-2 col-sm-4 col-md-4 col-lg-4">
@@ -99,7 +107,7 @@
     <i class="fa fa-save"></i> Guardar 
     <% end %>
     <% else %>
-    <%= button_tag(type: "submit", class: "btn btn-success col-sm-offset-3 col-xs-12 col-md-3 col-sm-3", disabled: true) do %>
+    <%= button_tag(type: "submit", class: "btn btn-success col-sm-offset-3 col-xs-12 col-md-3 col-sm-3") do %>
     <i class="fa fa-save"></i> Guardar 
     <% end %>
     <% end %>

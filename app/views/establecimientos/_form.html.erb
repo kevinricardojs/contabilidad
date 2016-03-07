@@ -18,35 +18,35 @@
   </div>
   <div class="field form-group col-xs-12 col-sm-10 col-md-10 col-lg-10 col-sm-offset-1 col-md-offset-1 col-lg-offset-1" >
     <%= f.label :nombre, "Nombre (*)" %>
-    <%= f.text_field :nombre, class:"form-control" %>
+    <%= f.text_field :nombre, class:"form-control", required:true %>
   </div>
-  <div class="field form-group col-xs-12 col-sm-3 col-md-3 col-lg-3 ">
+  <div class="field form-group col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
     <%= f.label :calle, "No. ó nombre de calle ó avenida (*)" %>
-    <%= f.text_field :calle, class:"form-control" %>
+    <%= f.text_field :calle, class:"form-control", required:true %>
   </div>
-  <div class="field form-group  col-xs-12 col-sm-3 col-md-3 col-lg-3">
+  <div class="field form-group  col-xs-12 col-sm-4 col-md-4 col-lg-4">
     <%= f.label :numero_casa, "Numero de Casa (*)" %>
-    <%= f.text_field :numero_casa, class:"form-control" %>
+    <%= f.text_field :numero_casa, class:"form-control", required:true %>
   </div>
-  <div class="field form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
+  <div class="field form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
     <%= f.label :zona, "Zona (*)" %>
-    <%= f.number_field :zona, class:"form-control",min:1,max:100%>
+    <%= f.number_field :zona, class:"form-control", min:1, max:100, required:true %>
   </div>
   <div class="field form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
-    <%= f.label :colonia, "Colonia o Barrio" %>
-    <%= f.text_field :colonia, class:"form-control"%>
+    <%= f.label :colonia, "Colonia o Barrio(*)" %>
+    <%= f.text_field :colonia, class:"form-control", required:true %>
   </div>
   <div class="field form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
     <%= f.label :departamento, "Departamento (*)" %>
-    <%= f.text_field :departamento, class:"form-control" %>
+    <%= f.text_field :departamento, class:"form-control", required:true %>
   </div>
   <div class="field form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
     <%= f.label :municipio, "Municipio (*)" %>
-    <%= f.text_field :municipio, class:"form-control" %>
+    <%= f.text_field :municipio, class:"form-control", required:true %>
   </div>
   <div class="field form-group col-xs-12 col-sm-3 col-md-3 col-lg-3">
     <%= f.label :telefono, "Telefono (*)" %>
-    <%= f.text_field :telefono, class:"form-control" %>
+    <%= f.text_field :telefono, class:"form-control", required:true %>
   </div>
 
 

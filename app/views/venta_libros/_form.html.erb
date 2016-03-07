@@ -94,11 +94,16 @@
 <%=  f.hidden_field :base, class:"base-iva" %>
 <%=  f.hidden_field :iva, class:"base-iva" %>
 <div class="actions col-md-12 col-sm-12 col-xs-12">
-    <%= link_to content_tag(:i ,' Volver' ,class:"fa fa-arrow-circle-left "), compra_libros_path , class:"btn btn-normal col-md-offset-3 col-md-2 col-sm-offset-3 col-sm-2"%>
-    <%= button_tag(type: "submit", class: "btn btn-success col-md-2 col-sm-2") do %>
+   <% if @u.contribuyente_id.nil? %>
+    <%= button_tag(type: "submit", class: "btn btn-success col-sm-offset-3 col-xs-12 col-md-3 col-sm-3", disabled: true) do %>
     <i class="fa fa-save"></i> Guardar 
     <% end %>
-    <%= button_tag(type: "reset", class: "btn btn-danger col-md-2 col-sm-2") do %>
+    <% else %>
+    <%= button_tag(type: "submit", class: "btn btn-success col-xs-12 col-md-3 col-sm-3", disabled: true) do %>
+    <i class="fa fa-save"></i> Guardar 
+    <% end %>
+    <% end %>
+    <%= button_tag(type: "reset", class: "btn btn-danger col-md-3 col-sm-3") do %>
     <i class="fa fa-undo"></i> Reiniciar 
     <% end %>
 

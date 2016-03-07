@@ -31,7 +31,7 @@ class CompraLibro < ActiveRecord::Base
   
   def proveedor_nit
     if self.proveedor_id
-      Proveedor.find_by(id: self.proveedor_id).nit
+      Proveedor.find(self.proveedor_id).nit
     end
   end
   def proveedor_nombre

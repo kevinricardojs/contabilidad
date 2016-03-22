@@ -1,16 +1,19 @@
-<div id="libro_compras" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <%= link_to  operaciones_libro_compra_path + ".pdf" , id:"pdf_link", class:"col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center" do %>
-    Ver Version Imprimible <i class="fa fa-print"></i>
-    <%end%>
+<%= link_to  new_compra_libro_path, class:"col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center btn btn-primary pdf_link" do %>
+  <i class="fa fa-angle-left"></i> Volver
+ <%end%>
+ <%= link_to  operaciones_libro_compra_path + ".pdf", class:"col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center btn btn-info pdf_link" do %>
+ Ver Version Imprimible(PDF) <i class="fa fa-print"></i>
+ <%end%>
+ <div id="libro_compras" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div id="pdf-render">
         <div  class="col-xs-9 col-sm-10 col-md-10 col-lg-10">
-        <strong><%= helper_contribuyente_nombre %></strong>
+            <strong><%= helper_contribuyente_nombre %></strong>
         </div>
         <div  class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
             Fecha: <strong><%= p_fecha%></strong>
         </div>
         <div  class="col-xs-9 col-sm-10 col-md-10 col-lg-10">
-        <strong><%= helper_establecimiento_nombre %></strong>
+            <strong><%= helper_establecimiento_nombre %></strong>
         </div>
         <div  class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
             Hora: <strong><%= p_hora %></strong>

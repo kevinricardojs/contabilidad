@@ -1,5 +1,5 @@
 <%= render 'partials/libro' %>
-<h3 class="text-center">Compras hechas por:  <%= @dato[0] %></h3>
+<h3 class="text-center">Compras hechas por:  <%= @u.establecimiento.nombre %></h3>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="min-height:520px; overflow-x:scroll;">
 	<div style="min-width:1100px; max-width:100%;" >
 		<%= render 'compras' %>

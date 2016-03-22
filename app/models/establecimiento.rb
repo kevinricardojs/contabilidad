@@ -2,6 +2,7 @@ class Establecimiento < ActiveRecord::Base
   belongs_to :contribuyente
   has_many :compra_libros
   has_many :venta_libros
+  has_many :usuarios
 
 	validates :nombre, 	presence: true
 	validates :calle , presence: true

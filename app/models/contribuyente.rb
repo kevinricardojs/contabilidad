@@ -2,6 +2,7 @@ class Contribuyente < ActiveRecord::Base
 	has_many :establecimientos
 	has_many :compra_libros
 	has_many :venta_libros
+	has_many :usuarios
 
 	validates :nit, presence: true, uniqueness: true
 	validates :nombre, 	presence: true

@@ -1,11 +1,14 @@
 class Usuario < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  belongs_to :establecimiento
+  belongs_to :contribuyente
+
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:login]
   enum mes: %w[Selecciona\ un\ Mes Enero Febrero Marzo Abril Mayo Junio Julio Agosto Septiembre Octubre Noviembre Diciembre]
   enum year: %w[Selecciona\ un\ Año 2015 2016 2017 2018 2019 2020]
-  
+
 
   attr_accessor :login
   attr_accessor :full_nombre
@@ -14,7 +17,7 @@ class Usuario < ActiveRecord::Base
 
   def full_nombre
     if self.nombre && self.apellido != ""
-       full_name = self.nombre + " " + self.apellido     
+       full_name = self.nombre + " " + self.apellido
     end
   end
 

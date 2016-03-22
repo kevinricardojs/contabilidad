@@ -4,20 +4,20 @@
     <%end%>
     <div id="pdf-render">
         <div  class="col-xs-9 col-sm-10 col-md-10 col-lg-10">
-            <strong><%= @contribuyente_nombre%></strong>
+            <strong><%= helper_contribuyente_nombre%></strong>
         </div>
         <div  class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
             Fecha: <strong><%= p_fecha%></strong>
         </div>
         <div  class="col-xs-9 col-sm-10 col-md-10 col-lg-10">
-            Establecimiento: <strong><%= @establecimiento_nombre%>
+            Establecimiento: <strong><%= helper_establecimiento_nombre%>
         </strong>
     </div>
     <div  class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
         Hora: <strong><%= p_hora %></strong>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        Nit:  <strong><%= @contribuyente_nit%></strong>
+        Nit:  <strong><%= helper_contribuyente_nit %></strong>
     </div>
     <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
         Periodo:  <strong><%= current_usuario.mes %></strong> - <strong><%= current_usuario.year %></strong>
@@ -26,7 +26,7 @@
         <strong>Libro de Ventas</strong>
     </div>
     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-        Folio: 
+        Folio:
     </div>
 </div>
 <div class="clearfix visible-xs-block"></div>

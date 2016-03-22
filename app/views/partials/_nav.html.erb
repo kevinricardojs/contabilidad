@@ -18,8 +18,8 @@
 
 </li>
 <% if usuario_signed_in? %>
-<p class="navbar-text">Contribuyente: <%= @contribuyente_nombre%></p>
-<p class="navbar-text">Establecimiento: <%= @establecimiento_nombre%></p>
+<p class="navbar-text">Contribuyente: <%= helper_contribuyente_nombre%></p>
+<p class="navbar-text">Establecimiento: <%= helper_establecimiento_nombre%></p>
 <p class="navbar-text">Mes: <%= current_usuario.mes %></p>
 <p class="navbar-text">Año: <%= current_usuario.year %></p>
 <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#myModal" id="boton-cambiar">
@@ -48,7 +48,7 @@
 	<%= link_to "Iniciar Sesión",new_usuario_session_path, class:"btn btn-default navbar-btn"%>
 	<%= link_to "Registrarme",new_usuario_registration_path, class:"btn btn-default navbar-btn"%>
 
-	<% end %>	
+	<% end %>
 </ul>
 </div><!-- /.navbar-collapse -->
 </div><!-- /.container-fluid -->

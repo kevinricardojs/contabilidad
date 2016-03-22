@@ -1,11 +1,11 @@
 <div class="col-sm-12 col-md-12 col-lg-12">
     <div class="col-md-8">
         <span>Contribuyente: <span class="text-muted">
-            <strong><%= @contribuyente_nombre %></strong>
+            <strong><%= helper_contribuyente_nombre %></strong>
         </span>
     </span>
     <span>Establecimiento: <span class="text-muted">
-        <strong><%= @establecimiento_nombre %></strong>
+        <strong><%= helper_establecimiento_nombre %></strong>
     </span>
 </span>
 </div>
@@ -106,15 +106,15 @@ Ver Resumen Libro de Ventas <i class="fa fa-print"></i>
 <div class="actions col-md-12 col-sm-12 col-xs-12">
  <% if @u.contribuyente_id.nil? %>
  <%= button_tag(type: "submit", class: "btn btn-success col-sm-offset-3 col-xs-12 col-md-3 col-sm-3", disabled: true) do %>
- <i class="fa fa-save"></i> Guardar 
+ <i class="fa fa-save"></i> Guardar
  <% end %>
  <% else %>
  <%= button_tag(type: "submit", class: "btn btn-success col-xs-12 col-sm-offset-3 col-md-3 col-sm-3") do %>
- <i class="fa fa-save"></i> Guardar 
+ <i class="fa fa-save"></i> Guardar
  <% end %>
  <% end %>
  <%= button_tag(type: "reset", class: "btn btn-danger col-md-3 col-sm-3") do %>
- <i class="fa fa-undo"></i> Reiniciar 
+ <i class="fa fa-undo"></i> Reiniciar
  <% end %>
 
 </div>

@@ -108,13 +108,11 @@ td{
 		border: 2px solid #DDD;
 	}
 	.th-sin-bordes th{
-		border:none;
-		border-bottom:  2px solid #DDD;
-		border-right: 2px solid #DDD;
+		border-top:none;
+
 	}
 	.tr-sin-bordes th{
 		border-bottom: none;
-		border-right: 2px solid #DDD;
 	}
 }
 @media print {
@@ -190,4 +188,24 @@ table{
 }
 .bold{
   font-weight: bold !important;
+}
+.reasignable, .vacio{
+  min-width:40px;
+}
+.td-btn{
+  width:54px !important;
+  height: 52px !important;
+}
+
+.hide{
+  display: none;
+}
+.no-border-top td{
+  border-top: none !important;
+  border-bottom: none !important;
+}
+.calculadora{
+  position: absolute;
+  left:0;
+  top:24.6%;
 }

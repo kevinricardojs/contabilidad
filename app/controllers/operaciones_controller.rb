@@ -2,18 +2,21 @@ class OperacionesController < ApplicationController
 	before_action :set_compras
 	before_action :set_ventas
 	before_action :set_por_cuentas
-	before_action :resumen_compras_iva
-  
+
 
 	def libro_venta
+		@iva = VentaLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:iva)
+		@base = VentaLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:base)
+		@total = @base + @iva
 	end
 	def libro_compra
+		@iva = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:iva)
 		@compras_por_dia = @compras.order(:dia)
 	end
 
 	private
-	
- 
+
+
 	def set_ventas
 		@ventas_por_dia = VentaLibro.order(:dia).where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).group(:dia).sum(:base)
 		dias = VentaLibro.order(:dia).where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).group(:dia).count()
@@ -27,7 +30,7 @@ class OperacionesController < ApplicationController
 				venta_unica["min"] = venta_unica["numero"]
 				venta_unica["max"] = venta_unica["numero"]
 				@ventas.push venta_unica
-			else 
+			else
 				resumen_dia_ventas = {}
 				resumen_dia_ventas['base']  = VentaLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes, dia: numero_dia).sum(:base)
 				resumen_dia_ventas['gravado_bienes'] = VentaLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes, dia: numero_dia).sum(:gravado_bienes)
@@ -58,10 +61,6 @@ class OperacionesController < ApplicationController
 			suma_base = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes, tipo_de_gasto_id: cuenta[0]).sum(:base)
 			@compras_por_cuenta.push [nombre_cuenta , suma_base]
 		end
- 	end
-
- 	def resumen_compras_iva
- 		@iva = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:iva)
  	end
 
 	def set_compras

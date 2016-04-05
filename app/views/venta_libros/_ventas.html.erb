@@ -1,5 +1,5 @@
 
-  <table class="table table-bordered table-responsive">
+<table class="table table-bordered table-responsive">
   <thead>
     <tr>
       <th colspan="7"></th>
@@ -28,7 +28,7 @@
 
   <tbody>
     <% @ventas.each do |venta| %>
-      <tr>
+    <tr class="no-border-top">
       <td><%= venta.documento %></td>
       <td><%= venta.dia%></td>
       <td><%= venta.serie %></td>
@@ -48,11 +48,11 @@
       </td>
       <td class="td-btn">
        <%= link_to content_tag(:i ,'',class:"fa fa-pencil"), edit_venta_libro_path(venta) ,class:"btn btn-info col-md-12 text-center" %>
-      </td>
-      <td class="td-btn">
-        <%= link_to content_tag(:i ,'',class:"fa fa-trash-o"), venta, method: :delete, data: { confirm: 'Estas seguro?' },class:"btn btn-danger col-md-12 text-center" %>
-      </td>
-      </tr>
-    <% end %>
-  </tbody>
+     </td>
+     <td class="td-btn">
+      <%= link_to content_tag(:i ,'',class:"fa fa-trash-o"), venta, method: :delete, data: { confirm: 'Estas seguro?' },class:"btn btn-danger col-md-12 text-center" %>
+    </td>
+  </tr>
+  <% end %>
+</tbody>
 </table>

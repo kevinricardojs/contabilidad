@@ -61,8 +61,7 @@
 
     <tbody>
         <% @ventas.each do |venta| %>
-        <tr>
-
+        <tr class="no-border-top">
             <td><%= venta["dia"] %></td>
             <td><%= venta["documento"] %></td>
             <td><%= venta["nit"] %></td>
@@ -76,7 +75,34 @@
         <% end %>
     </tbody>
 </table>
+<div class="col-md-12">
+    <table class="table table-bordered">
+        <thead>
+          <tr class="tr-sin-bordes">
+            <th colspan="2" class="text-center">Resumen por Cuenta Contable</th>
+        </tr>
+        <tr class="th-sin-bordes">
+            <th>Nombre</th>
+            <th>Suma de base</th>
+        </tr>
+    </thead>
 
-
+    <tbody>
+    <tr>
+          <td>Base</td>
+          <td>Q<%= @base %></td>
+      </tr>
+       <tr>
+          <td>IVA</td>
+          <td>Q<%= @iva %></td>
+      </tr>
+      <tr>
+          <td>Total</td>
+          <td>Q<%= @total %></td>
+      </tr>
+  </tbody>
+</table>
 
 </div>
+</div>
+

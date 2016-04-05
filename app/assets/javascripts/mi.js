@@ -229,12 +229,18 @@ $('#nombre-de-campo').autocomplete({
 function crear_partida(nombre_de_cuenta, nombre_,valor, position){
 
 	if (tipos.indexOf(nombre_de_cuenta) != -1 ) {
-		if ( position == "debe") {
+		var left_nombre_ = "left_" + nombre_;
+		var right_nombre_ = "right_" + nombre_;
+		var dinero_nombre_ = "dinero_" + nombre_;
+		if ( position == "debe")
+		{
 			if ($("input[name='partida[" + nombre_ + "]']").length == 0)
 			{
-				var tr = "<tr data-cuenta=" + nombre_ + "><td class='left titulo'>" + nombre_de_cuenta + "</td><td class='reasignable><span class='quetzal'>Q</span><span class='tipo_debe' id='cuenta_" + nombre_ +"'>" + valor + "</span></td><td id='vacio_" + nombre_ +"'></td></tr>";
+				var tr = "<tr data-cuenta=" + nombre_ + "><td class='left'>" + nombre_de_cuenta + "</td><td id='" + dinero_nombre_ + "' class='reasignable'><span class='quetzal'>Q</span><span class='monto' id='cuenta_" + nombre_ +"'>" + valor + "</span></td><td class='td-btn' id='" + left_nombre_+ "'><span class='btn btn-primary '><i class='fa fa-chevron-right'></i></span></td><td class='td-btn' id ='" + right_nombre_ + "'></td><td class='vacio' id='vacio_" + nombre_ +"'></td></tr>";
 				$("tr#total").before(tr);
+				$('#total-debe').text();
 				$(formulario).prepend("<input type='hidden' name=partida[" + nombre_ + "] value=" + valor + ">");
+				sumar_debe_o_haber("debe", valor, null);
 			}
 			else
 			{
@@ -242,14 +248,18 @@ function crear_partida(nombre_de_cuenta, nombre_,valor, position){
 				suma = suma.toFixed(2);
 				$("input[name='partida[" + nombre_ + "]']").val(suma);
 				$("#cuenta_" + nombre_).text($("input[name='partida[" + nombre_ + "]']").val());
+				sumar_debe_o_haber("sumaTodo", null, null);
 			}
 		}
-		else{
+		else
+		{
 			if ($("input[name='partida[" + nombre_ + "]']").length == 0)
 			{
-				var tr = "<tr data-cuenta=" + nombre_ + "><td class='left titulo'>" + nombre_de_cuenta + "</td><td id='vacio_" + nombre_ +"'></td><td class='reasignable><span class='quetzal'>Q</span><span class='tipo_haber' id='cuenta_" + nombre_ +"'>" + valor + "</span></td></tr>";
+				var tr = "<tr data-cuenta=" + nombre_ + "><td class='left'>" + nombre_de_cuenta + "</td><td class='vacio' id='vacio_" + nombre_ +"'></td><td class='td-btn' id='" + left_nombre_ + "'></td><td class='td-btn' id='" + right_nombre_ + "'><span class='btn btn-primary'><i class='fa fa-chevron-left'></i></span></td><td id='" + dinero_nombre_ + "'class='reasignable'><span class='quetzal'>Q</span><span class='monto' id='cuenta_" + nombre_ +"'>" + valor + "</span></td></tr>";
 				$("tr#total").before(tr);
 				$(formulario).prepend("<input type='hidden' name=partida[" + nombre_ + "] value=" + valor + ">");
+				sumar_debe_o_haber("haber", null, valor);
+
 			}
 			else
 			{
@@ -257,6 +267,7 @@ function crear_partida(nombre_de_cuenta, nombre_,valor, position){
 				suma = suma.toFixed(2);
 				$("input[name='partida[" + nombre_ + "]']").val(suma);
 				$("#cuenta_" + nombre_).text($("input[name='partida[" + nombre_ + "]']").val());
+				sumar_debe_o_haber("sumaTodo", null, null);
 			}
 		}
 
@@ -266,13 +277,7 @@ function crear_partida(nombre_de_cuenta, nombre_,valor, position){
 	{
 		alert("Esta cuenta no existe");
 	};
-}
-
-// else if(position == undefined)
-// {
-// 	$('#nombre-de-campo').parent("div").addClass('has-error');
-// }
-
+};
 
 function limpiar(){
 	$('#nombre-de-campo').parent("div").removeClass('has-error');
@@ -286,6 +291,7 @@ $('#agregar').click(function(e) {
 	var position = $('input:radio[name=tipo]:checked').val();
 	nombre_de_cuenta = $('#nombre-de-campo').val();
 	valor_de_cuenta = $('#valor-de-campo').val();
+	valor_de_cuenta = parseFloat(valor_de_cuenta).toFixed(2)
 	nombre_ = nombre_de_cuenta.split(" ").join("_").toLowerCase();
 
 	if (nombre_de_cuenta != "" && valor_de_cuenta != "")
@@ -303,13 +309,107 @@ $('#agregar').click(function(e) {
 	{
 		alert("Debes Rellenar los dos Campos Necesarios");
 	};
-
-$('.reasignable').click( function(){
-	var nombre_cuenta = $(this).parent().data('cuenta');
-	$(this).insertAfter("#vacio_" + nombre_de_cuenta);
-})
 });
+
+$("body").on("click", '.td-btn span', function(){
+	var nombre_ = $(this).parent().parent().data('cuenta');
+	var nombre_cuenta = "#vacio_" + nombre_;
+	var dinero_nombre_ = "#dinero_" + nombre_;
+	var vacio_nombre_ = "#vacio_" + nombre_;
+	var left_btn = "#left_" + nombre_;
+	var right_btn = "#right_" + nombre_;
+	var hijo = $(this).children("i");
+	$(this).parent().empty();
+	if ($(hijo).hasClass('fa-chevron-left'))
+	{
+		$(left_btn).html("<span class='btn btn-primary '><i class='fa fa-chevron-right'></i></span>")
+		$(right_btn).after($(vacio_nombre_));
+		$(left_btn).before($(dinero_nombre_));
+		$(dinero_nombre_).removeClass('tipo_haber');
+		$(dinero_nombre_).addClass('tipo_debe');
+	}
+	else if($(hijo).hasClass('fa-chevron-right'))
+	{
+		$(right_btn).html("<span class='btn btn-primary '><i class='fa fa-chevron-left'></i></span>")
+		$(left_btn).before($(vacio_nombre_));
+		$(right_btn).after($(dinero_nombre_));
+		$(dinero_nombre_).removeClass('tipo_debe');
+		$(dinero_nombre_).addClass('tipo_haber');
+	}
+	else
+	{
+		alert("Invalido");
+	};
+	sumar_debe_o_haber("sumaTodo",null,null);});
+
+function sumar_debe_o_haber(tipo,debe, haber){
+	if (tipo == "debe") {
+		var monto = parseFloat($('#total-debe span.monto').text()) + parseFloat(debe);
+		monto = monto.toFixed(2);
+		$('#total-debe span.monto').text(monto);
+	}
+	else if(tipo == "haber")
+	{
+		var monto = parseFloat($('#total-haber span.monto').text()) + parseFloat(haber);
+		monto = monto.toFixed(2);
+		$('#total-haber span.monto').text(monto);
+	}
+	else
+	{
+		var debe = 0;
+		var haber = 0;
+		$('.tipo_debe .monto').each(function(index, el) {
+			debe  = debe + parseFloat($(el).text());
+		});
+
+		$('.tipo_haber .monto').each(function(index, el) {
+			haber = haber + parseFloat($(el).text());
+		});
+		$('#total-debe span.monto').text(debe.toFixed(2));
+		$('#total-haber span.monto').text(haber.toFixed(2));
+	}
+	verificar_totales();
+};
+
+function verificar_totales(){
+	var debe = parseFloat($('#total-debe span.monto').text());
+	var haber = parseFloat($('#total-haber span.monto').text());
+
+	if (debe == haber) {
+		$('.termina-partida').removeClass('bg-danger');
+		$('.termina-partida').addClass('bg-success');
+	}
+	else
+	{
+		$('.termina-partida').removeClass('bg-success');
+		$('.termina-partida').addClass('bg-danger');
+	}
+}
+
 $('#reboot').click(function(e) {
 	window.location.reload();
 });
+
+$('#sumar').keyup( function(event) {
+	var cantidad = parseFloat($(this).val());
+	if (!isNaN(cantidad))
+	{
+		if ( !isNaN(cantidad) && event.keyCode == 13 )
+		{
+			$('.calculadora label input:radio:not(:checked)').attr('disabled', 'disabled');
+			var selected = "#" + $('.calculadora label input:radio:checked').data('quien');
+			var previa = parseFloat($(selected).val()) || 0;
+			nueva = previa + cantidad;
+			total = parseFloat(nueva);
+			$(selected).val(total.toFixed(2));
+			$(this).val("");
+			$(this).parent().removeClass("has-error");
+		}
+	}
+	else
+	{
+		$(this).parent().addClass("has-error");
+	}
+});
+
 });

@@ -13,13 +13,13 @@
   <div class="container col-md-4">
     <div class="radio col-md-12">
       <label class="bold">
-      <input type="radio" name="tipo" id="debe" value="debe" checked>
+        <input type="radio" name="tipo" id="debe" value="debe" checked>
         Debe
       </label>
     </div>
     <div class="radio col-md-12">
       <label class="bold">
-      <input type="radio" name="tipo" id="haber" value="haber">
+        <input type="radio" name="tipo" id="haber" value="haber">
         Haber
       </label>
     </div>
@@ -48,8 +48,8 @@
   <thead>
     <tr>
       <th>Nombre De Cuentas</th>
-      <th>Debe</th>
-      <th>Haber</th>
+      <th colspan="2">Debe</th>
+      <th colspan="2">Haber</th>
     </tr>
 
   </thead>
@@ -57,8 +57,8 @@
   <tbody id="tbody-partida">
     <tr id="total">
       <td class="left border-grueso-right">Total</td>
-      <td id="total-debe" class="termina-partida"></td>
-      <td id="total-haber" class="termina-partida"></td>
+      <td colspan="2" id="total-debe" class="termina-partida"><span class="quetzal">Q</span><span class="monto">0.00</span></td>
+      <td colspan="2" id="total-haber" class="termina-partida"><span class="quetzal">Q</span><span class="monto">0.00</span></td>
     </tr>
   </tbody>
 </table>

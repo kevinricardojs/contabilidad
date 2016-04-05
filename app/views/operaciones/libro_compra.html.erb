@@ -1,10 +1,10 @@
 <%= link_to  new_compra_libro_path, class:"col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center btn btn-primary pdf_link" do %>
-  <i class="fa fa-angle-left"></i> Volver
- <%end%>
- <%= link_to  operaciones_libro_compra_path + ".pdf", class:"col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center btn btn-info pdf_link" do %>
- Ver Version Imprimible(PDF) <i class="fa fa-print"></i>
- <%end%>
- <div id="libro_compras" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<i class="fa fa-angle-left"></i> Volver
+<%end%>
+<%= link_to  operaciones_libro_compra_path + ".pdf", class:"col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center btn btn-info pdf_link" do %>
+Ver Version Imprimible(PDF) <i class="fa fa-print"></i>
+<%end%>
+<div id="libro_compras" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div id="pdf-render">
         <div  class="col-xs-9 col-sm-10 col-md-10 col-lg-10">
             <strong><%= helper_contribuyente_nombre %></strong>
@@ -42,7 +42,7 @@
                 <th colspan="2">Proveedor</th>
                 <th colspan="2">Base Gravada</th>
                 <th colspan="2">Base Exenta</th>
-                <th colspan="2"></th>
+                <th colspan="3"></th>
             </tr>
             <tr class="th-sin-bordes">
                 <th>Dia</th>
@@ -55,15 +55,15 @@
                 <th>Servicios</th>
                 <th>Bienes</th>
                 <th>Servicios</th>
+                <th>Base</th>
                 <th>IVA</th>
                 <th>Total</th>
-                <th>Base</th>
             </tr>
         </thead>
 
         <tbody>
             <% @compras_por_dia.each do |compra| %>
-            <tr>
+            <tr class="no-border-top">
                 <td><%= compra.dia %></td>
                 <td><%= compra.documento %></td>
                 <td><%= compra.serie %></td>
@@ -74,9 +74,9 @@
                 <td>Q<%= compra.gravado_servicios %></td>
                 <td>Q<%= compra.exento_bienes %></td>
                 <td>Q<%= compra.exento_servicios %></td>
+                <td>Q<%= compra.base %></td>
                 <td>Q<%= compra.iva %></td>
                 <td>Q<%= compra.total %></td>
-                <td>Q<%= compra.base %></td>
             </tr>
             <% end %>
         </tbody>

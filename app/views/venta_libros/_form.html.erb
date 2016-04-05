@@ -77,7 +77,7 @@ Ver Resumen Libro de Ventas <i class="fa fa-print"></i>
         <%= f.text_field :nombre, class:"form-control" , required:true%>
     </div>
 </div>
-
+<div class="clearfix"></div>
 <div class="col-xs-12 col-md-offset-2 col-sm-4 col-md-4 col-lg-4">
     <h5 class="text-center">Valor Gravado</h5>
     <div class="field form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -100,22 +100,21 @@ Ver Resumen Libro de Ventas <i class="fa fa-print"></i>
         <%= f.text_field :exento_servicios, class:"form-control exento exento-servicios" , required:true%>
     </div>
 </div>
-
 <%=  f.hidden_field :base, class:"base-iva" %>
 <%=  f.hidden_field :iva, class:"base-iva" %>
 <div class="actions col-md-12 col-sm-12 col-xs-12">
- <% if @u.contribuyente_id.nil? %>
- <%= button_tag(type: "submit", class: "btn btn-success col-sm-offset-3 col-xs-12 col-md-3 col-sm-3", disabled: true) do %>
- <i class="fa fa-save"></i> Guardar
- <% end %>
- <% else %>
- <%= button_tag(type: "submit", class: "btn btn-success col-xs-12 col-sm-offset-3 col-md-3 col-sm-3") do %>
- <i class="fa fa-save"></i> Guardar
- <% end %>
- <% end %>
- <%= button_tag(type: "reset", class: "btn btn-danger col-md-3 col-sm-3") do %>
- <i class="fa fa-undo"></i> Reiniciar
- <% end %>
+   <% if @u.contribuyente_id.nil? %>
+   <%= button_tag(type: "submit", class: "btn btn-success col-sm-offset-3 col-xs-12 col-md-3 col-sm-3", disabled: true) do %>
+   <i class="fa fa-save"></i> Guardar
+   <% end %>
+   <% else %>
+   <%= button_tag(type: "submit", class: "btn btn-success col-xs-12 col-sm-offset-3 col-md-3 col-sm-3") do %>
+   <i class="fa fa-save"></i> Guardar
+   <% end %>
+   <% end %>
+   <%= button_tag(type: "reset", class: "btn btn-danger col-md-3 col-sm-3") do %>
+   <i class="fa fa-undo"></i> Reiniciar
+   <% end %>
 
 </div>
 <% end %>

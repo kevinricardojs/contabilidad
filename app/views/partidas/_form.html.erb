@@ -11,64 +11,29 @@
 		</thead>
 
 		<tbody>
-			<% partida =  @partida.solo_campos_valids %>
-			<%if partida["caja_h"] %>
+
+			<% @partida.cuentas.order(:posicion).each do |cuenta| %>
 			<tr>
-				<td class="left border-grueso-right">Caja</td>
-				<td></td>
-				<td><%= f.text_field :caja_h, value:partida["caja_h"], class:"form-control", readonly:true %></td>
-			</tr>	
-			<% partida.each do |nombre, valor|
-				if nombre != "descripcion" && nombre != "caja_h" && nombre != "caja_d" && nombre != "numero_partida" && nombre != "id" %>
+				<td class="left border-grueso-right"><%= cuenta.nombre%></td>
+				<td><%= "Q" + cuenta.debe if  cuenta.debe != "" &&  cuenta.debe != "0.0"  %></td>
+				<td><%= "Q" + cuenta.haber if cuenta.haber != "" && cuenta.haber != "0.0" %></td>
+			</tr>
+			<% end %>
 				<tr>
-					<td class="left border-grueso-right"><%= nombre.split("_").map(&:capitalize).join(' ') %></td>
-					<td><%= f.text_field "#{nombre}", value:valor, class:"form-control" , readonly:true %></td>
-					<td></td>
+					<td class="left border-grueso-right">Descripción</td>
+					<td colspan="2"><%= f.text_field :descripcion, class:"form-control" %></td>
 				</tr>
-				<% end %>
-				<% end %>		
 				<tr>
 					<td class="left border-grueso-right">Total</td>
-					<td class="termina-partida">Q<%= partida["caja_h"] %></td>
-					<td class="termina-partida">Q<%= partida["caja_h"] %></td>
+					<td class="termina-partida">Q<%= @partida.total["debe"] %></td>
+					<td class="termina-partida">Q<%= @partida.total["haber"] %></td>
 				</tr>
-				<tr>
-					<td class="left">Descripción</td>
-					<td colspan="2"><%= f.text_field :descripcion , value:partida["descripcion"] ,class:"form-control" %></td>
-				</tr>
-				<% elsif partida["caja_d"]  %>
-				
-				<% partida.each do |nombre, valor|
-					if nombre != "descripcion" && nombre != "caja_h" && nombre != "caja_d" && nombre != "numero_partida" && nombre != "id" %>
-					<tr>
-						<td class="left border-grueso-right"><%= nombre.split("_").map(&:capitalize).join(' ') %></td>
-						<td></td>
-						<td><%= f.text_field "#{nombre}", value:valor, class:"form-control" , readonly:true %></td>	
-					</tr>
-					<% end %>
-
-					<% end %>	
-					<tr>
-						<td class="left border-grueso-right">Caja</td>
-						<td><%= f.text_field :caja_d, value:partida["caja_d"], class:"form-control", readonly:true %></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td class="left border-grueso-right">Total</td>
-						<td class="termina-partida">Q<%= partida["caja_d"] %></td>
-						<td class="termina-partida">Q<%= partida["caja_d"] %></td>
-					</tr>
-					<tr>
-						<td class="left">Descripción</td>
-						<td colspan="2"><%= f.text_field :descripcion , value:partida["descripcion"] ,class:"form-control", required:true %></td>
-					</tr>
-					<% end %>
 
 				</tbody>
 			</table>
 			<%= link_to content_tag(:i ,' Volver' ,class:"fa fa-arrow-circle-left "), libro_diario_resumen_path , class:"btn btn-normal col-xs-12 col-md-offset-3 col-md-3  col-sm-3"%>
 			<%= button_tag(type: "submit", class: "btn btn-success col-xs-12 col-md-3 col-sm-3") do %>
-			<i class="fa fa-save"></i> Actualizar Partida 
+			<i class="fa fa-save"></i> Actualizar Partida
 			<% end %>
 			<% end %>
 		</div>

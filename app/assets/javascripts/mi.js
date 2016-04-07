@@ -226,51 +226,48 @@ $('#nombre-de-campo').autocomplete({
 	source: tipos
 });
 
-function crear_partida(nombre_de_cuenta, nombre_,valor, position){
+function crear_partida(nombre_de_cuenta, nombre_,valor, position,number){
 
 	if (tipos.indexOf(nombre_de_cuenta) != -1 ) {
 		var left_nombre_ = "left_" + nombre_;
+		var div = "#" + nombre_;
+		var numero = $(div).data('numero');
 		var right_nombre_ = "right_" + nombre_;
 		var dinero_nombre_ = "dinero_" + nombre_;
-		if ( position == "debe")
+
+		if ($(div).length == 0)
 		{
-			if ($("input[name='partida[" + nombre_ + "]']").length == 0)
+			$(formulario).append("<div id='" + nombre_ + "' data-numero='" + number + "'></div>");
+			$(div).append("<input type='hidden' name='partida[cuentas_attributes][" + number +"][nombre]' value='" + nombre_de_cuenta + "'>");
+			$(div).append("<input type='hidden' name='partida[cuentas_attributes][" + number +"][posicion]' value=" + number + ">");
+			if ( position == "debe")
 			{
-				var tr = "<tr data-cuenta=" + nombre_ + "><td class='left'>" + nombre_de_cuenta + "</td><td id='" + dinero_nombre_ + "' class='reasignable'><span class='quetzal'>Q</span><span class='monto' id='cuenta_" + nombre_ +"'>" + valor + "</span></td><td class='td-btn' id='" + left_nombre_+ "'><span class='btn btn-primary '><i class='fa fa-chevron-right'></i></span></td><td class='td-btn' id ='" + right_nombre_ + "'></td><td class='vacio' id='vacio_" + nombre_ +"'></td></tr>";
+				var tr = "<tr data-cuenta=" + nombre_ + "><td class='left'>" + nombre_de_cuenta + "</td><td id='" + dinero_nombre_ + "' class='reasignable tipo_debe'><span class='quetzal'>Q</span><span class='monto' id='cuenta_" + nombre_ +"'>" + valor + "</span></td><td class='td-btn' id='" + left_nombre_+ "'><span class='btn btn-primary '><i class='fa fa-chevron-right'></i></span></td><td class='td-btn' id ='" + right_nombre_ + "'></td><td class='vacio' id='vacio_" + nombre_ +"'></td></tr>";
 				$("tr#total").before(tr);
-				$('#total-debe').text();
-				$(formulario).prepend("<input type='hidden' name=partida[" + nombre_ + "] value=" + valor + ">");
-				sumar_debe_o_haber("debe", valor, null);
+				$(div).append("<input type='hidden' name='partida[cuentas_attributes][" + number +"][debe]' id='input_" + nombre_ + "_debe'value=" + valor + ">");
+				$(div).append("<input type='hidden' name='partida[cuentas_attributes][" + number +"][haber]' id='input_" + nombre_ + "_haber' value=''>");
+				sumar(position, valor);
+				numero_actual_cuentas += 1;
 			}
 			else
 			{
-				var suma = to_dinero($("input[name='partida[" + nombre_ + "]']").val()) + to_dinero(valor);
-				suma = suma.toFixed(2);
-				$("input[name='partida[" + nombre_ + "]']").val(suma);
-				$("#cuenta_" + nombre_).text($("input[name='partida[" + nombre_ + "]']").val());
-				sumar_debe_o_haber("sumaTodo", null, null);
+				var tr = "<tr data-cuenta=" + nombre_ + "><td class='left'>" + nombre_de_cuenta + "</td><td class='vacio' id='vacio_" + nombre_ +"'></td><td class='td-btn' id='" + left_nombre_ + "'></td><td class='td-btn' id='" + right_nombre_ + "'><span class='btn btn-primary'><i class='fa fa-chevron-left'></i></span></td><td id='" + dinero_nombre_ + "'class='reasignable tipo_haber'><span class='quetzal'>Q</span><span class='monto' id='cuenta_" + nombre_ +"'>" + valor + "</span></td></tr>";
+				$("tr#total").before(tr);
+				$(div).append("<input type='hidden' name='partida[cuentas_attributes][" + number +"][haber]' id='input_" + nombre_ + "_haber' value=" + valor + ">");
+				$(div).append("<input type='hidden' name='partida[cuentas_attributes][" + number +"][debe]' id='input_" + nombre_ + "_debe' value=''>");
+				sumar(position, valor);
+				numero_actual_cuentas += 1;
 			}
 		}
+
 		else
 		{
-			if ($("input[name='partida[" + nombre_ + "]']").length == 0)
-			{
-				var tr = "<tr data-cuenta=" + nombre_ + "><td class='left'>" + nombre_de_cuenta + "</td><td class='vacio' id='vacio_" + nombre_ +"'></td><td class='td-btn' id='" + left_nombre_ + "'></td><td class='td-btn' id='" + right_nombre_ + "'><span class='btn btn-primary'><i class='fa fa-chevron-left'></i></span></td><td id='" + dinero_nombre_ + "'class='reasignable'><span class='quetzal'>Q</span><span class='monto' id='cuenta_" + nombre_ +"'>" + valor + "</span></td></tr>";
-				$("tr#total").before(tr);
-				$(formulario).prepend("<input type='hidden' name=partida[" + nombre_ + "] value=" + valor + ">");
-				sumar_debe_o_haber("haber", null, valor);
-
-			}
-			else
-			{
-				var suma = to_dinero($("input[name='partida[" + nombre_ + "]']").val()) + to_dinero(valor);
-				suma = suma.toFixed(2);
-				$("input[name='partida[" + nombre_ + "]']").val(suma);
-				$("#cuenta_" + nombre_).text($("input[name='partida[" + nombre_ + "]']").val());
-				sumar_debe_o_haber("sumaTodo", null, null);
-			}
+			var suma = to_dinero($("input[name='partida[cuentas_attributes][" + numero + "][" + position + "]']").val()) + to_dinero(valor);
+			suma = suma.toFixed(2);
+			$("input[name='partida[cuentas_attributes][" + numero + "][" + position + "]']").val(suma);
+			$("#cuenta_" + nombre_).text($("input[name='partida[cuentas_attributes][" + numero + "][" + position + "]']").val());
+			sumar();
 		}
-
 		limpiar();
 	}
 	else
@@ -297,7 +294,7 @@ $('#agregar').click(function(e) {
 	if (nombre_de_cuenta != "" && valor_de_cuenta != "")
 	{
 		if (!isNaN(valor_de_cuenta)) {
-			crear_partida( nombre_de_cuenta, nombre_,valor_de_cuenta, position);
+			crear_partida( nombre_de_cuenta, nombre_,valor_de_cuenta, position, numero_actual_cuentas);
 			$('#valor-de-campo').parent().removeClass('has-error');
 		}
 		else
@@ -311,8 +308,12 @@ $('#agregar').click(function(e) {
 	};
 });
 
+var numero_actual_cuentas = $('.cuenta').length;
+// Cambio de debe a haber
 $("body").on("click", '.td-btn span', function(){
 	var nombre_ = $(this).parent().parent().data('cuenta');
+	var debe = "#input_" + nombre_ + "_debe";
+	var haber = "#input_" + nombre_ + "_haber";
 	var nombre_cuenta = "#vacio_" + nombre_;
 	var dinero_nombre_ = "#dinero_" + nombre_;
 	var vacio_nombre_ = "#vacio_" + nombre_;
@@ -327,6 +328,8 @@ $("body").on("click", '.td-btn span', function(){
 		$(left_btn).before($(dinero_nombre_));
 		$(dinero_nombre_).removeClass('tipo_haber');
 		$(dinero_nombre_).addClass('tipo_debe');
+		$(debe).val($(haber).val());
+		$(haber).val("");
 	}
 	else if($(hijo).hasClass('fa-chevron-right'))
 	{
@@ -335,35 +338,38 @@ $("body").on("click", '.td-btn span', function(){
 		$(right_btn).after($(dinero_nombre_));
 		$(dinero_nombre_).removeClass('tipo_debe');
 		$(dinero_nombre_).addClass('tipo_haber');
+		$(haber).val($(debe).val());
+		$(debe).val("");
 	}
 	else
 	{
 		alert("Invalido");
 	};
-	sumar_debe_o_haber("sumaTodo",null,null);});
+	sumar();
+});
+/**/
 
-function sumar_debe_o_haber(tipo,debe, haber){
-	if (tipo == "debe") {
-		var monto = parseFloat($('#total-debe span.monto').text()) + parseFloat(debe);
+function sumar(tipo, valor){
+	if (tipo != null && valor != null) {
+		var viejo = 0;
+		var selector = "#total-" + tipo + " span.monto";
+		if ( !isNaN(parseFloat($(selector).text())) ) {
+			var viejo = parseFloat($(selector).text());
+		}
+		var monto =  parseFloat(viejo) + parseFloat(valor);
 		monto = monto.toFixed(2);
-		$('#total-debe span.monto').text(monto);
-	}
-	else if(tipo == "haber")
-	{
-		var monto = parseFloat($('#total-haber span.monto').text()) + parseFloat(haber);
-		monto = monto.toFixed(2);
-		$('#total-haber span.monto').text(monto);
+		$(selector).text(monto);
 	}
 	else
 	{
 		var debe = 0;
 		var haber = 0;
-		$('.tipo_debe .monto').each(function(index, el) {
-			debe  = debe + parseFloat($(el).text());
-		});
 
-		$('.tipo_haber .monto').each(function(index, el) {
-			haber = haber + parseFloat($(el).text());
+		$('.tipo_debe .monto').each(function() {
+			debe = debe + parseFloat($(this).text());
+		});
+		$('.tipo_haber .monto').each(function() {
+			haber = haber + parseFloat($(this).text());
 		});
 		$('#total-debe span.monto').text(debe.toFixed(2));
 		$('#total-haber span.monto').text(haber.toFixed(2));
@@ -376,15 +382,15 @@ function verificar_totales(){
 	var haber = parseFloat($('#total-haber span.monto').text());
 
 	if (debe == haber) {
-		$('.termina-partida').removeClass('bg-danger');
-		$('.termina-partida').addClass('bg-success');
+		$('.termina-partida').removeClass('text-danger');
+		$('.termina-partida').addClass('text-success');
 	}
 	else
 	{
-		$('.termina-partida').removeClass('bg-success');
-		$('.termina-partida').addClass('bg-danger');
+		$('.termina-partida').removeClass('text-success');
+		$('.termina-partida').addClass('text-danger');
 	}
-}
+};
 
 $('#reboot').click(function(e) {
 	window.location.reload();
@@ -411,5 +417,6 @@ $('#sumar').keyup( function(event) {
 		$(this).parent().addClass("has-error");
 	}
 });
+
 
 });

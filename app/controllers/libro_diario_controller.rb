@@ -3,12 +3,15 @@ class LibroDiarioController < ApplicationController
   before_action :partidas_libro, only: :resumen
   before_action :partidas_primarias
 
-  # Accion Partidas que busca o crea la partida 1 && 2 
-  def partidas
-    @partida = @libro_diario.partidas.new
-  end
+# Accion Partidas que busca o crea la partida 1 && 2
+def partidas
+  @partida = @libro_diario.partidas.new
+  @partida.cuentas.build
+end
+
 # Accion resumen solo para ver las partidas creadas
 def resumen
+
 end
 
 private
@@ -27,42 +30,53 @@ def partidas_primarias
 
   partida1 = @libro_diario.partidas.find_by(numero_partida: 1)
   if partida1 == nil
-    partida1 = @libro_diario.partidas.new  
-    partida1.numero_partida = 1
-    partida1.establecimiento_id = @libro_diario.establecimiento_id
-    partida1.ventas = ventas_base
-    partida1.iva_credito_fiscal = ventas_iva
-    partida1.caja_d = ventas_caja
-    partida1.descripcion = "No hay Descripción"
-    partida1.save 
-    @partida_1 = partida1
-  else
-    partida1.ventas = ventas_base
-    partida1.iva_credito_fiscal = ventas_iva
-    partida1.caja_d = ventas_caja
-    partida1.save 
-    @partida_1 = partida1
+    params = { partida:{
+      numero_partida: 1,
+      establecimiento_id: @libro_diario.establecimiento_id,
+      cuentas_attributes: [
+        { nombre: "Caja", debe: ventas_caja, haber: 0.00, posicion: 1 },
+        { nombre: "Ventas", debe: 0.00, haber: ventas_base, posicion: 2 },
+        { nombre: "Iva por Pagar", debe: 0.00, haber: ventas_iva, posicion: 3 }],
+        descripcion: "Para registrar las ventas de mercaderia mas IVA"
+        }}
+        partida1 = @libro_diario.partidas.new(params[:partida])
+        partida1.save
+      else
+        caja = partida1.cuentas.find_by(posicion: 1)
+        ventas = partida1.cuentas.find_by(posicion: 2)
+        iva = partida1.cuentas.find_by(posicion: 3)
+        caja.debe = ventas_caja
+        ventas.haber = ventas_base
+        iva.haber = ventas_iva
+        caja.save
+        ventas.save
+        iva.save
+      end
 
-  end
+      partida2 = @libro_diario.partidas.find_by(numero_partida: 2)
+      if partida2 == nil
+        params = { partida:{
+          numero_partida: 2,
+          establecimiento_id: @libro_diario.establecimiento_id,
+          cuentas_attributes: [
+            { nombre: "Compras", debe: compras_base, haber: 0.00, posicion: 1 },
+            { nombre: "Iva por cobrar", debe: compras_iva, haber: 0.00, posicion: 2 },
+            { nombre: "Caja", debe: 0.00, haber: compras_caja, posicion: 3 }],
+            descripcion: "Por compras mas IVA"
+            }}
+            partida2 = @libro_diario.partidas.new(params[:partida])
+            partida2.save
+          else
+            caja2 = partida2.cuentas.find_by(posicion: 3)
+            compras2 = partida2.cuentas.find_by(posicion: 1)
+            iva2 = partida2.cuentas.find_by(posicion: 2)
+            caja2.debe = compras_caja
+            compras2.haber = compras_base
+            iva2.haber = compras_iva
+            caja2.save
+            compras2.save
+            iva2.save
+          end
+        end
 
-  partida2 = @libro_diario.partidas.find_by(numero_partida: 2)
-  if partida2 == nil
-    partida2 = @libro_diario.partidas.new    
-    partida2.numero_partida = 2
-    partida2.establecimiento_id = @libro_diario.establecimiento_id
-    partida2.compras = compras_base
-    partida2.iva_credito_fiscal = compras_iva
-    partida2.caja_h = compras_caja
-    partida2.descripcion = "No hay Descripción"
-    partida2.save 
-    @partida_2 = partida2
-  else
-    partida2.compras = compras_base
-    partida2.iva_credito_fiscal = compras_iva
-    partida2.caja_h = compras_caja
-    partida2.save 
-    @partida_2 = partida2
-  end
-end
-
-end
+      end

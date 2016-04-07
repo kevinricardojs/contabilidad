@@ -68,6 +68,9 @@
 <div class="col-md-12">
 	<%= form_for @partida do |f| %>
  <div class="field col-md-8">
+   <%= f.fields_for :cuentas do |c|  %>
+   <div class="todas-las-cuentas"></div>
+  <%end%>
   <%= f.label :descripcion, class:"label-control" %>
   <%= f.text_field :descripcion, class:"form-control", required:true, placeholder:"Agrega una descripción" %>
   <br>

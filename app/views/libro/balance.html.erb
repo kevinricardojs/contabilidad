@@ -1,0 +1,54 @@
+<div class="col-md-12 no-pad">
+  <table class="table table-striped table-responsive">
+    <thead>
+      <tr>
+        <th rowspan="2">Cuentas</th>
+        <th colspan="2" >Sumas</th>
+        <th colspan="2" >Saldos</th>
+      </tr>
+      <tr>
+        <th>Debe</th>
+        <th>Haber</th>
+        <th>Debe</th>
+        <th>Haber</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% saldo_debe = 0 %>
+      <% saldo_haber = 0 %>
+      <% @cuentas.each do |nombre| %>
+
+      <% nombre_ =  Cuenta.where(nombre_: nombre).first.nombre %>
+      <% debe = '%.2f' % Cuenta.where(nombre_: nombre).sum(:debe).to_f %>
+      <% haber = '%.2f' % Cuenta.where(nombre_: nombre).sum(:haber).to_f %>
+      <tr>
+        <td class="left border-grueso-right"><%= nombre_ %></td>
+        <td>Q<%= debe %></td>
+        <td>Q<%= haber %></td>
+        <% if debe.to_f < haber.to_f
+        new_debe = haber.to_f - debe.to_f %>
+        <% saldo_debe += new_debe %>
+        <td><%= "Q" + '%.2f' % (new_debe) %></td>
+        <td></td>
+        <% elsif haber.to_f < debe.to_f %>
+        <% new_haber = debe.to_f - haber.to_f %>
+        <% saldo_haber += new_haber %>
+
+        <td></td>
+        <td><%= "Q" + '%.2f' % (new_haber)  %></td>
+        <% else %>
+        <td></td>
+        <td></td>
+        <% end %>
+      </tr>
+      <% end %>
+      <tr>
+        <td class="left border-grueso-right">Totales</td>
+        <td class="termina-partida">Q<%= '%.2f' % @libro_diario.cuentas.sum(:debe).to_f %></td>
+        <td class="termina-partida">Q<%= '%.2f' % @libro_diario.cuentas.sum(:haber).to_f %></td>
+        <td class="termina-partida"><%= "Q" + '%.2f' % (saldo_debe) %></td>
+        <td class="termina-partida"><%= "Q" + '%.2f' % (saldo_haber) %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

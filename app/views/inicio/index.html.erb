@@ -1,80 +1,88 @@
 <%= render "partials/nav"%>
 <div class="container-fluid">
-		
-<h2 class="text-center">Bienvenido <%= current_usuario.full_nombre || current_usuario.username%></h2>
-<div class="jumbotron col-md-12 col-lg-offset-1 col-lg-10">
-	<div class="objeto col-md-4 col-lg-4">
-		<i class="fa fa-newspaper-o fa-grande"></i>
-		<h4 class="text-center">Catalogos</h4>
-		<i class="fa fa-plus fa-mas"></i>
-		<div class="popover bottom">
-			<div class="arrow"></div>
-			<div class="popover-title">
-				<h4>Opciones</h4>
-			</div>
-			<div class="popover-content">
-				<%= link_to new_contribuyente_path do %>
-				<i class="fa fa-user-plus"></i> Agregar nuevo Contribuyente
-				<% end %>
-				<br>				
-				<%= link_to new_establecimiento_path do %>
-				<i class="fa fa-building"></i> Agregar un nuevo Establecimiento
-				<% end %>
-				<br>
-				<%= link_to new_proveedor_path do %>
-				<i class="fa fa-buysellads"></i> Agregar un nuevo Proveedor
-				<% end %>
-				<br>
-				<%= link_to new_tipo_de_gasto_path do %>
+
+	<h2 class="text-center">Bienvenido <%= current_usuario.full_nombre || current_usuario.username%></h2>
+	<div class="jumbotron col-md-12 col-lg-offset-1 col-lg-10">
+		<div class="objeto col-md-4 col-lg-4">
+			<i class="fa fa-newspaper-o fa-grande"></i>
+			<h4 class="text-center">Catalogos</h4>
+			<i class="fa fa-plus fa-mas"></i>
+			<div class="popover bottom">
+				<div class="arrow"></div>
+				<div class="popover-title">
+					<h4>Opciones</h4>
+				</div>
+				<div class="popover-content">
+					<%= link_to new_contribuyente_path do %>
+					<i class="fa fa-user-plus"></i> Agregar nuevo Contribuyente
+					<% end %>
+					<br>
+					<%= link_to new_establecimiento_path do %>
+					<i class="fa fa-building"></i> Agregar un nuevo Establecimiento
+					<% end %>
+					<br>
+					<%= link_to new_proveedor_path do %>
+					<i class="fa fa-buysellads"></i> Agregar un nuevo Proveedor
+					<% end %>
+					<br>
+					<%= link_to new_tipo_de_gasto_path do %>
 					<i class="fa fa-bank"></i> Agregar Tipo de Gasto
-				<% end %>
+					<% end %>
+				</div>
 			</div>
-		</div>
 
-	</div>
-	<div class="objeto col-md-4 col-lg-4">
-		<i class="fa fa-book fa-grande"></i>
-		<h4 class="text-center">Libros</h4>
-		<i class="fa fa-plus fa-mas"></i>
-		<div class="popover bottom">
-			<div class="arrow"></div>
-			<div class="popover-title">
-				<h4>Opciones</h4>
-			</div>
-			<div class="popover-content">
-				<%= link_to new_compra_libro_path do %>
-				<i class="fa fa-shopping-cart"></i> Agregar Compra
-				<% end %>
-				<br>
-				<%= link_to new_venta_libro_path do %>
-				<i class="fa fa-line-chart"></i> Agregar Venta
-				<% end %>
-				<br>
-				<%= link_to libro_diario_partidas_path do %>
-				<i class="fa fa-book"></i> Agregar Partida
-				<% end %>
-			</div>
 		</div>
+		<div class="objeto col-md-4 col-lg-4">
+			<i class="fa fa-book fa-grande"></i>
+			<h4 class="text-center">Libros</h4>
+			<i class="fa fa-plus fa-mas"></i>
+			<div class="popover bottom">
+				<div class="arrow"></div>
+				<div class="popover-title">
+					<h4>Opciones</h4>
+				</div>
+				<div class="popover-content">
+					<%= link_to new_compra_libro_path do %>
+					<i class="fa fa-shopping-cart"></i> Agregar Compra
+					<% end %>
+					<br>
+					<%= link_to new_venta_libro_path do %>
+					<i class="fa fa-line-chart"></i> Agregar Venta
+					<% end %>
+					<br>
+					<%= link_to libro_diario_partidas_path do %>
+					<i class="fa fa-book"></i> Agregar Partida
+					<% end %>
+					<br>
+					<%= link_to libro_mayor_path do %>
+					<i class="fa fa-book"></i> Libro Mayor
+					<% end %>
+					<br>
+					<%= link_to libro_balance_path do %>
+					<i class="fa fa-book"></i> Libro Balance
+					<% end %>
+				</div>
+			</div>
 
-	</div>
-	<div class="objeto col-md-4 col-lg-4">
-		<i class="fa fa-cogs fa-grande"></i>
-		<h4 class="text-center">Operaciones Especiales</h4>
-		
-		<div class="popover bottom">
-			<div class="arrow"></div>
-			<div class="popover-title">
-				<h4>Opciones</h4>
-			</div>
-			<div class="popover-content">
-				<a href="#"><i class="fa fa-user-plus"></i> Cambiar datos</a>
-				<li>Dos</li>
-				<li>Tres</li>
-			</div>
 		</div>
+		<div class="objeto col-md-4 col-lg-4">
+			<i class="fa fa-cogs fa-grande"></i>
+			<h4 class="text-center">Operaciones Especiales</h4>
 
+			<div class="popover bottom">
+				<div class="arrow"></div>
+				<div class="popover-title">
+					<h4>Opciones</h4>
+				</div>
+				<div class="popover-content">
+					<a href="#"><i class="fa fa-user-plus"></i> Cambiar datos</a>
+					<li>Dos</li>
+					<li>Tres</li>
+				</div>
+			</div>
+
+		</div>
 	</div>
-</div>
-<%= render "partials/cambio_datos"%>
+	<%= render "partials/cambio_datos"%>
 
 </div>

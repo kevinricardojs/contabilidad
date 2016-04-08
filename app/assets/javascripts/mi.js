@@ -202,6 +202,7 @@ $('#compra_libro_tipo_de_gasto').keyup(function (){
 
 /*Partidas*/
 var tipos = [ "Caja", "Banco", "Clientes", "Deudores", "Acciones Suscritas", "Suscriptores De Acciones", "Hipoteca", "Prestamos Fiduciarios", "Documentos Por Cobrar", "Documentos Por Pagar", "Cuentas Por Cobrar", "Cuentas Por Pagar", "Proveedores", "Acreedores", "Inmuebles", "Mobiliario y Equipo", "Equipo De Computacion", "Maquinaria", "Herramientas", "Vehiculos", "Cristaleria", "Depreciacion Acumulada Mobiliario y Equipo", "Depreciacion Acumulada Equipo De Computacion", "Depreciacion Acumulada Maquinaria", "Depreciacion Acumulada Herramienta", "Depreciacion Acumulada Vehiculos", "Depreciacion Acumulada Cristaleria", "Capital", "Capital Autorizado", "Reserva Legal", "Ventas", "Servicios Prestados", "Comisiones Devengadas", "Alquileres Devengados", "Arrendamiento De Maquinaria", "Alquileres Pagados", "Gastos Generales", "Viaticos", "Seguros Pagados", "Servicios Pagados", "Reparacion y Mantenimiento Gastos", "Repuestos y Accesorios Gastos", "Combustibles y Lubricantes", "Costo Por Servicio", "Telefono", "Energia Electrica", "Medicina y Medicamentos", "Depreciacion Mobiliario y Equipo", "Depreciacion Equipo De Computacion", "Depreciacion Maquinaria", "Depreciacion Herramienta", "Depreciacion Vehiculos", "Depreciacion Cristaleria", "Compras", "Intereses Devengados", "Intereses Pagados", "Terrenos", "Edificios", "Gastos Constitucion", "Sueldos y Salarios", "Retencion Igss Laboral", "Cuota Patronal", "Bonificacion E Incentivo Laboral", "Bono 14", "Aguinaldo", "Fletes Sobre Compras", "Indemnizaciones", "Perdidas y Ganancias", "Publicidad y Propaganda", "Vacaciones", "Descuentos Sobre Compras", "Devoluciones y Rebajas Sobre Ventas"];
+//var new_tipos = ["Caja", "Caja Chica", "Bancos", "Caja y Bancos", "Clientes", "Deudores", "Cuentas por Cobrar", "Corresponsales", "Documentos por Cobrar", "Iva por Cobrar", "Mercaderias", "Inversiones", "Papeleria y Utiles", "Utiles y Enseres", "Mobiliario y Equipo", "Vehiculos", "Equipo de Computacion", "Maquinaria", "Terrenos", "Edificios", "Inmuebles", "Herramientas", "Gastos de Organizacion", "Gastos de Instalacion", "Gastos de Institucion", "Derecho de Llave y toda Cuenta Pagada por Anticipado", "Alquileres",  ];
 var estado = undefined;
 var tipos_con_tipo = [ "Caja,H", "Caja,D", "Banco,D", "Clientes,D", "Deudores,D", "Acciones Suscritas,D", "Suscriptores De Acciones,Pendiente", "Hipoteca,H", "Prestamos Fiduciarios,H", "Documentos Por Cobrar,D", "Documentos Por Pagar,H", "Cuentas Por Cobrar,D", "Cuentas Por Pagar,H", "Proveedores,H", "Acreedores,H", "Inmuebles,D", "Mobiliario y Equipo,D", "Equipo De Computacion,D", "Maquinaria,D", "Herramientas,D", "Vehiculos,D", "Cristaleria,D", "Depreciacion Acumulada Mobiliario y Equipo,H", "Depreciacion Acumulada Equipo De Computacion,H", "Depreciacion Acumulada Maquinaria,H", "Depreciacion Acumulada Herramienta,H", "Depreciacion Acumulada Vehiculos,H", "Depreciacion Acumulada Cristaleria,H", "Capital,PENDIENTE", "Capital Autorizado,PENDIENTE", "Reserva Legal,PENDIENTE", "Ventas,H", "Servicios Prestados,H", "Comisiones Devengadas,H", "Alquileres Devengados,H", "Arrendamiento De Maquinaria,D", "Alquileres Pagados,D", "Gastos Generales,D", "Viaticos,D", "Seguros Pagados,D", "Servicios Pagados,D", "Reparacion y Mantenimiento Gastos,D", "Repuestos y Accesorios Gastos,D", "Combustibles y Lubricantes,D", "Costo Por Servicio,D", "Telefono,D", "Energia Electrica,D", "Medicina y Medicamentos,D", "Depreciacion Mobiliario y Equipo,D", "Depreciacion Equipo De Computacion,D", "Depreciacion Maquinaria,D", "Depreciacion Herramienta,D", "Depreciacion Vehiculos,D", "Depreciacion Cristaleria,D", "Compras,D", "Intereses Devengados,H", "Intereses Pagados,D", "Terrenos,D", "Edificios,D", "Gastos Constitucion,D", "Sueldos y Salarios,D", "Retencion Igss Laboral,H", "Cuota Patronal,D", "Bonificacion E Incentivo Laboral,D", "Bono 14,D", "Aguinaldo,D", "Fletes Sobre Compras,D", "Indemnizaciones,D", "Perdidas y Ganancias,H", "Publicidad y Propaganda,D", "Vacaciones,D", "Descuentos Sobre Compras,H", "Devoluciones y Rebajas Sobre Ventas,D"];
 // var lista_haber = [];
@@ -384,9 +385,11 @@ function verificar_totales(){
 	if (debe == haber) {
 		$('.termina-partida').removeClass('text-danger');
 		$('.termina-partida').addClass('text-success');
+		$('#submit-partida').removeAttr('disabled');
 	}
 	else
 	{
+		$('#submit-partida').attr('disabled', 'disabled');
 		$('.termina-partida').removeClass('text-success');
 		$('.termina-partida').addClass('text-danger');
 	}
@@ -403,7 +406,8 @@ $('#sumar').keyup( function(event) {
 		if ( !isNaN(cantidad) && event.keyCode == 13 )
 		{
 			$('.calculadora label input:radio:not(:checked)').attr('disabled', 'disabled');
-			var selected = "#" + $('.calculadora label input:radio:checked').data('quien');
+			var selected = "." + $('.calculadora label input:radio:checked').data('quien');
+			console.log(selected);
 			var previa = parseFloat($(selected).val()) || 0;
 			nueva = previa + cantidad;
 			total = parseFloat(nueva);
@@ -418,5 +422,19 @@ $('#sumar').keyup( function(event) {
 	}
 });
 
-
+$('.toggle-calc').click(function() {
+	var direccion = $(this).data('direccion');
+	if (direccion == "right") {
+		$('.calculadora .mandos').animate({left: 0});
+		$(this).children('.fa-arrow-right').removeClass('right');
+		$(this).children('.fa-arrow-right').addClass('left');
+		$(this).data('direccion', 'left');
+	}
+	else{
+		$('.calculadora .mandos').animate({left: "-110%"});
+		$(this).children('.fa-arrow-right').removeClass('left');
+		$(this).children('.fa-arrow-right').addClass('right');
+		$(this).data('direccion', 'right');
+	};
+});
 });

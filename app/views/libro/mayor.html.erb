@@ -1,0 +1,79 @@
+<div class="col-md-6 no-pad">
+  <table class="table table-striped table-responsive">
+    <thead>
+      <tr>
+        <th colspan="5">Folio 1</th>
+      </tr>
+
+    </thead>
+    <tbody>
+      <% @cuentas.each do |nombre| %>
+      <% if Cuenta.where(nombre_: nombre).sum(:debe) != "0.0" %>
+      <tr>
+      <td colspan="5" class="bold"><%= Cuenta.where(nombre_: nombre).first.nombre %></td>
+      </tr>
+      <% Cuenta.where(nombre_: nombre).each do |cuenta| %>
+      <% if cuenta.debe != "" && cuenta.debe!= "0.0"%>
+
+      <tr>
+        <td><%= @u.mes %></td>
+        <td><%= cuenta.partida.dia %></td>
+        <td class="left border-grueso-right descripcion"><%= cuenta.partida.descripcion %></td>
+        <td>Q<%= '%.2f' % cuenta.debe.to_f %></td>
+        <td></td>
+      </tr>
+
+      <% end %>
+      <% end %>
+      <tr>
+       <td colspan="3" class="left border-grueso-right"></td>
+       <td class="termina-partida"></td>
+       <td class="termina-partida">Q<%= '%.2f' % Cuenta.where(nombre_: nombre).sum(:debe).to_f %></td>
+     </tr>
+     <% end %>
+     <% end %>
+   </tbody>
+ </table>
+</div>
+
+<div class="col-md-6 no-pad">
+  <table class="table table-striped table-responsive">
+    <thead>
+      <tr>
+        <th colspan="5">Folio 2</th>
+      </tr>
+      <tr>
+        <th>Mes</th>
+        <th>No.</th>
+        <th>Descripción</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cuentas.each do |nombre| %>
+      <% if Cuenta.where(nombre_: nombre).sum(:haber) != "0.0" %>
+      <tr>
+        <td colspan="5" class="bold"><%= Cuenta.where(nombre_: nombre).first.nombre %></td>
+      </tr>
+      <% Cuenta.where(nombre_: nombre).each do |cuenta| %>
+      <% if cuenta.haber != "" && cuenta.haber!= "0.0"%>
+
+      <tr>
+        <td><%= @u.mes %></td>
+        <td><%= cuenta.partida.dia %></td>
+        <td class="left border-grueso-right descripcion"><%= cuenta.partida.descripcion %></td>
+        <td>Q<%= '%.2f' % cuenta.haber.to_f %></td>
+        <td></td>
+      </tr>
+      <% end %>
+      <% end %>
+      <tr>
+        <td colspan="3" class="left border-grueso-right"></td>
+        <td class="termina-partida"></td>
+        <td class="termina-partida">Q<%= '%.2f' % Cuenta.where(nombre_: nombre).sum(:haber).to_f %></td>
+      </tr>
+      <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

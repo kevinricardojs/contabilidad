@@ -126,30 +126,30 @@ td{
     border: none;
   }
   #pdf-render{
-	font-size: 10px !important;
+   font-size: 10px !important;
+ }
+ #line_items {
+  page-break-before: always;
 }
-  #line_items {
-    page-break-before: always;
-  }
-  .pdf_link {
-    display: none;
-  }
+.pdf_link {
+  display: none;
+}
 }
 .ui-autocomplete {
-    position: absolute;
-    z-index: 1000;
-    cursor: default;
-    padding: 0;
-    margin-top: 2px;
-    list-style: none;
-    background-color: #ffffff;
-    border: 1px solid #ccc;
-    -webkit-border-radius: 5px;
-       -moz-border-radius: 5px;
-            border-radius: 5px;
-    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-       -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  z-index: 1000;
+  cursor: default;
+  padding: 0;
+  margin-top: 2px;
+  list-style: none;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 .ui-autocomplete > li {
   padding: 3px 20px;
@@ -205,5 +205,60 @@ table{
 .calculadora{
   position: absolute;
   left:0;
-  top:24.6%;
+  top: 182px;
+  .mandos{
+    position: relative;
+    left: -110%;
+    background: #049372;
+    border-radius: 5px;
+    border-left:  1px dashed #D2D7D3;
+    box-shadow: 2px 2px 5px gray;
+    padding: 2px 3px;
+  }
+  label{
+    color: white;
+  }
+}
+.toggle-calc{
+  position: relative;
+  left:0;
+  bottom: 10;
+  z-index: 100;
+  i{
+    -webkit-transition: all 0.8s;
+    -moz-transition: all 0.8s;
+    -o-transition: all 0.8s;
+    -ms-transition: all 0.8s;
+    transition: all 0.8s;
+  }
+  i.left{
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -ms--transform: rotate(180deg);
+    transform: rotate(180deg);
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    transition: all 0.2s;
+  }
+  i.right{
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -ms--transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    transition: all 0.2s;
+  }
+}
+.no-pad{
+  padding: 0 !important;
+  margin: 0 !important;
+  border-left: 1px solid black;
+}
+.descripcion{
+  font-size: 10px;
 }

@@ -70,9 +70,9 @@ def partidas_primarias
             caja2 = partida2.cuentas.find_by(posicion: 3)
             compras2 = partida2.cuentas.find_by(posicion: 1)
             iva2 = partida2.cuentas.find_by(posicion: 2)
-            caja2.debe = compras_caja
-            compras2.haber = compras_base
-            iva2.haber = compras_iva
+            caja2.haber = compras_caja
+            compras2.debe = compras_base
+            iva2.debe = compras_iva
             caja2.save
             compras2.save
             iva2.save

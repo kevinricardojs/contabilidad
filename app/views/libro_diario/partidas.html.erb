@@ -5,32 +5,32 @@
   <div class="col-md-5">
     <label class="control-label">Buscar campo</label>
     <input type="text" class="form-control" name="nombre-campo" id="nombre-de-campo" autocomplete="off" placeholder="Ingresa el nombre de la Cuenta" autofocus required>
-  </div>
-  <div class="col-md-3">
+</div>
+<div class="col-md-3">
     <label class="control-label">Valor</label>
     <input type="text" id="valor-de-campo" placeholder="Ingresa la Cantidad" class="form-control" autocomplete="off" pattern="^\d+$" title="Solo se aceptan numeros">
-  </div>
-  <div class="container col-md-4">
+</div>
+<div class="container col-md-4">
     <div class="radio col-md-12">
       <label class="bold">
         <input type="radio" name="tipo" id="debe" value="debe" checked>
         Debe
-      </label>
-    </div>
-    <div class="radio col-md-12">
-      <label class="bold">
-        <input type="radio" name="tipo" id="haber" value="haber">
-        Haber
-      </label>
-    </div>
-  </div>
+    </label>
+</div>
+<div class="radio col-md-12">
+  <label class="bold">
+    <input type="radio" name="tipo" id="haber" value="haber">
+    Haber
+</label>
+</div>
+</div>
 
-  <div class="clearfix"></div>
+<div class="clearfix"></div>
 
-  <div class="col-md-2">
+<div class="col-md-2">
     <label>Agregar a Partida</label>
     <input type="submit" id="agregar" value="Agregar" class="btn btn-success">
-  </div>
+</div>
 </form>
 <div class="col-md-2">
   <label>Reiniciar</label><br/>
@@ -50,27 +50,29 @@
       <th>Nombre De Cuentas</th>
       <th colspan="2">Debe</th>
       <th colspan="2">Haber</th>
-    </tr>
+  </tr>
 
-  </thead>
+</thead>
 
-  <tbody id="tbody-partida">
+<tbody id="tbody-partida">
     <tr id="total">
       <td class="left border-grueso-right">Total</td>
       <td colspan="2" id="total-debe" class="termina-partida"><span class="quetzal">Q</span><span class="monto">0.00</span></td>
       <td colspan="2" id="total-haber" class="termina-partida"><span class="quetzal">Q</span><span class="monto">0.00</span></td>
-    </tr>
-  </tbody>
+  </tr>
+</tbody>
 </table>
 
 </div>
 
 <div class="col-md-12">
 	<%= form_for @partida do |f| %>
- <div class="field col-md-8">
-   <%= f.fields_for :cuentas do |c|  %>
-   <div class="todas-las-cuentas"></div>
-  <%end%>
+ <!-- <div class="field col-md-3">
+   <%= f.label :dia, class:"label-control" %>
+   <%= f.number_field :dia, class:"form-control", required:true, placeholder:"Agregar dia del asiento", max:31, min:1%>
+   <br>
+</div> -->
+<div class="field col-md-8">
   <%= f.label :descripcion, class:"label-control" %>
   <%= f.text_field :descripcion, class:"form-control", required:true, placeholder:"Agrega una descripción" %>
   <br>
@@ -80,7 +82,7 @@
   <% if @u.establecimiento_id == nil %>
   <%= f.submit "Añadir Partida", class:"form-control btn btn-primary" , disabled:true%>
   <% else %>
-  <%= f.submit "Añadir Partida", class:"form-control btn btn-primary" %>
+  <%= f.submit "Añadir Partida", class:"form-control btn btn-primary", id:"submit-partida" %>
   <% end %>
 </div>
 <%end%>

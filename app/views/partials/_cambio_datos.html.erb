@@ -8,7 +8,7 @@
 			<div class="modal-body" id="receptor-cambiar">
 				<form action="/usuarios" method="post">
 					<input type="hidden" value="put" name="_method">
-					<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %> 
+					<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
 
 
 					<div class="field form-group">
@@ -47,12 +47,12 @@
 						<%= label :year,"Año"%>
 						<select name="usuario[year]" class="form-control">
 							<option value="Selecciona un Año">Selecciona un año</option>
-							<option value="2015">2015</option>
 							<option value="2016">2016</option>
 							<option value="2017">2017</option>
 							<option value="2018">2018</option>
 							<option value="2019">2019</option>
 							<option value="2020">2020</option>
+							<option value="2015">2021</option>
 						</select>
 					</div>
 

@@ -1,17 +1,24 @@
 
-<label for="who">
-  <input type="radio" name="suma" data-quien="venta_libro_gravado_bienes"> Gravado Bienes
-</label>
-<label for="who">
-  <input type="radio" name="suma" data-quien="venta_libro_gravado_servicios"> Gravado Servicios
-</label>
-<label for="who">
-  <input type="radio" name="suma" data-quien="venta_libro_exento_bienes"> Exento Bienes
-</label>
-<label for="who">
-  <input type="radio" name="suma" data-quien="venta_libro_exento_servicios"> Exento Servicios
-</label>
-<div class="form-group">
-  <label class="control-label">Sumar</label>
-  <input type="number" class="form-control" id="sumar">
+<div class="calculadora form-group">
+  <div class="mandos">
+    <label for="who">
+      <input type="radio" name="suma" data-quien="gravado-bienes" checked="checked"> Gravado Bienes
+    </label><br>
+    <label for="who">
+      <input type="radio" name="suma" data-quien="gravado-servicios"> Gravado Servicios
+    </label><br>
+    <label for="who">
+      <input type="radio" name="suma" data-quien="exento-bienes"> Exento Bienes
+    </label><br>
+    <label for="who">
+      <input type="radio" name="suma" data-quien="exento-servicios"> Exento Servicios
+    </label><br>
+    <div class="form-group">
+      <label class="control-label">Sumar</label>
+      <input type="number" class="form-control" id="sumar">
+    </div>
+  </div>
+  <div class="toggle-calc btn btn-primary" data-direccion="right">
+    <i class="fa fa-calculator"></i> <i class=" fa fa-arrow-right"></i>
+  </div>
 </div>

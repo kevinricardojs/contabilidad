@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get 'libro/mayor'
+  get 'libro/balance'
+
   resources :partidas, except:[:index, :show, :new]
 
   get 'libro_diario/partidas'

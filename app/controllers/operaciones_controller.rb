@@ -7,11 +7,16 @@ class OperacionesController < ApplicationController
 	def libro_venta
 		@iva = VentaLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:iva)
 		@base = VentaLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:base)
+		@bienes = (VentaLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:gravado_bienes).to_f / 1.12).round(2)
+		@servicios = (VentaLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:gravado_servicios).to_f / 1.12).round(2)
 		@total = @base + @iva
 	end
 	def libro_compra
 		@iva = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:iva)
+		@base = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:base)
 		@compras_por_dia = @compras.order(:dia)
+		@total = @base + @iva
+		@total_cuentas = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).count
 	end
 
 	private

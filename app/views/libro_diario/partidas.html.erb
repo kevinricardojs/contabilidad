@@ -28,7 +28,7 @@
 <div class="clearfix"></div>
 
 <div class="col-md-2">
-    <label>Agregar a Partida</label>
+    <label class="control-label">Agregar a Partida</label><br>
     <input type="submit" id="agregar" value="Agregar" class="btn btn-success">
 </div>
 </form>
@@ -67,11 +67,11 @@
 
 <div class="col-md-12">
 	<%= form_for @partida do |f| %>
- <!-- <div class="field col-md-3">
+ <div class="field col-md-3">
    <%= f.label :dia, class:"label-control" %>
    <%= f.number_field :dia, class:"form-control", required:true, placeholder:"Agregar dia del asiento", max:31, min:1%>
    <br>
-</div> -->
+</div>
 <div class="field col-md-8">
   <%= f.label :descripcion, class:"label-control" %>
   <%= f.text_field :descripcion, class:"form-control", required:true, placeholder:"Agrega una descripción" %>

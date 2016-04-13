@@ -4,6 +4,7 @@ class Cuenta < ActiveRecord::Base
   before_create :make_nombre_
   before_create :take_libro_diario
 
+  
   def take_libro_diario
     self.libro_diario_id = self.partida.libro_diario_id
   end

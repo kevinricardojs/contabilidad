@@ -2,6 +2,8 @@ class CompraLibrosController < ApplicationController
   before_action :set_compra_libro, only: [:show, :edit, :update, :destroy]
   before_action :set_compras
   before_action :validar_datos_para_trabajar
+  before_action :set_libro_diario
+  before_action :partidas_primarias
 
   # GET /compra_libros
   def index
@@ -29,6 +31,19 @@ class CompraLibrosController < ApplicationController
     respond_to do |format|
       if @compra_libro.save
         format.html { redirect_to new_compra_libro_path, notice: 'La Compra fue añadida exitosamente' }
+        # Hacer la cuenta para la partida 2 Compras
+
+        partida = @libro_diario.partidas.find_by(numero_partida: 2)
+        cuenta = partida.cuentas.find_by(nombre_: @compra_libro.tipo_de_gasto.downcase.split(" ").join("_"))
+        ultimo = partida.cuentas.minimum(:posicion) - 1
+        if cuenta == nil
+          cuenta = Cuenta.new(nombre: @compra_libro.tipo_de_gasto, debe: @compra_libro.base, haber:0.0, partida_id: partida.id, posicion: ultimo)
+          cuenta.save
+        else  
+          cuenta.debe = (cuenta.debe.to_f + @compra_libro.base.to_f).round(2)
+          cuenta.save
+        end
+        
       else
         format.html { render :new }
       end
@@ -48,6 +63,14 @@ class CompraLibrosController < ApplicationController
 
   # DELETE /compra_libros/1
   def destroy
+    partida = @libro_diario.partidas.find_by(numero_partida: 2)
+    cuenta = partida.cuentas.find_by(nombre_: @compra_libro.tipo_de_gasto.downcase.split(" ").join("_"))
+    cuenta.debe = cuenta.debe.to_f - @compra_libro.base.to_f
+    if cuenta.debe == "0.0"
+      cuenta.destroy
+    else
+      cuenta.save
+    end
     @compra_libro.destroy
     respond_to do |format|
       format.html { redirect_to new_compra_libro_path, notice: 'La Compra fue borrada' }

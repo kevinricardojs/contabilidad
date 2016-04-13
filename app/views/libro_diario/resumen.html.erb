@@ -48,9 +48,13 @@
 					<% end %>
 				</td>
 				<td colspan="1">
+					<% if p.numero_partida == 1 || p.numero_partida == 2 %>
+						<a href="" class="btn btn-danger no-window" disabled><i class="fa fa-trash-o"></i></a>
+					<% else %>
 					<%= link_to Partida.find(p.id), class:"btn btn-danger no-window", data: { confirm: "Estas seguro(a)?" }, method: :delete do %>
 					<i class="fa fa-trash-o"></i>
 					<% end %>
+					<% end%>
 				</td>
 			</tr>
 			<% end %>

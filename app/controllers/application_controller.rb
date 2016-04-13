@@ -53,4 +53,48 @@ end
       flash.now[:alert] = 'No has Seleccionado ningun Año para trabajar!'
     end
   end
+
+  def partidas_primarias
+    ventas_base = VentaLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:base)
+    ventas_iva = VentaLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:iva)
+    ventas_caja = ventas_base + ventas_iva
+    compras_base = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:base)
+    compras_iva = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:iva)
+    compras_caja = compras_base + compras_iva
+
+
+    partida1 = @libro_diario.partidas.find_by(numero_partida: 1)
+    if partida1 == nil
+      params = { partida:{numero_partida: 1, dia: 1,establecimiento_id: @libro_diario.establecimiento_id, cuentas_attributes: [{ nombre: "Caja", debe: ventas_caja, haber: 0.00, posicion: 1 },{ nombre: "Ventas", debe: 0.00, haber: ventas_base, posicion: 2 },{ nombre: "Iva por Pagar", debe: 0.00, haber: ventas_iva, posicion: 3 }],descripcion: "Por favor añade una descripción"}}
+      partida1 = @libro_diario.partidas.new(params[:partida])
+      partida1.save
+    else
+      caja = partida1.cuentas.find_by(posicion: 1)
+      ventas = partida1.cuentas.find_by(posicion: 2)
+      iva = partida1.cuentas.find_by(posicion: 3)
+      caja.debe = ventas_caja
+      ventas.haber = ventas_base
+      iva.haber = ventas_iva
+      caja.save
+      ventas.save
+      iva.save
+    end
+
+    partida2 = @libro_diario.partidas.find_by(numero_partida: 2)
+    if partida2 == nil
+      params = { partida:{numero_partida: 2, dia:1, establecimiento_id: @libro_diario.establecimiento_id, cuentas_attributes: [{ nombre: "Caja", debe: 0.00, haber: compras_caja, posicion: 900 },{ nombre: "Iva por cobrar", debe: compras_iva, haber: 0.00, posicion: 899 }],descripcion: "Por favor añade una descripción"}}
+      partida2 = @libro_diario.partidas.new(params[:partida])
+      partida2.save
+    else
+      caja2 = partida2.cuentas.find_by(posicion: 900)
+      iva2 = partida2.cuentas.find_by(posicion: 899)
+      caja2.haber = compras_caja
+      iva2.debe = compras_iva
+      caja2.save
+      iva2.save
+    end
+
+  end
+
 end
+

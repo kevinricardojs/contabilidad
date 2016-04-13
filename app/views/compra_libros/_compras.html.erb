@@ -47,7 +47,7 @@
         <%= link_to content_tag(:i ,'',class:"fa fa-pencil"), edit_compra_libro_path(compra) ,class:"btn btn-info col-md-12 text-center" %>
       </td>
       <td class="td-btn">
-        <%= link_to content_tag(:i ,'',class:"fa fa-trash-o"), compra, method: :delete, data: { confirm: 'Estas seguro?' },class:"btn btn-danger col-md-12 text-center" %>
+        <%= link_to content_tag(:i ,'',class:"fa fa-trash-o"), compra, method: :delete, data: { confirm: 'Estas seguro?' },class:"btn btn-danger col-md-12 text-center no-window" %>
       </td>
     </tr>
     <% end %>

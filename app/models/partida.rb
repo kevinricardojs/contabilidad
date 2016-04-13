@@ -13,8 +13,8 @@ class Partida < ActiveRecord::Base
 			total_d += c.debe.to_f
 			total_h += c.haber.to_f
 		end
-		total["debe"] = total_d
-		total["haber"] = total_h
+		total["debe"] = '%.2f' % total_d.round(2)
+		total["haber"] = '%.2f' % total_h.round(2)
 
 		return total
 	end

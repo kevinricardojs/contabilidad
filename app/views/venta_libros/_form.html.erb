@@ -82,26 +82,24 @@ Ver Resumen Libro de Ventas <i class="fa fa-print"></i>
     <h5 class="text-center">Valor Gravado</h5>
     <div class="field form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
         <%= f.label :gravado_bienes, "Bienes" %>
-        <%= f.text_field :gravado_bienes, class:"form-control gravado gravado-bienes", required:true%>
+        <%= f.text_field :gravado_bienes, class:"form-control gravado gravado-bienes"%>
     </div>
     <div class="field form-group col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
         <%= f.label :gravado_servicios, "Servicios" %>
-        <%= f.text_field :gravado_servicios, class:"form-control gravado gravado-servicios" , required:true%>
+        <%= f.text_field :gravado_servicios, class:"form-control gravado gravado-servicios" %>
     </div>
 </div>
 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
     <h5 class="text-center">Valor Exento</h5>
     <div class="field form-group col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
         <%= f.label :exento_bienes, "Bienes" %>
-        <%= f.text_field :exento_bienes, class:"form-control exento exento-bienes" , required:true%>
+        <%= f.text_field :exento_bienes, class:"form-control exento exento-bienes" %>
     </div>
     <div class="field form-group col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
         <%= f.label :exento_servicios, "Servicios" %>
-        <%= f.text_field :exento_servicios, class:"form-control exento exento-servicios" , required:true%>
+        <%= f.text_field :exento_servicios, class:"form-control exento exento-servicios" %>
     </div>
 </div>
-<%=  f.hidden_field :base, class:"base-iva" %>
-<%=  f.hidden_field :iva, class:"base-iva" %>
 <div class="actions col-md-12 col-sm-12 col-xs-12">
    <% if @u.contribuyente_id.nil? %>
    <%= button_tag(type: "submit", class: "btn btn-success col-sm-offset-3 col-xs-12 col-md-3 col-sm-3", disabled: true) do %>

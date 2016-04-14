@@ -53,12 +53,12 @@ class CompraLibro < ActiveRecord::Base
   end
 
   def base_iva
-    if self.gravado_bienes != ""
-      self.base = self.gravado_bienes.to_f / 1.12
-      self.iva = self.base.to_f * 0.12
-    elsif self.gravado_servicios != ""
-      self.base = self.gravado_servicios.to_f / 1.12
-      self.iva = self.base.to_f * 0.12
+    if self.gravado_bienes != "" && !self.gravado_bienes.nil?
+      self.base = (self.gravado_bienes.to_f / 1.12).round(2)
+      self.iva = (self.base.to_f * 0.12).round(2)
+    elsif self.gravado_servicios != "" && !self.gravado_servicios.nil?
+      self.base = (self.gravado_servicios.to_f / 1.12).round(2)
+      self.iva = (self.base.to_f * 0.12).round(2)
     else
       self.base = 0.00
       self.iva = 0.00

@@ -9,80 +9,94 @@ Ver Version Imprimible(PDF) <i class="fa fa-print"></i>
   <div id="pdf-render">
     <div  class="col-xs-9 col-sm-10 col-md-10 col-lg-10">
       <strong><%= helper_contribuyente_nombre %></strong>
-  </div>
-  <div  class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
+    </div>
+    <div  class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
       Fecha: <strong><%= p_fecha%></strong>
-  </div>
-  <div  class="col-xs-9 col-sm-10 col-md-10 col-lg-10">
+    </div>
+    <div  class="col-xs-9 col-sm-10 col-md-10 col-lg-10">
       <strong><%= helper_establecimiento_nombre %></strong>
-  </div>
-  <div  class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
+    </div>
+    <div  class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
       Hora: <strong><%= p_hora %></strong>
-  </div>
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       Nit:  <strong><%= helper_contribuyente_nit%></strong>
-  </div>
-  <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
-      Periodo:  <strong><%= @u.mes %></strong> - <strong><%= @u.year %></strong>
-  </div>
-  <div class="col-xs-6 col-sm-7 col-md-7 col-lg-7 text-center">
+    </div>
+    <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+      Periodo:  <strong><%= print_meses_periodo %></strong>
+    </div>
+    <div class="col-xs-6 col-sm-7 col-md-7 col-lg-7 text-center">
       <strong>Libro Balance General de Cuentas</strong>
-  </div>
-  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
       Folio:
+    </div>
   </div>
-</div>
-<div class="col-md-12 no-pad">
-  <table class="table table-hover table-responsive">
-    <thead>
-      <tr>
-        <th rowspan="2">Cuentas</th>
-        <th colspan="2" >Sumas</th>
-        <th colspan="2" >Saldos</th>
-    </tr>
-    <tr>
-        <th>Debe</th>
-        <th>Haber</th>
-        <th>Debe</th>
-        <th>Haber</th>
-    </tr>
-</thead>
-<tbody>
-  <% saldo_debe = 0 %>
-  <% saldo_haber = 0 %>
-  <% @cuentas.each do |nombre| %>
+  <div class="col-md-12 no-pad">
+    <table class="table table-hover table-responsive">
+      <thead>
+        <tr>
+          <th rowspan="2">Cuentas</th>
+          <th colspan="2" >Sumas</th>
+          <th colspan="2" >Saldos</th>
+          <th rowspan="2">nombre</th>
+        </tr>
+        <tr>
+          <th>Debe</th>
+          <th>Haber</th>
+          <th>Debe</th>
+          <th>Haber</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% total_debe = 0 %>
+        <% total_haber = 0 %>
+        <% saldo_debe = 0 %>
+        <% saldo_haber = 0 %>
+        <%= @cuentas %>
+        <% @cuentas.each do |cuenta| %>
+  
+        <% nombre_ =  Cuenta.where(nombre_: cuenta).first.nombre %>
+        <% debe = '%.2f' % Cuenta.where(nombre_: cuenta, establecimiento_id: @u.establecimiento_id).sum(:debe).to_f %>
+        <% haber = '%.2f' % Cuenta.where(nombre_: cuenta, establecimiento_id: @u.establecimiento_id).sum(:haber).to_f %>
+        <!---->
+        <% if debe != "0.00" || haber != "0.00" %>
+        <% total_debe += debe.to_f %>
+        <% total_haber += haber.to_f %>
 
-  <% nombre_ =  Cuenta.where(nombre_: nombre).first.nombre %>
-  <% debe = '%.2f' % Cuenta.where(nombre_: nombre).sum(:debe).to_f %>
-  <% haber = '%.2f' % Cuenta.where(nombre_: nombre).sum(:haber).to_f %>
-  <tr>
-    <td class="left border-grueso-right"><%= nombre_ %></td>
-    <td>Q<%= debe %></td>
-    <td>Q<%= haber %></td>
-    <% if debe.to_f < haber.to_f
-      new_debe = haber.to_f - debe.to_f %>
-      <% saldo_debe += new_debe %>
-      <td><%= "Q" + '%.2f' % (new_debe) %></td>
-      <td></td>
-      <% elsif haber.to_f < debe.to_f %>
-      <% new_haber = debe.to_f - haber.to_f %>
-      <% saldo_haber += new_haber %>
-
-      <td></td>
-      <td><%= "Q" + '%.2f' % (new_haber)  %></td>
-      <% else %>
-      <td></td>
-      <td></td>
-      <% end %>
-  </tr>
-  <% end %>
-  <tr>
-      <td class="left border-grueso-right">Totales</td>
-      <td class="termina-partida">Q<%= '%.2f' % @libro_diario.cuentas.sum(:debe).to_f %></td>
-      <td class="termina-partida">Q<%= '%.2f' % @libro_diario.cuentas.sum(:haber).to_f %></td>
-      <td class="termina-partida"><%= "Q" + '%.2f' % (saldo_debe) %></td>
-      <td class="termina-partida"><%= "Q" + '%.2f' % (saldo_haber) %></td>
-  </tr>
-</tbody>
-</table>
-</div>
+        <tr>
+          <td class="left border-grueso-right"><%= nombre_ %></td>
+          <td>Q<%= debe %></td>
+          <td>Q<%= haber %></td>
+            <!---->
+            <% if debe.to_f < haber.to_f %>
+              <% new_debe = haber.to_f - debe.to_f %>
+              <% saldo_debe += new_debe %>
+              <td><%= "Q" + '%.2f' % (new_debe) %></td>
+              <td></td>
+            <% elsif haber.to_f < debe.to_f %>
+              <% new_haber = debe.to_f - haber.to_f %>
+              <% saldo_haber += new_haber %>
+              <td></td>
+              <td><%= "Q" + '%.2f' % (new_haber)  %></td>
+            <% else %>
+              <td></td>
+              <td></td>
+            <% end %>
+            <!---->
+            <td><%= @u.establecimiento.nombre %></td>
+        </tr>
+          <% end%>
+          <!---->
+        <% end %>
+        <tr>
+          <td class="left border-grueso-right">Totales</td>
+          <td class="termina-partida">Q<%= '%.2f' % total_debe %></td>
+          <td class="termina-partida">Q<%= '%.2f' % total_haber %></td>
+          <td class="termina-partida"><%= "Q" + '%.2f' % (saldo_debe) %></td>
+          <td class="termina-partida"><%= "Q" + '%.2f' % (saldo_haber) %></td>
+          <td class="termina-partida">Totales</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

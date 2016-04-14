@@ -23,4 +23,19 @@ module ApplicationHelper
       "Selecciona Contribuyente"
     end
   end
+
+  def print_meses_periodo
+    case @periodo
+    when 1
+      "Enero, Febrero, Marzo – #{@u.year}"
+    when 2
+      "Abril, Mayo, Junio – #{@u.year}"
+    when 3
+      "Julio, Agosto, Septiembre – #{@u.year}"
+    when 4
+      "Octubre, Noviembre, Diciembre – #{@u.year}"
+    else
+      "No es un periodo valido"
+    end
+  end
 end

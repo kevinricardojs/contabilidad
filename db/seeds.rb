@@ -6,6 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-# 10.times do |i|
-# 	 CompraLibro.create(documento:2, serie:"A", numero:"#{i}", establecimiento_id: 1, mes:"Abril", year:"2016", proveedor_id:1, base:88, iva:12, gravado_bienes:100, gravado_servicios:0, exento_bienes:0, exento_servicios:0, total:100, contribuyente_id: 1, tipo_de_gasto_id:1  )
-# 	end
+Usuario.create!(email: "kevin@gmail.com", password:"kevinverde", username: "kevinverde")
+Contribuyente.create!(nit: "3879309", nombre: "Kevin Jimenez", calle: "2 calle", no_casa: "1-90", zona: "2", colonia: "Escuintla", departamento: "Escuintla", municipio: "Escuintla", telefono: "44267590")
+Establecimiento.create!(nombre: "Casa kevin", calle: "2 calle", numero_casa: "1-90", zona: "1", colonia: "Escuintla", departamento: "Escuintla", municipio: "Escuintla", telefono: "44267590", contribuyente_id: 1)

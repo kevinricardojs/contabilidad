@@ -1,7 +1,5 @@
 class LibroDiarioController < ApplicationController
-  before_action :set_libro_diario
   before_action :partidas_libro, only: :resumen
-  before_action :partidas_primarias
 
   # Accion Partidas que busca o crea la partida 1 && 2
   def partidas

@@ -12,8 +12,8 @@ class Usuario < ActiveRecord::Base
 
   attr_accessor :login
   attr_accessor :full_nombre
-  validates :username, :presence => true, :uniqueness => {:case_sensitive => false  }
-  validate :validate_username
+  # validates :username, :presence => true, :uniqueness => {:case_sensitive => false  }
+  # validate :validate_username
 
   def full_nombre
     if self.nombre && self.apellido != ""

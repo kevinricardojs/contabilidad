@@ -1,6 +1,5 @@
 class VentaLibro < ActiveRecord::Base
-	before_save :suma_total
-	
+	before_save :base_iva
 	belongs_to :contribuyente
 	belongs_to :establecimiento
 	enum documento: %w{DA FA FC FE FO NC ND}
@@ -12,11 +11,18 @@ class VentaLibro < ActiveRecord::Base
 	validates :year, presence: true, numericality:true
 	validates :contribuyente_id, presence: {message: "Debes Seleccionar un Contribuyente"}
 	validates :establecimiento_id, presence:{message: "Debes Seleccionar un Establecimiento"}
-	validates :base, numericality: true
-	validates :iva, numericality: true 
 
-	
-	def suma_total
-		self.total = self.base + self.iva
+	def base_iva
+		if self.gravado_bienes != "" && !self.gravado_bienes.nil?
+			self.base = self.gravado_bienes.to_f / 1.12
+			self.iva = self.base.to_f * 0.12
+		elsif self.gravado_servicios != "" && !self.gravado_servicios.nil?
+			self.base = self.gravado_servicios.to_f / 1.12
+			self.iva = self.base.to_f * 0.12
+		else
+			self.base = 0.00
+			self.iva = 0.00
+		end
 	end
+
 end

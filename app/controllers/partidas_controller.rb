@@ -1,6 +1,5 @@
 class PartidasController < ApplicationController
   before_action :set_partida, only: [:show, :edit, :update, :destroy]
-  before_action :set_libro_diario
 
 
   # GET /partidas/1/edit

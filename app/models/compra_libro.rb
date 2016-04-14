@@ -2,7 +2,7 @@ class CompraLibro < ActiveRecord::Base
   #Callback
   before_validation :self_proveedor_id
   before_validation :self_tipo_de_gasto
-  before_save :suma_total 
+  before_create :base_iva 
 
   attr_accessor :proveedor_nit
   attr_accessor :proveedor_nombre
@@ -23,10 +23,8 @@ class CompraLibro < ActiveRecord::Base
   validates :mes, presence: true
   validates :year, presence: true, numericality:true
   validates :proveedor_id, presence: true
-  validates :contribuyente_id, presence: {message: "Debes Seleccionar un Contribuyente"}
-  validates :establecimiento_id, presence:{message: "Debes Seleccionar un Establecimiento"}
-  validates :base, numericality: true
-  validates :iva, numericality: true 
+  validates :contribuyente_id, presence: true
+  validates :establecimiento_id, presence: true
   validates :tipo_de_gasto_id, presence: true
   
   def proveedor_nit
@@ -53,8 +51,18 @@ class CompraLibro < ActiveRecord::Base
   def self_tipo_de_gasto
     self.tipo_de_gasto_id = TipoDeGasto.find_or_create_by(nombre: @tipo_de_gasto).id if @tipo_de_gasto.present?
   end
-  def suma_total
-    self.total = self.base + self.iva
+
+  def base_iva
+    if self.gravado_bienes != ""
+      self.base = self.gravado_bienes.to_f / 1.12
+      self.iva = self.base.to_f * 0.12
+    elsif self.gravado_servicios != ""
+      self.base = self.gravado_servicios.to_f / 1.12
+      self.iva = self.base.to_f * 0.12
+    else
+      self.base = 0.00
+      self.iva = 0.00
+    end
   end
   
 end

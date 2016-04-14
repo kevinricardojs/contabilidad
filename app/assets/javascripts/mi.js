@@ -104,50 +104,6 @@ $('#compra_libro_documento').change(function() {
 	$('#tipo-documento').attr('value', documento[inicialesDocumento]);
 });
 
-if ($('.base-iva').val() == "") {
-	$('.base-iva').val("0.00");
-};
-function CalculoBaseIva(neto){
-
-	var totalFac 	= neto.val();
-	var base 		= totalFac / 1.12;
-	var iva 		= base * 0.12;
-	iva 		= iva.toFixed(2);
-	base 		= base.toFixed(2);
-	var total 		= (parseFloat(iva) + parseFloat(base)).toFixed(2);
-	$('#compra_libro_base').val(base);
-	$('#compra_libro_iva').val(iva);
-	$('#venta_libro_base').val(base);
-	$('#venta_libro_iva').val(iva);
-}
-var gravado 		= $('.gravado');
-var exento 			= $('.exento');
-gravado.change(function(){
-	exento.val("0.00");
-	if ($(this).hasClass('gravado-bienes'))
-	{
-		$('.gravado-servicios').val("0.00");
-	}
-	else
-	{
-		$('.gravado-bienes').val("0.00");
-	}
-	CalculoBaseIva($(this));
-});
-
-exento.change(function (){
-	var precio = $(this).val();
-	gravado.val("0.00");
-	$('.base-iva').val("0.00");
-	if ($(this).hasClass('exento-bienes'))
-	{
-		$('.exento-servicios').val("0.00");
-	}
-	else
-	{
-		$('.exento-bienes').val("0.00");
-	}
-});
 
 
 /*Autocompletado Proveedor CompraLibros#new*/
@@ -429,12 +385,16 @@ $('.toggle-calc').click(function() {
 		$(this).children('.fa-arrow-right').removeClass('right');
 		$(this).children('.fa-arrow-right').addClass('left');
 		$(this).data('direccion', 'left');
+		$('.calculadora').css('z-index', '100');
 	}
 	else{
 		$('.calculadora .mandos').animate({left: "-110%"});
 		$(this).children('.fa-arrow-right').removeClass('left');
 		$(this).children('.fa-arrow-right').addClass('right');
 		$(this).data('direccion', 'right');
+		setTimeout(function() {
+			$('.calculadora').css('z-index', '-1');
+		}, 1000);
 	};
 });
 });

@@ -15,7 +15,7 @@ Ver Resumen Libro de Compras <i class="fa fa-print"></i>
 </div>
 
 
-<%= form_for(@compra_libro, html: {autocomplete: "off"}) do |f| %>
+<%= form_for(@compra_libro, html: {autocomplete: "off", disabled: true}) do |f| %>
 <% if @compra_libro.errors.any? %>
 <div class="alert alert-danger alert-dismissable col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
   <% @compra_libro.errors.full_messages.each do |mensaje|%>
@@ -99,7 +99,7 @@ Ver Resumen Libro de Compras <i class="fa fa-print"></i>
 </div>
 <div class="actions col-md-offset-4 col-md-4">
 
-    <% if @u.contribuyente_id.nil? %>
+    <% if @u.contribuyente_id.nil? || @u.mes == "Selecciona un Mes" || @u.year == "Selecciona un Año" %>
     <%= button_tag(type: "submit", class: "btn btn-success col-xs-12 col-md-6 col-sm-6", disabled: true) do %>
     <i class="fa fa-save"></i> Guardar
     <% end %>

@@ -1,5 +1,5 @@
   <%= link_to  new_venta_libro_path, class:"col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center btn btn-primary pdf_link" do %>
-  <i class="fa fa-angle-left"></i> Ver Version Imprimible
+  <i class="fa fa-angle-left"></i> Volver
   <%end%>
   <%= link_to  operaciones_libro_venta_path + ".pdf", class:"col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center btn btn-info pdf_link" do %>
   Ver Version Imprimible <i class="fa fa-print"></i>
@@ -69,8 +69,8 @@
         <td><%= venta["max"] %></td>
         <td><%= venta["serie"] %></td>
         <td><%= venta["nombre"] %></td>
-        <td>Q<%= venta["gravado_bienes"] %></td>
-        <td>Q<%= venta["gravado_servicios"] %></td>
+        <td>Q<%= '%.2f' % venta["gravado_bienes"].to_f %></td>
+        <td>Q<%= '%.2f' % venta["gravado_servicios"].to_f %></td>
       </tr>
       <% end %>
     </tbody>
@@ -90,19 +90,19 @@
       <tbody>
         <tr>
           <td>Bienes</td>
-          <td>Q<%= @bienes %></td>
+          <td>Q<%= '%.2f' % @bienes.to_f %></td>
         </tr>
         <tr>
         <td>Servicios</td>
-          <td>Q<%= @servicios %></td>
+          <td>Q<%= '%.2f' % @servicios.to_f %></td>
         </tr>
         <tr>
           <td>IVA</td>
-          <td>Q<%= @iva %></td>
+          <td>Q<%= '%.2f' % @iva.to_f %></td>
         </tr>
         <tr>
           <td>Total</td>
-          <td>Q<%= @total %></td>
+          <td>Q<%= '%.2f' % @total.to_f %></td>
         </tr>
       </tbody>
     </table>

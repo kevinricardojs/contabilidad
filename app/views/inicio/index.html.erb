@@ -57,10 +57,6 @@
 					<%= link_to libro_mayor_path do %>
 					<i class="fa fa-book"></i> Libro Mayor
 					<% end %>
-					<br>
-					<%= link_to libro_balance_path do %>
-					<i class="fa fa-book"></i> Libro Balance
-					<% end %>
 				</div>
 			</div>
 
@@ -75,9 +71,21 @@
 					<h4>Opciones</h4>
 				</div>
 				<div class="popover-content">
-					<a href="#"><i class="fa fa-user-plus"></i> Cambiar datos</a>
-					<li>Dos</li>
-					<li>Tres</li>
+					<%= link_to libro_balance_primer_periodo_path do %>
+					<i class="fa fa-book"></i> Libro Balance Primer Periodo
+					<% end %>
+					<br>
+					<%= link_to libro_balance_segundo_periodo_path do %>
+					<i class="fa fa-book"></i> Libro Balance Segundo Periodo
+					<% end %>
+					<br>
+					<%= link_to libro_balance_tercer_periodo_path do %>
+					<i class="fa fa-book"></i> Libro Balance Tercer Periodo
+					<% end %>
+					<br>
+					<%= link_to libro_balance_cuarto_periodo_path do %>
+					<i class="fa fa-book"></i> Libro Balance Cuarto Periodo
+					<% end %>
 				</div>
 			</div>
 

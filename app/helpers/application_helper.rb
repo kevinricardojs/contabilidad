@@ -24,16 +24,16 @@ module ApplicationHelper
     end
   end
 
-  def print_meses_periodo
-    case @periodo
+  def print_meses_periodo(periodo)
+    case periodo
     when 1
-      "Enero, Febrero, Marzo – #{@u.year}"
+      "Enero, Febrero, Marzo del  #{@u.year}"
     when 2
-      "Abril, Mayo, Junio – #{@u.year}"
+      "Abril, Mayo, Junio del  #{@u.year}"
     when 3
-      "Julio, Agosto, Septiembre – #{@u.year}"
+      "Julio, Agosto, Septiembre del  #{@u.year}"
     when 4
-      "Octubre, Noviembre, Diciembre – #{@u.year}"
+      "Octubre, Noviembre, Diciembre del  #{@u.year}"
     else
       "No es un periodo valido"
     end

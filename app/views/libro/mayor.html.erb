@@ -56,7 +56,7 @@ Balance <i class="fa fa-angle-right"></i>
                 <tr>
                     <td colspan="5" class="bold"><%= Cuenta.where(nombre_: nombre).first.nombre %></td>
                 </tr>
-                <% Cuenta.where(nombre_: nombre).each do |cuenta| %>
+                <% Cuenta.where(nombre_: nombre, balance_id: @balance.id).each do |cuenta| %>
                 <% if cuenta.debe != "" && cuenta.debe!= "0.0"%>
 
                 <tr>

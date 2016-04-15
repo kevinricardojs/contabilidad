@@ -1,6 +1,6 @@
 class LibroDiario < ActiveRecord::Base
 	belongs_to :establecimiento
-	has_many :partidas
+	has_many :partidas, dependent: :destroy
 	has_many :cuentas
 	belongs_to :balance
 	before_create :periodo

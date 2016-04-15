@@ -8,9 +8,9 @@ Ver Version Imprimible(PDF) <i class="fa fa-print"></i>
 <%= link_to  libro_mayor_path, class:"col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center btn btn-primary pdf_link" do %>
 Libro Mayor <i class="fa fa-angle-right"></i>
 <%end%>
-<% if @u.establecimiento_id == nil %>
+<% if @u.contribuyente_id.nil? || @u.mes == "Selecciona un Mes" || @u.year == "Selecciona un Año" %>
 <div class="col-md-8 col-md-offset-2">
-	<p class="bg-warning text-center text-muted" style="padding: 20px;">No puedes ver el <strong>Resumen</strong> porque no has seleccionado el <strong>Establecimiento</strong> con el que deseas trabajar</p>
+	<p class="bg-warning text-center text-muted" style="padding: 20px;">No puedes ver el <strong>Resumen</strong> porque no has seleccionado el <strong>Establecimiento, Mes o Año</strong> con el que deseas trabajar</p>
 </div>
 <% else %>
 <div id="resumen">

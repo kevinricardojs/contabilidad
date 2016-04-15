@@ -93,8 +93,8 @@ def partidas_primarias
             params = { partida:
               {numero_partida: 2, dia:1, establecimiento_id: @libro_diario.establecimiento_id, 
                 cuentas_attributes: [
-                  { nombre: "Caja", debe: 0.00, haber: compras_caja, posicion: 900, balance_id: @balance},
-                  { nombre: "Iva por cobrar", debe: compras_iva, haber: 0.00, posicion: 899, balance_id: @balance}],
+                  { nombre: "Caja", debe: 0.00, haber: compras_caja, posicion: 900, balance_id: @balance.id},
+                  { nombre: "Iva por cobrar", debe: compras_iva, haber: 0.00, posicion: 899, balance_id: @balance.id}],
                   descripcion: "Por favor añade una descripción"}}
                   partida2 = @libro_diario.partidas.new(params[:partida])
                   partida2.save

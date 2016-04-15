@@ -101,7 +101,7 @@ Ver Resumen Libro de Ventas <i class="fa fa-print"></i>
     </div>
 </div>
 <div class="actions col-md-12 col-sm-12 col-xs-12">
-   <% if @u.contribuyente_id.nil? %>
+   <% if @u.contribuyente_id.nil? || @u.mes == "Selecciona un Mes" || @u.year == "Selecciona un Año" %>
    <%= button_tag(type: "submit", class: "btn btn-success col-sm-offset-3 col-xs-12 col-md-3 col-sm-3", disabled: true) do %>
    <i class="fa fa-save"></i> Guardar
    <% end %>

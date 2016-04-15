@@ -65,7 +65,7 @@ $('#boton-cambiar').click(function() {
 		else
 		{
 
-			$(select_contribuyentes).append("<option value=''>No hay ningun establecimiento</option>");
+			$(select_contribuyentes).append("<option value=''>No hay ningun Contribuyente</option>");
 		}
 	});
 	select_contribuyentes.change(function() {

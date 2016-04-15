@@ -74,9 +74,9 @@ Ver Version Imprimible(PDF) <i class="fa fa-print"></i>
                 <td>Q<%= compra.gravado_servicios %></td>
                 <td>Q<%= compra.exento_bienes %></td>
                 <td>Q<%= compra.exento_servicios %></td>
-                <td>Q<%= compra.base %></td>
-                <td>Q<%= compra.iva %></td>
-                <td>Q<%= compra.total %></td>
+                <td>Q<%= '%.2f' % compra.base.to_f %></td>
+                <td>Q<%= '%.2f' % compra.iva.to_f %></td>
+                <td>Q<%= '%.2f' % compra.total.to_f %></td>
             </tr>
             <% end %>
         </tbody>
@@ -97,16 +97,16 @@ Ver Version Imprimible(PDF) <i class="fa fa-print"></i>
           <% @compras_por_cuenta.each do |cuenta|  %>
           <tr>
             <td><%= cuenta[0]%></td>
-            <td>Q<%= cuenta[1]%></td>
+            <td>Q<%= '%.2f' % cuenta[1].to_f%></td>
         </tr>
         <% end %>
         <tr>
           <td>IVA</td>
-          <td>Q<%= @iva %></td>
+          <td>Q<%= '%.2f' % @iva.to_f %></td>
       </tr>
       <tr>
       <td>Total</td>
-          <td>Q<%= @total %></td>
+          <td>Q<%= '%.2f' % @total.to_f %></td>
       </tr>
   </tbody>
 </table>

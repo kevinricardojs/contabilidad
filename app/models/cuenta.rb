@@ -4,19 +4,18 @@ class Cuenta < ActiveRecord::Base
   belongs_to :balance
   before_create :make_nombre_
   before_create :take_libro_diario
-  before_create :balance
+  before_create :tomar_balance
+  #validates :balance_id, presence: true
   
   def take_libro_diario
-    self.libro_diario_id = @libro_diario,id
+    self.libro_diario_id = self.partida.libro_diario_id
   end
 
   def make_nombre_
     self.nombre_ = self.nombre.downcase.split(" ").join("_")
   end
 
-  def balance
-    if @balance
-      self.balance_id = @balance
-    end
+  def tomar_balance
+      self.balance_id = self.partida.libro_diario.balance_id
   end
 end

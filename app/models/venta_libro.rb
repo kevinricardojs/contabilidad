@@ -25,4 +25,7 @@ class VentaLibro < ActiveRecord::Base
 		end
 	end
 
+	def total
+		self.total = '%.2f' % (self.base.to_f + self.iva.to_f)
+	end
 end

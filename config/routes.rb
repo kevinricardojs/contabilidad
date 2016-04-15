@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
 
   get 'libro/mayor'
-  get 'libro/balance'
+  get 'libro/balance_primer_periodo'
+  get 'libro/balance_segundo_periodo'
+  get 'libro/balance_tercer_periodo'
+  get 'libro/balance_cuarto_periodo'
 
   resources :partidas, except:[:index, :show, :new]
 

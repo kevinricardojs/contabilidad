@@ -1,6 +1,6 @@
 class Establecimiento < ActiveRecord::Base
 	belongs_to :contribuyente
-	belongs_to :balance
+	has_many :balances
 	has_many :compra_libros
 	has_many :venta_libros
 	has_many :usuarios

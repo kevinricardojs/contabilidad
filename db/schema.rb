@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160414222634) do
+ActiveRecord::Schema.define(version: 20160415160026) do
 
   create_table "balances", force: :cascade do |t|
     t.integer  "establecimiento_id", limit: 4
@@ -65,20 +65,19 @@ ActiveRecord::Schema.define(version: 20160414222634) do
   end
 
   create_table "cuentas", force: :cascade do |t|
-    t.string   "nombre",             limit: 255
-    t.string   "nombre_",            limit: 255
-    t.string   "debe",               limit: 255
-    t.string   "haber",              limit: 255
-    t.integer  "partida_id",         limit: 4
-    t.integer  "posicion",           limit: 4
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.integer  "libro_diario_id",    limit: 4
-    t.integer  "periodo",            limit: 4
-    t.integer  "establecimiento_id", limit: 4
+    t.string   "nombre",          limit: 255
+    t.string   "nombre_",         limit: 255
+    t.string   "debe",            limit: 255
+    t.string   "haber",           limit: 255
+    t.integer  "partida_id",      limit: 4
+    t.integer  "posicion",        limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "libro_diario_id", limit: 4
+    t.integer  "balance_id",      limit: 4
   end
 
-  add_index "cuentas", ["establecimiento_id"], name: "index_cuentas_on_establecimiento_id", using: :btree
+  add_index "cuentas", ["balance_id"], name: "index_cuentas_on_balance_id", using: :btree
   add_index "cuentas", ["libro_diario_id"], name: "index_cuentas_on_libro_diario_id", using: :btree
   add_index "cuentas", ["partida_id"], name: "index_cuentas_on_partida_id", using: :btree
 
@@ -105,8 +104,10 @@ ActiveRecord::Schema.define(version: 20160414222634) do
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.integer  "periodo",            limit: 4
+    t.integer  "balance_id",         limit: 4
   end
 
+  add_index "libro_diarios", ["balance_id"], name: "index_libro_diarios_on_balance_id", using: :btree
   add_index "libro_diarios", ["establecimiento_id"], name: "index_libro_diarios_on_establecimiento_id", using: :btree
 
   create_table "partidas", force: :cascade do |t|
@@ -193,10 +194,11 @@ ActiveRecord::Schema.define(version: 20160414222634) do
   add_foreign_key "compra_libros", "establecimientos"
   add_foreign_key "compra_libros", "proveedors"
   add_foreign_key "compra_libros", "tipo_de_gastos"
-  add_foreign_key "cuentas", "establecimientos"
+  add_foreign_key "cuentas", "balances"
   add_foreign_key "cuentas", "libro_diarios"
   add_foreign_key "cuentas", "partidas"
   add_foreign_key "establecimientos", "contribuyentes"
+  add_foreign_key "libro_diarios", "balances"
   add_foreign_key "libro_diarios", "establecimientos"
   add_foreign_key "partidas", "establecimientos"
   add_foreign_key "partidas", "libro_diarios"

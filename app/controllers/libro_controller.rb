@@ -10,6 +10,6 @@ class LibroController < ApplicationController
   private
 
   def set_nombres_all_cuentas
-    @cuentas = Cuenta.all.group(:nombre_).count
+    @cuentas = @balance.cuentas.group(:nombre_).count
   end
 end

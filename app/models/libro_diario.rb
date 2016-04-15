@@ -2,8 +2,9 @@ class LibroDiario < ActiveRecord::Base
 	belongs_to :establecimiento
 	has_many :partidas
 	has_many :cuentas
-
+	belongs_to :balance
 	before_create :periodo
+	validates :balance_id, presence: true
 
 	def periodo
 		mes = self.mes
@@ -21,6 +22,5 @@ class LibroDiario < ActiveRecord::Base
 			self.periodo = nil
 		end
 	end
-
 
 end

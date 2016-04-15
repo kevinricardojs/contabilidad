@@ -21,7 +21,7 @@ gem 'jquery-turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 gem 'devise'
-gem 'pdfkit'
+#gem 'pdfkit'
 gem 'wkhtmltopdf-binary'
 gem 'jquery-ui-rails'
 gem 'tzinfo-data'

@@ -5,7 +5,16 @@ class LibroController < ApplicationController
   end
 
   def balance_primer_periodo
-  	@current_balance = Balance.find_by(establecimiento_id: current_usuario.establecimiento_id, periodo:1, year: current_usuario.year)
+    @current_balance = Balance.find_by(establecimiento_id: current_usuario.establecimiento_id, periodo:1, year: current_usuario.year)
+  	respond_to do |format|
+      format.html { @current_balance } 
+      format.pdf do
+        pdf = CreaPdf.new(@current_balance, current_usuario,10, 50)
+        send_data pdf.render, filename: "balance.pdf",
+                              type: "application/pdf",
+                              disposition: "inline"
+      end
+    end
   end
 
   def balance_segundo_periodo

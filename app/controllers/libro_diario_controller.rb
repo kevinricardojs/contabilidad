@@ -13,7 +13,15 @@ class LibroDiarioController < ApplicationController
 
   # Accion resumen solo para ver las partidas creadas
   def resumen
-
+    respond_to do |format|
+      format.html 
+      format.pdf do 
+        pdf = PartidasPdf.new(@partidas_libro_diario, @u)
+        send_data pdf.render, filename: "partidas" + @u.establecimiento.nombre.split(" ").join("_") + "_" + @u.mes + ".pdf",
+        type: "application/pdf",
+        disposition: "inline"
+      end
+    end
   end
 
   private

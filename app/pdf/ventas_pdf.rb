@@ -11,6 +11,7 @@ class VentasPdf < Pdf
 			ventas
 			@puntero  = cursor.to_s
 		end
+		resumen(@puntero)
 	end
 
 	def ventas
@@ -38,15 +39,15 @@ class VentasPdf < Pdf
 			@ventas.each do |venta| 
 				movimiento =[
 					[
-						{content:venta["dia"].to_s, size: 10, borders: [:left, :right] },
-						{content:venta["documento"].to_s, size: 10, borders: [:left, :right] },
-						{content:venta["nit"].to_s, size: 10, borders: [:left, :right] },
-						{content:venta["min"].to_s, size: 10, borders: [:left, :right] },
-						{content:venta["max"].to_s, size: 10, borders: [:left, :right] },
-						{content:venta["serie"].to_s, size: 10, borders: [:left, :right] },
-						{content:venta["nombre"].to_s, size: 10, borders: [:left, :right] },
-						{content:"Q" + '%.2f' % venta["gravado_bienes"].to_f, size: 10, borders: [:left, :right] },
-						{content:"Q" + '%.2f' % venta["gravado_servicios"].to_f, size: 10, borders: [:left, :right] }
+						{content:venta["dia"].to_s, size: 10, borders: [:left, :right], align: :center },
+						{content:venta["documento"].to_s, size: 10, borders: [:left, :right], align: :center },
+						{content:venta["nit"].to_s, size: 10, borders: [:left, :right], align: :center },
+						{content:venta["min"].to_s, size: 10, borders: [:left, :right], align: :center },
+						{content:venta["max"].to_s, size: 10, borders: [:left, :right], align: :center },
+						{content:venta["serie"].to_s, size: 10, borders: [:left, :right], align: :center },
+						{content:venta["nombre"].to_s, size: 9, borders: [:left, :right], align: :center, width: 150 },
+						{content:"Q" + '%.2f' % venta["gravado_bienes"].to_f, size: 10, borders: [:left, :right], align: :right },
+						{content:"Q" + '%.2f' % venta["gravado_servicios"].to_f, size: 10, borders: [:left, :right], align: :right }
 					]
 				]
 
@@ -55,6 +56,22 @@ class VentasPdf < Pdf
 			end
 
 			table(title, header: true, width: 540)
+		end
+
+		def resumen(puntero)
+			@p = puntero.to_i - 10
+			tabla = [
+				[{content:"Resumen", colspan:2,align: :center, font_style: :bold}],
+				[{content:"Bienes", size: 10, borders: [:left, :right]}, {content:"Q" + '%.2f' % @bienes.to_f, align: :right, size: 10, borders: [:left, :right]}],
+				[{content:"Servicios", size: 10, borders: [:left, :right]}, {content:"Q" + '%.2f' % @servicios.to_f, align: :right, size: 10, borders: [:left, :right]}],
+				[{content:"IVA", size: 10, borders: [:left, :right]}, {content:"Q" + '%.2f' % @iva.to_f, align: :right, size: 10, borders: [:left, :right]}],
+				[{content:"Total", size: 10, borders: [:left, :right]}, {content:"Q" + '%.2f' % @total.to_f, align: :right, size: 10, borders: [:left, :right]}],
+				[{content: "", colspan:2, borders: [:top]}]
+			]
+			bounding_box([0, @p], width: 540) do
+				table(tabla, header: true, width: 540)
+			end
+
 		end
 
 	end

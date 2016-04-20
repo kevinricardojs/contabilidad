@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20160415160026) do
   create_table "compra_libros", force: :cascade do |t|
     t.integer  "documento",          limit: 4
     t.string   "serie",              limit: 255
-    t.string   "numero",             limit: 255
+    t.integer  "numero",             limit: 4
     t.integer  "dia",                limit: 4
     t.string   "mes",                limit: 255
     t.string   "year",               limit: 255
@@ -167,7 +167,7 @@ ActiveRecord::Schema.define(version: 20160415160026) do
   create_table "venta_libros", force: :cascade do |t|
     t.integer  "documento",          limit: 4
     t.string   "serie",              limit: 255
-    t.string   "numero",             limit: 255
+    t.integer  "numero",             limit: 4
     t.integer  "dia",                limit: 4
     t.string   "mes",                limit: 255
     t.string   "year",               limit: 255

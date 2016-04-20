@@ -3,7 +3,7 @@ class CreateCompraLibros < ActiveRecord::Migration
     create_table :compra_libros do |t|
       t.integer :documento
       t.string :serie
-      t.string :numero
+      t.integer :numero
       t.integer :dia
       t.string :mes
       t.string :year

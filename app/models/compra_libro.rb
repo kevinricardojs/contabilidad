@@ -20,7 +20,6 @@ class CompraLibro < ActiveRecord::Base
   validates :serie, presence: true
   validates :numero, presence: true, numericality:true
   validates :dia, presence: true, numericality:true
-  validates :mes, presence: true
   validates :year, presence: true, numericality:true
   validates :proveedor_id, presence: true
   validates :contribuyente_id, presence: true

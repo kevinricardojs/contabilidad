@@ -397,4 +397,39 @@ $('.toggle-calc').click(function() {
 		}, 1000);
 	};
 });
+
+	var meses =  ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+	var mes = $('#compra_libro_dato_mes').data('mes');
+	var current = meses.indexOf(mes);
+	var primero, segundo, tercero;
+	if(current == 0)
+	{
+
+		primero = "Noviembre"
+		segundo = "Diciembre"
+		tercero = "Enero"
+	}
+
+	else if(current == 1)
+	{
+
+		primero = "Diciembre"
+		segundo = "Enero"
+		tercero = "Febrero";
+	}
+	else
+	{
+
+		primero = meses[current - 2 ];
+		segundo = meses[current - 1 ];
+		tercero = meses[current];
+	};
+
+
+	var mesesValidos = [ primero, segundo, tercero];
+	var regex = primero + "|" + segundo + "|" + tercero;
+	$('#compra_libro_dato_mes').attr('pattern', regex );
+	$('#compra_libro_dato_mes').autocomplete({
+		source: mesesValidos
+	});
 });

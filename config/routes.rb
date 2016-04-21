@@ -13,8 +13,8 @@ Rails.application.routes.draw do
 
   resources :tipo_de_gastos
 
-  resources :venta_libros, path: "libro_de_ventas"
-  resources :compra_libros, path: "libro_de_compras"
+  resources :venta_libros, path: "libro_de_ventas", except:[:index]
+  resources :compra_libros, path: "libro_de_compras", except:[:index]
   devise_for :usuarios, controllers: {registrations: "registrations"}
   resources :proveedors
   resources :establecimientos

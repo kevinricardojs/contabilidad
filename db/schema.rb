@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160415160026) do
+ActiveRecord::Schema.define(version: 20160421170532) do
 
   create_table "balances", force: :cascade do |t|
     t.integer  "establecimiento_id", limit: 4
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20160415160026) do
     t.integer  "contribuyente_id",   limit: 4
     t.integer  "establecimiento_id", limit: 4
     t.integer  "tipo_de_gasto_id",   limit: 4
+    t.string   "dato_mes",           limit: 255
   end
 
   add_index "compra_libros", ["contribuyente_id"], name: "index_compra_libros_on_contribuyente_id", using: :btree

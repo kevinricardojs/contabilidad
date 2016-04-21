@@ -44,23 +44,24 @@ class ComprasPdf < Pdf
 			@compras_por_dia.each do |compra|
 				dato = 
 				[			[
-					{content:compra.dia.to_s, size: 8 , align: :center},
-					{content:compra.documento.to_s, size: 8, align: :center },
-					{content:compra.serie.to_s, size: 8, align: :center },
-					{content:compra.numero.to_s, size: 8 , align: :center},
-					{content:compra.proveedor.nit.to_s, size: 8 , align: :center},
-					{content:compra.proveedor.nombre, size: 8, align: :center },
-					{content:compra.gravado_bienes.to_s, size: 8, align: :right },
-					{content:compra.gravado_servicios.to_s, size: 8 , align: :right},
-					{content:compra.exento_bienes.to_s, size: 8, align: :right },
-					{content:compra.exento_servicios.to_s, size: 8 , align: :right},
-					{content: "Q" + '%.2f' % compra.base.to_f, size: 7 , align: :right},
-					{content: "Q" + '%.2f' % compra.iva.to_f, size: 7 , align: :right},
-					{content: "Q" + '%.2f' % compra.total.to_f, size: 7, align: :right }
+					{content:compra.dia.to_s, size: 8 , align: :center, borders: [:left, :right]},
+					{content:compra.documento.to_s, size: 8, align: :center, borders: [:left, :right] },
+					{content:compra.serie.to_s, size: 8, align: :center, borders: [:left, :right] },
+					{content:compra.numero.to_s, size: 8 , align: :center, borders: [:left, :right]},
+					{content:compra.proveedor.nit.to_s, size: 8 , align: :center, borders: [:left, :right]},
+					{content:compra.proveedor.nombre, size: 8, align: :center, borders: [:left, :right] },
+					{content:compra.gravado_bienes.to_s, size: 8, align: :right, borders: [:left, :right] },
+					{content:compra.gravado_servicios.to_s, size: 8 , align: :right, borders: [:left, :right]},
+					{content:compra.exento_bienes.to_s, size: 8, align: :right, borders: [:left, :right] },
+					{content:compra.exento_servicios.to_s, size: 8 , align: :right, borders: [:left, :right]},
+					{content: "Q" + '%.2f' % compra.base.to_f, size: 7 , align: :right, borders: [:left, :right]},
+					{content: "Q" + '%.2f' % compra.iva.to_f, size: 7 , align: :right, borders: [:left, :right]},
+					{content: "Q" + '%.2f' % compra.total.to_f, size: 7, align: :right , borders: [:left, :right]}
 					]]
 					title += dato
 				end
-				table( title, header: true, width: 540)
+				title += [[ {content: "", colspan: 13, borders: [:top]}]]
+				table( title, header: true, width: 530, cell_style:{ border_color: "333333", text_color: "333333"})
 			end
 
 			def cuentas_per_nombre(puntero)
@@ -70,12 +71,12 @@ class ComprasPdf < Pdf
 				]
 
 				@compras_por_cuenta.each do |cuenta| 
-					data = [ [ {content: cuenta[0].to_s, colspan: 9, size: 8}, {content: "Q" + '%.2f' % cuenta[1], colspan: 4, size: 8, align: :right}]]
+					data = [ [ {content: cuenta[0].to_s, colspan: 9, size: 8, borders: [:left, :right]}, {content: "Q" + '%.2f' % cuenta[1], colspan: 4, size: 8, align: :right, borders: [:left, :right]}]]
 					title_cuenta += data
 				end
-				title_cuenta += [[ {content: "Iva", colspan: 9, size: 8}, {content: "Q" + '%.2f' % @iva, colspan: 4, size: 8, align: :right}], [{content: "Total", colspan: 9, size: 8}, {content: "Q" + '%.2f' % @total, colspan: 4, size: 8, align: :right}]]
-				bounding_box([0, @p], width: 540) do
-					table(title_cuenta, header: true, width: 540)
+				title_cuenta += [[ {content: "Iva", colspan: 9, size: 8, borders: [:left, :right]}, {content: "Q" + '%.2f' % @iva, colspan: 4, size: 8, align: :right, borders: [:left, :right]}], [{content: "Total", colspan: 9, size: 8}, {content: "Q" + '%.2f' % @total, colspan: 4, size: 8, align: :right}]]
+				bounding_box([0, @p], width: 530) do
+					table(title_cuenta, header: true, width: 530, cell_style:{ border_color: "333333", text_color: "333333"} )
 				end
 
 			end

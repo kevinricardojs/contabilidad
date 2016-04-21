@@ -21,42 +21,42 @@ class Pdf < Prawn::Document
 			canvas do
 				bounding_box([35,820], width: 300) do
 
-					text @u.contribuyente.nombre , size: 12, style: :bold
-					text @u.establecimiento.nombre, size: 12, style: :bold
+					text @u.contribuyente.nombre , size: 12, style: :bold, color: "333333"
+					text @u.establecimiento.nombre, size: 12, style: :bold, color: "333333"
 
-					text "Nit: #{@u.contribuyente.nit}", size: 12, style: :bold
-					text "Periodo: " + print_meses_periodo(@periodo), size: 9, style: :bold
+					text "Nit: #{@u.contribuyente.nit}", size: 12, style: :bold, color: "333333"
+					text "Periodo: " + print_meses_periodo(@periodo), size: 9, style: :bold, color: "333333"
 
 				end	
 				bounding_box([480, 820], width: 200) do
-					text "Fecha: #{dia}", size:12, style: :normal
-					text "Hora: #{hora}", size:9, style: :normal
+					text "Fecha: #{dia}", size:10, style: :normal, color: "333333"
+					text "Hora: #{hora}", size:9, style: :normal, color: "333333"
 
 				end
 
 				bounding_box([200, 820], width:200) do
-					text @tipo, size: 10, style: :bold
+					text @tipo, size: 10, style: :bold, color: "333333"
 				end
 			end
 		else
 			canvas do
 				bounding_box([35,560], width: 300) do
 
-					text @u.contribuyente.nombre , size: 12, style: :bold
-					text @u.establecimiento.nombre, size: 12, style: :bold
+					text @u.contribuyente.nombre , size: 12, style: :bold, color: "333333"
+					text @u.establecimiento.nombre, size: 12, style: :bold, color: "333333"
 
-					text "Nit: #{@u.contribuyente.nit}", size: 12, style: :bold
-					text "Periodo: " + print_meses_periodo(@periodo), size: 9, style: :bold
+					text "Nit: #{@u.contribuyente.nit}", size: 12, style: :bold, color: "333333"
+					text "Periodo: " + print_meses_periodo(@periodo), size: 9, style: :bold, color: "333333"
 
 				end	
 				bounding_box([680, 560], width: 200) do
-					text "Fecha: #{dia}", size:12, style: :normal
-					text "Hora: #{hora}", size:9, style: :normal
+					text "Fecha: #{dia}", size:10, style: :normal, color: "333333"
+					text "Hora: #{hora}", size:9, style: :normal, color: "333333"
 
 				end
 
 				bounding_box([300, 560], width:200) do
-					text @tipo, size: 14, style: :bold
+					text @tipo, size: 14, style: :bold, color: "333333"
 				end
 			end
 		end
@@ -68,14 +68,16 @@ class Pdf < Prawn::Document
 			options = {
 				at: [480, 757],
 				width: 150,
-				start_count_at:  @folios_consumidos	
+				start_count_at:  @folios_consumidos,
+				color: "333333"	
 			}
 			number_pages "Folio: <page>" ,options
 		else
 			options = {
 				at: [650, 500],
 				width: 150,
-				start_count_at:  @folios_consumidos	
+				start_count_at:  @folios_consumidos,
+				color: "333333"	
 			}
 			number_pages "Folio: <page>" ,options
 		end

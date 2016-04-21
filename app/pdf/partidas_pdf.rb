@@ -46,6 +46,6 @@ class PartidasPdf < Pdf
 			titulo += partida
 		end
 		
-		table(titulo, header: true, width: 540 )
+		table(titulo, header: true, width: 530, cell_style:{ border_color: "333333", font_color: "333333"} )
 	end
 end

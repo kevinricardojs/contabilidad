@@ -41,7 +41,7 @@ class MayorPdf < Pdf
 		if partidas.length <= 1
 			partidas += [[@u.mes, "", "", "", ""]]
 		end
-		table( partidas, header: true, width: 384)
+		table( partidas, header: true, width: 384, cell_style:{ border_color: "333333", font_color: "333333"})
 	end
 
 	def haber
@@ -73,7 +73,7 @@ class MayorPdf < Pdf
 		if partidas.length <= 1
 			partidas += [[@u.mes, "", "", "", ""]]
 		end
-		table( partidas, header: true, width: 384)
+		table( partidas, header: true, width: 384, cell_style:{ border_color: "333333", font_color: "333333"})
 	end
 
 end

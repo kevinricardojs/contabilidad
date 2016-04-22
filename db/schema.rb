@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160421170532) do
+ActiveRecord::Schema.define(version: 20160422201618) do
 
   create_table "balances", force: :cascade do |t|
     t.integer  "establecimiento_id", limit: 4
@@ -97,6 +97,17 @@ ActiveRecord::Schema.define(version: 20160421170532) do
   end
 
   add_index "establecimientos", ["contribuyente_id"], name: "index_establecimientos_on_contribuyente_id", using: :btree
+
+  create_table "folios", force: :cascade do |t|
+    t.string   "libro",              limit: 255
+    t.integer  "paginas",            limit: 4
+    t.string   "year",               limit: 255
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "establecimiento_id", limit: 4
+  end
+
+  add_index "folios", ["establecimiento_id"], name: "index_folios_on_establecimiento_id", using: :btree
 
   create_table "libro_diarios", force: :cascade do |t|
     t.integer  "establecimiento_id", limit: 4
@@ -199,6 +210,7 @@ ActiveRecord::Schema.define(version: 20160421170532) do
   add_foreign_key "cuentas", "libro_diarios"
   add_foreign_key "cuentas", "partidas"
   add_foreign_key "establecimientos", "contribuyentes"
+  add_foreign_key "folios", "establecimientos"
   add_foreign_key "libro_diarios", "balances"
   add_foreign_key "libro_diarios", "establecimientos"
   add_foreign_key "partidas", "establecimientos"

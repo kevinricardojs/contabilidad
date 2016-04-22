@@ -1,7 +1,8 @@
 class Pdf < Prawn::Document
 	def initialize(tipo, u, folios_consumidos, folios_max, periodo, orientation)
+		Prawn::Font::AFM.hide_m17n_warning = true
 		super(bottom_margin: 30, page_layout: orientation.to_sym, page_size: 'A4')
-		define_grid(columns: 12, rows:12)
+		define_grid(columns: 12, rows:10)
 		@periodo = periodo
 		@cuentas = Cuenta.all.group(:nombre_).count
 		@u = u
@@ -11,15 +12,14 @@ class Pdf < Prawn::Document
 		@orientation = orientation
 		cabecera(@orientation)
 		font "Helvetica"
-		
 	end
 
 	def cabecera(orientation)
 		dia = Time.now.strftime('%d/%m/%Y')
 		hora = Time.now.strftime("%I:%M:%S %P")
 		if orientation == "portrait"
-			canvas do
-				bounding_box([35,820], width: 300) do
+			repeat(:all) do
+				grid([0,0],[1,5]).bounding_box do
 
 					text @u.contribuyente.nombre , size: 12, style: :bold, color: "333333"
 					text @u.establecimiento.nombre, size: 12, style: :bold, color: "333333"
@@ -28,19 +28,19 @@ class Pdf < Prawn::Document
 					text "Periodo: " + print_meses_periodo(@periodo), size: 9, style: :bold, color: "333333"
 
 				end	
-				bounding_box([480, 820], width: 200) do
+				grid([0,10],[1,11]).bounding_box do
 					text "Fecha: #{dia}", size:10, style: :normal, color: "333333"
 					text "Hora: #{hora}", size:9, style: :normal, color: "333333"
-
 				end
 
-				bounding_box([200, 820], width:200) do
-					text @tipo, size: 10, style: :bold, color: "333333"
+				grid([0,4],[1,7]).bounding_box do
+					text @tipo, size: 10, style: :bold, color: "333333", align: :center
 				end
+
 			end
 		else
-			canvas do
-				bounding_box([35,560], width: 300) do
+			repeat(:all) do
+				grid([0,0],[1,3]).bounding_box do
 
 					text @u.contribuyente.nombre , size: 12, style: :bold, color: "333333"
 					text @u.establecimiento.nombre, size: 12, style: :bold, color: "333333"
@@ -49,25 +49,25 @@ class Pdf < Prawn::Document
 					text "Periodo: " + print_meses_periodo(@periodo), size: 9, style: :bold, color: "333333"
 
 				end	
-				bounding_box([680, 560], width: 200) do
-					text "Fecha: #{dia}", size:10, style: :normal, color: "333333"
-					text "Hora: #{hora}", size:9, style: :normal, color: "333333"
+				grid([0,10],[1,11]).bounding_box do
+					text "Fecha: #{dia}", size:12, style: :normal, color: "333333"
+					text "Hora: #{hora}", size:10, style: :normal, color: "333333"
 
 				end
 
-				bounding_box([300, 560], width:200) do
-					text @tipo, size: 14, style: :bold, color: "333333"
+				grid([0,4],[1,7]).bounding_box do
+					text @tipo, size: 14, style: :bold, color: "333333", align: :center
 				end
+
 			end
 		end
-		enumerar_paginas(orientation)
 	end
-
 	def enumerar_paginas(orientation)
 		if orientation == "portrait"
 			options = {
-				at: [480, 757],
+				at: [460, 740],
 				width: 150,
+				page_filter: lambda{ |pg| pg <= @folios_max } ,
 				start_count_at:  @folios_consumidos,
 				color: "333333"	
 			}

@@ -1,9 +1,10 @@
 class Establecimiento < ActiveRecord::Base
 	belongs_to :contribuyente
-	has_many :balances
-	has_many :compra_libros
-	has_many :venta_libros
+	has_many :balances, dependent: :destroy
+	has_many :compra_libros, dependent: :destroy
+	has_many :venta_libros, dependent: :destroy
 	has_many :usuarios
+	has_many :folios
 
 	
 

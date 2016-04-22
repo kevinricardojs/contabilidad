@@ -7,11 +7,12 @@ class VentasPdf < Pdf
 		@servicios = servicios
 		@total = total
 		@ventas = ventas_c
-		grid([1, 0], [11,9]).bounding_box do
+		grid([1, 0], [9,11]).bounding_box do
 			ventas
 			@puntero  = cursor.to_s
 		end
 		resumen(@puntero)
+		enumerar_paginas("portrait")
 	end
 
 	def ventas
@@ -52,10 +53,10 @@ class VentasPdf < Pdf
 				]
 
 				title += movimiento
-				title += [[{content: "", colspan:9, borders: [:top]}]]
+				
 			end
-
-			table(title, header: true, width: 530, cell_style:{ border_color: "333333", font_color: "333333"})
+			title += [[{content: "", colspan:9, borders: [:top]}]]
+			table(title, header: true, width: 523, cell_style:{ border_color: "333333", font_color: "333333"})
 		end
 
 		def resumen(puntero)
@@ -68,8 +69,8 @@ class VentasPdf < Pdf
 				[{content:"Total", size: 10, borders: [:left, :right]}, {content:"Q" + '%.2f' % @total.to_f, align: :right, size: 10, borders: [:left, :right]}],
 				[{content: "", colspan:2, borders: [:top]}]
 			]
-			bounding_box([0, @p], width: 530) do
-				table(tabla, header: true, width: 530, cell_style:{ border_color: "333333", font_color: "333333"})
+			bounding_box([0, @p], width: 523) do
+				table(tabla, header: true, width: 523, cell_style:{ border_color: "333333", font_color: "333333"})
 			end
 
 		end

@@ -2,10 +2,10 @@ class BalancePdf < Pdf
 	def initialize(tipo, balance, u, folios_consumidos, folios_max, periodo, orientation)
 		super(tipo,u, folios_consumidos, folios_max, periodo, orientation)
 		@balance = balance
-		grid([1, 0], [11,9]).bounding_box do
+		grid([1, 0], [9,11]).bounding_box do
 			cuentas
 		end
-		
+		enumerar_paginas("portrait")
 	end
 
 	def cuentas
@@ -56,7 +56,7 @@ class BalancePdf < Pdf
 						{content:saldo_acreedor, align: :right, borders: [:left, :right], border_width: 1, border_color: "757D75", size:10} 
 					]
 				]
-				header += cuenta 
+				header += cuenta
 			end
 		end
 
@@ -74,7 +74,7 @@ class BalancePdf < Pdf
 			]
 		end
 
-		table( header, header: true, width: 530, cell_style: { border_color: "333333", font_color: "333333"})
+		table( header, header: true, width: 523, cell_style: { border_color: "333333", font_color: "333333"})
 
 	end
 

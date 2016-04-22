@@ -3,9 +3,10 @@ class PartidasPdf < Pdf
 		super("Resumen de Partidas del Libro Diario", u, 1, 100, u.mes, "portrait")
 		@partidas_libro_diario = partidas
 
-		grid([1, 0], [11,9]).bounding_box do
+		grid([1, 0], [9,11]).bounding_box do
 			partidas_render
 		end
+		enumerar_paginas("portrait")
 	end
 
 	def partidas_render
@@ -46,6 +47,6 @@ class PartidasPdf < Pdf
 			titulo += partida
 		end
 		
-		table(titulo, header: true, width: 530, cell_style:{ border_color: "333333", font_color: "333333"} )
+		table(titulo, header: true, width: 523, cell_style:{ border_color: "333333", font_color: "333333"} )
 	end
 end

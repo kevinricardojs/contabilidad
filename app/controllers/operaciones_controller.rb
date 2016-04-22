@@ -30,7 +30,7 @@ class OperacionesController < ApplicationController
 		respond_to do |format|
 			format.html
 			format.pdf do
-				pdf = ComprasPdf.new(@iva, @base, @compras_por_dia, @total, @total_cuentas, @u, @compras_por_cuenta)
+				pdf = ComprasPdf.new(@iva, @base, @compras_por_dia, @total, @total_cuentas, @u, @compras_por_cuenta, @folios_compras)
 				send_data pdf.render, filename: "compras.pdf",
 				type: "application/pdf",
 				disposition: "inline"

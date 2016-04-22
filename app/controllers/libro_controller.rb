@@ -19,7 +19,7 @@ class LibroController < ApplicationController
     respond_to do |format|
       format.html { @current_balance } 
       format.pdf do
-        pdf = BalancePdf.new("Balance General de Cuentas",@current_balance, current_usuario,10, 50, 1, "portrait")
+        pdf = BalancePdf.new("Balance General de Cuentas",@current_balance, current_usuario,1, 50, 1, "portrait")
         send_data pdf.render, filename: "balance_primer_periodo_" + @u.establecimiento.nombre.split(" ").join("_") + "_" + @u.year + ".pdf",
         type: "application/pdf",
         disposition: "inline"
@@ -71,4 +71,8 @@ class LibroController < ApplicationController
   def set_nombres_all_cuentas
     @cuentas = Cuenta.all.group(:nombre_).count
   end
+
+  # def balance_folio
+  #   @folio = Folio.find(libro: "balance", year:@u.year)
+  # end
 end

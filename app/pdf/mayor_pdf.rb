@@ -2,15 +2,16 @@ class MayorPdf < Pdf
 	def initialize(tipo, libro, u, folios_consumidos, folios_max, periodo, orientation)
 		super(tipo, u, folios_consumidos, folios_max, periodo, orientation)
 		@u = u
-		define_grid(columns: 12, rows:10)
+		enumerar_paginas("landscape")
 		@libro_diario = libro
 		grid([1, 0], [11,5]).bounding_box do
 			debe
 		end
-		grid([1, 6], [11,9]).bounding_box do
+		grid([1, 6], [11,11]).bounding_box do
 			haber
 		end
 		@cuentas = Cuenta.all.group(:nombre_).count
+		
 	end
 
 	def debe

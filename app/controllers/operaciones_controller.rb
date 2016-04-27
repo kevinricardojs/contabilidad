@@ -5,8 +5,10 @@ class OperacionesController < ApplicationController
 
 	def libro_venta
 		if @folios_ventas == nil
-			flash.now[:alert] = "Debes Registrar los Folios de este Libro"
-			@ventas = []
+			pdf = ErrorPdf.new
+			send_data pdf.render, filename: "ventas.pdf",
+			type: "application/pdf",
+			disposition: "inline"
 		else
 			@iva = VentaLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:iva)
 			@base = VentaLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:base)
@@ -17,7 +19,7 @@ class OperacionesController < ApplicationController
 				format.html
 				format.pdf do 
 					pdf = VentasPdf.new(@iva, @base, @bienes, @servicios, @total, @ventas, @u)
-					send_data pdf.render, filename: "ventas.pdf",
+					send_data pdf.render, filename: "libro_ventas_" + current_usuario.establecimiento.nombre.split(" ").join("_") + "_" + current_usuario.year + ".pdf",
 					type: "application/pdf",
 					disposition: "inline"
 				end
@@ -27,8 +29,10 @@ class OperacionesController < ApplicationController
 	def libro_compra
 		if @folios_compras == nil
 			flash.now[:alert] = "Debes Registrar los Folios de este Libro"
-			@compras_por_dia = []
-			@compras_por_cuenta = []
+			pdf = ErrorPdf.new
+			send_data pdf.render, filename: "compras.pdf",
+			type: "application/pdf",
+			disposition: "inline"
 		else
 			@iva = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:iva)
 			@base = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:base)
@@ -40,7 +44,7 @@ class OperacionesController < ApplicationController
 				format.html
 				format.pdf do
 					pdf = ComprasPdf.new(@iva, @base, @compras_por_dia, @total, @total_cuentas, @u, @compras_por_cuenta, @folios_compras)
-					send_data pdf.render, filename: "compras.pdf",
+					send_data pdf.render, filename: "libro_compras_" + current_usuario.establecimiento.nombre.split(" ").join("_") + "_" + current_usuario.year + ".pdf",
 					type: "application/pdf",
 					disposition: "inline"
 				end

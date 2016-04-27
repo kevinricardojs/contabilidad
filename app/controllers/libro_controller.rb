@@ -1,15 +1,23 @@
 class LibroController < ApplicationController
   before_action :set_nombres_all_cuentas
+  before_action :balance_folio, except: :mayor
 
   def mayor
-    @current_balance = Balance.find_or_create_by(establecimiento_id: current_usuario.establecimiento_id, periodo:@periodo, year: current_usuario.year)
-    respond_to do |format|
-      format.html 
-      format.pdf do 
-        pdf = MayorPdf.new("Libro Mayor", @libro_diario, current_usuario,10, 50, current_usuario.mes, "landscape" )
-        send_data pdf.render, filename: "mayor_" + @u.establecimiento.nombre.split(" ").join("_") + "_" + @u.mes + ".pdf",
-        type: "application/pdf",
-        disposition: "inline"
+    if @folios_mayor == nil
+      pdf = ErrorPdf.new
+      send_data pdf.render, filename: "ventas.pdf",
+      type: "application/pdf",
+      disposition: "inline"
+    else
+      @current_balance = Balance.find_or_create_by(establecimiento_id: current_usuario.establecimiento_id, periodo:@periodo, year: current_usuario.year)
+      respond_to do |format|
+        format.html 
+        format.pdf do 
+          pdf = MayorPdf.new("Libro Mayor", @libro_diario, current_usuario,10, 50, current_usuario.mes, "landscape" )
+          send_data pdf.render, filename: "mayor_" + @u.establecimiento.nombre.split(" ").join("_") + "_" + @u.mes + ".pdf",
+          type: "application/pdf",
+          disposition: "inline"
+        end
       end
     end
   end
@@ -72,7 +80,12 @@ class LibroController < ApplicationController
     @cuentas = Cuenta.all.group(:nombre_).count
   end
 
-  # def balance_folio
-  #   @folio = Folio.find(libro: "balance", year:@u.year)
-  # end
+  def balance_folio
+   if @folios_balance == nil
+    pdf = ErrorPdf.new
+    send_data pdf.render, filename: "balance.pdf",
+    type: "application/pdf",
+    disposition: "inline"
+  end
+end
 end

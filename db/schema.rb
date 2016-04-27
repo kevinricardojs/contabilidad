@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160422201618) do
+ActiveRecord::Schema.define(version: 20160427212129) do
 
   create_table "balances", force: :cascade do |t|
     t.integer  "establecimiento_id", limit: 4
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 20160422201618) do
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.integer  "establecimiento_id", limit: 4
+    t.integer  "disponibles",        limit: 4
   end
 
   add_index "folios", ["establecimiento_id"], name: "index_folios_on_establecimiento_id", using: :btree

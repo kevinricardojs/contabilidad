@@ -1,0 +1,2 @@
+module FoliosHelper
+end

@@ -17,7 +17,9 @@ Rails.application.routes.draw do
   resources :compra_libros, path: "libro_de_compras", except:[:index]
   devise_for :usuarios, controllers: {registrations: "registrations"}
   resources :proveedors
-  resources :establecimientos
+  resources :establecimientos do
+    resources :folios
+  end
   resources :contribuyentes
   get 'inicio/index'
   post 'peticion_json/contribuyentes'

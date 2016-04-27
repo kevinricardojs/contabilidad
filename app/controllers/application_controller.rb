@@ -113,7 +113,9 @@ def partidas_primarias
             caja2.save
             iva2.save
           end
+          
         end
+
       end
 
       def current_period
@@ -143,10 +145,13 @@ def partidas_primarias
       end
 
       def crear_folios
-        @folios_compras = {max:50, used:10}
-        @folios_ventas = {max:50, used:0}
-        @folios_mayor = {max:50, used:0}
-        @folios_balance = {max:50, used:0}
-      end
-    end
+        if usuario_signed_in? && current_usuario.establecimiento_id && current_usuario.mes != "Selecciona un Mes" && current_usuario.year != "Selecciona un Año"
+         @folios_compras = Folio.find_by(establecimiento_id: @u.establecimiento_id, year: @u.year, libro: 0 )
+         @folios_ventas = Folio.find_by(establecimiento_id: @u.establecimiento_id, year: @u.year, libro: 1)
+         @folios_diario = Folio.find_by(establecimiento_id: @u.establecimiento_id, year: @u.year, libro: 2) 
+         @folios_mayor = Folio.find_by(establecimiento_id: @u.establecimiento_id, year: @u.year, libro: 3)
+         @folios_balance = Folio.find_by(establecimiento_id: @u.establecimiento_id, year: @u.year, libro: 4 )
+       end
+     end
+   end
 

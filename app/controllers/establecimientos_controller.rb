@@ -9,7 +9,7 @@ class EstablecimientosController < ApplicationController
   # GET /establecimientos/1
   # GET /establecimientos/1.json
   def show
-    @contribuyentes = Contribuyente.all
+  @folios = @establecimiento.folios.order(:year)
   end
 
   # GET /establecimientos/new

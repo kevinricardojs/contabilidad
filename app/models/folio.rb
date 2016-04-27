@@ -1,5 +1,7 @@
 class Folio < ActiveRecord::Base
 	has_one :establecimiento
-	validates :libro, enum: %w[compras ventas mayor balance partidas]
+
+
+	enum libro: %w{compras ventas diario mayor balance}
 	validates :paginas, numericality:true
 end

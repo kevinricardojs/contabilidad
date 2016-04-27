@@ -1,7 +1,7 @@
 class CreateFolios < ActiveRecord::Migration
   def change
     create_table :folios do |t|
-      t.string :libro
+      t.integer :libro
       t.integer :paginas
       t.string :year
 

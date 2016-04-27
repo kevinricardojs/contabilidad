@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 20160422201618) do
   add_index "establecimientos", ["contribuyente_id"], name: "index_establecimientos_on_contribuyente_id", using: :btree
 
   create_table "folios", force: :cascade do |t|
-    t.string   "libro",              limit: 255
+    t.integer  "libro",              limit: 4
     t.integer  "paginas",            limit: 4
     t.string   "year",               limit: 255
     t.datetime "created_at",                     null: false

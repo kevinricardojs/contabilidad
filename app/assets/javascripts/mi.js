@@ -5,8 +5,8 @@ $(document).ready(function(){
 	};
 
 //Alertas
-var noticia = $('#notice');
-var alerta = $('#alert');
+var noticia = $('#notice span');
+var alerta = $('#alert span');
 
 if (!$(noticia).text()  == "") {
 	$("#notice").animate({

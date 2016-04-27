@@ -1,0 +1,46 @@
+<div class="form">
+  <%= form_for([@establecimiento,@folio]) do |f| %>
+  <% if @folio.errors.any? %>
+<!--   <div class="alert alert-danger alert-dismissable col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+    <strong>Error</strong> los campos con asterisco <strong>(*)</strong> son requeridos
+    <br>
+    <strong>El tipo de gasto</strong> puede que ya haya sido creado
+  </div> -->
+  <% end %>
+
+  <div class="col-md-12">
+    <div class="field form-group col-md-offset-4 col-md-4 col-sm-offset-4 col-sm-4">
+      <%= f.label :libro, "Libro(*)" %>
+      <select name="folio[libro]" class="form-control" id="compra_libro_documento" autofocus="autofocus" required>
+        <option value=""></option>
+        <option value="compras">Libro Compras</option>
+        <option value="ventas">Libro Ventas</option>
+        <option value="diario">Diario</option>
+        <option value="mayor">Libro Mayor</option>
+        <option value="balance">Libro Balance</option>
+      </select>
+    </div>
+
+    <div class="field form-group col-md-offset-4 col-md-4 col-sm-offset-4 col-sm-4">
+      <%= f.label :paginas, "Paginas(*)" %><br>
+      <%= f.number_field :paginas, class:"form-control", required:true, autocomplete:"off", min: 25, max:200%>
+    </div>
+    <%= f.hidden_field :establecimiento_id, value: @establecimiento.id %>
+    <div class="field form-group col-md-offset-4 col-md-4 col-sm-offset-4 col-sm-4">
+      <%= f.label :year, "Año(*)" %>
+      <select name="folio[year]" class="form-control" id="compra_libro_documento" required>
+        <option value="" selected="selected"></option>
+        <option value="2016">2016</option>
+        <option value="2017">2017</option>
+        <option value="2018">2018</option>
+        <option value="2019">2019</option>
+        <option value="2020">2020</option>
+      </select>
+    </div>
+  </div>
+  <div class="actions col-md-offset-4 col-md-4 col-sm-offset-4 col-sm-4">
+    <%= f.submit "Guardar", class:"btn btn-success form-control" %>
+  </div>
+  <% end %>
+
+</div>

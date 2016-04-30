@@ -1,13 +1,13 @@
 class Pdf < Prawn::Document
-	def initialize(tipo, u, folios_consumidos, folios_max, periodo, orientation)
+	def initialize(tipo, u, folio, periodo, orientation)
 		Prawn::Font::AFM.hide_m17n_warning = true
 		super(bottom_margin: 30, page_layout: orientation.to_sym, page_size: 'A4')
 		define_grid(columns: 12, rows:10)
 		@periodo = periodo
 		@cuentas = Cuenta.all.group(:nombre_).count
 		@u = u
-		@folios_consumidos = folios_consumidos.to_i
-		@folios_max = folios_max.to_i
+		@folio = folio
+		@comenzar = consumidos_mensual + 1	
 		@tipo = tipo
 		@orientation = orientation
 		cabecera(@orientation)
@@ -67,16 +67,17 @@ class Pdf < Prawn::Document
 			options = {
 				at: [460, 740],
 				width: 150,
-				page_filter: lambda{ |pg| pg <= @folios_max } ,
-				start_count_at:  @folios_consumidos,
+				page_filter: lambda{ |pg| pg <= @folio.paginas + 1 },
+				start_count_at:  @comenzar,
 				color: "333333"	
 			}
 			number_pages "Folio: <page>" ,options
 		else
 			options = {
 				at: [650, 500],
+				page_filter: lambda{ |pg| pg <= @folio.paginas + 1 },
 				width: 150,
-				start_count_at:  @folios_consumidos,
+				start_count_at:  @comenzar,
 				color: "333333"	
 			}
 			number_pages "Folio: <page>" ,options
@@ -96,5 +97,21 @@ class Pdf < Prawn::Document
 		else
 			@u.mes
 		end
+	end
+
+	def consumidos_mensual
+		mes = @u.mes
+		suma = 0
+		if mes != "Enero"
+			@folio.consumidos.order(:position).each do |consumido|
+				if consumido.mes == mes
+					break
+				else
+					suma += consumido.pag_usadas	
+				end
+			end	
+		end
+		
+		return suma
 	end
 end

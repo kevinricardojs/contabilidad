@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160427212129) do
+ActiveRecord::Schema.define(version: 20160429154215) do
 
   create_table "balances", force: :cascade do |t|
     t.integer  "establecimiento_id", limit: 4
@@ -50,6 +50,17 @@ ActiveRecord::Schema.define(version: 20160427212129) do
   add_index "compra_libros", ["establecimiento_id"], name: "index_compra_libros_on_establecimiento_id", using: :btree
   add_index "compra_libros", ["proveedor_id"], name: "index_compra_libros_on_proveedor_id", using: :btree
   add_index "compra_libros", ["tipo_de_gasto_id"], name: "index_compra_libros_on_tipo_de_gasto_id", using: :btree
+
+  create_table "consumidos", force: :cascade do |t|
+    t.integer  "folio_id",   limit: 4
+    t.string   "mes",        limit: 255
+    t.integer  "pag_usadas", limit: 4
+    t.integer  "position",   limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "consumidos", ["folio_id"], name: "index_consumidos_on_folio_id", using: :btree
 
   create_table "contribuyentes", force: :cascade do |t|
     t.string   "nit",          limit: 255
@@ -207,6 +218,7 @@ ActiveRecord::Schema.define(version: 20160427212129) do
   add_foreign_key "compra_libros", "establecimientos"
   add_foreign_key "compra_libros", "proveedors"
   add_foreign_key "compra_libros", "tipo_de_gastos"
+  add_foreign_key "consumidos", "folios"
   add_foreign_key "cuentas", "balances"
   add_foreign_key "cuentas", "libro_diarios"
   add_foreign_key "cuentas", "partidas"

@@ -10,6 +10,7 @@ class OperacionesController < ApplicationController
 			type: "application/pdf",
 			disposition: "inline"
 		else
+
 			@iva = VentaLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:iva)
 			@base = VentaLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:base)
 			@bienes = (VentaLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:gravado_bienes).to_f / 1.12).round(2)
@@ -17,11 +18,24 @@ class OperacionesController < ApplicationController
 			@total = @base + @iva
 			respond_to do |format|
 				format.html
-				format.pdf do 
-					pdf = VentasPdf.new(@iva, @base, @bienes, @servicios, @total, @ventas, @u)
+				format.pdf do 	
+					
+					# Parametros suma de iva, suma de base, suma de bienes, suma de servicios,
+					# => suma total, todas las ventas, current_usuario y el folio del actual año!
+					pdf = VentasPdf.new(@iva, @base, @bienes, @servicios, @total, @ventas, @u, @folios_ventas)
+
+					# Guardar en variable "pagina" el total de hojas usadas
+					paginas = (pdf.number_pages "<total>",color:'FFFFFF').to_s.split("..")[1]
+					#Crear o buscar el dato de cuantas paginas consumidas hay 
+					consumido = @folios_ventas.consumidos.find_or_create_by(mes: @u.mes)
+					# Actualizar!
+					consumido.update!(pag_usadas: paginas.to_i)
+
+					# Render del pdf
 					send_data pdf.render, filename: "libro_ventas_" + current_usuario.establecimiento.nombre.split(" ").join("_") + "_" + current_usuario.year + ".pdf",
 					type: "application/pdf",
 					disposition: "inline"
+
 				end
 			end
 		end
@@ -47,6 +61,16 @@ class OperacionesController < ApplicationController
 					send_data pdf.render, filename: "libro_compras_" + current_usuario.establecimiento.nombre.split(" ").join("_") + "_" + current_usuario.year + ".pdf",
 					type: "application/pdf",
 					disposition: "inline"
+					
+					# Guardar en variable "pagina" el total de hojas usadas
+					paginas = (pdf.number_pages "<total>",color:'FFFFFF').to_s.split("..")[1]
+					#Crear o buscar el dato de cuantas paginas consumidas hay 
+					consumido = @folios_compras.consumidos.find_or_create_by(mes: @u.mes)
+					# Actualizar!
+					consumido.update!(pag_usadas: paginas.to_i)
+
+					consumido = @folios_compras.consumidos.find_or_create_by(mes: current_usuario.mes)
+					consumido.update!(pag_usadas: paginas.to_i)
 				end
 			end
 		end

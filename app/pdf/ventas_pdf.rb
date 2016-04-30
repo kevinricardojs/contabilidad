@@ -1,6 +1,6 @@
 class VentasPdf < Pdf
-	def initialize(iva, base, bienes, servicios, total, ventas_c, u)
-		super("Libro de Ventas", u, 1, 10, "current", "portrait")
+	def initialize(iva, base, bienes, servicios, total, ventas_c, u, folio)
+		super("Libro de Ventas", u, folio, "current", "portrait")
 		@iva = iva
 		@base = base
 		@bienes = bienes

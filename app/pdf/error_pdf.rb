@@ -15,7 +15,7 @@ class ErrorPdf < Prawn::Document
 			end
 			move_down 80
 			text "X", align: :center, size: 30
-			text "Lamentablemente no has registrado este Folio para trabajarlo", align: :center, color: 'A94442' , style: :bold
+			text "Lamentablemente no has registrado este Folio para visualizarlo", align: :center, color: 'A94442' , style: :bold
 			text "Debes ir al los Folios de este establecimiento para poder registrarlo", align: :center, color: 'A94442'
 
 			fill_color "DA4453"

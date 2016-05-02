@@ -102,14 +102,34 @@ class Pdf < Prawn::Document
 	def consumidos
 		mes = @u.mes
 		suma = 0
-		if mes != "Enero"
-			@folio.consumidos.order(:position).each do |consumido|
-				if consumido.mes == mes
-					break
-				else
-					suma += consumido.pag_usadas	
-				end
-			end	
+		if self.class != MayorPdf
+			
+			if mes != "Enero"
+				@folio.consumidos.order(:position).each do |consumido|
+					if consumido.mes == mes
+						break
+					else
+						suma += consumido.pag_usadas	
+					end
+				end	
+			end
+		else
+			case @periodo
+			when 1
+				suma += 0
+			when 2
+				suma += @folio.consumidos.find_by(mes: "Enero").pag_usadas
+			when 3
+				enero = @folio.consumidos.find_by(mes: "Enero").pag_usadas
+				abril = @folio.consumidos.find_by(mes: "Abril").pag_usadas
+				suma += enero + abril
+			else
+				enero = @folio.consumidos.find_by(mes: "Enero").pag_usadas
+				abril = @folio.consumidos.find_by(mes: "Abril").pag_usadas
+				julio = @folio.consumidos.find_by(mes: "Julio").pag_usadas
+				suma += enero + abril + julio
+				
+			end
 		end
 		return suma
 	end

@@ -22,9 +22,9 @@ class LibroController < ApplicationController
             consumido = @folios_mayor.consumidos.find_or_create_by(mes: "Enero")
           elsif meses.find_index(@u.mes) <= 5 && meses.find_index(@u.mes) >= 3
             consumido = @folios_mayor.consumidos.find_or_create_by(mes: "Abril")
-          elsif meses.find_index(@u.mes) <= 8 && meses.find_index(@u.mes) >= 4
+          elsif meses.find_index(@u.mes) <= 8 && meses.find_index(@u.mes) >= 6
             consumido = @folios_mayor.consumidos.find_or_create_by(mes: "Julio")
-          else
+          elsif meses.find_index(@u.mes) <= 11 && meses.find_index(@u.mes) >= 9
             consumido = @folios_mayor.consumidos.find_or_create_by(mes: "Octubre")
           end
           # Actualizar!

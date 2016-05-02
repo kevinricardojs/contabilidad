@@ -38,7 +38,7 @@ class MayorPdf < Pdf
 					end
 				end
 				partida.push [{content: "", colspan: 4, border_top_color: "AAAAAA"}, {content: "Q" + '%.2f' % suma, size: 10, align: :right}]
-				partidas += partida 
+				partidas += partida * 45
 			end
 		end
 		if partidas.length <= 1
@@ -69,7 +69,7 @@ class MayorPdf < Pdf
 					end
 				end
 				partida.push [{content: "", colspan: 4, border_top_color: "AAAAAA"}, {content: "Q" + '%.2f' % suma, size: 10, align: :right}]
-				partidas += partida 
+				partidas += partida * 45
 			end
 		end
 

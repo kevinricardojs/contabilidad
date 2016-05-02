@@ -13,7 +13,23 @@ class LibroController < ApplicationController
       respond_to do |format|
         format.html 
         format.pdf do 
-          pdf = MayorPdf.new("Libro Mayor", @libro_diario, current_usuario,10, 50, current_usuario.mes, "landscape" )
+          pdf = MayorPdf.new("Libro Mayor", @libro_diario, current_usuario,@folios_mayor, current_usuario.mes, "landscape")
+
+          paginas = (pdf.number_pages "<total>",color:'FFFFFF').to_s.split("..")[1]
+          #Crear o buscar el dato de cuantas paginas consumidas hay 
+          meses  = %w[Enero Febrero Marzo Abril Mayo Junio Julio Agosto Septiembre Octubre Noviembre Diciembre]
+          if meses.find_index(@u.mes) <= 2
+            consumido = @folios_mayor.consumidos.find_or_create_by(mes: "Enero")
+          elsif meses.find_index(@u.mes) <= 5 && meses.find_index(@u.mes) >= 3
+            consumido = @folios_mayor.consumidos.find_or_create_by(mes: "Abril")
+          elsif meses.find_index(@u.mes) <= 8 && meses.find_index(@u.mes) >= 4
+            consumido = @folios_mayor.consumidos.find_or_create_by(mes: "Julio")
+          else
+            consumido = @folios_mayor.consumidos.find_or_create_by(mes: "Octubre")
+          end
+          # Actualizar!
+          consumido.update!(pag_usadas: paginas.to_i)
+
           send_data pdf.render, filename: "mayor_" + @u.establecimiento.nombre.split(" ").join("_") + "_" + @u.mes + ".pdf",
           type: "application/pdf",
           disposition: "inline"
@@ -27,7 +43,14 @@ class LibroController < ApplicationController
     respond_to do |format|
       format.html { @current_balance } 
       format.pdf do
-        pdf = BalancePdf.new("Balance General de Cuentas",@current_balance, current_usuario,1, 50, 1, "portrait")
+        pdf = BalancePdf.new("Balance General de Cuentas",@current_balance, current_usuario, @folios_balance, 1, "portrait")
+
+        paginas = (pdf.number_pages "<total>",color:'FFFFFF').to_s.split("..")[1]
+        #Crear o buscar el dato de cuantas paginas consumidas hay 
+        consumido = @folios_balance.consumidos.find_or_create_by(mes: "Enero")
+        # Actualizar!
+        consumido.update!(pag_usadas: paginas.to_i)
+
         send_data pdf.render, filename: "balance_primer_periodo_" + @u.establecimiento.nombre.split(" ").join("_") + "_" + @u.year + ".pdf",
         type: "application/pdf",
         disposition: "inline"
@@ -40,7 +63,12 @@ class LibroController < ApplicationController
     respond_to do |format|
       format.html { @current_balance } 
       format.pdf do
-        pdf = BalancePdf.new("Balance General de Cuentas", @current_balance, current_usuario,10, 50, 2, "portrait")
+        pdf = BalancePdf.new("Balance General de Cuentas", @current_balance, current_usuario, @folios_balance, 2, "portrait")
+        paginas = (pdf.number_pages "<total>",color:'FFFFFF').to_s.split("..")[1]
+        #Crear o buscar el dato de cuantas paginas consumidas hay 
+        consumido = @folios_balance.consumidos.find_or_create_by(mes: "Abril")
+        # Actualizar!
+        consumido.update!(pag_usadas: paginas.to_i)
         send_data pdf.render, filename: "balance.pdf",
         type: "application/pdf",
         disposition: "inline"
@@ -53,7 +81,12 @@ class LibroController < ApplicationController
     respond_to do |format|
       format.html { @current_balance } 
       format.pdf do
-        pdf = BalancePdf.new("Balance General de Cuentas", @current_balance, current_usuario,10, 50, 3, "portrait")
+        pdf = BalancePdf.new("Balance General de Cuentas", @current_balance, current_usuario, @folios_balance, 3, "portrait")
+        paginas = (pdf.number_pages "<total>",color:'FFFFFF').to_s.split("..")[1]
+        #Crear o buscar el dato de cuantas paginas consumidas hay 
+        consumido = @folios_balance.consumidos.find_or_create_by(mes: "Julio")
+        # Actualizar!
+        consumido.update!(pag_usadas: paginas.to_i)
         send_data pdf.render, filename: "balance.pdf",
         type: "application/pdf",
         disposition: "inline"
@@ -66,7 +99,12 @@ class LibroController < ApplicationController
     respond_to do |format|
       format.html { @current_balance } 
       format.pdf do
-        pdf = BalancePdf.new("Balance General de Cuentas", @current_balance, current_usuario,10, 50, 4, "portrait")
+        pdf = BalancePdf.new("Balance General de Cuentas", @current_balance, current_usuario, @folios_balance, 4, "portrait")
+        paginas = (pdf.number_pages "<total>",color:'FFFFFF').to_s.split("..")[1]
+        #Crear o buscar el dato de cuantas paginas consumidas hay 
+        consumido = @folios_balance.consumidos.find_or_create_by(mes: "Octubre")
+        # Actualizar!
+        consumido.update!(pag_usadas: paginas.to_i)
         send_data pdf.render, filename: "balance.pdf",
         type: "application/pdf",
         disposition: "inline"
@@ -81,11 +119,11 @@ class LibroController < ApplicationController
   end
 
   def balance_folio
-   if @folios_balance == nil
-    pdf = ErrorPdf.new
-    send_data pdf.render, filename: "balance.pdf",
-    type: "application/pdf",
-    disposition: "inline"
+    if @folios_balance == nil
+      pdf = ErrorPdf.new
+      send_data pdf.render, filename: "balance.pdf",
+      type: "application/pdf",
+      disposition: "inline"
+    end
   end
-end
 end

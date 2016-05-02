@@ -1,6 +1,6 @@
 class BalancePdf < Pdf
-	def initialize(tipo, balance, u, folios_consumidos, folios_max, periodo, orientation)
-		super(tipo,u, folios_consumidos, folios_max, periodo, orientation)
+	def initialize(tipo, balance, u, folio, periodo, orientation)
+		super(tipo,u, folio, periodo, orientation)
 		@balance = balance
 		grid([1, 0], [9,11]).bounding_box do
 			cuentas

@@ -19,12 +19,18 @@ class LibroDiarioController < ApplicationController
       send_data pdf.render, filename: "partidas.pdf",
       type: "application/pdf",
       disposition: "inline"
-    
+
     else
       respond_to do |format|
         format.html 
         format.pdf do 
-          pdf = PartidasPdf.new(@partidas_libro_diario, @u)
+
+          pdf = PartidasPdf.new(@partidas_libro_diario, @u, @folios_diario)
+          paginas = (pdf.number_pages "<total>",color:'FFFFFF').to_s.split("..")[1]
+          #Crear o buscar el dato de cuantas paginas consumidas hay 
+          consumido = @folios_diario.consumidos.find_or_create_by(mes: @u.mes)
+          # Actualizar!
+          consumido.update!(pag_usadas: paginas.to_i)
           send_data pdf.render, filename: "partidas" + @u.establecimiento.nombre.split(" ").join("_") + "_" + @u.mes + ".pdf",
           type: "application/pdf",
           disposition: "inline"

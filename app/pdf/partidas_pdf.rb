@@ -1,6 +1,6 @@
 class PartidasPdf < Pdf
-	def initialize(partidas, u)
-		super("Resumen de Partidas del Libro Diario", u, 1, 100, u.mes, "portrait")
+	def initialize(partidas, u, folios_partida)
+		super("Resumen de Partidas del Libro Diario", u,folios_partida, u.mes, "portrait")
 		@partidas_libro_diario = partidas
 
 		grid([1, 0], [9,11]).bounding_box do

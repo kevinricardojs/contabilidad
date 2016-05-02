@@ -1,5 +1,5 @@
 class Pdf < Prawn::Document
-	def initialize(tipo, u, folio, periodo, orientation)
+	def initialize(tipo_de_libro, u, folio, periodo, orientation)
 		Prawn::Font::AFM.hide_m17n_warning = true
 		super(bottom_margin: 30, page_layout: orientation.to_sym, page_size: 'A4')
 		define_grid(columns: 12, rows:10)
@@ -7,8 +7,8 @@ class Pdf < Prawn::Document
 		@cuentas = Cuenta.all.group(:nombre_).count
 		@u = u
 		@folio = folio
-		@comenzar = consumidos_mensual + 1	
-		@tipo = tipo
+		@comenzar = consumidos + 1	
+		@tipo_de_libro = tipo_de_libro
 		@orientation = orientation
 		cabecera(@orientation)
 		font "Helvetica"
@@ -34,7 +34,7 @@ class Pdf < Prawn::Document
 				end
 
 				grid([0,4],[1,7]).bounding_box do
-					text @tipo, size: 10, style: :bold, color: "333333", align: :center
+					text @tipo_de_libro, size: 10, style: :bold, color: "333333", align: :center
 				end
 
 			end
@@ -56,7 +56,7 @@ class Pdf < Prawn::Document
 				end
 
 				grid([0,4],[1,7]).bounding_box do
-					text @tipo, size: 14, style: :bold, color: "333333", align: :center
+					text @tipo_de_libro, size: 14, style: :bold, color: "333333", align: :center
 				end
 
 			end
@@ -99,7 +99,7 @@ class Pdf < Prawn::Document
 		end
 	end
 
-	def consumidos_mensual
+	def consumidos
 		mes = @u.mes
 		suma = 0
 		if mes != "Enero"
@@ -111,7 +111,6 @@ class Pdf < Prawn::Document
 				end
 			end	
 		end
-		
 		return suma
 	end
 end

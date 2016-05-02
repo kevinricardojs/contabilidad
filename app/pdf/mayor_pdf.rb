@@ -1,13 +1,14 @@
 class MayorPdf < Pdf
-	def initialize(tipo, libro, u, folios_consumidos, folios_max, periodo, orientation)
-		super(tipo, u, folios_consumidos, folios_max, periodo, orientation)
+	def initialize(tipo, libro, u, folio, periodo, orientation)
+		super(tipo, u, folio, periodo, orientation)
 		@u = u
 		enumerar_paginas("landscape")
 		@libro_diario = libro
-		grid([1, 0], [11,5]).bounding_box do
+		grid([1, 0], [9,5]).bounding_box do
 			debe
 		end
-		grid([1, 6], [11,11]).bounding_box do
+		go_to_page(1)
+		grid([1, 6], [9,11]).bounding_box do
 			haber
 		end
 		@cuentas = Cuenta.all.group(:nombre_).count
@@ -36,13 +37,13 @@ class MayorPdf < Pdf
 					end
 				end
 				partida.push [{content: "", colspan: 4, border_top_color: "AAAAAA"}, {content: "Q" + '%.2f' % suma, size: 10, align: :right}]
-				partidas += partida
+				partidas += partida * 100
 			end
 		end
 		if partidas.length <= 1
 			partidas += [[@u.mes, "", "", "", ""]]
 		end
-		table( partidas, header: true, width: 384, cell_style:{ border_color: "333333", font_color: "333333"})
+		table( partidas, header: 2, width: 384, cell_style:{ border_color: "333333", font_color: "333333"})
 	end
 
 	def haber
@@ -67,14 +68,14 @@ class MayorPdf < Pdf
 					end
 				end
 				partida.push [{content: "", colspan: 4, border_top_color: "AAAAAA"}, {content: "Q" + '%.2f' % suma, size: 10, align: :right}]
-				partidas += partida
+				partidas += partida * 100
 			end
 		end
 
 		if partidas.length <= 1
 			partidas += [[@u.mes, "", "", "", ""]]
 		end
-		table( partidas, header: true, width: 384, cell_style:{ border_color: "333333", font_color: "333333"})
+		table( partidas, header: 2, width: 384, cell_style:{ border_color: "333333", font_color: "333333"})
 	end
 
 end

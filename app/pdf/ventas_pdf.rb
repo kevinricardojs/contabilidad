@@ -1,6 +1,6 @@
 class VentasPdf < Pdf
-	def initialize(iva, base, bienes, servicios, total, ventas_c, u, folio)
-		super("Libro de Ventas", u, folio, "current", "portrait")
+	def initialize(iva, base, bienes, servicios, total, ventas_c, u, folio, tipo)
+		super("Libro de Ventas", u, folio, "current", "portrait",tipo)
 		@iva = iva
 		@base = base
 		@bienes = bienes
@@ -10,8 +10,9 @@ class VentasPdf < Pdf
 		grid([1, 0], [9,11]).bounding_box do
 			ventas
 			@puntero  = cursor.to_s
+			resumen
 		end
-		resumen(@puntero)
+		
 		enumerar_paginas("portrait")
 	end
 
@@ -52,15 +53,15 @@ class VentasPdf < Pdf
 					]
 				]
 
-				title += movimiento
+				title += movimiento * 30
 				
 			end
 			title += [[{content: "", colspan:9, borders: [:top]}]]
-			table(title, header: true, width: 523, cell_style:{ border_color: "333333", font_color: "333333"})
+			table(title, header: 2, width: 523, cell_style:{ border_color: "333333", font_color: "333333"})
 		end
 
-		def resumen(puntero)
-			@p = puntero.to_i - 10
+		def resumen
+			
 			tabla = [
 				[{content:"Resumen", colspan:2,align: :center, font_style: :bold}],
 				[{content:"Bienes", size: 10, borders: [:left, :right]}, {content:"Q" + '%.2f' % @bienes.to_f, align: :right, size: 10, borders: [:left, :right]}],
@@ -69,9 +70,9 @@ class VentasPdf < Pdf
 				[{content:"Total", size: 10, borders: [:left, :right]}, {content:"Q" + '%.2f' % @total.to_f, align: :right, size: 10, borders: [:left, :right]}],
 				[{content: "", colspan:2, borders: [:top]}]
 			]
-			bounding_box([0, @p], width: 523) do
-				table(tabla, header: true, width: 523, cell_style:{ border_color: "333333", font_color: "333333"})
-			end
+			
+			table(tabla, header: true, width: 523, cell_style:{ border_color: "333333", font_color: "333333"})
+			
 
 		end
 

@@ -49,15 +49,15 @@ Ver Version Imprimible(PDF) <i class="fa fa-print"></i>
             </thead>
             <tbody>
                 <% @cuentas.each do |nombre| %>
-                <% if @libro_diario.cuentas.where(nombre_: nombre ).sum(:debe) != "0.0" %>
+                <% if @current_balance.cuentas.where(nombre_: nombre ).sum(:debe) != "0.0" %>
                 <tr>
-                    <td colspan="5" class="bold"><%= Cuenta.where(nombre_: nombre).first.nombre %></td>
+                    <td colspan="4" class="bold"><%= Cuenta.where(nombre_: nombre).first.nombre %></td>
                 </tr>
-                <% @libro_diario.cuentas.where(nombre_: nombre).each do |cuenta| %>
-                <% if cuenta.debe != "" && cuenta.debe!= "0.0"%>
+                <% @current_balance.cuentas.where(nombre_: nombre).each do |cuenta| %>
+                <% if cuenta.debe != "" && cuenta.debe!= "0.0" %>
 
                 <tr>
-                    <td><%= @u.mes %></td>
+                    <td><%= cuenta.libro_diario.mes %></td>
                     <td><%= cuenta.partida.dia %></td>
                     <td class="left border-grueso-right descripcion"><%= cuenta.partida.descripcion %></td>
                     <td>Q<%= '%.2f' % cuenta.debe.to_f %></td>
@@ -69,7 +69,7 @@ Ver Version Imprimible(PDF) <i class="fa fa-print"></i>
                 <tr>
                     <td colspan="3" class="left border-grueso-right"></td>
                     <td class="termina-partida"></td>
-                    <td class="termina-partida">Q<%= '%.2f' % Cuenta.where(nombre_: nombre).sum(:debe).to_f %></td>
+                    <td class="termina-partida">Q<%= '%.2f' % @current_balance.cuentas.where(nombre_: nombre).sum(:debe).to_f %></td>
                 </tr>
                 <% end %>
                 <% end %>
@@ -92,15 +92,14 @@ Ver Version Imprimible(PDF) <i class="fa fa-print"></i>
             </thead>
             <tbody>
                 <% @cuentas.each do |nombre| %>
-                <% if @libro_diario.cuentas.where(nombre_: nombre).sum(:haber) != "0.0" %>
+                <% if @current_balance.cuentas.where(nombre_: nombre).sum(:haber) != "0.0" %>
                 <tr>
-                    <td colspan="5" class="bold"><%= Cuenta.where(nombre_: nombre).first.nombre %></td>
+                    <td colspan="4" class="bold"><%= Cuenta.where(nombre_: nombre).first.nombre %></td>
                 </tr>
-                <% @libro_diario.cuentas.where(nombre_: nombre).each do |cuenta| %>
+                <% @current_balance.cuentas.where(nombre_: nombre).each do |cuenta| %>
                 <% if cuenta.haber != "" && cuenta.haber!= "0.0"%>
-
                 <tr>
-                    <td><%= @u.mes %></td>
+                    <td><%= cuenta.libro_diario.mes %></td>
                     <td><%= cuenta.partida.dia %></td>
                     <td class="left border-grueso-right descripcion"><%= cuenta.partida.descripcion %></td>
                     <td>Q<%= '%.2f' % cuenta.haber.to_f %></td>
@@ -111,7 +110,7 @@ Ver Version Imprimible(PDF) <i class="fa fa-print"></i>
                 <tr>
                     <td colspan="3" class="left border-grueso-right"></td>
                     <td class="termina-partida"></td>
-                    <td class="termina-partida">Q<%= '%.2f' % Cuenta.where(nombre_: nombre).sum(:haber).to_f %></td>
+                    <td class="termina-partida">Q<%= '%.2f' % @current_balance.cuentas.where(nombre_: nombre).sum(:haber).to_f %></td>
                 </tr>
                 <% end %>
                 <% end %>

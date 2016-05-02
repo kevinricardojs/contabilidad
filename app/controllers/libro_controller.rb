@@ -13,7 +13,7 @@ class LibroController < ApplicationController
       respond_to do |format|
         format.html 
         format.pdf do 
-          pdf = MayorPdf.new("Libro Mayor", @libro_diario, current_usuario,@folios_mayor, current_usuario.mes, "landscape")
+          pdf = MayorPdf.new("Libro Mayor", @current_balance, current_usuario,@folios_mayor, @periodo, "landscape")
 
           paginas = (pdf.number_pages "<total>",color:'FFFFFF').to_s.split("..")[1]
           #Crear o buscar el dato de cuantas paginas consumidas hay 

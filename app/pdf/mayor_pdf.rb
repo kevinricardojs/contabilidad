@@ -1,9 +1,9 @@
 class MayorPdf < Pdf
-	def initialize(tipo, libro, u, folio, periodo, orientation)
+	def initialize(tipo, balance, u, folio, periodo, orientation)
 		super(tipo, u, folio, periodo, orientation)
 		@u = u
-		enumerar_paginas("landscape")
-		@libro_diario = libro
+		
+		@current_balance = balance
 		grid([1, 0], [9,5]).bounding_box do
 			debe
 		end
@@ -12,6 +12,7 @@ class MayorPdf < Pdf
 			haber
 		end
 		@cuentas = Cuenta.all.group(:nombre_).count
+		enumerar_paginas("landscape")
 		
 	end
 
@@ -26,22 +27,22 @@ class MayorPdf < Pdf
 			]
 		]
 		@cuentas.each do |nombre|
-			suma = @libro_diario.cuentas.where(nombre_: nombre).sum(:debe)  
+			suma = @current_balance.cuentas.where(nombre_: nombre).sum(:debe)  
 			if suma != "" && suma != "0" && suma != "0.0" && suma != "0.00"
 				name = Cuenta.find_by(nombre_: nombre[0]).nombre
 				partida = [[{content: name, colspan:5, align: :center, font_style: :bold, border_bottom_color: "AAAAAA"}]]
-				cuentas = LibroDiario.find(@libro_diario).cuentas.where(nombre_: nombre)
+				cuentas = @current_balance.cuentas.where(nombre_: nombre)
 				cuentas.each do |cuenta|
-					if cuenta.debe != "" && cuenta.debe != "0" && cuenta.debe != "0.0" && cuenta.debe != "0.00"
-						partida.push [ {content:@u.mes, size: 8, borders:[:left]} , {content: cuenta.partida.dia, size: 8, align: :center, borders:[]}, {content: cuenta.partida.descripcion, size: 9, borders:[], width: 200}, {content: "Q" + '%.2f' % cuenta.debe.to_f, size: 8, align: :right, borders:[]} , {content: "----", borders:[:right], align: :center}]
+					if cuenta.debe != "" && cuenta.debe!= "0.0"	
+						partida.push [ {content: cuenta.libro_diario.mes, size: 8, borders:[:left]} , {content: cuenta.partida.dia, size: 8, align: :center, borders:[]}, {content: cuenta.partida.descripcion, size: 9, borders:[], width: 200}, {content: "Q" + '%.2f' % cuenta.debe.to_f, size: 8, align: :right, borders:[]} , {content: "----", borders:[:right], align: :center}]
 					end
 				end
 				partida.push [{content: "", colspan: 4, border_top_color: "AAAAAA"}, {content: "Q" + '%.2f' % suma, size: 10, align: :right}]
-				partidas += partida * 100
+				partidas += partida 
 			end
 		end
 		if partidas.length <= 1
-			partidas += [[@u.mes, "", "", "", ""]]
+			partidas += [[ cuenta.libro_diario.mes, "", "", "", ""]]
 		end
 		table( partidas, header: 2, width: 384, cell_style:{ border_color: "333333", font_color: "333333"})
 	end
@@ -57,23 +58,23 @@ class MayorPdf < Pdf
 			]
 		]
 		@cuentas.each do |nombre|
-			suma = @libro_diario.cuentas.where(nombre_: nombre).sum(:haber)
+			suma = @current_balance.cuentas.where(nombre_: nombre).sum(:haber)
 			if suma != "" && suma != "0" && suma != "0.0" && suma != "0.00"
 				name = Cuenta.find_by(nombre_: nombre[0]).nombre
 				partida = [[{content: name, colspan:5, align: :center, font_style: :bold, border_bottom_color: "FAFAFA"}]]
-				cuentas = LibroDiario.find(@libro_diario).cuentas.where(nombre_: nombre)
+				cuentas = @current_balance.cuentas.where(nombre_: nombre)
 				cuentas.each do |cuenta|
 					if cuenta.haber != "" && cuenta.haber != "0" && cuenta.haber != "0.0" && cuenta.haber != "0.00"
-						partida.push [ {content:@u.mes, size: 8, borders:[:left]} , {content: cuenta.partida.dia, size: 8, align: :center, borders:[]}, {content: cuenta.partida.descripcion, size: 9, borders:[], width: 200}, {content: "Q" + '%.2f' % cuenta.haber.to_f, size: 8, align: :right, borders:[]} , {content: "----", borders:[:right], align: :center}]
+						partida.push [ {content: cuenta.libro_diario.mes, size: 8, borders:[:left]} , {content: cuenta.partida.dia, size: 8, align: :center, borders:[]}, {content: cuenta.partida.descripcion, size: 9, borders:[], width: 200}, {content: "Q" + '%.2f' % cuenta.haber.to_f, size: 8, align: :right, borders:[]} , {content: "----", borders:[:right], align: :center}]
 					end
 				end
 				partida.push [{content: "", colspan: 4, border_top_color: "AAAAAA"}, {content: "Q" + '%.2f' % suma, size: 10, align: :right}]
-				partidas += partida * 100
+				partidas += partida 
 			end
 		end
 
 		if partidas.length <= 1
-			partidas += [[@u.mes, "", "", "", ""]]
+			partidas += [[ cuenta.libro_diario.mes, "", "", "", ""]]
 		end
 		table( partidas, header: 2, width: 384, cell_style:{ border_color: "333333", font_color: "333333"})
 	end

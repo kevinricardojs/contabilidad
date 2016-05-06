@@ -29,7 +29,7 @@ class FoliosController < ApplicationController
 	def update
 		respond_to do |format|
 			if @folio.update(folio_params)
-				format.html { redirect_to @establecimiento, notice: 'El Tipo de gasto fue actualizado' }
+				format.html { redirect_to @establecimiento, notice: 'El Folio fue actualizado' }
 			else
 				format.html { render :edit }
 			end
@@ -39,7 +39,7 @@ class FoliosController < ApplicationController
 	def destroy
 		@folio.destroy
 		respond_to do |format|
-			format.html { redirect_to @establecimiento, notice: 'EL Tipo de gasto fue borrado' }
+			format.html { redirect_to @establecimiento, notice: 'El Folio fue borrado' }
 		end
 	end
 

@@ -5,8 +5,8 @@ $(document).ready(function(){
 	};
 
 //Alertas
-var noticia = $('#notice span');
-var alerta = $('#alert span');
+var noticia = $('#notice');
+var alerta = $('#alert');
 
 if (!$(noticia).text()  == "") {
 	$("#notice").animate({
@@ -37,7 +37,7 @@ $(popover).mouseleave(function() {
 $('a').click(function  () {
 	if ($(this).hasClass('no-window') != true)
 	{
-		window.open(this.href,'Accion',"scrollbars=yes, resizable=yes, fullscreen=yes, height=660"); return false;
+		window.open(this.href,'Accion',"scrollbars=yes, resizable=yes, fullscreen=yes,width=1080 height=660"); return false;
 	};
 });
 
@@ -122,8 +122,8 @@ $('#compras_proveedor_nit').keyup(function () {
 
 		var nit_seleccionado = $('#compras_proveedor_nit').val();
 		var index_nit = nit_proveedores.indexOf(nit_seleccionado);
-
-		if ($('.ui-helper-hidden-accessible div:last-child').text() == "No search results.")
+		console.log(nit_proveedores);
+		if (nit_proveedores.length == 0)
 		{
 			$('#compras_proveedor_nombre').removeAttr('readonly');
 			$('#compras_proveedor_nombre').attr('placeholder' ,'Escribe el nombre del nuevo Proveedor');

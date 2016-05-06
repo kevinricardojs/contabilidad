@@ -1,7 +1,7 @@
 class ComprasPdf < Pdf
 
-	def initialize(iva, base, compras_por_dia, total, total_cuentas, u, compras_por_cuenta,folio,tipo)
-		super("Libro de Compras y Servicios Recibidos", u, folio, "current", "portrait",tipo)
+	def initialize(iva, base, compras_por_dia, total, total_cuentas, u, compras_por_cuenta, folio)
+		super("Libro de Compras y Servicios Recibidos", u, folio, "current", "portrait")
 		@compras_por_cuenta = compras_por_cuenta
 		@compras_por_dia = compras_por_dia
 		@iva = iva

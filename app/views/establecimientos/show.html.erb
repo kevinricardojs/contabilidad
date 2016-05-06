@@ -83,42 +83,6 @@
     </p>
 </a>
 </div>
-<div class="col-md-12">
-    <%= link_to new_establecimiento_folio_path(@establecimiento), class:"col-md-12 col-sm-12 col-xs-12 btn btn-info" do %>
-    <i class="fa fa-plus"></i> Nuevo Folio
-    <% end%>
-    <h5 class="text-center">Folios Registrados</h5>
-
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Tipo de Libro</th>
-            <th>Paginas registradas</th>
-            <th>Año</th>
-            <th colspan="2">Acciones</th>
-        </tr>
-    </thead>
-
-    <tbody>
-    <% @folios.each do |folio| %>
-        <tr>
-        <td><%= "Libro " + folio.libro %></td>
-        <td><%= folio.paginas %></td>
-        <td><%= folio.year %></td>
-            <td class="td-btn">
-            <%= link_to content_tag(:i ,'',class:"fa fa-pencil"), edit_establecimiento_folio_path(@establecimiento,folio) ,class:"btn btn-info col-md-12 text-center" %>
-
-            </td>
-            <td class="td-btn">
-            <%= link_to content_tag(:i ,'',class:"fa fa-trash-o"), establecimiento_folio_path(@establecimiento,folio), method: :delete, data: { confirm: 'Estas seguro?' },class:"btn btn-danger col-md-12 no-window text-center" %>
-            </td>
-        </tr>
-        <% end %>
-    </tbody>
-</table>
-
-</div>
-
 <div class="col-xs-12 col-md-12 col-lg-12 text-center">   
     <br>
     <%= link_to  establecimientos_path, class:"btn btn-normal"  do %>
@@ -128,4 +92,43 @@
     <%= link_to  edit_establecimiento_path, class:"btn btn-info" do%>
     Editar <i class="fa fa-pencil"></i>
     <% end %>
+    <br>
 </div>
+<div class="col-md-12"></div>
+<div class="col-md-12">
+    <%= link_to new_establecimiento_folio_path(@establecimiento), class:"col-md-12 col-sm-12 col-xs-12 btn btn-info" do %>
+    <i class="fa fa-plus"></i> Nuevo Folio
+    <% end%>
+    <h5 class="text-center">Folios Registrados</h5>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Tipo de Libro</th>
+                <th>Paginas registradas</th>
+                <th>Año</th>
+                <th colspan="2">Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% @folios.each do |folio| %>
+            <tr>
+                <td><%= "Libro " + folio.libro.capitalize %></td>
+                <td><%= folio.paginas %></td>
+                <td><%= folio.year %></td>
+                <td class="td-btn">
+                    <%= link_to content_tag(:i ,'',class:"fa fa-pencil"), edit_establecimiento_folio_path(@establecimiento,folio) ,class:"btn btn-info col-md-12 text-center" %>
+
+                </td>
+                <td class="td-btn">
+                    <%= link_to content_tag(:i ,'',class:"fa fa-trash-o"), establecimiento_folio_path(@establecimiento,folio), method: :delete, data: { confirm: 'Estas seguro?' },class:"btn btn-danger col-md-12 no-window text-center" %>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+
+</div>
+
+

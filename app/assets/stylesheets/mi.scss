@@ -31,13 +31,14 @@ td{
 	width:40%;
 	height: 90px;
 	z-index:90;
+  color: white;
 }
-// #notice{
-// 	background: rgba(0,100,66,0.7);
-// }
-// #alert{
-// 	background: rgba(#044F67,0.9);
-// }
+#notice{
+	background: rgba(0,100,66,0.7);
+}
+#alert{
+	background: rgba(#044F67,0.9);
+}
 .fa-grande{
 	font-size: 13em !important;
 }

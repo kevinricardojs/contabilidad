@@ -6,7 +6,21 @@ class CompraLibrosController < ApplicationController
   before_action :partidas_primarias
 
   # GET /compra_libros
-  def index
+  def destroy_all
+    @compras.each do |compra|
+      partida = @libro_diario.partidas.find_by(numero_partida: 2)
+      cuenta = partida.cuentas.find_by(nombre_: compra.tipo_de_gasto.downcase.split(" ").join("_"))
+      cuenta.debe = cuenta.debe.to_f - compra.base.to_f
+      if cuenta.debe == "0.0"
+        cuenta.destroy
+      else
+        cuenta.save
+      end
+      compra.destroy
+    end
+    respond_to do |format|
+      format.html { redirect_to new_compra_libro_path, notice: 'Has borrado todas las Compras de este Mes' }
+    end
   end
 
   # GET /compra_libros/1
@@ -31,24 +45,24 @@ class CompraLibrosController < ApplicationController
     respond_to do |format|
       if @compra_libro.save
         format.html { redirect_to new_compra_libro_path, notice: 'La Compra fue añadida exitosamente' }
-        # Hacer la cuenta para la partida 2 Compras
+          # Hacer la cuenta para la partida 2 Compras
 
-        partida = @libro_diario.partidas.find_by(numero_partida: 2)
-        cuenta = partida.cuentas.find_by(nombre_: @compra_libro.tipo_de_gasto.downcase.split(" ").join("_"))
-        ultimo = partida.cuentas.minimum(:posicion) - 1
-        if cuenta == nil
-          cuenta = Cuenta.new(nombre: @compra_libro.tipo_de_gasto,libro_diario_id:  @libro_diario,  debe: @compra_libro.base.to_f.round(2), haber:0.0, partida_id: partida.id, posicion: ultimo)
-          cuenta.save
-        else  
-          cuenta.debe = (cuenta.debe.to_f + @compra_libro.base.to_f).round(2)
-          cuenta.save
+          partida = @libro_diario.partidas.find_by(numero_partida: 2)
+          cuenta = partida.cuentas.find_by(nombre_: @compra_libro.tipo_de_gasto.downcase.split(" ").join("_"))
+          ultimo = partida.cuentas.minimum(:posicion) - 1
+
+          if cuenta == nil
+            cuenta = Cuenta.new(nombre: @compra_libro.tipo_de_gasto,libro_diario_id:  @libro_diario,  debe: @compra_libro.base.to_f.round(2), haber:0.0, partida_id: partida.id, posicion: ultimo)
+            cuenta.save
+          else  
+            cuenta.debe = (cuenta.debe.to_f + @compra_libro.base.to_f).round(2)
+            cuenta.save
+          end
+        else
+          format.html { render :new }
         end
-        
-      else
-        format.html { render :new }
       end
     end
-  end
 
   # PATCH/PUT /compra_libros/1
   def update
@@ -76,19 +90,18 @@ class CompraLibrosController < ApplicationController
       format.html { redirect_to new_compra_libro_path, notice: 'La Compra fue borrada' }
     end
   end
-  def reporte
-  end
+
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_compra_libro
-      @compra_libro = CompraLibro.find(params[:id])
-    end
-    def set_compras
-      @compras = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes)      
-    end
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def compra_libro_params
-      params.require(:compra_libro).permit(:documento, :serie, :numero, :proveedor_nit, :proveedor_nombre , :dia, :mes,:dato_mes, :year, :gravado_bienes, :gravado_servicios, :exento_bienes, :exento_servicios, :contribuyente_id, :establecimiento_id, :base, :iva, :tipo_de_gasto)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_compra_libro
+    @compra_libro = CompraLibro.find(params[:id])
   end
+  def set_compras
+    @compras = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes)      
+  end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def compra_libro_params
+    params.require(:compra_libro).permit(:documento, :serie, :numero, :proveedor_nit, :proveedor_nombre , :dia, :mes,:dato_mes, :year, :gravado_bienes, :gravado_servicios, :exento_bienes, :exento_servicios, :contribuyente_id, :establecimiento_id, :base, :iva, :tipo_de_gasto)
+  end
+end

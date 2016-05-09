@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :venta_libros, path: "libro_de_ventas", except:[:index]
   resources :compra_libros, path: "libro_de_compras", except:[:index]
+  get 'compra_libros/destroy_all'
   devise_for :usuarios, controllers: {registrations: "registrations"}
   resources :proveedors
   resources :establecimientos do

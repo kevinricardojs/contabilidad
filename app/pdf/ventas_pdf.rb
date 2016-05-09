@@ -53,7 +53,7 @@ class VentasPdf < Pdf
 					]
 				]
 
-				title += movimiento * 30
+				title += movimiento	
 				
 			end
 			title += [[{content: "", colspan:9, borders: [:top]}]]

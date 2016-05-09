@@ -2,7 +2,7 @@
 <%= link_to  libro_mayor_path, class:"col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center btn btn-primary pdf_link" do %>
 <i class="fa fa-angle-left"></i> Volver
 <%end%>
-<%= link_to  libro_balance_segundo_periodo_path + ".pdf", class:"col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center btn btn-info pdf_link" do %>
+<%= link_to  libro_balance_de_saldos_path + ".pdf", class:"col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center btn btn-info pdf_link" do %>
 Ver Version Imprimible(PDF) <i class="fa fa-print"></i>
 <%end%>
 <div id="libro_compras" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -23,7 +23,7 @@ Ver Version Imprimible(PDF) <i class="fa fa-print"></i>
       Nit:  <strong><%= helper_contribuyente_nit%></strong>
     </div>
     <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
-    Periodo:  <strong><%= print_meses_periodo(2) %></strong>
+    Periodo:  <strong><%= print_meses_periodo(1) %></strong>
     </div>
     <div class="col-xs-6 col-sm-7 col-md-7 col-lg-7 text-center">
       <strong>Libro Balance General de Cuentas</strong>
@@ -32,5 +32,6 @@ Ver Version Imprimible(PDF) <i class="fa fa-print"></i>
       Folio:
     </div>
   </div>
+
   <%= render 'balance' %>
 </div>

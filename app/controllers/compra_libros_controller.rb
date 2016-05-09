@@ -52,7 +52,7 @@ class CompraLibrosController < ApplicationController
           ultimo = partida.cuentas.minimum(:posicion) - 1
 
           if cuenta == nil
-            cuenta = Cuenta.new(nombre: @compra_libro.tipo_de_gasto,libro_diario_id:  @libro_diario,  debe: @compra_libro.base.to_f.round(2), haber:0.0, partida_id: partida.id, posicion: ultimo)
+            cuenta = Cuenta.new(nombre: @compra_libro.tipo_de_gasto, libro_diario_id:  @libro_diario,  debe: @compra_libro.base.to_f.round(2), haber:0.0, partida_id: partida.id, posicion: ultimo, mes: @u.mes )
             cuenta.save
           else  
             cuenta.debe = (cuenta.debe.to_f + @compra_libro.base.to_f).round(2)

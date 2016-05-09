@@ -1,26 +1,10 @@
 class LibroDiario < ActiveRecord::Base
 	belongs_to :establecimiento
+	belongs_to :balance
 	has_many :partidas, dependent: :destroy
 	has_many :cuentas, dependent: :destroy
-	belongs_to :balance
-	before_create :periodo
 	validates :balance_id, presence: true
 
-	def periodo
-		mes = self.mes
-		if mes == "Selecciona un Mes"
-			self.periodo = 0
-		elsif mes == "Enero" || mes == "Febrero" || mes == "Marzo"
-			self.periodo = 1
-		elsif mes == "Abril" || mes == "Mayo" || mes == "Junio"
-			self.periodo = 2 
-		elsif mes == "Julio" || mes == "Agosto" || mes == "Septiembre"
-			self.periodo = 3
-		elsif mes == "Octubre" || mes == "Noviembre" || mes == "Diciembre"
-			self.periodo = 4 
-		else
-			self.periodo = nil
-		end
-	end
+
 
 end

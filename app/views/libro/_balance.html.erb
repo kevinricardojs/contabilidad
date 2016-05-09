@@ -3,12 +3,9 @@
     <thead>
       <tr>
         <th rowspan="2">Cuentas</th>
-        <th colspan="2" >Sumas</th>
         <th colspan="2" >Saldos</th>
       </tr>
       <tr>
-        <th>Debe</th>
-        <th>Haber</th>
         <th>Debe</th>
         <th>Haber</th>
       </tr>
@@ -29,9 +26,6 @@
       <% total_haber += haber.to_f %>
 
       <tr>
-        <td class="left border-grueso-right"><%= nombre_ %></td>
-        <td class="right">Q<%= debe %></td>
-        <td class="right">Q<%= haber %></td>
         <!---->
         <% if debe.to_f < haber.to_f %>
         <% new_debe = haber.to_f - debe.to_f %>

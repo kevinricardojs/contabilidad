@@ -16,6 +16,6 @@ class Cuenta < ActiveRecord::Base
   end
 
   def tomar_balance
-      self.balance_id = self.partida.libro_diario.balance_id
+    self.balance_id = self.partida.libro_diario.balance_id
   end
 end

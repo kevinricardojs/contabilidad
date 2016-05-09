@@ -30,7 +30,7 @@ def set_libro_diario
     if libro != nil
       @libro_diario = libro
     else
-      @libro_diario = LibroDiario.create!(balance_id: @balance.id, establecimiento_id: establecimiento, mes: mes, year: year, periodo: @periodo )
+      @libro_diario = LibroDiario.create!(balance_id: @balance.id, establecimiento_id: establecimiento, mes: mes, year: year )
     end
   end
 end
@@ -140,7 +140,7 @@ def partidas_primarias
 
       def set_balance
         if usuario_signed_in? && current_usuario.establecimiento_id != nil && current_usuario.mes != "Selecciona un Mes" && current_usuario.year != "Selecciona un Año"
-          @balance = Balance.find_or_create_by(establecimiento_id: current_usuario.establecimiento_id, year: current_usuario.year, periodo: @periodo )
+          @balance = Balance.find_or_create_by(establecimiento_id: current_usuario.establecimiento_id, year: current_usuario.year )
         end
       end
 

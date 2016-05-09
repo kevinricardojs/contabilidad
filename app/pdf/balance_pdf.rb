@@ -1,6 +1,8 @@
 class BalancePdf < Pdf
-	def initialize(tipo, balance, u, folio, periodo, orientation)
+	def initialize(tipo, balance, u, folio, periodo, orientation, mes)
+		
 		super(tipo,u, folio, periodo, orientation)
+		@mes = mes
 		@balance = balance
 		grid([1, 0], [9,11]).bounding_box do
 			cuentas
@@ -13,12 +15,9 @@ class BalancePdf < Pdf
 		header = [ [
 			{content: "", colspan: 1, border_color:"757D75"},
 			{content: "Saldos", colspan: 2, align: :center, font_style: :bold, border_color: "757D75"},
-			{content: "Totales", colspan: 2, align: :center, font_style: :bold, border_color: "757D75"} 
 			],
 			[
 				{content:"Cuentas", align: :center, font_style: :bold, border_color: "757D75"},
-				{content:"Debe", align: :center, font_style: :bold, border_color: "757D75"}, 
-				{content:"Haber", align: :center, font_style: :bold, border_color: "757D75"},
 				{content:"Debe", align: :center, font_style: :bold, border_color: "757D75"},
 				{content:"Haber", align: :center, font_style: :bold, border_color: "757D75"}
 			]
@@ -30,8 +29,9 @@ class BalancePdf < Pdf
 		total_haber = @balance.cuentas.sum(:haber)
 		@cuentas.each do |cuenta|
 			nombre = Cuenta.where(nombre_: cuenta[0] ).first.nombre
-			debe = Cuenta.where(nombre_: cuenta[0] , balance_id: @balance).sum(:debe).to_f
-			haber = Cuenta.where(nombre_: cuenta[0] , balance_id: @balance).sum(:haber).to_f
+
+			debe = Balance.find(@balance).cuentas.where("mes <= ? AND nombre = ?", @mes, cuenta[0]).sum(:debe).to_f
+			haber = Balance.find(@balance).cuentas.where("mes <= ? AND nombre = ?", @mes, cuenta[0]).sum(:haber).to_f
 			if debe != 0.0 || haber != 0.0
 				if debe.to_f < haber.to_f
 					saldo_acreedor = haber.to_f - debe.to_f
@@ -50,8 +50,6 @@ class BalancePdf < Pdf
 				cuenta = [
 					[ 
 						{content:nombre, align: :left, borders: [:left, :right], border_width: 1, border_color: "757D75", size:9},
-						{content:"Q" + '%.2f' % debe, align: :right, borders: [:left, :right], border_width: 1, border_color: "757D75", size:10},
-						{content:"Q" + '%.2f' % haber, align: :right, borders: [:left, :right], border_width: 1, border_color: "757D75", size:10},
 						{content:saldo_deudor, align: :right, borders: [:left, :right], border_width: 1, border_color: "757D75", size:10},
 						{content:saldo_acreedor, align: :right, borders: [:left, :right], border_width: 1, border_color: "757D75", size:10} 
 					]
@@ -61,13 +59,11 @@ class BalancePdf < Pdf
 		end
 
 		if header.length <= 2
-			header += [["Totales", "0.00", "0.00", "0.00", "0.00"]]
+			header += [["Totales", "0.00", "0.00"]]
 		else
 			header += [
 				[
 					{content:"Totales", font_style: :bold, align: :right}, 
-					{content:"Q" + '%.2f' % total_debe, align: :right, border_color: "000000", border_bottom_width: 2, border_top_width: 2, size:10}, 
-					{content:"Q" + '%.2f' % total_haber, align: :right, border_color: "000000", border_bottom_width: 2, border_top_width: 2, size:10}, 
 					{content:"Q" + '%.2f' % total_deudor, align: :right, border_color: "000000", border_bottom_width: 2, border_top_width: 2, size:10}, 
 					{content:"Q" + '%.2f' % total_acreedor, align: :right, border_color: "000000", border_bottom_width: 2, border_top_width: 2, size:10}
 				]

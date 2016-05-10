@@ -20,7 +20,7 @@
 <% if usuario_signed_in? %>
 <p class="navbar-text">Contribuyente: <%= helper_contribuyente_nombre%></p>
 <p class="navbar-text">Establecimiento: <%= helper_establecimiento_nombre%></p>
-<p class="navbar-text">Mes: <%= current_usuario.mes %></p>
+<p class="navbar-text">Mes: <%= print_mes %></p>
 <p class="navbar-text">Año: <%= current_usuario.year %></p>
 <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#myModal" id="boton-cambiar">
 	Cambiar

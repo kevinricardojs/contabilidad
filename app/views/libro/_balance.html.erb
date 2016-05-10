@@ -1,57 +1,52 @@
 <div class="col-md-12 no-pad">
-  <table class="table table-hover table-responsive">
-    <thead>
-      <tr>
-        <th rowspan="2">Cuentas</th>
-        <th colspan="2" >Saldos</th>
-      </tr>
-      <tr>
-        <th>Debe</th>
-        <th>Haber</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% total_debe = 0 %>
-      <% total_haber = 0 %>
-      <% saldo_debe = 0 %>
-      <% saldo_haber = 0 %>
-      <% @cuentas.each do |cuenta| %>
-      
-      <% nombre_ =  Cuenta.where(nombre_: cuenta[0] ).first.nombre %>
-      <% debe = '%.2f' % Cuenta.where(nombre_: cuenta[0] , balance_id: @current_balance).sum(:debe).to_f %>
-      <% haber = '%.2f' % Cuenta.where(nombre_: cuenta[0] , balance_id: @current_balance).sum(:haber).to_f %>
-      <!---->
-      <% if debe != "0.00" || haber != "0.00" %>
-      <% total_debe += debe.to_f %>
-      <% total_haber += haber.to_f %>
+    <table class="table table-hover table-responsive">
+        <thead>
+            <tr>
+                <th rowspan="2">Cuentas</th>
+                <th colspan="2" >Saldos</th>
+            </tr>
+            <tr>
+                <th>Debe</th>
+                <th>Haber</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% saldo_debe = 0 %>
+            <% saldo_haber = 0 %>
+            <% @cuentas.each do |cuenta| %>
 
-      <tr>
-        <!---->
-        <% if debe.to_f < haber.to_f %>
-        <% new_debe = haber.to_f - debe.to_f %>
-        <% saldo_debe += new_debe %>
-        <td class="right"><%= "Q" + '%.2f' % (new_debe) %></td>
-        <td class="right"></td>
-        <% elsif haber.to_f < debe.to_f %>
-        <% new_haber = debe.to_f - haber.to_f %>
-        <% saldo_haber += new_haber %>
-        <td class="right"></td>
-        <td class="right"><%= "Q" + '%.2f' % (new_haber)  %></td>
-        <% else %>
-        <td class="right"></td>
-        <td class="right"></td>
-        <% end %>
-        <!---->
-      </tr>
-      <% end%>
-      <!---->
-      <% end %>
-      <tr>
-        <td class="left border-grueso-right">Totales</td>
-        <td class="termina-partida right">Q<%= '%.2f' % total_debe %></td>
-        <td class="termina-partida right">Q<%= '%.2f' % total_haber %></td>
-        <td class="termina-partida right"><%= "Q" + '%.2f' % (saldo_debe) %></td>
-        <td class="termina-partida right"><%= "Q" + '%.2f' % (saldo_haber) %></td>
-      </tr>
-    </tbody>
-  </table>
+            <% nombre_ =  Cuenta.where(nombre_: cuenta[0] ).first.nombre %>
+            <% debe = Balance.find(@current_balance).cuentas.where("mes <= ? AND nombre_ = ?", @mes, cuenta[0]).sum(:debe).to_f %>
+            <% haber = Balance.find(@current_balance).cuentas.where("mes <= ? AND nombre_ = ?", @mes, cuenta[0]).sum(:haber).to_f %>
+            <!---->
+            <% if debe != 0.0 || haber != 0.0 %>
+            <tr>
+                <!---->
+                <td class="left"><%= nombre_ %></td>
+
+                <% if debe.to_f < haber.to_f %>
+                    <% new_debe = haber.to_f - debe.to_f %>
+                    <% saldo_debe += new_debe %>
+                    <td class="right"></td>
+                    <td class="right"><%= "Q" + '%.2f' % (new_debe) %></td>
+                <% elsif haber.to_f < debe.to_f %>
+                    <% new_haber = debe.to_f - haber.to_f %>
+                    <% saldo_haber += new_haber %>
+                    <td class="right"><%= "Q" + '%.2f' % (new_haber)  %></td>
+                    <td class="right"></td>
+                <% else %>
+                <td class="right"></td>
+                <td class="right"></td>
+                <% end %>
+                <!---->
+            </tr>
+            <% end%>
+            <!---->
+            <% end %>
+            <tr>
+                <td class="left border-grueso-right">Totales</td>
+                <td class="termina-partida right"><%= "Q" + '%.2f' % (saldo_debe) %></td>
+                <td class="termina-partida right"><%= "Q" + '%.2f' % (saldo_haber) %></td>
+            </tr>
+        </tbody>
+    </table>

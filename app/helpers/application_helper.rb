@@ -38,4 +38,13 @@ module ApplicationHelper
       "No es un periodo valido"
     end
   end
+
+  def print_mes
+    meses = %w[Enero Febrero Marzo Abril Mayo Junio Julio Agosto Septiembre Octubre Noviembre Diciembre]
+    if @u.mes.to_i == 0
+      return "Selecciona un Mes"
+    else
+      return meses[@u.mes.to_i - 1]
+    end
+  end
 end

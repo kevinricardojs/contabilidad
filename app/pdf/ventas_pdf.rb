@@ -64,8 +64,8 @@ class VentasPdf < Pdf
 			
 			tabla = [
 				[{content:"Resumen", colspan:2,align: :center, font_style: :bold}],
-				[{content:"Bienes", size: 10, borders: [:left, :right]}, {content:"Q" + '%.2f' % @bienes.to_f, align: :right, size: 10, borders: [:left, :right]}],
-				[{content:"Servicios", size: 10, borders: [:left, :right]}, {content:"Q" + '%.2f' % @servicios.to_f, align: :right, size: 10, borders: [:left, :right]}],
+				[{content:"Ventas por Bienes", size: 10, borders: [:left, :right]}, {content:"Q" + '%.2f' % @bienes.to_f, align: :right, size: 10, borders: [:left, :right]}],
+				[{content:"Servicios Prestados", size: 10, borders: [:left, :right]}, {content:"Q" + '%.2f' % @servicios.to_f, align: :right, size: 10, borders: [:left, :right]}],
 				[{content:"IVA", size: 10, borders: [:left, :right]}, {content:"Q" + '%.2f' % @iva.to_f, align: :right, size: 10, borders: [:left, :right]}],
 				[{content:"Total", size: 10, borders: [:left, :right]}, {content:"Q" + '%.2f' % @total.to_f, align: :right, size: 10, borders: [:left, :right]}],
 				[{content: "", colspan:2, borders: [:top]}]

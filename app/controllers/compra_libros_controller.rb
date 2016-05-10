@@ -10,12 +10,7 @@ class CompraLibrosController < ApplicationController
     @compras.each do |compra|
       partida = @libro_diario.partidas.find_by(numero_partida: 2)
       cuenta = partida.cuentas.find_by(nombre_: compra.tipo_de_gasto.downcase.split(" ").join("_"))
-      cuenta.debe = cuenta.debe.to_f - compra.base.to_f
-      if cuenta.debe == "0.0"
-        cuenta.destroy
-      else
-        cuenta.save
-      end
+      cuenta.destroy
       compra.destroy
     end
     respond_to do |format|

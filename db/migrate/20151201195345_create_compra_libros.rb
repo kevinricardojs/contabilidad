@@ -5,7 +5,7 @@ class CreateCompraLibros < ActiveRecord::Migration
       t.string :serie
       t.integer :numero
       t.integer :dia
-      t.string :mes
+      t.integer :mes
       t.string :year
       t.references :proveedor, index: true, foreign_key: true
       t.decimal :base, precision: 10, scale: 2

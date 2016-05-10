@@ -25,13 +25,11 @@ class BalancePdf < Pdf
 		cuentas = []
 		total_deudor = 0 
 		total_acreedor = 0
-		total_debe = @balance.cuentas.sum(:debe)
-		total_haber = @balance.cuentas.sum(:haber)
 		@cuentas.each do |cuenta|
 			nombre = Cuenta.where(nombre_: cuenta[0] ).first.nombre
 
-			debe = Balance.find(@balance).cuentas.where("mes <= ? AND nombre = ?", @mes, cuenta[0]).sum(:debe).to_f
-			haber = Balance.find(@balance).cuentas.where("mes <= ? AND nombre = ?", @mes, cuenta[0]).sum(:haber).to_f
+			debe = Balance.find(@balance).cuentas.where("mes <= ? AND nombre_ = ?", @mes, cuenta[0]).sum(:debe).to_f
+			haber = Balance.find(@balance).cuentas.where("mes <= ? AND nombre_ = ?", @mes, cuenta[0]).sum(:haber).to_f
 			if debe != 0.0 || haber != 0.0
 				if debe.to_f < haber.to_f
 					saldo_acreedor = haber.to_f - debe.to_f

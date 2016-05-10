@@ -6,7 +6,7 @@ class Usuario < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:login]
-  enum mes: %w[Selecciona\ un\ Mes Enero Febrero Marzo Abril Mayo Junio Julio Agosto Septiembre Octubre Noviembre Diciembre]
+  enum mes: %w[Selecciona\ un\ Mes 01 02 03 04 05 06 07 08 09 10 11 12]
   enum year: %w[Selecciona\ un\ Año 2015 2016 2017 2018 2019 2020]
 
 

@@ -72,9 +72,9 @@ def partidas_primarias
        partida:  {
         numero_partida: 1, dia: 1, establecimiento_id: @libro_diario.establecimiento_id, 
         cuentas_attributes: [
-          { nombre: "Caja", debe: ventas_caja, haber: 0.00, posicion: 1 , balance_id: @balance.id},
-          { nombre: "Ventas", debe: 0.00, haber: ventas_base, posicion: 2, balance_id: @balance.id},
-          { nombre: "Iva por Pagar", debe: 0.00, haber: ventas_iva, posicion: 3, balance_id: @balance.id}
+          { nombre: "Caja", debe: ventas_caja, haber: 0.00, posicion: 1 , balance_id: @balance.id, mes: @u.mes},
+          { nombre: "Ventas", debe: 0.00, haber: ventas_base, posicion: 2, balance_id: @balance.id, mes: @u.mes},
+          { nombre: "Debito Fiscal", debe: 0.00, haber: ventas_iva, posicion: 3, balance_id: @balance.id, mes: @u.mes}
           ],
           descripcion: "Por favor añade una descripción"}
         }
@@ -98,8 +98,8 @@ def partidas_primarias
           partida:{
             numero_partida: 2, dia:1, establecimiento_id: @libro_diario.establecimiento_id, 
             cuentas_attributes: [
-              { nombre: "Caja", debe: 0.00, haber: compras_caja, posicion: 900, balance_id: @balance.id},
-              { nombre: "Iva por cobrar", debe: compras_iva, haber: 0.00, posicion: 899, balance_id: @balance.id}
+              { nombre: "Caja", debe: 0.00, haber: compras_caja, posicion: 900, balance_id: @balance.id, mes: @u.mes},
+              { nombre: "Credito Fiscal", debe: compras_iva, haber: 0.00, posicion: 899, balance_id: @balance.id, mes: @u.mes}
               ],
               descripcion: "Por favor añade una descripción"}
             }

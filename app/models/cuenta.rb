@@ -5,6 +5,7 @@ class Cuenta < ActiveRecord::Base
   before_create :make_nombre_
   before_create :take_libro_diario
   before_create :tomar_balance
+  before_create :mi_mes
   #validates :balance_id, presence: true
   
   def take_libro_diario
@@ -17,5 +18,9 @@ class Cuenta < ActiveRecord::Base
 
   def tomar_balance
     self.balance_id = self.partida.libro_diario.balance_id
+  end
+
+  def mi_mes
+    self.mes = self.libro_diario.mes
   end
 end

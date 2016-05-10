@@ -58,11 +58,11 @@ Ver Resumen Libro de Ventas <i class="fa fa-print"></i>
     <%= f.label :dia, "Día(*)" %>
     <%= f.number_field :dia, class:"form-control", required:true, min:1, max:31  %>
 </div>
-<div class="field form-group col-xs-6 col-sm-2 col-md-2 col-lg-2 ">
-    <%= f.label :mes, "Mes(*)" %>
-    <%= f.text_field :mes, readonly:"readonly", class:"form-control", value:current_usuario.mes , required:true%>
-</div >
 <div class="field form-group col-xs-6 col-sm-1 col-md-1 col-lg-1 ">
+    <%= f.label :mes, "Mes(*)" %>
+    <%= f.number_field :mes, readonly:"readonly", class:"form-control", value:current_usuario.mes , required:true%>
+</div >
+<div class="field form-group col-xs-6 col-sm-2 col-md-2 col-lg-2 ">
     <%= f.label :year, "Año(*)"%>
     <%= f.text_field :year, readonly:"readonly", class:"form-control", value:current_usuario.year , required:true%>
 </div>

@@ -398,38 +398,52 @@ $('.toggle-calc').click(function() {
 	};
 });
 
-	var meses =  ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
-	var mes = $('#compra_libro_dato_mes').data('mes');
-	var current = meses.indexOf(mes);
-	var primero, segundo, tercero;
-	if(current == 0)
-	{
+var meses =  ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+var mes = $('#compra_libro_dato_mes').data('mes');
+var current = meses.indexOf(mes);
+var primero, segundo, tercero;
+if(current == 0)
+{
 
-		primero = "11"
-		segundo = "12"
-		tercero = "01"
-	}
+	primero = "11"
+	segundo = "12"
+	tercero = "01"
+}
 
-	else if(current == 1)
-	{
+else if(current == 1)
+{
 
-		primero = "12"
-		segundo = "01"
-		tercero = "02"
-	}
-	else
-	{
+	primero = "12"
+	segundo = "01"
+	tercero = "02"
+}
+else
+{
 
-		primero = meses[current - 2 ];
-		segundo = meses[current - 1 ];
-		tercero = meses[current];
-	};
+	primero = meses[current - 2 ];
+	segundo = meses[current - 1 ];
+	tercero = meses[current];
+};
 
 
-	var mesesValidos = [ primero, segundo, tercero];
-	var regex = primero + "|" + segundo + "|" + tercero;
-	$('#compra_libro_dato_mes').attr('pattern', regex );
-	$('#compra_libro_dato_mes').autocomplete({
-		source: mesesValidos
+var mesesValidos = [ primero, segundo, tercero];
+var regex = primero + "|" + segundo + "|" + tercero;
+$('#compra_libro_dato_mes').attr('pattern', regex );
+$('#compra_libro_dato_mes').autocomplete({
+	source: mesesValidos
+});
+
+	//Crear enlace a mayor o balance
+	var libro, mes;
+	$('#operacion-libro').change(function() {
+		$('#link-to-libro').children('a').remove();
+		libro = $('#escoger-libro option:selected').val();
+		mes = $('#escoger-mes option:selected').val();
+		if ( libro !="nulo" && mes != "nulo") {
+			var link = "/libro/" + libro + "?mes=" + mes;
+			var boton = "<a class='btn btn-info col-md-12' href='" + link + "''>Ver</a>";
+			$('#link-to-libro').append(boton);
+		};
 	});
+
 });

@@ -61,22 +61,41 @@
 			</div>
 
 		</div>
-		<div class="objeto col-md-4 col-lg-4">
-			<i class="fa fa-cogs fa-grande"></i>
+		<div class="col-md-4 col-lg-4 text-center">
+			<i class="fa fa-cogs fa-5x"></i>
 			<h4 class="text-center">Operaciones Especiales</h4>
-
-			<div class="popover bottom">
-				<div class="arrow"></div>
-				<div class="popover-title">
-					<h4>Opciones</h4>
-				</div>
-				<div class="popover-content">
-					<%= link_to libro_balance_de_saldos_path do %>
-					<i class="fa fa-book"></i> Libro Balance de Saldos
-					<% end %>
+			<div class="col-md-12">
+				<form id="operacion-libro">
+					<span>
+						<select  id="escoger-libro" class="form-control">
+							<option value="nulo">Seleccione un Libro</option>
+							<option value="balance_de_saldos">Libro Balance</option>
+							<option value="mayor">Libro Mayor</option>
+						</select>
+					</span>
+					<span>
+						<select name="mes" class="form-control" id="escoger-mes">
+							<option value="nulo">Selecciona un mes</option>
+							<option value="01">Enero</option>
+							<option value="02">Febrero</option>
+							<option value="03">Marzo</option>
+							<option value="04">Abril</option>
+							<option value="05">Mayo</option>
+							<option value="06">Junio</option>
+							<option value="07">Julio</option>
+							<option value="08">Agosto</option>
+							<option value="09">Septiembre</option>
+							<option value="10">Octubre</option>
+							<option value="11">Noviembre</option>
+							<option value="12">Diciembre</option>
+						</select>
+					</span>
+				</form>
+				<div id="link-to-libro">
 					
 				</div>
 			</div>
+			
 
 		</div>
 	</div>

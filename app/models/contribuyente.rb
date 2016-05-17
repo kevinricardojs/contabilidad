@@ -12,6 +12,18 @@ class Contribuyente < ActiveRecord::Base
 	validates :departamento , presence: true
 	validates :municipio , presence: true
 	validates :telefono , presence: true,
-									length: {is: 8 , message:" tiene un minimo de 8 caracteres"},
-									numericality:{only_integer: true , message:" solo debe contener numeros"}
+	length: {is: 8 , message:" tiene un minimo de 8 caracteres"},
+	numericality:{only_integer: true , message:" solo debe contener numeros"}
+
+	def destroy
+		Usuario.where(contribuyente_id: self.id).each do |user|
+			user.contribuyente_id = nil
+			user.establecimiento_id = nil
+			user.save
+		end
+		super()
+	end
+
 end
+
+

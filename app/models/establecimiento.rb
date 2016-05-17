@@ -6,7 +6,7 @@ class Establecimiento < ActiveRecord::Base
 	has_many :usuarios
 	has_many :folios
 
-	
+
 
 	validates :nombre, 	presence: true
 	validates :calle , presence: true
@@ -16,4 +16,13 @@ class Establecimiento < ActiveRecord::Base
 	validates :municipio , presence: true
 	validates :telefono , presence: true, length: {is: 8 , message:" tiene un minimo de 8 caracteres"},
 	numericality:{only_integer: true , message:" solo debe contener numeros"}
+
+	def destroy
+		Usuario.where(establecimiento_id: self.id).each do |user|
+			user.establecimiento_id = nil
+			user.save
+		end
+		super()
+	end
+
 end

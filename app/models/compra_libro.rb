@@ -2,7 +2,7 @@ class CompraLibro < ActiveRecord::Base
   #Callback
   before_validation :self_proveedor_id
   before_validation :self_tipo_de_gasto
-  before_create :base_iva 
+  before_create :base_iva
 
   attr_accessor :proveedor_nit
   attr_accessor :proveedor_nombre
@@ -25,7 +25,8 @@ class CompraLibro < ActiveRecord::Base
   validates :contribuyente_id, presence: true
   validates :establecimiento_id, presence: true
   validates :tipo_de_gasto_id, presence: true
-  
+  validates :total, inclusion:{ in: 0..100000000}
+
   def proveedor_nit
     if self.proveedor_id
       Proveedor.find(self.proveedor_id).nit
@@ -43,8 +44,8 @@ class CompraLibro < ActiveRecord::Base
     end
   end
 
-  def self_proveedor_id   
-    self.proveedor_id = Proveedor.find_or_create_by(nit: @proveedor_nit , nombre: @proveedor_nombre).id if @proveedor_nit.present? && @proveedor_nombre.present?  
+  def self_proveedor_id
+    self.proveedor_id = Proveedor.find_or_create_by(nit: @proveedor_nit , nombre: @proveedor_nombre).id if @proveedor_nit.present? && @proveedor_nombre.present?
   end
 
   def self_tipo_de_gasto
@@ -67,5 +68,5 @@ class CompraLibro < ActiveRecord::Base
   def total
     self.total = '%.2f' % (self.base.to_f + self.iva.to_f)
   end
-  
+
 end

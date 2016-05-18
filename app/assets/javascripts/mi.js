@@ -41,6 +41,7 @@ $('a').click(function  () {
 	};
 });
 
+
 /**/
 
 
@@ -441,9 +442,13 @@ $('#compra_libro_dato_mes').autocomplete({
 		mes = $('#escoger-mes option:selected').val();
 		if ( libro !="nulo" && mes != "nulo") {
 			var link = "/libro/" + libro + "?mes=" + mes;
-			var boton = "<a class='btn btn-info col-md-12' href='" + link + "''>Ver</a>";
+			var boton = "<a class='btn btn-info col-md-12 window' href='" + link + "'>Ver</a>";
 			$('#link-to-libro').append(boton);
 		};
+
+		$('#link-to-libro a').click(function(e) {
+			window.open(this.href,'Accion',"scrollbars=yes, resizable=yes, fullscreen=yes,width=1080 height=660"); return false;
+		});
 	});
 
 });

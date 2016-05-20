@@ -1,5 +1,7 @@
 class VentaLibro < ActiveRecord::Base
-	before_save :base_iva
+	before_validation :base_iva
+
+
 	belongs_to :contribuyente
 	belongs_to :establecimiento
 	enum documento: %w{DA FA FC FE FO NC ND}
@@ -11,14 +13,13 @@ class VentaLibro < ActiveRecord::Base
 	validates :year, presence: true, numericality:true
 	validates :contribuyente_id, presence: {message: "Debes Seleccionar un Contribuyente"}
 	validates :establecimiento_id, presence:{message: "Debes Seleccionar un Establecimiento"}
+	validates :total, numericality: { greater_than: 0, message:"Debes ingresar una Cantidad Valida" }
 
 	def base_iva
-		if self.gravado_bienes != "" && !self.gravado_bienes.nil?
-			self.base = self.gravado_bienes.to_f / 1.12
-			self.iva = self.base.to_f * 0.12
-		elsif self.gravado_servicios != "" && !self.gravado_servicios.nil?
-			self.base = self.gravado_servicios.to_f / 1.12
-			self.iva = self.base.to_f * 0.12
+		if self.exento_servicios.nil? && self.exento_bienes.nil?
+			suma = self.gravado_bienes.to_f + self.gravado_servicios.to_f
+			self.base = (suma.to_f / 1.12).round(2)
+			self.iva = (self.base.to_f * 0.12).round(2)
 		else
 			self.base = 0.00
 			self.iva = 0.00
@@ -26,6 +27,10 @@ class VentaLibro < ActiveRecord::Base
 	end
 
 	def total
-		self.total = '%.2f' % (self.base.to_f + self.iva.to_f)
+		if self.base.to_f + self.iva.to_f != 0
+			self.total = '%.2f' % (self.base.to_f + self.iva.to_f)
+		else
+			self.total = '%.2f' % (self.exento_servicios.to_f + self.exento_bienes.to_f)
+		end
 	end
 end

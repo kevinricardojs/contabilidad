@@ -1,44 +1,48 @@
 <%= render 'partials/libro' %>
 
-<p>
-  <strong>Documento:</strong>
-  <%= @compra_libro.documento %>
-</p>
 
-<p>
-  <strong>Serie:</strong>
-  <%= @compra_libro.serie %>
-</p>
+<div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 fac-compra">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Registro de Compra</div>
+    <div class="panel-body">
+      <p>
+        <strong>Tipo de Documento:</strong> <%= @compra_libro.documento %>
+      </p>
 
-<p>
-  <strong>Numero:</strong>
-  <%= @compra_libro.numero %>
-</p>
+      <p>
+        <strong>Serie:</strong> <%= @compra_libro.serie %>
+      </p>
+      <p>
+        <strong>Numero:</strong> <%= @compra_libro.numero %>
+      </p>
+      <p>
+        <strong>Nombre del Proveedor:</strong> <%= @compra_libro.proveedor.nombre %>
+      </p>
 
-<p>
-  <strong>Proveedor:</strong>
-  <%= @compra_libro.proveedor.nombre %>
-</p>
+      <p>
+        <strong>Nit del Proveedor:</strong> <%= @compra_libro.proveedor.nit %>
+      </p>
+      <p>
+        <strong>Fecha de la Compra:</strong> <%= @compra_libro.dia %>/<%= @compra_libro.mes %>/<%= @compra_libro.year %>
+      </p>
 
-<p>
-  <strong>Nit:</strong>
-  <%= @compra_libro.proveedor.nit %>
-</p>
+    </div>
+  </div>
 
-<p>
-  <strong>Dia:</strong>
-  <%= @compra_libro.dia %>
-</p>
+</div>
+<nav class="col-md-4 col-sm-4 col-xs-4 col-lg-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4 col-lg-offset-4 ">
+  <ul class="pager">
+    <li class="previous">
+    <%= link_to new_compra_libro_path do %>
 
-<p>
-  <strong>Mes:</strong>
-  <%= @compra_libro.mes %>
-</p>
+      <span aria-hidden="true">&larr;</span> Atras
+      <%end%>
+    </li>
+    <li class="next">
+      <%= link_to edit_compra_libro_path(@compra_libro) do %>
+      Editar <span aria-hidden="true">&rarr;</span>
+      <%end%>
+    </li>
+  </ul>
+</nav>
 
-<p>
-  <strong>Year:</strong>
-  <%= @compra_libro.year %>
-</p>
-
-<%= link_to 'Edit', edit_compra_libro_path(@compra_libro) %> |
-<%= link_to 'Back', compra_libros_path %>

@@ -92,16 +92,21 @@ $('#boton-cambiar').click(function() {
 	});
 });
 /**/
-$('#compra_libro_documento').change(function() {
-	var inicialesDocumento = $('#compra_libro_documento option:selected').attr('value');
-	var documento = [];
-	documento["DA"] = "DECLARACION ADUANERA";
-	documento["FA"] = "FAUCA";
-	documento["FC"] = "FACTURA";
-	documento["FE"] = "FACTURA ESPECIAL";
-	documento["FO"] = "FORMULARIO SAT";
-	documento["NC"] = "NOTA CREDITO";
-	documento["ND"] = "NOTA DEBITO";
+
+var documento = [];
+documento["DA"] = "DECLARACION ADUANERA";
+documento["FA"] = "FAUCA";
+documento["FC"] = "FACTURA";
+documento["FE"] = "FACTURA ESPECIAL";
+documento["FO"] = "FORMULARIO SAT";
+documento["NC"] = "NOTA CREDITO";
+documento["ND"] = "NOTA DEBITO";
+var dato = $(".select").data('edit');
+$(".select option[value='" +dato +"']").attr('selected', 'selected');
+$('#tipo-documento').attr('value', documento[dato]);
+$('.select').change(function() {
+	var inicialesDocumento = $('.select option:selected').attr('value');
+
 	$('#tipo-documento').attr('value', documento[inicialesDocumento]);
 });
 

@@ -1,8 +1,9 @@
 class CompraLibro < ActiveRecord::Base
   #Callback
+  before_validation :base_iva
   before_validation :self_proveedor_id
   before_validation :self_tipo_de_gasto
-  before_create :base_iva
+
 
   attr_accessor :proveedor_nit
   attr_accessor :proveedor_nombre
@@ -25,16 +26,21 @@ class CompraLibro < ActiveRecord::Base
   validates :contribuyente_id, presence: true
   validates :establecimiento_id, presence: true
   validates :tipo_de_gasto_id, presence: true
-  validates :total, inclusion:{ in: 0..100000000}
+  validates :total, numericality: { greater_than: 0, message:"Debes ingresar una Cantidad   Valida" }
 
   def proveedor_nit
-    if self.proveedor_id
-      Proveedor.find(self.proveedor_id).nit
+    if Proveedor.where(id: self.proveedor_id).first != nil
+        return self.proveedor.nit
+    else
+      return @proveedor_nit
     end
   end
+
   def proveedor_nombre
-    if self.proveedor_id
+    if Proveedor.where(id: self.proveedor_id).first != nil
       Proveedor.find_by(id: self.proveedor_id).nombre
+    else
+      return @proveedor_nombre
     end
   end
 
@@ -53,11 +59,9 @@ class CompraLibro < ActiveRecord::Base
   end
 
   def base_iva
-    if self.gravado_bienes != "" && !self.gravado_bienes.nil?
-      self.base = (self.gravado_bienes.to_f / 1.12).round(2)
-      self.iva = (self.base.to_f * 0.12).round(2)
-    elsif self.gravado_servicios != "" && !self.gravado_servicios.nil?
-      self.base = (self.gravado_servicios.to_f / 1.12).round(2)
+    if self.exento_servicios.nil? && self.exento_bienes.nil?
+      suma = self.gravado_bienes.to_f + self.gravado_servicios.to_f
+      self.base = (suma.to_f / 1.12).round(2)
       self.iva = (self.base.to_f * 0.12).round(2)
     else
       self.base = 0.00
@@ -66,7 +70,10 @@ class CompraLibro < ActiveRecord::Base
   end
 
   def total
-    self.total = '%.2f' % (self.base.to_f + self.iva.to_f)
+    if self.base.to_f + self.iva.to_f != 0
+      self.total = '%.2f' % (self.base.to_f + self.iva.to_f)
+    else
+      self.total = '%.2f' % (self.exento_servicios.to_f + self.exento_bienes.to_f)
+    end
   end
-
 end

@@ -1,9 +1,8 @@
 class VentaLibro < ActiveRecord::Base
 	before_validation :base_iva
+	belongs_to :libro_v
 
 
-	belongs_to :contribuyente
-	belongs_to :establecimiento
 	enum documento: %w{DA FA FC FE FO NC ND}
 	validates :documento , presence: true
 	validates :serie, presence: true
@@ -11,8 +10,6 @@ class VentaLibro < ActiveRecord::Base
 	validates :dia, presence: true, numericality:true
 	validates :mes, presence: true
 	validates :year, presence: true, numericality:true
-	validates :contribuyente_id, presence: {message: "Debes Seleccionar un Contribuyente"}
-	validates :establecimiento_id, presence:{message: "Debes Seleccionar un Establecimiento"}
 	validates :total, numericality: { greater_than: 0, message:"Debes ingresar una Cantidad Valida" }
 
 	def base_iva

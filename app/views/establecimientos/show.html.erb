@@ -1,134 +1,107 @@
 <%= render 'mininav' %>
-<br>
-<div class="list-group ">
+<div class="col-md-7 col-sm-12 col-lg-offset-1 col-lg-6">
+    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Establecimiento: <%= @establecimiento.nombre %></div>
+            <div class="panel-body">
 
-    <a class="list-group-item active col-md-12 col-xs-12 col-lg-12" href="#">
+                <p>
+                    <strong>Nit:</strong>
+                    <%= @establecimiento.contribuyente.nit %>
+                </p>
+                <p>
+                    <strong>Nombre:</strong>
+                    <%= @establecimiento.nombre %>
+                </p>
+                <p>
+                    <strong>Calle:</strong>
+                    <%= @establecimiento.calle %>
+                </p>
+                <p>
+                    <strong>No casa:</strong>
+                    <%= @establecimiento.numero_casa %>
+                </p>
+                <p>
+                    <strong>Zona:</strong>
+                    <%= @establecimiento.zona %>
+                </p>
+                <p>
+                    <strong>Colonia:</strong>
+                    <%= @establecimiento.colonia %>
+                </p>
+                <p>
+                    <strong>Departamento:</strong>
+                    <%= @establecimiento.departamento %>
+                </p>
+                <p>
+                    <strong>Municipio:</strong>
+                    <%= @establecimiento.municipio %>
+                </p>
+                <p>
+                    <strong>Telefono:</strong>
+                    <%= @establecimiento.telefono %>
+                </p>
+            </div>
+        </div>
+    </div>
 
-        Datos Personales
+    <nav class="col-md-10 col-sm-10 col-xs-10 col-lg-10 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col-lg-offset-1 ">
+      <ul class="pager">
+        <li class="previous">
+            <%= link_to establecimientos_path do %>
 
-    </a>
-    <% id = @establecimiento.contribuyente_id %>
-    <% contribuyente = Contribuyente.find_by(id: id) || 0 %>
-    <% if contribuyente == 0 %>
-    <a class="  list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4 btn-danger" href="#">
-        <p>
-            <strong>Nit:</strong>
-            Error
-        </p>
-    </a>  
-    <% else %>
-    <a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
-        <p>
-            <strong>Nit:</strong>
-            <%= contribuyente.nit %>
-        </p> 
-    </a>
-    <% end %>
-
-</p>
-</a>
-<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
-
-    <p>
-        <strong>Nombre:</strong>
-        <%= @establecimiento.nombre %>
-    </p>
-</a>
-<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
-    <p>
-        <strong>Calle:</strong>
-        <%= @establecimiento.calle %>
-    </p>
-
-</a>
-<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
-    <p>
-        <strong>No casa:</strong>
-        <%= @establecimiento.numero_casa %>
-    </p>
-</a>
-
-<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
-    <p>
-        <strong>Zona:</strong>
-        <%= @establecimiento.zona %>
-    </p>
-
-</a>
-<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
-    <p>
-        <strong>Colonia:</strong>
-        <%= @establecimiento.colonia %>
-    </p>
-</a>
-<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
-
-    <p>
-        <strong>Departamento:</strong>
-        <%= @establecimiento.departamento %>
-    </p>
-
-
-</a>
-<a class="list-group-item col-xs-12 col-sm-6 col-md-6 col-lg-4" href="#">
-    <p>
-        <strong>Municipio:</strong>
-        <%= @establecimiento.municipio %>
-    </p>
-</a>
-<a class="list-group-item col-xs-12 col-sm-12 col-md-12 col-lg-12" href="#">  
-    <p>
-        <strong>Telefono:</strong>
-        <%= @establecimiento.telefono %>
-    </p>
-</a>
+            <span aria-hidden="true">&larr;</span> Volver
+            <%end%>
+        </li>
+        <li class="next">
+          <%= link_to edit_establecimiento_path do %>
+          Editar <i class="fa fa-pencil"></i>
+          <%end%>
+      </li>
+  </ul>
+</nav>
 </div>
-<div class="col-xs-12 col-md-12 col-lg-12 text-center">   
-    <br>
-    <%= link_to  establecimientos_path, class:"btn btn-normal"  do %>
-    <i class="fa fa-arrow-circle-left"></i> Volver
-    <% end %>
-    |
-    <%= link_to  edit_establecimiento_path, class:"btn btn-info" do%>
-    Editar <i class="fa fa-pencil"></i>
-    <% end %>
-    <br>
-</div>
-<div class="col-md-12"></div>
-<div class="col-md-12">
-    <%= link_to new_establecimiento_folio_path(@establecimiento), class:"col-md-12 col-sm-12 col-xs-12 btn btn-info" do %>
-    <i class="fa fa-plus"></i> Nuevo Folio
-    <% end%>
-    <h5 class="text-center">Folios Registrados</h5>
+<div class="col-md-5 col-sm-12 col-lg-4" >
+    <div class="panel panel-info">
+        <%= link_to new_establecimiento_folio_path(@establecimiento), style:"color: white;" do %>
+        <div class="panel-heading" style="background:#37BC9B;">
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Tipo de Libro</th>
-                <th>Paginas registradas</th>
-                <th>Año</th>
-                <th colspan="2">Acciones</th>
-            </tr>
-        </thead>
+            <i class="fa fa-plus"></i> Nuevo Folio
 
-        <tbody>
-            <% @folios.each do |folio| %>
-            <tr>
-                <td><%= "Libro " + folio.libro.capitalize %></td>
-                <td><%= folio.paginas %></td>
-                <td><%= folio.year %></td>
-                <td class="td-btn">
-                    <%= link_to content_tag(:i ,'',class:"fa fa-pencil"), edit_establecimiento_folio_path(@establecimiento,folio) ,class:"btn btn-info col-md-12 text-center" %>
+        </div>
+        <% end%>
 
-                </td>
-                <td class="td-btn">
-                    <%= link_to content_tag(:i ,'',class:"fa fa-trash-o"), establecimiento_folio_path(@establecimiento,folio), method: :delete, data: { confirm: 'Estas seguro?' },class:"btn btn-danger col-md-12 no-window text-center" %>
-                </td>
-            </tr>
-            <% end %>
-        </tbody>
-    </table>
+        <h5 class="text-center" style="margin: 0 10px;">Folios Registrados</h5>
+        <div class="panel-body">
+            <table class="table table-hover ">
+                <thead>
+                    <tr>
+                        <th>Libro</th>
+                        <th>Folios Registrados</th>
+                        <th>Año</th>
+                        <th colspan="2">Acciones</th>
+                    </tr>
+                </thead>
 
+                <tbody>
+                    <% @folios.each do |folio| %>
+                    <tr>
+                        <td><%= folio.libro.capitalize %></td>
+                        <td><%= folio.paginas %></td>
+                        <td><%= folio.year %></td>
+                        <td class="td-btn">
+                            <%= link_to content_tag(:i ,'',class:"fa fa-pencil"), edit_establecimiento_folio_path(@establecimiento,folio) ,class:"btn btn-info col-md-12 text-center" %>
+
+                        </td>
+                        <td class="td-btn">
+                            <%= link_to content_tag(:i ,'',class:"fa fa-trash-o"), establecimiento_folio_path(@establecimiento,folio), method: :delete, data: { confirm: 'Estas seguro?' },class:"btn btn-danger col-md-12 no-window text-center" %>
+                        </td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 

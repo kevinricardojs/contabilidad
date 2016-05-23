@@ -16,8 +16,6 @@ class CreateVentaLibros < ActiveRecord::Migration
       t.decimal :base, precision: 10, scale: 2
       t.decimal :iva, precision: 10, scale: 2
       t.decimal :total, precision: 10, scale: 2
-      t.references :contribuyente, index: true, foreign_key: true
-      t.references :establecimiento, index: true, foreign_key: true
 
       t.timestamps null: false
     end

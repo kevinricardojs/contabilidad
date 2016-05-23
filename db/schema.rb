@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160509173718) do
+ActiveRecord::Schema.define(version: 20160523181153) do
 
   create_table "balances", force: :cascade do |t|
     t.integer  "establecimiento_id", limit: 4
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20160509173718) do
     t.string   "serie",              limit: 255
     t.integer  "numero",             limit: 4
     t.integer  "dia",                limit: 4
-    t.string   "mes",                limit: 255
+    t.integer  "mes",                limit: 4
     t.string   "year",               limit: 255
     t.integer  "proveedor_id",       limit: 4
     t.decimal  "base",                           precision: 10, scale: 2
@@ -53,11 +53,11 @@ ActiveRecord::Schema.define(version: 20160509173718) do
 
   create_table "consumidos", force: :cascade do |t|
     t.integer  "folio_id",   limit: 4
-    t.string   "mes",        limit: 255
+    t.integer  "mes",        limit: 4
     t.integer  "pag_usadas", limit: 4
     t.integer  "position",   limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   add_index "consumidos", ["folio_id"], name: "index_consumidos_on_folio_id", using: :btree
@@ -124,7 +124,7 @@ ActiveRecord::Schema.define(version: 20160509173718) do
 
   create_table "libro_diarios", force: :cascade do |t|
     t.integer  "establecimiento_id", limit: 4
-    t.string   "mes",                limit: 255
+    t.integer  "mes",                limit: 4
     t.string   "year",               limit: 255
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
@@ -134,6 +134,16 @@ ActiveRecord::Schema.define(version: 20160509173718) do
 
   add_index "libro_diarios", ["balance_id"], name: "index_libro_diarios_on_balance_id", using: :btree
   add_index "libro_diarios", ["establecimiento_id"], name: "index_libro_diarios_on_establecimiento_id", using: :btree
+
+  create_table "libro_vs", force: :cascade do |t|
+    t.integer  "establecimiento_id", limit: 4
+    t.integer  "mes",                limit: 4
+    t.integer  "year",               limit: 4
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "libro_vs", ["establecimiento_id"], name: "index_libro_vs_on_establecimiento_id", using: :btree
 
   create_table "partidas", force: :cascade do |t|
     t.string   "dia",                limit: 255
@@ -190,29 +200,27 @@ ActiveRecord::Schema.define(version: 20160509173718) do
   add_index "usuarios", ["username"], name: "index_usuarios_on_username", unique: true, using: :btree
 
   create_table "venta_libros", force: :cascade do |t|
-    t.integer  "documento",          limit: 4
-    t.string   "serie",              limit: 255
-    t.integer  "numero",             limit: 4
-    t.integer  "dia",                limit: 4
-    t.string   "mes",                limit: 255
-    t.string   "year",               limit: 255
-    t.string   "nit",                limit: 255
-    t.string   "nombre",             limit: 255
-    t.decimal  "gravado_bienes",                 precision: 10, scale: 2
-    t.decimal  "gravado_servicios",              precision: 10, scale: 2
-    t.decimal  "exento_bienes",                  precision: 10, scale: 2
-    t.decimal  "exento_servicios",               precision: 10, scale: 2
-    t.decimal  "base",                           precision: 10, scale: 2
-    t.decimal  "iva",                            precision: 10, scale: 2
-    t.decimal  "total",                          precision: 10, scale: 2
-    t.integer  "contribuyente_id",   limit: 4
-    t.integer  "establecimiento_id", limit: 4
-    t.datetime "created_at",                                              null: false
-    t.datetime "updated_at",                                              null: false
+    t.integer  "documento",         limit: 4
+    t.string   "serie",             limit: 255
+    t.integer  "numero",            limit: 4
+    t.integer  "dia",               limit: 4
+    t.integer  "mes",               limit: 4
+    t.string   "year",              limit: 255
+    t.string   "nit",               limit: 255
+    t.string   "nombre",            limit: 255
+    t.decimal  "gravado_bienes",                precision: 10, scale: 2
+    t.decimal  "gravado_servicios",             precision: 10, scale: 2
+    t.decimal  "exento_bienes",                 precision: 10, scale: 2
+    t.decimal  "exento_servicios",              precision: 10, scale: 2
+    t.decimal  "base",                          precision: 10, scale: 2
+    t.decimal  "iva",                           precision: 10, scale: 2
+    t.decimal  "total",                         precision: 10, scale: 2
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
+    t.integer  "libro_v_id",        limit: 4
   end
 
-  add_index "venta_libros", ["contribuyente_id"], name: "index_venta_libros_on_contribuyente_id", using: :btree
-  add_index "venta_libros", ["establecimiento_id"], name: "index_venta_libros_on_establecimiento_id", using: :btree
+  add_index "venta_libros", ["libro_v_id"], name: "index_venta_libros_on_libro_v_id", using: :btree
 
   add_foreign_key "balances", "establecimientos"
   add_foreign_key "compra_libros", "contribuyentes"
@@ -227,10 +235,10 @@ ActiveRecord::Schema.define(version: 20160509173718) do
   add_foreign_key "folios", "establecimientos"
   add_foreign_key "libro_diarios", "balances"
   add_foreign_key "libro_diarios", "establecimientos"
+  add_foreign_key "libro_vs", "establecimientos"
   add_foreign_key "partidas", "establecimientos"
   add_foreign_key "partidas", "libro_diarios"
   add_foreign_key "usuarios", "contribuyentes"
   add_foreign_key "usuarios", "establecimientos"
-  add_foreign_key "venta_libros", "contribuyentes"
-  add_foreign_key "venta_libros", "establecimientos"
+  add_foreign_key "venta_libros", "libro_vs"
 end

@@ -24,8 +24,7 @@ class VentaLibrosController < ApplicationController
   # POST /venta_libros
   def create
     @venta_libro = VentaLibro.new(venta_libro_params)
-    @venta_libro.contribuyente_id = @u.contribuyente_id
-    @venta_libro.establecimiento_id  = @u.establecimiento_id 
+    @venta_libro.libro_v_id = @libro_v.id
 
     respond_to do |format|
       if @venta_libro.save
@@ -61,10 +60,10 @@ class VentaLibrosController < ApplicationController
       @venta_libro = VentaLibro.find(params[:id])
     end
     def set_ventas
-      @ventas = VentaLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes)
+      @ventas = VentaLibro.where(libro_v_id: @libro_v)
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def venta_libro_params
-      params.require(:venta_libro).permit(:documento, :serie, :numero, :dia, :mes, :year, :nit, :nombre, :gravado_bienes, :gravado_servicios, :exento_bienes, :exento_servicios, :base, :iva, :total, :contribuyente_id, :establecimiento_id)
+      params.require(:venta_libro).permit(:documento, :serie, :numero, :dia, :mes, :year, :nit, :nombre, :gravado_bienes, :gravado_servicios, :exento_bienes, :exento_servicios, :base, :iva, :total, :contribuyente_id, :establecimiento_id, :libro_v_id)
     end
 end

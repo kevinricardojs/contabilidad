@@ -1,5 +1,6 @@
 class CompraLibrosController < ApplicationController
   before_action :set_compra_libro, only: [:show, :edit, :update, :destroy]
+  before_action :find_libro_c
   before_action :set_compras
   before_action :validar_datos_para_trabajar
   before_action :set_libro_diario
@@ -34,9 +35,7 @@ class CompraLibrosController < ApplicationController
   # POST /compra_libros
   def create
     @compra_libro = CompraLibro.new(compra_libro_params)
-    @compra_libro.contribuyente_id = @u.contribuyente_id
-    @compra_libro.establecimiento_id  = @u.establecimiento_id 
-
+    @compra_libro.libro_c_id = @libro_c.id
     respond_to do |format|
       if @compra_libro.save
         format.html { redirect_to new_compra_libro_path, notice: 'La Compra fue añadida exitosamente' }
@@ -49,7 +48,7 @@ class CompraLibrosController < ApplicationController
           if cuenta == nil
             cuenta = Cuenta.new(nombre: @compra_libro.tipo_de_gasto, libro_diario_id:  @libro_diario,  debe: @compra_libro.base.to_f.round(2), haber:0.0, partida_id: partida.id, posicion: ultimo, mes: @u.mes )
             cuenta.save
-          else  
+          else
             cuenta.debe = (cuenta.debe.to_f + @compra_libro.base.to_f).round(2)
             cuenta.save
           end
@@ -93,10 +92,10 @@ class CompraLibrosController < ApplicationController
     @compra_libro = CompraLibro.find(params[:id])
   end
   def set_compras
-    @compras = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes)      
+    @compras = CompraLibro.where(libro_c_id: @libro_c)
   end
   # Never trust parameters from the scary internet, only allow the white list through.
   def compra_libro_params
-    params.require(:compra_libro).permit(:documento, :serie, :numero, :proveedor_nit, :proveedor_nombre , :dia, :mes,:dato_mes, :year, :gravado_bienes, :gravado_servicios, :exento_bienes, :exento_servicios, :contribuyente_id, :establecimiento_id, :base, :iva, :tipo_de_gasto)
+    params.require(:compra_libro).permit(:documento, :serie, :numero, :proveedor_nit, :proveedor_nombre , :dia, :mes,:dato_mes, :year, :gravado_bienes, :gravado_servicios, :exento_bienes, :exento_servicios, :base, :iva, :tipo_de_gasto, :libro_c_id)
   end
 end

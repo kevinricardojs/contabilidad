@@ -7,6 +7,7 @@ before_action :authenticate_usuario!
 before_action :set_user_as_u
 before_action :current_period
 before_action :find_libro_v
+before_action :find_libro_c
 before_action :set_balance
 before_action :configure_permitted_parameters, if: :devise_controller?
 before_action :set_libro_diario
@@ -62,8 +63,8 @@ def partidas_primarias
     ventas_base = VentaLibro.where(libro_v_id: @libro_v).sum(:base)
     ventas_iva = VentaLibro.where(libro_v_id: @libro_v).sum(:iva)
     ventas_caja = ventas_base + ventas_iva
-    compras_base = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:base)
-    compras_iva = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:iva)
+    compras_base = CompraLibro.where(libro_c_id: @libro_c).sum(:base)
+    compras_iva = CompraLibro.where(libro_c_id: @libro_c).sum(:iva)
     compras_caja = compras_base + compras_iva
 
 
@@ -158,6 +159,12 @@ def partidas_primarias
      def find_libro_v
       if usuario_signed_in? && current_usuario.establecimiento_id && current_usuario.mes != "Selecciona un Mes" && current_usuario.year != "Selecciona un Año"
         @libro_v = LibroV.find_or_create_by(establecimiento_id: @u.establecimiento_id, mes: @u.mes, year: @u.year)
+      end
+    end
+
+     def find_libro_c
+      if usuario_signed_in? && current_usuario.establecimiento_id && current_usuario.mes != "Selecciona un Mes" && current_usuario.year != "Selecciona un Año"
+        @libro_c = LibroC.find_or_create_by(establecimiento_id: @u.establecimiento_id, mes: @u.mes, year: @u.year)
       end
     end
   end

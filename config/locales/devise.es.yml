@@ -3,6 +3,7 @@
 es:
   errors:
     messages:
+      too_short: 'es muy corto'
       expired: "ha expirado, por favor pida uno nuevo"
       not_found: "no encontrado"
       already_confirmed: "ya está confirmada, por favor intente ingresar"

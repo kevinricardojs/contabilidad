@@ -1,5 +1,6 @@
 class OperacionesController < ApplicationController
 	before_action :find_libro_v
+	before_action :find_libro_c
 	before_action :set_compras
 	before_action :set_ventas
 	before_action :set_por_cuentas
@@ -49,11 +50,11 @@ class OperacionesController < ApplicationController
 			type: "application/pdf",
 			disposition: "inline"
 		else
-			@iva = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:iva)
-			@base = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).sum(:base)
+			@iva = CompraLibro.where(libro_c_id: @libro_c).sum(:iva)
+			@base = CompraLibro.where(libro_c_id: @libro_c).sum(:base)
 			@compras_por_dia = @compras.order(:dia)
 			@total = @base + @iva
-			@total_cuentas = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).count
+			@total_cuentas = CompraLibro.where(libro_c_id: @libro_c).count
 
 			respond_to do |format|
 				format.html
@@ -121,18 +122,19 @@ class OperacionesController < ApplicationController
 		end
 
 		def set_por_cuentas
-			cuentas = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes).group(:tipo_de_gasto_id).count()
+			cuentas = CompraLibro.where(libro_c_id: @libro_c).group(:tipo_de_gasto_id).count()
 			@compras_por_cuenta = []
 
 			cuentas.each do |cuenta|
 				nombre_cuenta = TipoDeGasto.find_by_id(cuenta[0]).nombre
-				suma_base = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes, tipo_de_gasto_id: cuenta[0]).sum(:base)
+				suma_base = CompraLibro.where(libro_c_id: @libro_c, tipo_de_gasto_id: cuenta[0]).sum(:base)
 				@compras_por_cuenta.push [nombre_cuenta , suma_base]
 			end
 		end
 
 		def set_compras
-			@compras = CompraLibro.where(establecimiento_id: current_usuario.establecimiento_id, mes: current_usuario.mes)
+			@compras = CompraLibro.where(libro_c_id: @libro_c)
 		end
+
 	end
 

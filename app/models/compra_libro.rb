@@ -5,6 +5,7 @@ class CompraLibro < ActiveRecord::Base
   before_validation :self_tipo_de_gasto
 
 
+
   attr_accessor :proveedor_nit
   attr_accessor :proveedor_nombre
   attr_accessor :tipo_de_gasto
@@ -14,6 +15,7 @@ class CompraLibro < ActiveRecord::Base
   belongs_to :establecimiento
   belongs_to :cuenta_contable
   belongs_to :tipo_de_gasto
+  belongs_to :libro_c
 
   #Validaciones
   enum documento: %w{DA FA FC FE FO NC ND}
@@ -23,14 +25,12 @@ class CompraLibro < ActiveRecord::Base
   validates :dia, presence: true, numericality:true
   validates :year, presence: true, numericality:true
   validates :proveedor_id, presence: true
-  validates :contribuyente_id, presence: true
-  validates :establecimiento_id, presence: true
   validates :tipo_de_gasto_id, presence: true
   validates :total, numericality: { greater_than: 0, message:"Debes ingresar una Cantidad   Valida" }
 
   def proveedor_nit
     if Proveedor.where(id: self.proveedor_id).first != nil
-        return self.proveedor.nit
+      return self.proveedor.nit
     else
       return @proveedor_nit
     end
@@ -45,8 +45,10 @@ class CompraLibro < ActiveRecord::Base
   end
 
   def tipo_de_gasto
-    if self.tipo_de_gasto_id
-      TipoDeGasto.find_by(id: self.tipo_de_gasto_id).nombre
+    if  TipoDeGasto.find_by(id: self.tipo_de_gasto_id) != nil
+      return TipoDeGasto.find_by(id: self.tipo_de_gasto_id).nombre
+    else
+      return @tipo_de_gasto
     end
   end
 

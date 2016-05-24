@@ -132,6 +132,7 @@ $('#compras_proveedor_nit').keyup(function () {
 		if (nit_proveedores.length == 0)
 		{
 			$('#compras_proveedor_nombre').removeAttr('readonly');
+			$('#compras_proveedor_nombre').val('');
 			$('#compras_proveedor_nombre').attr('placeholder' ,'Escribe el nombre del nuevo Proveedor');
 		}
 		else if(nit_seleccionado == "")

@@ -1,87 +1,58 @@
-<p>
-  <strong>Documento:</strong>
-  <%= @venta_libro.documento %>
-</p>
+<%= render 'partials/libro' %>
+<div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 fac-compra">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Registro de Venta</div>
+    <div class="panel-body">
+      <p>
+        <strong>Documento:</strong>
+        <%= @venta_libro.documento %>
+      </p>
 
-<p>
-  <strong>Serie:</strong>
-  <%= @venta_libro.serie %>
-</p>
+      <p>
+        <strong>Serie:</strong>
+        <%= @venta_libro.serie %>
+      </p>
 
-<p>
-  <strong>Numero:</strong>
-  <%= @venta_libro.numero %>
-</p>
+      <p>
+        <strong>Numero:</strong>
+        <%= @venta_libro.numero %>
+      </p>
+      <p>
+        <strong>Nit del Comprador:</strong>
+        <%= @venta_libro.nit %>
+      </p>
 
-<p>
-  <strong>Dia:</strong>
-  <%= @venta_libro.dia %>
-</p>
+      <p>
+        <strong>Nombre: del Comprador</strong>
+        <%= @venta_libro.nombre %>
+      </p>
+      <p>
+        <strong>Total:</strong>
+        Q<%= @venta_libro.total %>
+      </p>
+      <p>
+        <strong>Fecha:</strong>
+        <%= @venta_libro.dia %>/<%= @venta_libro.mes %>/<%= @venta_libro.year %>
+      </p>
 
-<p>
-  <strong>Mes:</strong>
-  <%= @venta_libro.mes %>
-</p>
+    </div>
+  </div>
 
-<p>
-  <strong>Year:</strong>
-  <%= @venta_libro.year %>
-</p>
 
-<p>
-  <strong>Nit:</strong>
-  <%= @venta_libro.nit %>
-</p>
 
-<p>
-  <strong>Nombre:</strong>
-  <%= @venta_libro.nombre %>
-</p>
+  <nav class="col-md-4 col-sm-4 col-xs-4 col-lg-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4 col-lg-offset-4 ">
+    <ul class="pager">
+      <li class="previous">
+        <%= link_to  new_venta_libro_path do %>
 
-<p>
-  <strong>Gravado bienes:</strong>
-  <%= @venta_libro.gravado_bienes %>
-</p>
+        <span aria-hidden="true">&larr;</span> Atras
+        <%end%>
+      </li>
+      <li class="next">
+        <%= link_to edit_venta_libro_path(@venta_libro) do %>
+        Editar <i class="fa fa-pencil"></i>
+        <%end%>
+      </li>
+    </ul>
+  </nav>
 
-<p>
-  <strong>Gravado servicios:</strong>
-  <%= @venta_libro.gravado_servicios %>
-</p>
-
-<p>
-  <strong>Exento bienes:</strong>
-  <%= @venta_libro.exento_bienes %>
-</p>
-
-<p>
-  <strong>Exento servicios:</strong>
-  <%= @venta_libro.exento_servicios %>
-</p>
-
-<p>
-  <strong>Base:</strong>
-  <%= @venta_libro.base %>
-</p>
-
-<p>
-  <strong>Iva:</strong>
-  <%= @venta_libro.iva %>
-</p>
-
-<p>
-  <strong>Total:</strong>
-  <%= @venta_libro.total %>
-</p>
-
-<p>
-  <strong>Contribuyente:</strong>
-  <%= @venta_libro.contribuyente %>
-</p>
-
-<p>
-  <strong>Establecimiento:</strong>
-  <%= @venta_libro.establecimiento %>
-</p>
-
-<%= link_to 'Edit', edit_venta_libro_path(@venta_libro) %> |
-<%= link_to 'Back', venta_libros_path %>

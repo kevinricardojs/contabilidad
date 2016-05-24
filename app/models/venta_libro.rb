@@ -1,5 +1,6 @@
 class VentaLibro < ActiveRecord::Base
 	before_validation :base_iva
+	before_save :nombre_nit
 	belongs_to :libro_v
 
 
@@ -20,6 +21,12 @@ class VentaLibro < ActiveRecord::Base
 		else
 			self.base = 0.00
 			self.iva = 0.00
+		end
+	end
+	def nombre_nit
+		if self.nombre == "" && self.nit == ""
+			self.nombre = nil
+			self.nit = nil
 		end
 	end
 

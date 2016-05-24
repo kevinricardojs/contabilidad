@@ -7,8 +7,8 @@ class CreateVentaLibros < ActiveRecord::Migration
       t.integer :dia
       t.integer :mes
       t.string :year
-      t.string :nit
-      t.string :nombre
+      t.string :nit, default: "C/F"
+      t.string :nombre, default: "Clientes Varios"
       t.decimal :gravado_bienes, precision: 10, scale: 2
       t.decimal :gravado_servicios, precision: 10, scale: 2
       t.decimal :exento_bienes, precision: 10, scale: 2

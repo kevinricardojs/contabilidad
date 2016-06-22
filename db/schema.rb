@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160523194917) do
+ActiveRecord::Schema.define(version: 20160524220824) do
 
   create_table "balances", force: :cascade do |t|
     t.integer  "establecimiento_id", limit: 4
@@ -61,17 +61,18 @@ ActiveRecord::Schema.define(version: 20160523194917) do
   add_index "consumidos", ["folio_id"], name: "index_consumidos_on_folio_id", using: :btree
 
   create_table "contribuyentes", force: :cascade do |t|
-    t.string   "nit",          limit: 255
-    t.string   "nombre",       limit: 255
-    t.string   "calle",        limit: 255
-    t.string   "no_casa",      limit: 255
-    t.integer  "zona",         limit: 4
-    t.string   "colonia",      limit: 255
-    t.string   "departamento", limit: 255
-    t.string   "municipio",    limit: 255
-    t.string   "telefono",     limit: 255
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "nit",             limit: 255
+    t.string   "nombre",          limit: 255
+    t.string   "calle",           limit: 255
+    t.string   "no_casa",         limit: 255
+    t.integer  "zona",            limit: 4
+    t.string   "colonia",         limit: 255
+    t.string   "departamento",    limit: 255
+    t.string   "municipio",       limit: 255
+    t.string   "telefono",        limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "t_contribuyente", limit: 4
   end
 
   create_table "cuentas", force: :cascade do |t|

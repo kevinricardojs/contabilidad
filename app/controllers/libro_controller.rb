@@ -11,24 +11,24 @@ class LibroController < ApplicationController
     else
       @current_balance = Balance.find_or_create_by(establecimiento_id: current_usuario.establecimiento_id, periodo:@periodo, year: current_usuario.year)
       respond_to do |format|
-        format.html 
-        format.pdf do 
-          pdf = MayorPdf.new("Libro Mayor", @current_balance, current_usuario,@folios_mayor, @periodo, "landscape")
+        format.html
+        format.pdf do
+          pdf = MayorPdf.new("Libro Mayor", @current_balance, current_usuario,@folios_mayor, @periodo, "landscape", @mes)
 
-          paginas = (pdf.number_pages "<total>",color:'FFFFFF').to_s.split("..")[1]
-          #Crear o buscar el dato de cuantas paginas consumidas hay 
-          meses  = %w[Enero Febrero Marzo Abril Mayo Junio Julio Agosto Septiembre Octubre Noviembre Diciembre]
-          if meses.find_index(@u.mes) <= 2
-            consumido = @folios_mayor.consumidos.find_or_create_by(mes: "Enero")
-          elsif meses.find_index(@u.mes) <= 5 && meses.find_index(@u.mes) >= 3
-            consumido = @folios_mayor.consumidos.find_or_create_by(mes: "Abril")
-          elsif meses.find_index(@u.mes) <= 8 && meses.find_index(@u.mes) >= 6
-            consumido = @folios_mayor.consumidos.find_or_create_by(mes: "Julio")
-          elsif meses.find_index(@u.mes) <= 11 && meses.find_index(@u.mes) >= 9
-            consumido = @folios_mayor.consumidos.find_or_create_by(mes: "Octubre")
-          end
-          # Actualizar!
-          consumido.update!(pag_usadas: paginas.to_i)
+          # paginas = (pdf.number_pages "<total>",color:'FFFFFF').to_s.split("..")[1]
+          # #Crear o buscar el dato de cuantas paginas consumidas hay
+          # meses  = %w[Enero Febrero Marzo Abril Mayo Junio Julio Agosto Septiembre Octubre Noviembre Diciembre]
+          # if meses.find_index(@u.mes) <= 2
+          #   consumido = @folios_mayor.consumidos.find_or_create_by(mes: "Enero")
+          # elsif meses.find_index(@u.mes) <= 5 && meses.find_index(@u.mes) >= 3
+          #   consumido = @folios_mayor.consumidos.find_or_create_by(mes: "Abril")
+          # elsif meses.find_index(@u.mes) <= 8 && meses.find_index(@u.mes) >= 6
+          #   consumido = @folios_mayor.consumidos.find_or_create_by(mes: "Julio")
+          # elsif meses.find_index(@u.mes) <= 11 && meses.find_index(@u.mes) >= 9
+          #   consumido = @folios_mayor.consumidos.find_or_create_by(mes: "Octubre")
+          # end
+          # # Actualizar!
+          # consumido.update!(pag_usadas: paginas.to_i)
 
           send_data pdf.render, filename: "mayor_" + @u.establecimiento.nombre.split(" ").join("_") + "_" + @u.mes + ".pdf",
           type: "application/pdf",

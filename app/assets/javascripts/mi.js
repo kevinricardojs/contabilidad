@@ -447,7 +447,7 @@ $('#compra_libro_dato_mes').autocomplete({
 		libro = $('#escoger-libro option:selected').val();
 		mes = $('#escoger-mes option:selected').val();
 		if ( libro !="nulo" && mes != "nulo") {
-			var link = "/libro/" + libro + "?mes=" + mes;
+			var link = "/libro/" + libro + ".pdf?mes=" + mes;
 			var boton = "<a class='btn btn-info col-md-12 window' href='" + link + "'>Ver</a>";
 			$('#link-to-libro').append(boton);
 		};

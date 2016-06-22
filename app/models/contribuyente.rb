@@ -16,6 +16,8 @@ class Contribuyente < ActiveRecord::Base
 	length: {is: 8 , message:" tiene un minimo de 8 caracteres"},
 	numericality:{only_integer: true , message:" solo debe contener numeros"}
 
+	enum t_contribuyente: %w[pequeno normal sociedad]
+
 	def reset
 		Usuario.where(contribuyente_id: self.id).each do |user|
 			user.contribuyente_id = nil
@@ -23,7 +25,6 @@ class Contribuyente < ActiveRecord::Base
 			user.save
 		end
 	end
-
 end
 
 

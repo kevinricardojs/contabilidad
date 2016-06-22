@@ -7,7 +7,7 @@ class Pdf < Prawn::Document
 		@cuentas = Cuenta.all.group(:nombre_).count
 		@u = u
 		@folio = folio
-		@comenzar = consumidos + 1	
+		@comenzar = 0 + 1
 		@tipo_de_libro = tipo_de_libro
 		@orientation = orientation
 		cabecera(@orientation)
@@ -27,7 +27,7 @@ class Pdf < Prawn::Document
 					text "Nit: #{@u.contribuyente.nit}", size: 12, style: :bold, color: "333333"
 					text "Periodo: " + print_meses_periodo(@periodo), size: 9, style: :bold, color: "333333"
 
-				end	
+				end
 				grid([0,10],[1,11]).bounding_box do
 					text "Fecha: #{dia}", size:10, style: :normal, color: "333333"
 					text "Hora: #{hora}", size:9, style: :normal, color: "333333"
@@ -48,7 +48,7 @@ class Pdf < Prawn::Document
 					text "Nit: #{@u.contribuyente.nit}", size: 12, style: :bold, color: "333333"
 					text "Periodo: " + print_meses_periodo(@periodo), size: 9, style: :bold, color: "333333"
 
-				end	
+				end
 				grid([0,10],[1,11]).bounding_box do
 					text "Fecha: #{dia}", size:12, style: :normal, color: "333333"
 					text "Hora: #{hora}", size:10, style: :normal, color: "333333"
@@ -69,7 +69,7 @@ class Pdf < Prawn::Document
 				width: 150,
 				page_filter: lambda{ |pg| pg <= @folio.paginas + 1 },
 				start_count_at:  @comenzar,
-				color: "333333"	
+				color: "333333"
 			}
 			number_pages "Folio: <page>" ,options
 		else
@@ -78,7 +78,7 @@ class Pdf < Prawn::Document
 				page_filter: lambda{ |pg| pg <= @folio.paginas + 1 },
 				width: 150,
 				start_count_at:  @comenzar,
-				color: "333333"	
+				color: "333333"
 			}
 			number_pages "Folio: <page>" ,options
 		end
@@ -103,15 +103,15 @@ class Pdf < Prawn::Document
 		mes = @u.mes
 		suma = 0
 		if self.class != MayorPdf
-			
+
 			if mes != "Enero"
 				@folio.consumidos.order(:position).each do |consumido|
 					if consumido.mes == mes
 						break
 					else
-						suma += consumido.pag_usadas	
+						suma += consumido.pag_usadas
 					end
-				end	
+				end
 			end
 		else
 			case @periodo
@@ -128,7 +128,7 @@ class Pdf < Prawn::Document
 				abril = @folio.consumidos.find_by(mes: "Abril").pag_usadas
 				julio = @folio.consumidos.find_by(mes: "Julio").pag_usadas
 				suma += enero + abril + julio
-				
+
 			end
 		end
 		return suma

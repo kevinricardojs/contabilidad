@@ -69,8 +69,13 @@
         <td><%= venta["max"] %></td>
         <td><%= venta["serie"] %></td>
         <td><%= venta["nombre"] %></td>
+        <% if @u.contribuyente.t_contribuyente == "normal"  %>
         <td>Q<%= '%.2f' % venta["gravado_bienes"].to_f %></td>
         <td>Q<%= '%.2f' % venta["gravado_servicios"].to_f %></td>
+        <% else %>
+        <td>Q<%= '%.2f' % venta["exento_bienes"].to_f %></td>
+        <td>Q<%= '%.2f' % venta["exento_servicios"].to_f %></td>
+        <%end%>
       </tr>
       <% end %>
     </tbody>

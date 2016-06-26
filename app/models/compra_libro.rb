@@ -11,8 +11,6 @@ class CompraLibro < ActiveRecord::Base
   attr_accessor :tipo_de_gasto
   #Asociaciones
   belongs_to :proveedor
-  belongs_to :contribuyente
-  belongs_to :establecimiento
   belongs_to :cuenta_contable
   belongs_to :tipo_de_gasto
   belongs_to :libro_c
@@ -66,7 +64,7 @@ class CompraLibro < ActiveRecord::Base
       self.base = (suma.to_f / 1.12).round(2)
       self.iva = (self.base.to_f * 0.12).round(2)
     else
-      self.base = 0.00
+      self.base = self.exento_bienes.to_f + self.exento_servicios.to_f
       self.iva = 0.00
     end
   end

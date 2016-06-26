@@ -15,12 +15,17 @@ class OperacionesController < ApplicationController
 
 			@iva = VentaLibro.where(libro_v_id: @libro_v).sum(:iva)
 			@base = VentaLibro.where(libro_v_id: @libro_v).sum(:base)
-			@bienes = (VentaLibro.where(libro_v_id: @libro_v).sum(:gravado_bienes).to_f / 1.12).round(2)
-			@servicios = (VentaLibro.where(libro_v_id: @libro_v).sum(:gravado_servicios).to_f / 1.12).round(2)
-			@total = @base + @iva
-			respond_to do |format|
-				format.html
-				format.pdf do
+			if @u.contribuyente.t_contribuyente == "normal"
+				@bienes = (VentaLibro.where(libro_v_id: @libro_v).sum(:gravado_bienes).to_f / 1.12).round(2)
+				@servicios = (VentaLibro.where(libro_v_id: @libro_v).sum(:gravado_servicios).to_f / 1.12).round(2)
+			else
+				@bienes = (VentaLibro.where(libro_v_id: @libro_v).sum(:exento_bienes))
+				@servicios = (VentaLibro.where(libro_v_id: @libro_v).sum(:exento_servicios))
+			end
+				@total = @base + @iva
+				respond_to do |format|
+					format.html
+					format.pdf do
 
 					# Parametros suma de iva, suma de base, suma de bienes, suma de servicios,
 					# => suma total, todas las ventas, current_usuario y el folio del actual año!
@@ -116,25 +121,25 @@ class OperacionesController < ApplicationController
 
 					@ventas.push resumen_dia_ventas.as_json
 				end
-				end
-			end
-			return @ventas
-		end
-
-		def set_por_cuentas
-			cuentas = CompraLibro.where(libro_c_id: @libro_c).group(:tipo_de_gasto_id).count()
-			@compras_por_cuenta = []
-
-			cuentas.each do |cuenta|
-				nombre_cuenta = TipoDeGasto.find_by_id(cuenta[0]).nombre
-				suma_base = CompraLibro.where(libro_c_id: @libro_c, tipo_de_gasto_id: cuenta[0]).sum(:base)
-				@compras_por_cuenta.push [nombre_cuenta , suma_base]
 			end
 		end
-
-		def set_compras
-			@compras = CompraLibro.where(libro_c_id: @libro_c)
-		end
-
+		return @ventas
 	end
+
+	def set_por_cuentas
+		cuentas = CompraLibro.where(libro_c_id: @libro_c).group(:tipo_de_gasto_id).count()
+		@compras_por_cuenta = []
+
+		cuentas.each do |cuenta|
+			nombre_cuenta = TipoDeGasto.find_by_id(cuenta[0]).nombre
+			suma_base = CompraLibro.where(libro_c_id: @libro_c, tipo_de_gasto_id: cuenta[0]).sum(:base)
+			@compras_por_cuenta.push [nombre_cuenta , suma_base]
+		end
+	end
+
+	def set_compras
+		@compras = CompraLibro.where(libro_c_id: @libro_c)
+	end
+
+end
 

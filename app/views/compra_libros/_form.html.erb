@@ -70,7 +70,8 @@ Ver Resumen Libro de Compras <i class="fa fa-print"></i>
     <%= f.label :tipo_de_gasto, "Tipo de Gasto(*)", class:"control-label"%>
     <%= f.text_field :tipo_de_gasto, class:"form-control", id:"compra_libro_tipo_de_gasto", required:true %>
 </div>
-<div class="col-xs-12 col-sm-offset-2 col-md-offset-2 col-sm-4 col-md-4 col-lg-4">
+<% if Contribuyente.find(@u.contribuyente_id).t_contribuyente == "normal" %>
+<div class="col-xs-12 col-sm-offset-2 col-md-offset-2 col-sm-8 col-md-8 col-lg-8">
     <h5 class="text-center">Valor Gravado</h5>
     <div class="field form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
         <%= f.label :gravado_bienes, "Bienes", class:"control-label" %>
@@ -81,7 +82,8 @@ Ver Resumen Libro de Compras <i class="fa fa-print"></i>
         <%= f.text_field :gravado_servicios, class:"form-control gravado gravado-servicios"%>
     </div>
 </div>
-<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+<% else %>
+<div class="col-xs-12 col-sm-offset-2 col-md-offset-2 col-sm-8 col-md-8 col-lg-8">
     <h5 class="text-center">Valor Exento</h5>
     <div class="field form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
         <%= f.label :exento_bienes, "Bienes",class:"control-label" %>
@@ -92,6 +94,7 @@ Ver Resumen Libro de Compras <i class="fa fa-print"></i>
         <%= f.text_field :exento_servicios, class:"form-control exento exento-servicios" %>
     </div>
 </div>
+<% end %>
 <div class="actions col-md-offset-4 col-md-4">
 
     <% if @u.contribuyente_id.nil? || @u.mes == "Selecciona un Mes" || @u.year == "Selecciona un Año" %>

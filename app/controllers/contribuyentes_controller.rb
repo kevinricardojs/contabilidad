@@ -64,6 +64,6 @@ class ContribuyentesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contribuyente_params
-      params.require(:contribuyente).permit(:nit, :nombre, :calle, :no_casa, :apto_similar, :zona, :colonia, :departamento, :municipio, :telefono, :fax, :apto_postal, :email)
+      params.require(:contribuyente).permit(:nit, :nombre, :calle, :no_casa, :apto_similar, :zona, :colonia, :departamento, :municipio, :telefono, :fax, :apto_postal, :email, :t_contribuyente)
     end
   end

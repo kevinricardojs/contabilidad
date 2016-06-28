@@ -7,7 +7,7 @@ class Pdf < Prawn::Document
 		@cuentas = Cuenta.all.group(:nombre_).count
 		@u = u
 		@folio = folio
-		@comenzar = 0 + 1
+		@comenzar = consumidos + 	1
 		@tipo_de_libro = tipo_de_libro
 		@orientation = orientation
 		cabecera(@orientation)
@@ -100,18 +100,14 @@ class Pdf < Prawn::Document
 	end
 
 	def consumidos
-		mes = @u.mes
+
+		mes = @u.mes.to_i
 		suma = 0
 		if self.class != MayorPdf
-
-			if mes != "Enero"
-				@folio.consumidos.order(:position).each do |consumido|
-					if consumido.mes == mes
-						break
-					else
-						suma += consumido.pag_usadas
-					end
-				end
+			if mes != 1
+				suma = @folio.consumidos.where('mes < ?', mes).sum(:pag_usadas)
+			else
+				return suma
 			end
 		else
 			case @periodo
@@ -133,4 +129,4 @@ class Pdf < Prawn::Document
 		end
 		return suma
 	end
-end
+	end

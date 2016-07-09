@@ -7,7 +7,7 @@ class Cuenta < ActiveRecord::Base
   before_create :tomar_balance
   before_create :mi_mes
   #validates :balance_id, presence: true
-  
+
   def take_libro_diario
     self.libro_diario_id = self.partida.libro_diario_id
   end

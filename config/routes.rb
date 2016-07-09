@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   get 'libro/mayor'
   get 'libro/balance_de_saldos'
+  get 'libro/estado_de_resultados'
 
   resources :partidas, except:[:index, :show, :new]
 

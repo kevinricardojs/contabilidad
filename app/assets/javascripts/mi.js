@@ -226,6 +226,7 @@ function crear_partida(nombre_de_cuenta, nombre_,valor, position,number){
 
 		else
 		{
+
 			var suma = to_dinero($("input[name='partida[cuentas_attributes][" + numero + "][" + position + "]']").val()) + to_dinero(valor);
 			suma = suma.toFixed(2);
 			$("input[name='partida[cuentas_attributes][" + numero + "][" + position + "]']").val(suma);

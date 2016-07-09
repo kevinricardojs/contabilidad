@@ -29,7 +29,7 @@ class OperacionesController < ApplicationController
 
 					# Parametros suma de iva, suma de base, suma de bienes, suma de servicios,
 					# => suma total, todas las ventas, current_usuario y el folio del actual año!
-					pdf = VentasPdf.new(@iva, @base, @bienes, @servicios, @total, @ventas, @u, @folios_ventas)
+					pdf = VentasPdf.new(@iva, @base, @bienes, @servicios, @total, @ventas, @u, @folios_ventas, @periodo)
 
 					# Guardar en variable "pagina" el total de hojas usadas
 					paginas = (pdf.number_pages "<total>",color:'FFFFFF').to_s.split("..")[1]
@@ -64,7 +64,7 @@ class OperacionesController < ApplicationController
 			respond_to do |format|
 				format.html
 				format.pdf do
-					pdf = ComprasPdf.new(@iva, @base, @compras_por_dia, @total, @total_cuentas, @u, @compras_por_cuenta, @folios_compras)
+					pdf = ComprasPdf.new(@iva, @base, @compras_por_dia, @total, @total_cuentas, @u, @compras_por_cuenta, @folios_compras, @periodo)
 					send_data pdf.render, filename: "Libro_de_Compras_" + current_usuario.establecimiento.nombre.split(" ").join("_") + "_" + current_usuario.mes + "_" + current_usuario.year + ".pdf",
 					type: "application/pdf",
 					disposition: "inline"

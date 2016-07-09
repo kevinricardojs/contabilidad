@@ -114,15 +114,15 @@ class Pdf < Prawn::Document
 			when 1
 				suma += 0
 			when 2
-				suma += @folio.consumidos.find_by(mes: "Enero").pag_usadas
+				suma += @folio.consumidos.find_by(mes: "02").pag_usadas
 			when 3
-				enero = @folio.consumidos.find_by(mes: "Enero").pag_usadas
-				abril = @folio.consumidos.find_by(mes: "Abril").pag_usadas
+				enero = @folio.consumidos.find_by(mes: "02").pag_usadas
+				abril = @folio.consumidos.find_by(mes: "04").pag_usadas
 				suma += enero + abril
 			else
-				enero = @folio.consumidos.find_by(mes: "Enero").pag_usadas
-				abril = @folio.consumidos.find_by(mes: "Abril").pag_usadas
-				julio = @folio.consumidos.find_by(mes: "Julio").pag_usadas
+				enero = @folio.consumidos.find_by(mes: "02").pag_usadas
+				abril = @folio.consumidos.find_by(mes: "04").pag_usadas
+				julio = @folio.consumidos.find_by(mes: "07").pag_usadas
 				suma += enero + abril + julio
 
 			end

@@ -69,6 +69,7 @@ Ver Resumen Libro de Ventas <i class="fa fa-print"></i>
     </div>
 </div>
 <div class="clearfix"></div>
+<% if !@u.contribuyente_id.nil?%>
 <% if Contribuyente.find(@u.contribuyente_id).t_contribuyente == "normal" %>
 <div class="col-xs-12 col-sm-offset-2 col-md-offset-2 col-sm-8 col-md-8 col-lg-8">
     <h5 class="text-center">Valor Gravado</h5>
@@ -93,6 +94,7 @@ Ver Resumen Libro de Ventas <i class="fa fa-print"></i>
         <%= f.text_field :exento_servicios, class:"form-control exento exento-servicios" %>
     </div>
 </div>
+<% end %>
 <% end %>
 <div class="actions col-md-12 col-sm-12 col-xs-12">
  <% if @u.contribuyente_id.nil? || @u.mes == "Selecciona un Mes" || @u.year == "Selecciona un Año" %>

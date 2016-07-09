@@ -28,8 +28,8 @@ class MayorPdf < Pdf
 			]
 		]
 		@cuentas.each do |nombre|
-			suma = Balance.find(@current_balance).cuentas.where("mes <= ? AND nombre_ = ?", @mes, nombre[0]).sum(:debe)
-			if suma != "" && suma != "0" && suma != "0.0" && suma != "0.00"
+			suma = Balance.find(@current_balance).cuentas.where("mes <= ? AND nombre_ = ?", @mes, nombre[0]).sum(:debe).to_f
+			if suma != 0.0
 				name = Cuenta.find_by(nombre_: nombre[0]).nombre
 				partida = [[{content: name, colspan:5, align: :center, font_style: :bold, border_bottom_color: "AAAAAA"}]]
 				cuentas = Balance.find(@current_balance).cuentas.where("mes <= ? AND nombre_ = ?", @mes, nombre[0])
@@ -59,8 +59,8 @@ class MayorPdf < Pdf
 			]
 		]
 		@cuentas.each do |nombre|
-			suma = Balance.find(@current_balance).cuentas.where("mes <= ? AND nombre_ = ?", @mes, nombre[0]).sum(:haber)
-			if suma != "" && suma != "0" && suma != "0.0" && suma != "0.00"
+			suma = Balance.find(@current_balance).cuentas.where("mes <= ? AND nombre_ = ?", @mes, nombre[0]).sum(:haber).to_f
+			if suma != 0.0
 				name = Cuenta.find_by(nombre_: nombre[0]).nombre
 				partida = [[{content: name, colspan:5, align: :center, font_style: :bold, border_bottom_color: "FAFAFA"}]]
 				cuentas = Balance.find(@current_balance).cuentas.where("mes <= ? AND nombre_ = ?", @mes, nombre[0])

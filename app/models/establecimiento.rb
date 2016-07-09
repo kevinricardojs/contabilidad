@@ -4,6 +4,8 @@ class Establecimiento < ActiveRecord::Base
 	has_many :usuarios
 	has_many :balances, dependent: :destroy
 	has_many :folios, dependent: :destroy
+	has_many :libro_vs
+	has_many :libro_cs
 	before_destroy :reset
 
 

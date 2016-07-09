@@ -1,7 +1,7 @@
 class ComprasPdf < Pdf
 
-	def initialize(iva, base, compras_por_dia, total, total_cuentas, u, compras_por_cuenta, folio)
-		super("Libro de Compras y Servicios Recibidos", u, folio, "current", "portrait")
+	def initialize(iva, base, compras_por_dia, total, total_cuentas, u, compras_por_cuenta, folio, periodo)
+		super("Libro de Compras y Servicios Recibidos", u, folio, periodo, "portrait")
 		@compras_por_cuenta = compras_por_cuenta
 		@compras_por_dia = compras_por_dia
 		@iva = iva
@@ -12,7 +12,7 @@ class ComprasPdf < Pdf
 			@puntero  = cursor.to_s
 			cuentas_per_nombre
 		end
-		
+
 		enumerar_paginas("portrait")
 	end
 
@@ -26,7 +26,7 @@ class ComprasPdf < Pdf
 				{ content: "", colspan: 3, borders: [:top, :right, :left], font_style: :bold, align: :center }
 				],
 				[
-					{ content: "Dia", borders: [:bottom, :right, :left], font_style: :bold, align: :center, size:7 } ,	
+					{ content: "Dia", borders: [:bottom, :right, :left], font_style: :bold, align: :center, size:7 } ,
 					{ content: "Tipo", borders: [:bottom, :right, :left], font_style: :bold, align: :center, size:7 },
 					{ content: "Serie", borders: [:bottom, :right, :left], font_style: :bold, align: :center, size:7 },
 					{ content: "Numero", borders: [:bottom, :right, :left], font_style: :bold, align: :center, size:7 },
@@ -72,7 +72,7 @@ class ComprasPdf < Pdf
 				[{ content: "Resumen por Cuenta Contable", colspan: 13, size: 10, font_style: :bold, align: :center}],[ {content: "Nombre", colspan: 9, size: 10, font_style: :bold, align: :center}, { content: "Suma de Base", colspan:4, size: 10, font_style: :bold, align: :center}]
 			]
 
-			@compras_por_cuenta.each do |cuenta| 
+			@compras_por_cuenta.each do |cuenta|
 				data = [ [ {content: cuenta[0].to_s, colspan: 9, size: 8, borders: [:left, :right]}, {content: "Q" + '%.2f' % cuenta[1], colspan: 4, size: 8, align: :right, borders: [:left, :right]}]]
 				title_cuenta += data
 			end

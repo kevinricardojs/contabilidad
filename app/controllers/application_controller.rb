@@ -122,16 +122,16 @@ def partidas_primarias
 
       def current_period
         if usuario_signed_in?
-          mes = @u.mes
+          mes = @u.mes.to_i
           if mes == "Selecciona un Mes"
             @periodo = 0
-          elsif mes == "Enero" || mes == "Febrero" || mes == "Marzo"
+          elsif mes >= 1 && mes <= 3
             @periodo = 1
-          elsif mes == "Abril" || mes == "Mayo" || mes == "Junio"
+          elsif mes >= 4 && mes <= 6
             @periodo = 2
-          elsif mes == "Julio" || mes == "Agosto" || mes == "Septiembre"
+          elsif mes >= 7 && mes <= 9
             @periodo = 3
-          elsif mes == "Octubre" || mes == "Noviembre" || mes == "Diciembre"
+          elsif mes >= 10 && mes <= 12
             @periodo = 4
           else
             @periodo = nil
@@ -142,7 +142,7 @@ def partidas_primarias
 
       def set_balance
         if usuario_signed_in? && current_usuario.establecimiento_id != nil && current_usuario.mes != "Selecciona un Mes" && current_usuario.year != "Selecciona un Año"
-          @balance = Balance.find_or_create_by(establecimiento_id: current_usuario.establecimiento_id, year: current_usuario.year )
+          @balance = Balance.find_or_create_by(establecimiento_id: current_usuario.establecimiento_id,periodo: @periodo, year: current_usuario.year )
         end
       end
 

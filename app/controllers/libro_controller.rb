@@ -58,6 +58,20 @@ class LibroController < ApplicationController
     end
   end
 
+  def estado_de_resultados
+    @current_balance = Balance.find_by(establecimiento_id: current_usuario.establecimiento_id, year: current_usuario.year)
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = ResultadosPdf.new(@current_balance)
+        send_data pdf.render, filename: "balance_primer_periodo_" + @u.establecimiento.nombre.split(" ").join("_") + "_" + @u.year + ".pdf",
+        type: "application/pdf",
+        disposition: "inline"
+      end
+    end
+
+  end
+
 
   private
 

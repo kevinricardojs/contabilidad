@@ -24,25 +24,23 @@ ActiveRecord::Schema.define(version: 20160524220824) do
   add_index "balances", ["establecimiento_id"], name: "index_balances_on_establecimiento_id", using: :btree
 
   create_table "compra_libros", force: :cascade do |t|
-    t.integer  "documento",         limit: 4
-    t.string   "serie",             limit: 255
-    t.integer  "numero",            limit: 4
-    t.integer  "dia",               limit: 4
-    t.integer  "mes",               limit: 4
-    t.string   "year",              limit: 255
-    t.integer  "proveedor_id",      limit: 4
-    t.decimal  "base",                          precision: 10, scale: 2
-    t.decimal  "iva",                           precision: 10, scale: 2
-    t.decimal  "gravado_bienes",                precision: 10, scale: 2
-    t.decimal  "gravado_servicios",             precision: 10, scale: 2
-    t.decimal  "exento_bienes",                 precision: 10, scale: 2
-    t.decimal  "exento_servicios",              precision: 10, scale: 2
-    t.decimal  "total",                         precision: 10, scale: 2
-    t.datetime "created_at",                                             null: false
-    t.datetime "updated_at",                                             null: false
-    t.integer  "tipo_de_gasto_id",  limit: 4
-    t.string   "dato_mes",          limit: 255
-    t.integer  "libro_c_id",        limit: 4
+    t.integer  "documento",        limit: 4
+    t.string   "serie",            limit: 255
+    t.integer  "numero",           limit: 4
+    t.integer  "dia",              limit: 4
+    t.integer  "mes",              limit: 4
+    t.string   "year",             limit: 255
+    t.integer  "proveedor_id",     limit: 4
+    t.decimal  "base",                         precision: 10, scale: 2
+    t.decimal  "iva",                          precision: 10, scale: 2
+    t.decimal  "bienes",                       precision: 10, scale: 2
+    t.decimal  "servicios",                    precision: 10, scale: 2
+    t.decimal  "total",                        precision: 10, scale: 2
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
+    t.integer  "tipo_de_gasto_id", limit: 4
+    t.string   "dato_mes",         limit: 255
+    t.integer  "libro_c_id",       limit: 4
   end
 
   add_index "compra_libros", ["libro_c_id"], name: "index_compra_libros_on_libro_c_id", using: :btree
@@ -209,24 +207,22 @@ ActiveRecord::Schema.define(version: 20160524220824) do
   add_index "usuarios", ["username"], name: "index_usuarios_on_username", unique: true, using: :btree
 
   create_table "venta_libros", force: :cascade do |t|
-    t.integer  "documento",         limit: 4
-    t.string   "serie",             limit: 255
-    t.integer  "numero",            limit: 4
-    t.integer  "dia",               limit: 4
-    t.integer  "mes",               limit: 4
-    t.string   "year",              limit: 255
-    t.string   "nit",               limit: 255,                          default: "C/F"
-    t.string   "nombre",            limit: 255,                          default: "Clientes Varios"
-    t.decimal  "gravado_bienes",                precision: 10, scale: 2
-    t.decimal  "gravado_servicios",             precision: 10, scale: 2
-    t.decimal  "exento_bienes",                 precision: 10, scale: 2
-    t.decimal  "exento_servicios",              precision: 10, scale: 2
-    t.decimal  "base",                          precision: 10, scale: 2
-    t.decimal  "iva",                           precision: 10, scale: 2
-    t.decimal  "total",                         precision: 10, scale: 2
-    t.datetime "created_at",                                                                         null: false
-    t.datetime "updated_at",                                                                         null: false
-    t.integer  "libro_v_id",        limit: 4
+    t.integer  "documento",  limit: 4
+    t.string   "serie",      limit: 255
+    t.integer  "numero",     limit: 4
+    t.integer  "dia",        limit: 4
+    t.integer  "mes",        limit: 4
+    t.string   "year",       limit: 255
+    t.string   "nit",        limit: 255,                          default: "C/F"
+    t.string   "nombre",     limit: 255,                          default: "Clientes Varios"
+    t.decimal  "bienes",                 precision: 10, scale: 2
+    t.decimal  "servicios",              precision: 10, scale: 2
+    t.decimal  "base",                   precision: 10, scale: 2
+    t.decimal  "iva",                    precision: 10, scale: 2
+    t.decimal  "total",                  precision: 10, scale: 2
+    t.datetime "created_at",                                                                  null: false
+    t.datetime "updated_at",                                                                  null: false
+    t.integer  "libro_v_id", limit: 4
   end
 
   add_index "venta_libros", ["libro_v_id"], name: "index_venta_libros_on_libro_v_id", using: :btree

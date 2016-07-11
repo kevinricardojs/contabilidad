@@ -2,8 +2,11 @@
   <thead>
     <tr>
       <th colspan="8"></th>
+      <% if Contribuyente.find(@u.contribuyente_id).t_contribuyente == "normal" %>
       <th colspan="2" class="text-center">Valor Gravado</th>
+      <% else %>
       <th colspan="2" class="text-center">Valor Exento</th>
+      <% end %>
       <th colspan="4"></th>
     </tr>
     <tr>
@@ -15,8 +18,6 @@
       <th>Nombre</th>
       <th>Base</th>
       <th>Iva</th>
-      <th>Bienes</th>
-      <th>Servicios</th>
       <th>Bienes</th>
       <th>Servicios</th>
       <th>Total</th>
@@ -35,10 +36,8 @@
       <td><%= compra.proveedor.nombre %></td>
       <td><%= compra.base %></td>
       <td><%= compra.iva %></td>
-      <td><%= compra.gravado_bienes %></td>
-      <td><%= compra.gravado_servicios %></td>
-      <td><%= compra.exento_bienes %></td>
-      <td><%= compra.exento_servicios %></td>
+      <td><%= compra.bienes %></td>
+      <td><%= compra.servicios %></td>
       <td><%= compra.total %></td>
       <td class="td-btn">
         <%= link_to content_tag(:i ,'',class:"fa fa-eye"), compra ,class:"btn btn-default col-md-12 text-center"%>

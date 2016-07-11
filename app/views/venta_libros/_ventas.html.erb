@@ -2,57 +2,56 @@
 <table class="table table-bordered table-responsive">
   <thead>
     <tr>
-      <th colspan="9"></th>
-      <th colspan="2">Valor Gravado</th>
-      <th colspan="2">Valor Exento</th>
-      <th colspan="4"></th>
-    </tr>
-    <tr>
-      <th>Documento</th>
-      <th>Dia</th>
-      <th>Serie</th>
-      <th>Numero</th>
-      <th>Mes</th>
-      <th>Nit</th>
-      <th>Nombre</th>
-      <th>Base</th>
-      <th>Iva</th>
-      <th>Bienes</th>
-      <th>Servicios</th>
-      <th>Bienes</th>
-      <th>Servicios</th>
-      <th>Total</th>
-      <th colspan="3">Acciones</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @ventas.each do |venta| %>
-    <tr class="no-border-top">
-      <td><%= venta.documento %></td>
-      <td><%= venta.dia%></td>
-      <td><%= venta.serie %></td>
-      <td><%= venta.numero %></td>
-      <td><%= venta.mes %></td>
-      <td><%= venta.nit %></td>
-      <td><%= venta.nombre %></td>
-      <td><%= venta.base %></td>
-      <td><%= venta.iva %></td>
-      <td><%= venta.gravado_bienes %></td>
-      <td><%= venta.gravado_servicios %></td>
-      <td><%= venta.exento_bienes %></td>
-      <td><%= venta.exento_servicios %></td>
-      <td><%= venta.total %></td>
-      <td class="td-btn">
-        <%= link_to content_tag(:i ,'',class:"fa fa-eye"), venta ,class:"btn btn-default col-md-12 text-center"%>
-      </td>
-      <td class="td-btn">
-       <%= link_to content_tag(:i ,'',class:"fa fa-pencil"), edit_venta_libro_path(venta) ,class:"btn btn-info col-md-12 text-center" %>
-     </td>
-     <td class="td-btn">
-      <%= link_to content_tag(:i ,'',class:"fa fa-trash-o"), venta, method: :delete, data: { confirm: 'Estas seguro?' },class:"btn btn-danger col-md-12 text-center no-window" %>
-    </td>
+     <th colspan="8"></th>
+     <% if Contribuyente.find(@u.contribuyente_id).t_contribuyente == "normal" %>
+     <th colspan="2" class="text-center">Valor Gravado</th>
+     <% else %>
+     <th colspan="2" class="text-center">Valor Exento</th>
+     <% end %>
+     <th colspan="4"></th>
+   </tr>
+   <tr>
+    <th>Documento</th>
+    <th>Dia</th>
+    <th>Serie</th>
+    <th>Numero</th>
+    <th>Mes</th>
+    <th>Nit</th>
+    <th>Nombre</th>
+    <th>Base</th>
+    <th>Iva</th>
+    <th>Bienes</th>
+    <th>Servicios</th>
+    <th>Total</th>
+    <th colspan="3">Acciones</th>
   </tr>
-  <% end %>
+</thead>
+
+<tbody>
+  <% @ventas.each do |venta| %>
+  <tr class="no-border-top">
+    <td><%= venta.documento %></td>
+    <td><%= venta.dia%></td>
+    <td><%= venta.serie %></td>
+    <td><%= venta.numero %></td>
+    <td><%= venta.mes %></td>
+    <td><%= venta.nit %></td>
+    <td><%= venta.nombre %></td>
+    <td><%= venta.base %></td>
+    <td><%= venta.iva %></td>
+    <td><%= venta.bienes %></td>
+    <td><%= venta.servicios %></td>
+    <td><%= venta.total %></td>
+    <td class="td-btn">
+      <%= link_to content_tag(:i ,'',class:"fa fa-eye"), venta ,class:"btn btn-default col-md-12 text-center"%>
+    </td>
+    <td class="td-btn">
+     <%= link_to content_tag(:i ,'',class:"fa fa-pencil"), edit_venta_libro_path(venta) ,class:"btn btn-info col-md-12 text-center" %>
+   </td>
+   <td class="td-btn">
+    <%= link_to content_tag(:i ,'',class:"fa fa-trash-o"), venta, method: :delete, data: { confirm: 'Estas seguro?' },class:"btn btn-danger col-md-12 text-center no-window" %>
+  </td>
+</tr>
+<% end %>
 </tbody>
 </table>

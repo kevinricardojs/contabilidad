@@ -16,11 +16,11 @@ class OperacionesController < ApplicationController
 			@iva = VentaLibro.where(libro_v_id: @libro_v).sum(:iva)
 			@base = VentaLibro.where(libro_v_id: @libro_v).sum(:base)
 			if @u.contribuyente.t_contribuyente == "normal"
-				@bienes = (VentaLibro.where(libro_v_id: @libro_v).sum(:gravado_bienes).to_f / 1.12).round(2)
-				@servicios = (VentaLibro.where(libro_v_id: @libro_v).sum(:gravado_servicios).to_f / 1.12).round(2)
+				@bienes = (VentaLibro.where(libro_v_id: @libro_v).sum(:bienes).to_f / 1.12).round(2)
+				@servicios = (VentaLibro.where(libro_v_id: @libro_v).sum(:servicios).to_f / 1.12).round(2)
 			else
-				@bienes = (VentaLibro.where(libro_v_id: @libro_v).sum(:exento_bienes))
-				@servicios = (VentaLibro.where(libro_v_id: @libro_v).sum(:exento_servicios))
+				@bienes = (VentaLibro.where(libro_v_id: @libro_v).sum(:bienes))
+				@servicios = (VentaLibro.where(libro_v_id: @libro_v).sum(:servicios))
 			end
 				@total = @base + @iva
 				respond_to do |format|
@@ -47,6 +47,7 @@ class OperacionesController < ApplicationController
 			end
 		end
 	end
+
 	def libro_compra
 		if @folios_compras == nil
 			flash.now[:alert] = "Debes Registrar los Folios de este Libro"
@@ -88,8 +89,8 @@ class OperacionesController < ApplicationController
 
 	def set_ventas
 		@ventas_por_dia = VentaLibro.order(:dia).where(libro_v_id: @libro_v).group(:dia).sum(:base)
-		dias = VentaLibro.order(:serie).where(libro_v_id: @libro_v).group(:dia).count()
-		series = VentaLibro.order(:serie).where(libro_v_id: @libro_v).group(:serie).count()
+		dias = VentaLibro.where(libro_v_id: @libro_v).order(:dia).group(:dia).count()
+
 		@ventas = []
 
 		dias.each do |dia|
@@ -101,13 +102,12 @@ class OperacionesController < ApplicationController
 				venta_unica["max"] = venta_unica["numero"]
 				@ventas.push venta_unica
 			else
+				series = VentaLibro.where(libro_v_id: @libro_v, dia: dia[0]).group(:serie).count()
 				series.each do |serie|
 					resumen_dia_ventas = {}
 					resumen_dia_ventas['base']  = VentaLibro.where(libro_v_id: @libro_v, dia: numero_dia, serie: serie).sum(:base)
-					resumen_dia_ventas['gravado_bienes'] = VentaLibro.where(libro_v_id: @libro_v, dia: numero_dia, serie: serie).sum(:gravado_bienes)
-					resumen_dia_ventas['gravado_servicios'] = VentaLibro.where(libro_v_id: @libro_v, dia: numero_dia, serie: serie).sum(:gravado_servicios)
-					resumen_dia_ventas['exento_bienes'] = VentaLibro.where(libro_v_id: @libro_v, dia: numero_dia, serie: serie).sum(:exento_bienes)
-					resumen_dia_ventas['exento_servicios'] = VentaLibro.where(libro_v_id: @libro_v, dia: numero_dia, serie: serie).sum(:exento_servicios)
+					resumen_dia_ventas['bienes'] = VentaLibro.where(libro_v_id: @libro_v, dia: numero_dia, serie: serie).sum(:bienes)
+					resumen_dia_ventas['servicios'] = VentaLibro.where(libro_v_id: @libro_v, dia: numero_dia, serie: serie).sum(:servicios)
 					resumen_dia_ventas['documento'] = 'FC'
 					resumen_dia_ventas['numero']  = 'Pendiente'
 					resumen_dia_ventas['dia'] = numero_dia

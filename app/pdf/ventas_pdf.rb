@@ -40,15 +40,7 @@ class VentasPdf < Pdf
 			]
 
 			@ventas.each do |venta|
-				bienes = 0
-				servicios = 0
-				if @u.contribuyente.t_contribuyente == "normal"
-					bienes = venta["gravado_bienes"]
-					servicios = venta["gravado_servicios"]
-				else
-					bienes = venta["exento_bienes"]
-					servicios = venta["exento_servicios"]
-				end
+
 				movimiento =[
 					[
 						{content:venta["dia"].to_s, size: 10, borders: [:left, :right], align: :center },
@@ -58,8 +50,8 @@ class VentasPdf < Pdf
 						{content:venta["max"].to_s, size: 10, borders: [:left, :right], align: :center },
 						{content:venta["serie"].to_s, size: 10, borders: [:left, :right], align: :center },
 						{content:venta["nombre"].to_s, size: 9, borders: [:left, :right], align: :center, width: 150 },
-						{content:"Q" + '%.2f' % bienes.to_f, size: 10, borders: [:left, :right], align: :right },
-						{content:"Q" + '%.2f' % servicios.to_f, size: 10, borders: [:left, :right], align: :right }
+						{content:"Q" + '%.2f' % venta["bienes"].to_f, size: 10, borders: [:left, :right], align: :right },
+						{content:"Q" + '%.2f' % venta["servicios"].to_f, size: 10, borders: [:left, :right], align: :right }
 					]
 				]
 

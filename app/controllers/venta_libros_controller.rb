@@ -64,6 +64,6 @@ class VentaLibrosController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def venta_libro_params
-      params.require(:venta_libro).permit(:documento, :serie, :numero, :dia, :mes, :year, :nit, :nombre, :gravado_bienes, :gravado_servicios, :exento_bienes, :exento_servicios, :base, :iva, :total, :libro_v_id)
+      params.require(:venta_libro).permit(:documento, :serie, :numero, :dia, :mes, :year, :nit, :nombre, :bienes, :servicios, :base, :iva, :total, :libro_v_id)
     end
   end

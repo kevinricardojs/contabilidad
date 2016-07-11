@@ -14,8 +14,8 @@ class VentaLibro < ActiveRecord::Base
 	validates :total, numericality: { greater_than: 0, message:"Debes ingresar una Cantidad Valida" }
 
 	def base_iva
-		if self.exento_servicios.nil? && self.exento_bienes.nil?
-			suma = self.gravado_bienes.to_f + self.gravado_servicios.to_f
+		if self.libro_v.establecimiento.contribuyente.t_contribuyente == "normal"
+			suma = self.bienes.to_f + self.servicios.to_f
 			self.base = (suma.to_f / 1.12).round(2)
 			self.iva = (self.base.to_f * 0.12).round(2)
 		else
@@ -31,10 +31,6 @@ class VentaLibro < ActiveRecord::Base
 	end
 
 	def total
-		if self.base.to_f + self.iva.to_f != 0
-			self.total = '%.2f' % (self.base.to_f + self.iva.to_f)
-		else
-			self.total = '%.2f' % (self.exento_servicios.to_f + self.exento_bienes.to_f)
-		end
+		self.total = '%.2f' % (self.bienes.to_f + self.servicios.to_f)
 	end
 end

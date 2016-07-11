@@ -96,6 +96,6 @@ class CompraLibrosController < ApplicationController
   end
   # Never trust parameters from the scary internet, only allow the white list through.
   def compra_libro_params
-    params.require(:compra_libro).permit(:documento, :serie, :numero, :proveedor_nit, :proveedor_nombre , :dia, :mes,:dato_mes, :year, :gravado_bienes, :gravado_servicios, :exento_bienes, :exento_servicios, :base, :iva, :tipo_de_gasto, :libro_c_id)
+    params.require(:compra_libro).permit(:documento, :serie, :numero, :proveedor_nit, :proveedor_nombre , :dia, :mes,:dato_mes, :year, :bienes, :servicios, :base, :iva, :tipo_de_gasto, :libro_c_id)
   end
 end

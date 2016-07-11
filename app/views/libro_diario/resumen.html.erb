@@ -1,12 +1,8 @@
-<%= link_to  libro_diario_partidas_path, class:"col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center btn btn-primary pdf_link" do %>
+<%= link_to  libro_diario_partidas_path, class:"col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center btn btn-primary pdf_link" do %>
 <i class="fa fa-angle-left"></i> Agregar mas partidas
 <%end%>
-<%= link_to  libro_diario_resumen_path + ".pdf", class:"col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center btn btn-info pdf_link" do %>
+<%= link_to  libro_diario_resumen_path + ".pdf", class:"col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center btn btn-info pdf_link" do %>
 Ver Version Imprimible(PDF) <i class="fa fa-print"></i>
-<%end%>
-
-<%= link_to  libro_mayor_path, class:"col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center btn btn-primary pdf_link" do %>
-Libro Mayor <i class="fa fa-angle-right"></i>
 <%end%>
 <% if @u.contribuyente_id.nil? || @u.mes == "Selecciona un Mes" || @u.year == "Selecciona un Año" %>
 <div class="col-md-8 col-md-offset-2">

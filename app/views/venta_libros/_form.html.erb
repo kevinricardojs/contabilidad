@@ -70,45 +70,38 @@ Ver Resumen Libro de Ventas <i class="fa fa-print"></i>
 </div>
 <div class="clearfix"></div>
 <% if !@u.contribuyente_id.nil?%>
-<% if Contribuyente.find(@u.contribuyente_id).t_contribuyente == "normal" %>
 <div class="col-xs-12 col-sm-offset-2 col-md-offset-2 col-sm-8 col-md-8 col-lg-8">
-    <h5 class="text-center">Valor Gravado</h5>
-    <div class="field form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <%= f.label :gravado_bienes, "Bienes", class:"control-label" %>
-        <%= f.text_field :gravado_bienes, class:"form-control gravado gravado-bienes" %>
-    </div>
-    <div class="field form-group col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
-        <%= f.label :gravado_servicios, "Servicios", class:"control-label" %>
-        <%= f.text_field :gravado_servicios, class:"form-control gravado gravado-servicios"%>
-    </div>
+   <th colspan="8"></th>
+   <% if Contribuyente.find(@u.contribuyente_id).t_contribuyente == "normal" %>
+   <h5 class="text-center">Valor Gravado</h5>
+   <% else %>
+   <h5 class="text-center">Valor Exento</h5>
+   <% end %>
+
+   <div class="field form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <%= f.label :bienes, "Bienes", class:"control-label" %>
+    <%= f.text_field :bienes, class:"form-control gravado gravado-bienes" %>
 </div>
-<% else %>
-<div class="col-xs-12 col-sm-offset-2 col-md-offset-2 col-sm-8 col-md-8 col-lg-8">
-    <h5 class="text-center">Valor Exento</h5>
-    <div class="field form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <%= f.label :exento_bienes, "Bienes",class:"control-label" %>
-        <%= f.text_field :exento_bienes, class:"form-control exento exento-bienes"%>
-    </div>
-    <div class="field form-group col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
-        <%= f.label :exento_servicios, "Servicios",class:"control-label" %>
-        <%= f.text_field :exento_servicios, class:"form-control exento exento-servicios" %>
-    </div>
+<div class="field form-group col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
+    <%= f.label :servicios, "Servicios", class:"control-label" %>
+    <%= f.text_field :servicios, class:"form-control gravado gravado-servicios"%>
 </div>
-<% end %>
+</div>
+
 <% end %>
 <div class="actions col-md-12 col-sm-12 col-xs-12">
- <% if @u.contribuyente_id.nil? || @u.mes == "Selecciona un Mes" || @u.year == "Selecciona un Año" %>
- <%= button_tag(type: "submit", class: "btn btn-success col-sm-offset-3 col-xs-12 col-md-3 col-sm-3", disabled: true) do %>
- <i class="fa fa-save"></i> Guardar
- <% end %>
- <% else %>
- <%= button_tag(type: "submit", id:"send-data", class: "btn btn-success col-xs-12 col-sm-offset-3 col-md-3 col-sm-3") do %>
- <i class="fa fa-save"></i> Guardar
- <% end %>
- <% end %>
- <%= button_tag(type: "reset", class: "btn btn-danger col-md-3 col-sm-3") do %>
- <i class="fa fa-undo"></i> Reiniciar
- <% end %>
+   <% if @u.contribuyente_id.nil? || @u.mes == "Selecciona un Mes" || @u.year == "Selecciona un Año" %>
+   <%= button_tag(type: "submit", class: "btn btn-success col-sm-offset-3 col-xs-12 col-md-3 col-sm-3", disabled: true) do %>
+   <i class="fa fa-save"></i> Guardar
+   <% end %>
+   <% else %>
+   <%= button_tag(type: "submit", id:"send-data", class: "btn btn-success col-xs-12 col-sm-offset-3 col-md-3 col-sm-3") do %>
+   <i class="fa fa-save"></i> Guardar
+   <% end %>
+   <% end %>
+   <%= button_tag(type: "reset", class: "btn btn-danger col-md-3 col-sm-3") do %>
+   <i class="fa fa-undo"></i> Reiniciar
+   <% end %>
 
 </div>
 <% end %>

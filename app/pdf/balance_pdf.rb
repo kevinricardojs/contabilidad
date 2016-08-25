@@ -1,6 +1,6 @@
 class BalancePdf < Pdf
 	def initialize(tipo, balance, u, folio, periodo, orientation, mes)
-		
+
 		super(tipo,u, folio, periodo, orientation)
 		@mes = mes
 		@balance = balance
@@ -23,7 +23,7 @@ class BalancePdf < Pdf
 			]
 		]
 		cuentas = []
-		total_deudor = 0 
+		total_deudor = 0
 		total_acreedor = 0
 		@cuentas.each do |cuenta|
 			nombre = Cuenta.where(nombre_: cuenta[0] ).first.nombre
@@ -46,10 +46,10 @@ class BalancePdf < Pdf
 					saldo_acreedor = ""
 				end
 				cuenta = [
-					[ 
+					[
 						{content:nombre, align: :left, borders: [:left, :right], border_width: 1, border_color: "757D75", size:9},
 						{content:saldo_deudor, align: :right, borders: [:left, :right], border_width: 1, border_color: "757D75", size:10},
-						{content:saldo_acreedor, align: :right, borders: [:left, :right], border_width: 1, border_color: "757D75", size:10} 
+						{content:saldo_acreedor, align: :right, borders: [:left, :right], border_width: 1, border_color: "757D75", size:10}
 					]
 				]
 				header += cuenta
@@ -61,8 +61,8 @@ class BalancePdf < Pdf
 		else
 			header += [
 				[
-					{content:"Totales", font_style: :bold, align: :right}, 
-					{content:"Q" + '%.2f' % total_deudor, align: :right, border_color: "000000", border_bottom_width: 2, border_top_width: 2, size:10}, 
+					{content:"Totales", font_style: :bold, align: :right},
+					{content:"Q" + '%.2f' % total_deudor, align: :right, border_color: "000000", border_bottom_width: 2, border_top_width: 2, size:10},
 					{content:"Q" + '%.2f' % total_acreedor, align: :right, border_color: "000000", border_bottom_width: 2, border_top_width: 2, size:10}
 				]
 			]

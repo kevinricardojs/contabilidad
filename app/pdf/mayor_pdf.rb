@@ -18,6 +18,7 @@ class MayorPdf < Pdf
 	end
 
 	def debe
+		tamanos = []
 		partidas = [
 			[{content:"Debe", align: :center, font_style: :bold, border_color: "757D75", colspan:5}],
 			[
@@ -40,11 +41,15 @@ class MayorPdf < Pdf
 				end
 				partida.push [{content: "", colspan: 4, border_top_color: "AAAAAA"}, {content: "Q" + '%.2f' % suma, size: 10, align: :right}]
 				partidas += partida
+				tamanos += [partida.length]
 			end
 		end
 		if partidas.length <= 1
 			partidas += [[ cuenta.libro_diario.mes, "", "", "", ""]]
 		end
+		total_celdas = partidas.length - 2
+
+
 		table( partidas, header: 2, width: 384, cell_style:{ border_color: "333333", font_color: "333333"})
 	end
 

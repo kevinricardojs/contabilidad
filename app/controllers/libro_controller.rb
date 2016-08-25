@@ -49,7 +49,7 @@ class LibroController < ApplicationController
       respond_to do |format|
         format.html
         format.pdf do
-          pdf = BalancePdf.new("Balance de Saldos 01 de Enero al 31 de #{@nombre_mes}",@current_balance, current_usuario, @folios_balance, 1, "portrait", @mes)
+          pdf = BalancePdf.new("Balance de Saldos 01 de Enero al #{@nombre_mes}",@current_balance, current_usuario, @folios_balance, 1, "portrait", @mes)
           send_data pdf.render, filename: "balance_primer_periodo_" + @u.establecimiento.nombre.split(" ").join("_") + "_" + @u.year + ".pdf",
           type: "application/pdf",
           disposition: "inline"
@@ -81,7 +81,7 @@ class LibroController < ApplicationController
 
   def set_mes_final
     @mes = params[:mes]
-    meses = ["Invalido", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+    meses = ["Invalido", "31 de Enero", "28 de Febrero", "31 de Marzo", "30 de Abril", "31 de Mayo", "30 de Junio", "31 de Julio", "31 de Agosto", "30 de Septiembre", "31 de Octubre", "30 de Noviembre", "31 de Diciembre"]
     @nombre_mes = meses[@mes.to_i]
   end
 
